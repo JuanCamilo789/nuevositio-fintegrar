@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import AccesoRapido from '../components/AccesoRapido.astro';
+import QuienesSomos from '../components/QuienesSomos.astro';
+import Creditos from '../components/Creditos.astro';
+import Campanas from '../components/Campanas.astro';
+import BienestarSocial from '../components/BienestarSocial.astro';
+import Novedades from '../components/Novedades.astro';
+import Convenios from '../components/Convenios.astro';
+import SimuladorCredito from '../components/SimuladorCredito.astro';
+import CTABanner from '../components/CTABanner.astro';
+import Footer from '../components/Footer.astro';
+
+// Cache de 60 segundos, permitiendo servir contenido "stale" hasta por 10 minutos mientras se actualiza
+Astro.response.headers.set('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=600');
+---
+
+<Layout>
+  <Navbar />
+  <main>
+    <Hero />
+    <AccesoRapido />
+    <QuienesSomos />
+    <Creditos />
+    <Campanas />
+    <BienestarSocial />
+    <Novedades />
+    <Convenios />
+    <SimuladorCredito />
+    <CTABanner />
+  </main>
+  <Footer />
+</Layout>

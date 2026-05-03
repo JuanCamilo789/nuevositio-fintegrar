@@ -1,0 +1,24 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export const prerender = false;
+
+let content = '';
+try {
+  const filePath = path.resolve('./src/data/legales/terminos.html');
+  content = fs.readFileSync(filePath, 'utf-8');
+} catch (e) {
+  content = '<p>Contenido no disponible.</p>';
+}
+---
+
+<LegalLayout
+  pageTitle="Términos y Condiciones de Uso"
+  pageSubtitle="Condiciones que rigen el uso del sitio web y los servicios digitales de Cooperamigó"
+  breadcrumbs={[{ label: 'Términos y Condiciones' }]}
+  updateDate="enero de 2025"
+>
+  <div class="dynamic-content" set:html={content} />
+</LegalLayout>

@@ -1,0 +1,133 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<!-- ════════════════════════════════════
+     CTA BANNER
+════════════════════════════════════ -->
+<section class="cta-section" aria-label="Llamado a la acción" data-dark-bg>
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="cta-inner reveal">
+
+      <div class="cta-texto">
+        <h2 class="cta-titulo">Construye tu futuro con Cooperamigó</h2>
+        <p class="cta-desc">
+          Únase a una comunidad sólida que trabaja por el bienestar de sus asociados. 
+          Descubra todos los beneficios de ser parte de nuestra cooperativa de aporte y crédito.
+        </p>
+      </div>
+
+      <div class="cta-acciones">
+        <a href="https://serviciosdigitales.cooperamigo.coop/" class="btn btn-accent btn-lg" target="_blank" rel="noopener noreferrer">
+          <Icon name="tabler:user-plus" class="w-5 h-5" aria-hidden="true" />
+          Quiero ser asociado
+        </a>
+        <a href="https://serviciosdigitales.cooperamigo.coop/" class="btn btn-outline-light btn-lg" target="_blank" rel="noopener noreferrer">
+          <Icon name="tabler:credit-card" class="w-5 h-5" aria-hidden="true" />
+          Solicitar crédito
+        </a>
+        <a href="/nosotros#auxilios" class="btn btn-outline-light btn-lg">Conocer beneficios</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    background: #172B36;
+    padding: 8rem 0;
+    position: relative;
+    /* Quitamos overflow: hidden para que los círculos puedan salir de la sección */
+    z-index: 10;
+  }
+
+  /* Círculos decorativos de fondo */
+  .cta-section::before,
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cta-section::before {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(17, 76, 90, 0.25) 0%, transparent 70%);
+    top: -150px;
+    right: -100px;
+  }
+  /* El círculo amarillo que debe superponerse al footer */
+  .cta-section::after {
+    width: 280px;
+    height: 280px;
+    background: #FFC801;
+    opacity: 0.06; /* Reducida de 0.12 a 0.06 para mayor sutileza */
+    bottom: -140px; /* Mitad fuera de la sección */
+    left: -60px;
+    filter: blur(50px); /* Aumentado de 40px a 50px para suavizar más los bordes */
+  }
+
+  .cta-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .cta-inner {
+      flex-direction: row;
+      text-align: left;
+      justify-content: space-between;
+    }
+  }
+
+  .cta-texto {
+    max-width: 560px;
+  }
+
+  .cta-titulo {
+    font-size: clamp(2.25rem, 4vw, 3rem);
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    font-weight: 800;
+  }
+
+  .cta-desc {
+    font-size: 1.0625rem;
+    color: rgba(241, 246, 244, 0.7);
+    line-height: 1.7;
+  }
+
+  .cta-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-shrink: 0;
+    min-width: 280px;
+  }
+
+  .cta-acciones .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .cta-acciones { align-items: flex-start; }
+  }
+  @media (max-width: 1023px) {
+    .cta-section { padding: 6rem 0; }
+  }
+  @media (max-width: 767px) {
+    .cta-section { padding: 3.5rem 0; }
+    .cta-titulo { font-size: clamp(1.75rem, 6vw, 2.25rem); }
+    .cta-desc { font-size: 0.9375rem; }
+    .cta-acciones { min-width: 0; width: 100%; }
+  }
+</style>

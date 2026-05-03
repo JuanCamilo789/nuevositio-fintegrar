@@ -1,0 +1,25 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export const prerender = false;
+
+let content = '';
+try {
+  const filePath = path.resolve('./src/data/legales/sarlaft.html');
+  content = fs.readFileSync(filePath, 'utf-8');
+} catch (e) {
+  content = '<p>Contenido no disponible.</p>';
+}
+---
+
+<LegalLayout
+  pageTitle="SARLAFT"
+  pageSubtitle="Sistema de Administración del Riesgo de Lavado de Activos y de la Financiación del Terrorismo"
+  breadcrumbs={[{ label: 'Transparencia', href: '/nosotros#informes' }, { label: 'SARLAFT' }]}
+  updateDate="enero de 2025"
+  maxWidth="max-w-5xl"
+>
+  <div class="dynamic-content" set:html={content} />
+</LegalLayout>

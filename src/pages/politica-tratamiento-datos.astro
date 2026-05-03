@@ -1,0 +1,24 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export const prerender = false;
+
+let content = '';
+try {
+  const filePath = path.resolve('./src/data/legales/politica-datos.html');
+  content = fs.readFileSync(filePath, 'utf-8');
+} catch (e) {
+  content = '<p>Contenido no disponible.</p>';
+}
+---
+
+<LegalLayout
+  pageTitle="Política de Tratamiento de Datos"
+  pageSubtitle="En cumplimiento de la Ley 1581 de 2012 y el Decreto 1377 de 2013 sobre Protección de Datos Personales"
+  breadcrumbs={[{ label: 'Política de Tratamiento de Datos' }]}
+  updateDate="enero de 2025 — Versión vigente aprobada por el Consejo de Administración"
+>
+  <div class="dynamic-content" set:html={content} />
+</LegalLayout>

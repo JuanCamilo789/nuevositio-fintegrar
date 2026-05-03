@@ -1,0 +1,110 @@
+---
+import Layout from './Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  pageTitle: string;
+  pageSubtitle?: string;
+  description?: string;
+  breadcrumbs?: { label: string; href?: string }[];
+}
+
+const {
+  pageTitle,
+  pageSubtitle,
+  description,
+  breadcrumbs = [],
+} = Astro.props;
+
+const metaTitle = `${pageTitle} — Cooperamigó`;
+const metaDesc  = description ?? `${pageTitle} — Cooperativa Multiactiva Luis Amigó, Medellín.`;
+---
+
+<Layout title={metaTitle} description={metaDesc}>
+  <Navbar />
+
+  <div class="page-hero">
+    <div class="max-w-7xl mx-auto px-6">
+      <nav class="pg-breadcrumb" aria-label="Rutas">
+        <a href="/" class="pg-breadcrumb-link">Inicio</a>
+        {breadcrumbs.map((crumb) =>
+          crumb.href
+            ? <><span class="pg-breadcrumb-sep">/</span><a href={crumb.href} class="pg-breadcrumb-link">{crumb.label}</a></>
+            : <><span class="pg-breadcrumb-sep">/</span><span class="pg-breadcrumb-current">{crumb.label}</span></>
+        )}
+        {breadcrumbs.length === 0 &&
+          <><span class="pg-breadcrumb-sep">/</span><span class="pg-breadcrumb-current">{pageTitle}</span></>
+        }
+      </nav>
+
+      <h1 class="pg-title">{pageTitle}</h1>
+      {pageSubtitle && <p class="pg-subtitle">{pageSubtitle}</p>}
+    </div>
+  </div>
+
+  <main>
+    <slot />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-hero {
+    background: #172B36;
+    padding: 3.5rem 0 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 40%;
+    background: rgba(17, 76, 90, 0.25);
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+    pointer-events: none;
+  }
+
+  .pg-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    margin-bottom: 1.25rem;
+  }
+  .pg-breadcrumb-link {
+    color: rgba(241, 246, 244, 0.55);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .pg-breadcrumb-link:hover { color: #FFC801; }
+  .pg-breadcrumb-sep {
+    color: rgba(241, 246, 244, 0.25);
+  }
+  .pg-breadcrumb-current {
+    color: rgba(241, 246, 244, 0.85);
+    font-weight: 500;
+  }
+
+  .pg-title {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    position: relative;
+    z-index: 1;
+  }
+  .pg-subtitle {
+    font-size: 0.9375rem;
+    color: rgba(241, 246, 244, 0.68);
+    margin-top: 0.625rem;
+    position: relative;
+    z-index: 1;
+    line-height: 1.6;
+    max-width: 640px;
+  }
+</style>

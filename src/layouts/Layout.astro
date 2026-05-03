@@ -1,0 +1,184 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Cooperamigó — Cooperativa Multiactiva Luis Amigó",
+  description = "Cooperamigó es una organización cooperativa que contribuye al mejoramiento económico y social de sus asociados con atención oportuna, segura y transparente.",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#172B36" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <title>{title}</title>
+    <link rel="canonical" href={canonicalURL.href} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Cooperamigó" />
+    <meta property="og:locale" content="es_CO" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <!-- ── Vigilada Supersolidaria — fixed left badge ── -->
+    <div
+      class="supersolidaria-badge"
+      role="note"
+      aria-label="Vigilada por la Superintendencia de la Economía Solidaria"
+    >
+      <div class="ss-vigilada-block">
+        <span class="ss-line"></span>
+        <span class="ss-vigilada">VIGILADA</span>
+        <span class="ss-line"></span>
+      </div>
+      <span class="ss-nombre">SUPERSOLIDARIA</span>
+    </div>
+
+    <slot />
+
+    <!-- ── Cookie Banner ── -->
+    <div
+      class="cookie-banner"
+      id="cookieBanner"
+      role="dialog"
+      aria-live="polite"
+      aria-label="Aviso de cookies"
+    >
+      <div class="cookie-inner">
+        <div class="cookie-text">
+          <svg
+            class="cookie-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle><circle
+              cx="8.5"
+              cy="11"
+              r="1"
+              fill="currentColor"></circle><circle
+              cx="14.5"
+              cy="9.5"
+              r="1"
+              fill="currentColor"></circle><circle
+              cx="11.5"
+              cy="15"
+              r="1"
+              fill="currentColor"></circle>
+          </svg>
+          <p>
+            Utilizamos cookies propias y de terceros para mejorar su experiencia
+            de navegación. Al continuar, acepta nuestra
+            <a href="/politica-tratamiento-datos" class="cookie-link"
+              >Política de Tratamiento de Datos</a
+            >.
+          </p>
+        </div>
+        <div class="cookie-actions">
+          <button class="cookie-btn cookie-btn--outline" id="cookieDecline"
+            >Solo esenciales</button
+          >
+          <button class="cookie-btn cookie-btn--solid" id="cookieAccept"
+            >Aceptar todo</button
+          >
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── Scroll reveal ──
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      );
+      reveals.forEach((el) => observer.observe(el));
+
+      // ── Cookie Banner ──
+      const banner = document.getElementById("cookieBanner");
+      const accept = document.getElementById("cookieAccept");
+      const decline = document.getElementById("cookieDecline");
+
+      function setBannerPadding() {
+        if (banner && !banner.classList.contains("cookie-hidden")) {
+          document.body.style.paddingBottom = banner.offsetHeight + "px";
+        } else {
+          document.body.style.paddingBottom = "";
+        }
+      }
+
+      function dismissBanner() {
+        banner?.classList.add("cookie-hidden");
+        document.body.style.paddingBottom = "";
+      }
+
+      if (localStorage.getItem("cookieConsent")) {
+        banner?.classList.add("cookie-hidden");
+      } else {
+        // Wait for layout then set padding
+        requestAnimationFrame(setBannerPadding);
+        window.addEventListener("resize", setBannerPadding);
+      }
+
+      accept?.addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "all");
+        dismissBanner();
+      });
+      decline?.addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "essential");
+        dismissBanner();
+      });
+
+      // ── Badge color según sección ──
+      const badge = document.querySelector(
+        ".supersolidaria-badge",
+      ) as HTMLElement | null;
+      const darkSections = Array.from(
+        document.querySelectorAll("[data-dark-bg]"),
+      ) as HTMLElement[];
+
+      function updateBadgeColor() {
+        if (!badge) return;
+        const midY = window.innerHeight * 0.5;
+        const onDark = darkSections.some((el) => {
+          const r = el.getBoundingClientRect();
+          return midY >= r.top && midY <= r.bottom;
+        });
+        const color = onDark ? "#ffffff" : "#191919";
+        badge.style.setProperty("--badge-color", color);
+      }
+
+      updateBadgeColor();
+      window.addEventListener("scroll", updateBadgeColor, { passive: true });
+    </script>
+  </body>
+</html>

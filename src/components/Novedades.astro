@@ -1,0 +1,166 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const noticias = [
+  {
+    imagen: 'https://placehold.co/800x460/172B36/F1F6F4?font=lato&text=Asamblea%0AGeneral+2026',
+    categoria: 'Institucional',
+    fecha: '24 de marzo, 2026',
+    titulo: 'Asamblea General Ordinaria 2026: resultados y compromisos',
+    resumen: 'Cooperamigó avanza en su proceso de recuperación, modernización y compromiso con cada uno de sus asociados.',
+  },
+  {
+    imagen: 'https://placehold.co/800x460/172B36/F1F6F4?font=lato&text=Credito%0AEducativo+2026',
+    categoria: 'Créditos',
+    fecha: 'Enero, 2026',
+    titulo: 'Reapertura línea de crédito educativo: tasa especial 2026',
+    resumen: 'La Cooperativa Multiactiva Luis Amigó reapertura su línea de crédito educativo con la Universidad Católica Luis Amigó.',
+  },
+  {
+    imagen: 'https://placehold.co/800x460/172B36/F1F6F4?font=lato&text=Convenios%0ABienestar+2026',
+    categoria: 'Bienestar',
+    fecha: '01 de marzo, 2026',
+    titulo: 'Convenios y oportunidades',
+    resumen: 'Nuestra área de Bienestar Social se encuentra en proceso de ampliar la gama de convenios y servicios a nuestros asociados, así como del adecuado control de los mismos.',
+  },
+];
+---
+
+<!-- ════════════════════════════════════
+     NOVEDADES
+════════════════════════════════════ -->
+<section id="novedades" class="section-white" aria-labelledby="novedades-title">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 reveal">
+      <div>
+        <div class="section-eyebrow">Novedades</div>
+        <h2
+          id="novedades-title"
+          class="font-display"
+          style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;"
+        >
+          Últimas noticias
+        </h2>
+      </div>
+      <a href="#heroSlider" class="btn btn-outline btn-sm flex-shrink-0">
+        Ver todas las novedades
+        <Icon name="tabler:arrow-right" class="w-4 h-4" aria-hidden="true" />
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {noticias.map((n, i) => (
+        <article class={`news-card card-base reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}>
+          <div class="news-body">
+            <div class="news-top">
+              <div class="news-doc-icon">
+                <Icon name="tabler:file-text" class="w-5 h-5" aria-hidden="true" />
+              </div>
+              <span class="news-category">{n.categoria}</span>
+            </div>
+            <div class="news-meta">
+              <Icon name="tabler:calendar-event" class="w-3.5 h-3.5" aria-hidden="true" />
+              {n.fecha}
+            </div>
+            <h3 class="news-titulo">{n.titulo}</h3>
+            <p class="news-resumen">{n.resumen}</p>
+            <a href="#heroSlider" class="news-link">
+              Leer más
+              <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" aria-hidden="true" />
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .section-white {
+    background: #fff;
+    padding: 8rem 0;
+  }
+
+  /* Cuerpo de noticia */
+  .news-card {
+    overflow: hidden;
+  }
+  .news-top {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .news-doc-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: #F1F6F4;
+    color: #172B36;
+    flex-shrink: 0;
+  }
+  .news-body {
+    padding: 1.75rem;
+  }
+  .news-category {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #172B36;
+    background: #F1F6F4;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+  }
+  .news-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #172B36;
+    opacity: 0.6;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  .news-titulo {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #172B36;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+  .news-resumen {
+    font-size: 0.9375rem;
+    color: #172B36;
+    opacity: 0.6;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .news-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #172B36;
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .news-link:hover {
+    gap: 10px;
+  }
+
+  @media (max-width: 1023px) {
+    .section-white { padding: 6rem 0; }
+  }
+  @media (max-width: 767px) {
+    .section-white { padding: 3.5rem 0; }
+    .news-body { padding: 1.25rem; }
+    .news-titulo { font-size: 1rem; }
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+import InnerLayout from '../layouts/InnerLayout.astro';
+import AccesoRapido from '../components/AccesoRapido.astro';
+import Creditos from '../components/Creditos.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { Icon } from 'astro-icon/components';
+
+const requisitos = [
+  {
+    icon: 'tabler:id-badge',
+    titulo: 'Ser asociado activo',
+    desc: 'Estar vinculado a la Cooperativa y tener aportes al día.',
+  },
+  {
+    icon: 'tabler:calendar-check',
+    titulo: 'Antigüedad mínima',
+    desc: 'Contar con al menos un mes de antigüedad como asociado.',
+  },
+  {
+    icon: 'tabler:file-text',
+    titulo: 'Documento de identidad',
+    desc: 'Cédula de ciudadanía vigente (original y copia).',
+  },
+  {
+    icon: 'tabler:receipt',
+    titulo: 'Comprobante de ingresos',
+    desc: 'Desprendible de nómina o certificado laboral de los últimos tres meses.',
+  },
+  {
+    icon: 'tabler:building-bank',
+    titulo: 'Extracto bancario',
+    desc: 'Últimos tres extractos de cuenta de ahorros o corriente.',
+  },
+  {
+    icon: 'tabler:shield-check',
+    titulo: 'Sin reportes negativos',
+    desc: 'Estar al día en centrales de riesgo (Datacrédito / TransUnión) al momento de la solicitud.',
+  },
+];
+---
+
+<InnerLayout pageTitle="Líneas de Crédito" pageSubtitle="Soluciones financieras diseñadas a la medida de sus necesidades y posibilidades">
+  <AccesoRapido />
+  <Creditos />
+
+  <!-- ════════════════════════════════════
+       REQUISITOS
+  ════════════════════════════════════ -->
+  <section id="requisitos" class="req-section" aria-labelledby="req-title">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center max-w-xl mx-auto mb-12 reveal">
+        <div class="section-eyebrow" style="justify-content:center;">Para solicitar su crédito</div>
+        <h2
+          id="req-title"
+          class="font-display"
+          style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;margin-bottom:1rem;"
+        >
+          Requisitos generales
+        </h2>
+        <p style="font-size:1rem;color:#172B36;opacity:0.6;line-height:1.7;">
+          Estos son los documentos y condiciones básicas para acceder a cualquiera de nuestras líneas de crédito.
+        </p>
+      </div>
+
+      <div class="req-grid reveal">
+        {requisitos.map((r) => (
+          <div class="req-card">
+            <div class="req-icon">
+              <Icon name={r.icon} class="w-5 h-5" aria-hidden="true" />
+            </div>
+            <div class="req-body">
+              <div class="req-titulo">{r.titulo}</div>
+              <div class="req-desc">{r.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="req-footer reveal">
+        <p class="req-nota">
+          Los requisitos pueden variar según la línea de crédito y el monto solicitado.
+          Nuestro equipo le orientará en el proceso.
+        </p>
+        <a href="mailto:creditos@cooperamigo.coop" class="btn btn-dark btn-sm">
+          <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
+          Consultar requisitos específicos
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <CTABanner />
+</InnerLayout>
+
+<style>
+  .req-section {
+    background: #F1F6F4;
+    padding: 8rem 0;
+  }
+
+  .req-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .req-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 6px rgba(23, 43, 54, 0.06);
+  }
+
+  .req-icon {
+    width: 44px;
+    height: 44px;
+    background: #172B36;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #FFC801;
+  }
+
+  .req-body { flex: 1; }
+
+  .req-titulo {
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: #172B36;
+    margin-bottom: 0.25rem;
+  }
+
+  .req-desc {
+    font-size: 0.8125rem;
+    color: #172B36;
+    opacity: 0.6;
+    line-height: 1.6;
+  }
+
+  .req-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 1px 6px rgba(23, 43, 54, 0.06);
+  }
+
+  .req-nota {
+    font-size: 0.9375rem;
+    color: #172B36;
+    opacity: 0.6;
+    line-height: 1.6;
+    max-width: 540px;
+  }
+
+  @media (max-width: 1023px) {
+    .req-section { padding: 6rem 0; }
+    .req-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 639px) {
+    .req-section { padding: 4rem 0; }
+    .req-grid { grid-template-columns: 1fr; }
+    .req-footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>

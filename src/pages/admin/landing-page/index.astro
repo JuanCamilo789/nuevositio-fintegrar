@@ -1,0 +1,764 @@
+---
+import { createHmac, timingSafeEqual } from 'node:crypto';
+
+export const prerender = false;
+
+const COOKIE_NAME = 'admin_lp';
+const COOKIE_PATH = '/admin/landing-page';
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 8;
+
+const ADMIN_USERNAME =
+  import.meta.env.ADMIN_USERNAME ?? process.env.ADMIN_USERNAME ?? '';
+const ADMIN_PASSWORD =
+  import.meta.env.ADMIN_PASSWORD ?? process.env.ADMIN_PASSWORD ?? '';
+const ADMIN_SESSION_SECRET =
+  import.meta.env.ADMIN_SESSION_SECRET ?? process.env.ADMIN_SESSION_SECRET ?? '';
+
+const legalDocs = [
+  { id: 'politica-datos', title: 'Política de Tratamiento de Datos',  desc: 'Ley 1581 de 2012' },
+  { id: 'privacidad',     title: 'Aviso de Privacidad',               desc: 'Protección de datos personales' },
+  { id: 'terminos',       title: 'Términos y Condiciones',            desc: 'Condiciones de uso del sitio' },
+  { id: 'manual',         title: 'Manual de Procedimientos',          desc: 'Procedimientos internos' },
+  { id: 'sarlaft',        title: 'SARLAFT',                           desc: 'Sistema de Administración de Riesgo' },
+];
+
+function base64UrlEncode(text: string): string {
+  return Buffer.from(text, 'utf8')
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/g, '');
+}
+
+function base64UrlDecodeToString(text: string): string {
+  const padded = text.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(text.length / 4) * 4, '=');
+  return Buffer.from(padded, 'base64').toString('utf8');
+}
+
+function sign(payload: string): string {
+  const digest = createHmac('sha256', ADMIN_SESSION_SECRET).update(payload).digest('base64');
+  return digest.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+}
+
+function createSessionToken(username: string): string {
+  const exp = Date.now() + SESSION_MAX_AGE_SECONDS * 1000;
+  const payload = `${username}:${exp}`;
+  const sig = sign(payload);
+  return `${base64UrlEncode(payload)}.${sig}`;
+}
+
+function verifySessionToken(token: string | undefined): boolean {
+  if (!token || !ADMIN_SESSION_SECRET) return false;
+  const parts = token.split('.');
+  if (parts.length !== 2) return false;
+  const [payloadB64, sig] = parts;
+  const payload = base64UrlDecodeToString(payloadB64);
+  const expected = sign(payload);
+  const a = Buffer.from(sig);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length) return false;
+  if (!timingSafeEqual(a, b)) return false;
+  const idx = payload.lastIndexOf(':');
+  if (idx === -1) return false;
+  const exp = Number(payload.slice(idx + 1));
+  return Number.isFinite(exp) && exp > Date.now();
+}
+
+let loginError = '';
+if (Astro.request.method === 'POST') {
+  const form   = await Astro.request.formData();
+  const username = (form.get('username') as string || '').trim();
+  const password = (form.get('password') as string || '').trim();
+
+  if (!ADMIN_USERNAME || !ADMIN_PASSWORD || !ADMIN_SESSION_SECRET) {
+    loginError = 'Configuración incompleta. Faltan credenciales del panel.';
+  } else if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    Astro.cookies.set(COOKIE_NAME, createSessionToken(username), {
+      path:     COOKIE_PATH,
+      maxAge:   SESSION_MAX_AGE_SECONDS,
+      httpOnly: true,
+      sameSite: 'strict',
+      secure:   import.meta.env.PROD,
+    });
+    return Astro.redirect('/admin/landing-page');
+  } else {
+    loginError = 'Usuario o contraseña incorrectos.';
+  }
+}
+
+// ── Verificar sesión ──
+const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administrativo — Cooperamigó</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <style>
+    @font-face {
+      font-family: 'Bilmond';
+      src: url('/assets/fonts/Bilmond-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Bilmond';
+      src: url('/assets/fonts/Bilmond-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Bilmond';
+      src: url('/assets/fonts/Bilmond-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Bilmond';
+      src: url('/assets/fonts/Bilmond-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Bilmond';
+      src: url('/assets/fonts/Bilmond-ExtraBold.ttf') format('truetype');
+      font-weight: 800;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:      #172B36;
+      --dark-2:    #1E3A47;
+      --gold:      #FFC801;
+      --bg:        #F0F2F5;
+      --surface:   #ffffff;
+      --border:    #E4E8ED;
+      --border-2:  #D1D9E0;
+      --muted:     #6B7E8A;
+      --danger:    #DC2626;
+      --sidebar-w: 256px;
+    }
+
+    body {
+      font-family: 'Bilmond', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══════════════════════════════
+       LOGIN
+    ══════════════════════════════ */
+    .login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      background:
+        radial-gradient(900px 520px at 18% 20%, rgba(255, 200, 1, 0.18) 0%, rgba(255, 200, 1, 0) 60%),
+        radial-gradient(720px 480px at 85% 70%, rgba(23, 43, 54, 0.10) 0%, rgba(23, 43, 54, 0) 60%),
+        #EAF4EE;
+    }
+
+    .login-card {
+      width: min(1080px, 100%);
+      display: grid;
+      grid-template-columns: minmax(360px, 460px) 1.15fr;
+      background: var(--surface);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(23, 43, 54, 0.18);
+      border: 1px solid rgba(23, 43, 54, 0.06);
+    }
+
+    .login-left {
+      padding: 3rem 3rem 2.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-title {
+      font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .login-subtitle {
+      font-size: 0.95rem;
+      color: rgba(23, 43, 54, 0.62);
+      line-height: 1.45;
+      max-width: 420px;
+      margin-bottom: 1.35rem;
+      text-align: center;
+    }
+
+    .login-form { max-width: 420px; margin: 0 auto; text-align: left; }
+    .form-group { margin-bottom: 0.95rem; }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: rgba(23, 43, 54, 0.85);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.01em;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.01em; text-align: left;
+      color: var(--dark);
+      background: #fff;
+      border: 1.5px solid rgba(23, 43, 54, 0.12);
+      border-radius: 12px;
+      outline: none;
+      box-shadow: 0 1px 0 rgba(23, 43, 54, 0.02);
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+    }
+    .form-input::placeholder { color: rgba(23, 43, 54, 0.35); }
+    .form-input:hover { border-color: rgba(23, 43, 54, 0.2); }
+    .form-input:focus {
+      border-color: rgba(255, 200, 1, 0.9);
+      box-shadow: 0 0 0 4px rgba(255, 200, 1, 0.18), 0 10px 26px rgba(23, 43, 54, 0.08);
+    }
+
+    .login-footer {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: rgba(23, 43, 54, 0.45);
+      letter-spacing: 0.01em;
+      text-align: center;
+    }
+    .form-error {
+      margin-top: 0.625rem;
+      display: flex; align-items: center; gap: 0.375rem;
+      font-size: 0.8125rem; color: var(--danger); font-weight: 600;
+    }
+    .login-submit {
+      width: 100%; margin-top: 1.5rem;
+      padding: 0.875rem;
+      background: var(--dark); color: #fff;
+      font-size: 0.9375rem; font-weight: 700;
+      border: none; border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+      letter-spacing: 0.01em;
+    }
+    .login-submit:hover {
+      background: var(--dark-2);
+      box-shadow: 0 4px 16px rgba(23,43,54,0.25);
+      transform: translateY(-1px);
+    }
+    .login-right {
+      position: relative;
+      background: #DCE3E7;
+      min-height: 560px;
+      overflow: hidden;
+    }
+
+    .login-right-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .login-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(420px 260px at 25% 20%, rgba(255, 200, 1, 0.22) 0%, rgba(255, 200, 1, 0) 70%),
+        linear-gradient(180deg, rgba(23, 43, 54, 0.10) 0%, rgba(23, 43, 54, 0.26) 100%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+      .login-card { grid-template-columns: 1fr; }
+      .login-right { display: none; }
+      .login-left { padding: 2.5rem 1.75rem 2.25rem; }
+    }
+
+    /* ══════════════════════════════
+       DASHBOARD LAYOUT
+    ══════════════════════════════ */
+    .admin-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      background: var(--dark);
+      display: flex; flex-direction: column;
+      position: sticky; top: 0;
+      height: 100vh; overflow-y: auto;
+      border-right: 1px solid rgba(255,255,255,0.04);
+    }
+    .sidebar-brand {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 1.375rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-brand-icon {
+      width: 34px; height: 34px;
+      background: var(--gold);
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .sidebar-brand-icon svg { color: var(--dark); }
+    .sidebar-brand-text strong {
+      display: block; font-size: 0.875rem; font-weight: 800; color: #fff;
+    }
+    .sidebar-brand-text span {
+      font-size: 0.68rem; color: rgba(255,255,255,0.3); font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .sidebar-nav { flex: 1; padding: 1.25rem 0.875rem; }
+    .sidebar-nav-label {
+      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.2);
+      padding: 0 0.625rem; margin-bottom: 0.375rem; margin-top: 1.5rem;
+    }
+    .sidebar-nav-label:first-child { margin-top: 0; }
+
+    .sidebar-link {
+      display: flex; align-items: center; gap: 0.625rem;
+      padding: 0.55rem 0.625rem;
+      border-radius: 7px;
+      font-size: 0.8125rem; font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      margin-bottom: 0.125rem;
+    }
+    .sidebar-link svg { flex-shrink: 0; }
+    .sidebar-link:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
+    .sidebar-link.is-active {
+      background: rgba(255,200,1,0.1);
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .sidebar-footer {
+      padding: 1rem 0.875rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-logout {
+      display: flex; align-items: center; gap: 0.625rem;
+      padding: 0.55rem 0.625rem;
+      border-radius: 7px;
+      font-size: 0.8rem; font-weight: 500;
+      color: rgba(255,255,255,0.3);
+      cursor: pointer;
+      border: none; background: transparent;
+      width: 100%; text-align: left;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sidebar-logout:hover { background: rgba(220,38,38,0.1); color: #FCA5A5; }
+
+    /* ── Main ── */
+    .main-content { display: flex; flex-direction: column; min-height: 100vh; }
+
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 0.625rem; }
+    .topbar-breadcrumb {
+      font-size: 0.8125rem; color: var(--muted);
+      display: flex; align-items: center; gap: 0.375rem;
+    }
+    .topbar-breadcrumb-sep { opacity: 0.4; }
+    .topbar-breadcrumb strong { color: var(--dark); font-weight: 700; }
+    .topbar-right { display: flex; align-items: center; gap: 0.875rem; }
+    .topbar-badge {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      background: #DCFCE7; color: #15803D;
+      border-radius: 6px; padding: 0.3rem 0.625rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em;
+    }
+    .topbar-badge-dot {
+      width: 5px; height: 5px; background: #22C55E; border-radius: 50%;
+    }
+    .topbar-visit {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--muted); text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      transition: all 0.15s;
+    }
+    .topbar-visit:hover { border-color: var(--border-2); color: var(--dark); background: var(--bg); }
+
+    /* ── Page header ── */
+    .page-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.75rem 2rem;
+    }
+    .page-header-inner {
+      max-width: 860px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem;
+    }
+    .page-header h1 {
+      font-size: 1.25rem; font-weight: 800; color: var(--dark);
+      letter-spacing: -0.02em; margin-bottom: 0.25rem;
+    }
+    .page-header p { font-size: 0.8375rem; color: var(--muted); line-height: 1.5; }
+    .page-header-date {
+      font-size: 0.75rem; color: var(--muted);
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 7px; padding: 0.4rem 0.75rem;
+      white-space: nowrap; flex-shrink: 0;
+      display: flex; align-items: center; gap: 0.375rem;
+    }
+
+    .page-content { flex: 1; padding: 1.75rem 2rem; max-width: 900px; width: 100%; }
+
+    /* ── Section headers ── */
+    .section-label {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.875rem; margin-top: 2rem;
+      display: flex; align-items: center; gap: 0.625rem;
+    }
+    .section-label:first-child { margin-top: 0; }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ── Section cards ── */
+    .section-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.375rem;
+      text-decoration: none;
+      display: flex; flex-direction: column; gap: 1.25rem;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      position: relative; overflow: hidden;
+    }
+    .section-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .section-card:hover {
+      border-color: var(--border-2);
+      box-shadow: 0 4px 20px rgba(23,43,54,0.09);
+      transform: translateY(-2px);
+    }
+    .section-card:hover::before { opacity: 1; }
+    .section-card-top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+    }
+    .section-card-icon {
+      width: 42px; height: 42px;
+      background: var(--dark);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); flex-shrink: 0;
+    }
+    .section-card-arrow { color: var(--border-2); transition: color 0.15s, transform 0.15s; }
+    .section-card:hover .section-card-arrow { color: var(--dark); transform: translate(2px,-2px); }
+    .section-card-title {
+      font-size: 0.9375rem; font-weight: 800; color: var(--dark);
+      margin-bottom: 0.3rem; letter-spacing: -0.01em;
+    }
+    .section-card-desc { font-size: 0.775rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── Doc list ── */
+    .doc-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .doc-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.875rem 1.125rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .doc-row:hover {
+      border-color: var(--border-2);
+      box-shadow: 0 2px 10px rgba(23,43,54,0.06);
+    }
+    .doc-row-icon {
+      width: 36px; height: 36px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--dark); flex-shrink: 0;
+    }
+    .doc-row-body { flex: 1; min-width: 0; }
+    .doc-row-title {
+      font-size: 0.875rem; font-weight: 700; color: var(--dark); margin-bottom: 0.125rem;
+    }
+    .doc-row-meta { font-size: 0.7rem; color: var(--muted); }
+    .doc-edit-btn {
+      display: inline-flex; align-items: center; gap: 0.375rem;
+      padding: 0.45rem 0.875rem;
+      background: var(--dark); color: #fff;
+      font-size: 0.775rem; font-weight: 700;
+      border-radius: 7px; text-decoration: none;
+      white-space: nowrap; flex-shrink: 0;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .doc-edit-btn:hover { background: var(--dark-2); transform: translateY(-1px); }
+
+    /* ── Info note ── */
+    .dash-note {
+      margin-top: 2rem;
+      background: #FFFBEB;
+      border: 1px solid rgba(255,200,1,0.25);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.8125rem; color: #92400E; line-height: 1.6;
+    }
+    .dash-note svg { flex-shrink: 0; margin-top: 1px; color: #D97706; }
+    .dash-note strong { color: #78350F; }
+  </style>
+</head>
+<body>
+
+{!isAuth ? (
+  <!-- ══ LOGIN ══ -->
+  <div class="login-screen">
+    <div class="login-card">
+      <div class="login-left">
+        <h1 class="login-title">Saludos, bienvenido(a)</h1>
+        <p class="login-subtitle">
+          Inicie sesión para gestionar los distintos contenidos del sitio.
+        </p>
+
+        <form method="POST" class="login-form">
+          <div class="form-group">
+            <label class="form-label" for="username">Usuario</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="form-input"
+              placeholder="Ingrese su usuario"
+              autocomplete="username"
+              autofocus
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password">Contraseña</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="Ingrese su contraseña"
+              autocomplete="current-password"
+            />
+            {loginError && (
+              <p class="form-error">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                {loginError}
+              </p>
+            )}
+          </div>
+          <button type="submit" class="login-submit">Ingresar al panel</button>
+        </form>
+
+        <footer class="login-footer">Cooperativa Multiactiva Luis Amigó - 2026 (C) All righst reserved.</footer>
+      </div>
+
+      <div class="login-right" aria-hidden="true">
+        <img
+          src="/assets/img/promos/publicidad4.png"
+          alt=""
+          class="login-right-img"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </div>
+
+  </div>
+) : (
+  <!-- ══ DASHBOARD ══ -->
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="sidebar-brand-text">
+          <strong>Cooperamigó</strong>
+          <span>Panel administrativo</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <p class="sidebar-nav-label">General</p>
+        <a href="/admin/landing-page" class="sidebar-link is-active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Inicio
+        </a>
+
+        <p class="sidebar-nav-label">Contenidos</p>
+        <a href="/admin/landing-page/normatividad" class="sidebar-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Normatividad
+        </a>
+
+        <p class="sidebar-nav-label">Documentos legales</p>
+        {legalDocs.map(doc => (
+          <a href={`/admin/landing-page/editar/${doc.id}`} class="sidebar-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            {doc.title}
+          </a>
+        ))}
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="sidebar-logout" id="logoutBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Cerrar sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-breadcrumb">
+            <span>Panel</span>
+            <span class="topbar-breadcrumb-sep">/</span>
+            <strong>Inicio</strong>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <span class="topbar-badge">
+            <span class="topbar-badge-dot"></span>
+            Sesión activa
+          </span>
+          <a href="/" target="_blank" class="topbar-visit">
+            Ver sitio
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </header>
+
+      <div class="page-header">
+        <div class="page-header-inner">
+          <div>
+            <h1>Panel de administración</h1>
+            <p>Gestione los contenidos dinámicos del sitio web institucional de Cooperamigó.</p>
+          </div>
+          <div class="page-header-date">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Sesión activa · 8 h
+          </div>
+        </div>
+      </div>
+
+      <main class="page-content">
+
+        <!-- Sección: contenidos del sitio -->
+        <p class="section-label">Secciones del sitio</p>
+
+        <div class="section-cards">
+          <a href="/admin/landing-page/normatividad" class="section-card">
+            <div class="section-card-top">
+              <div class="section-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              </div>
+              <svg class="section-card-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </div>
+            <div>
+              <p class="section-card-title">Normatividad</p>
+              <p class="section-card-desc">Documentos, estatutos y reglamentos institucionales con carga de PDF</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Sección: documentos legales -->
+        <p class="section-label">Documentos legales</p>
+
+        <div class="doc-list">
+          {legalDocs.map((doc) => (
+            <div class="doc-row">
+              <div class="doc-row-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="doc-row-body">
+                <p class="doc-row-title">{doc.title}</p>
+                <p class="doc-row-meta">src/data/legales/{doc.id}.html · {doc.desc}</p>
+              </div>
+              <a href={`/admin/landing-page/editar/${doc.id}`} class="doc-edit-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Editar
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div class="dash-note">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>
+            <strong>Nota:</strong> Los cambios se guardan directamente en el servidor y se reflejan de inmediato en el sitio público.
+            La sesión expira automáticamente en 8 horas.
+          </span>
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+)}
+
+<script>
+  document.getElementById('logoutBtn')?.addEventListener('click', () => {
+    document.cookie = 'admin_lp=; path=/admin/landing-page; max-age=0';
+    window.location.href = '/admin/landing-page';
+  });
+</script>
+
+</body>
+</html>

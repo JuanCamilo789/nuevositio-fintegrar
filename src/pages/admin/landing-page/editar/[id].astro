@@ -1,0 +1,270 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { createHmac, timingSafeEqual } from 'node:crypto';
+
+export const prerender = false;
+
+const COOKIE_NAME = 'admin_lp';
+const ADMIN_SESSION_SECRET =
+  import.meta.env.ADMIN_SESSION_SECRET ?? process.env.ADMIN_SESSION_SECRET ?? '';
+
+function base64UrlDecodeToString(text: string): string {
+  const padded = text.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(text.length / 4) * 4, '=');
+  return Buffer.from(padded, 'base64').toString('utf8');
+}
+
+function sign(payload: string): string {
+  const digest = createHmac('sha256', ADMIN_SESSION_SECRET).update(payload).digest('base64');
+  return digest.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+}
+
+function verifySessionToken(token: string | undefined): boolean {
+  if (!token || !ADMIN_SESSION_SECRET) return false;
+  const parts = token.split('.');
+  if (parts.length !== 2) return false;
+  const [payloadB64, sig] = parts;
+  const payload = base64UrlDecodeToString(payloadB64);
+  const expected = sign(payload);
+  const a = Buffer.from(sig);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length) return false;
+  if (!timingSafeEqual(a, b)) return false;
+  const idx = payload.lastIndexOf(':');
+  if (idx === -1) return false;
+  const exp = Number(payload.slice(idx + 1));
+  return Number.isFinite(exp) && exp > Date.now();
+}
+
+// ── Verificar sesión ──
+const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
+if (!isAuth) {
+  return Astro.redirect('/admin/landing-page');
+}
+
+// ── Cargar documento ──
+const { id } = Astro.params;
+
+const docsMap: Record<string, string> = {
+  'politica-datos': 'Política de Tratamiento de Datos',
+  'privacidad':     'Aviso de Privacidad',
+  'terminos':       'Términos y Condiciones',
+  'manual':         'Manual de Procedimientos',
+  'sarlaft':        'SARLAFT',
+};
+
+// Whitelist: rechazar cualquier ID que no esté en el mapa
+if (!id || !(id in docsMap)) {
+  return Astro.redirect('/admin/landing-page');
+}
+
+const title = docsMap[id];
+const ALLOWED_DIR = path.resolve('./src/data/legales');
+let content = '';
+try {
+  const filePath = path.resolve(ALLOWED_DIR, `${id}.html`);
+  if (!filePath.startsWith(ALLOWED_DIR + path.sep)) {
+    return Astro.redirect('/admin/landing-page');
+  }
+  content = fs.readFileSync(filePath, 'utf-8');
+} catch {
+  content = '<p>Error al cargar el archivo.</p>';
+}
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editando: {title} — Admin Cooperamigó</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; }
+
+    .adm-header {
+      background: #172B36;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .adm-logo { color: #fff; font-size: 1rem; font-weight: 700; text-decoration: none; }
+    .adm-logo span { color: #FFC801; }
+
+    .editor-wrap { flex: 1; max-width: 900px; width: 100%; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .editor-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.8125rem;
+      color: #172B36;
+      opacity: 0.5;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .back-link:hover { opacity: 1; }
+    .editor-title { font-size: 1.375rem; font-weight: 800; color: #172B36; margin-top: 0.25rem; }
+
+    .save-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.5rem;
+      background: #172B36;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      flex-shrink: 0;
+    }
+    .save-btn:hover { opacity: 0.85; }
+    .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .editor-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 24px rgba(23,43,54,0.08);
+      overflow: hidden;
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #172B36;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 32px rgba(23,43,54,0.3);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <header class="adm-header">
+    <a href="/admin/landing-page" class="adm-logo">Cooperamigó <span>Admin</span></a>
+  </header>
+
+  <div class="editor-wrap">
+    <div class="editor-topbar">
+      <div>
+        <a href="/admin/landing-page" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          Volver al dashboard
+        </a>
+        <div class="editor-title">Editando: {title}</div>
+      </div>
+      <button id="saveBtn" class="save-btn">
+        <svg id="saveIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v13a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <span id="saveText">Guardar cambios</span>
+      </button>
+    </div>
+
+    <div class="editor-card">
+      <div id="editor" style="min-height:600px;">
+        <Fragment set:html={content} />
+      </div>
+    </div>
+  </div>
+
+  <div id="toast">¡Cambios guardados con éxito!</div>
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js" is:inline></script>
+
+<script is:inline define:vars={{ id }}>
+  const quill = new Quill('#editor', {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ header: [2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        ['link', 'blockquote', 'code-block'],
+        [{ list: 'ordered' }, { list: 'bullet' }, { list: 'alpha' }],
+        ['clean'],
+      ],
+    },
+  });
+
+  const saveBtn  = document.getElementById('saveBtn');
+  const saveText = document.getElementById('saveText');
+  const toast    = document.getElementById('toast');
+
+  saveBtn.addEventListener('click', async () => {
+    saveBtn.disabled   = true;
+    saveText.innerText = 'Guardando...';
+
+    try {
+      const res = await fetch('/api/save-legal', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ id, content: quill.root.innerHTML }),
+      });
+
+      if (res.ok) {
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      } else {
+        alert('Error al guardar los cambios.');
+      }
+    } catch {
+      alert('Error de conexión.');
+    } finally {
+      saveBtn.disabled   = false;
+      saveText.innerText = 'Guardar cambios';
+    }
+  });
+</script>
+
+<style is:global>
+  .ql-toolbar.ql-snow {
+    position: sticky !important;
+    top: 60px !important;
+    z-index: 150 !important;
+    border: none !important;
+    border-bottom: 1px solid #F1F6F4 !important;
+    padding: 0.875rem 1rem !important;
+    background: #F1F6F4 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important;
+  }
+  .ql-container.ql-snow { border: none !important; font-size: 1.05rem !important; }
+  .ql-editor { padding: 3rem !important; line-height: 1.8 !important; min-height: 600px; }
+  .ql-editor h2 { font-size: 1.625rem !important; font-weight: 700 !important; color: #172B36 !important; margin: 2.5rem 0 1.25rem !important; border-top: 1px solid #F1F6F4 !important; padding-top: 1.75rem !important; }
+  .ql-editor h3 { font-size: 1.25rem !important; font-weight: 700 !important; color: #172B36 !important; margin: 1.75rem 0 0.875rem !important; }
+  .ql-editor p  { font-size: 1.05rem !important; margin-bottom: 1.25rem !important; }
+  .ql-editor ul, .ql-editor ol { margin: 1.25rem 0 !important; }
+  .ql-editor li { font-size: 1.05rem !important; margin-bottom: 0.6rem !important; }
+  .ql-list[value="alpha"]::before {
+    content: 'abc'; font-weight: 800; font-size: 12px;
+    display: inline-block; width: 26px; text-align: center;
+    border: 1px solid rgba(23,43,54,0.12); border-radius: 4px;
+    background: #fff; line-height: 19px;
+  }
+</style>

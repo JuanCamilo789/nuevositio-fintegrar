@@ -1,0 +1,24 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export const prerender = false;
+
+let content = '';
+try {
+  const filePath = path.resolve('./src/data/legales/privacidad.html');
+  content = fs.readFileSync(filePath, 'utf-8');
+} catch (e) {
+  content = '<p>Contenido no disponible.</p>';
+}
+---
+
+<LegalLayout
+  pageTitle="Aviso de Privacidad"
+  pageSubtitle="Información sobre el tratamiento de sus datos personales por parte de Cooperamigó"
+  breadcrumbs={[{ label: 'Aviso de Privacidad' }]}
+  updateDate="enero de 2025"
+>
+  <div class="dynamic-content" set:html={content} />
+</LegalLayout>

@@ -1,0 +1,115 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const convenios = [
+  { icon: 'tabler:plane',            titulo: 'Aviatur',              sub: 'Turismo y viajes' },
+  { icon: 'tabler:stethoscope',      titulo: 'Emermédica',           sub: 'Salud y emergencias' },
+  { icon: 'tabler:shield-check',     titulo: 'Campos de Paz',        sub: 'Servicios funerarios' },
+  { icon: 'tabler:shield-check',     titulo: 'Los Olivos',           sub: 'Servicios funerarios' },
+  { icon: 'tabler:users',            titulo: 'Cotrafa Social',       sub: 'Protección exequial' },
+  { icon: 'tabler:building-bank',    titulo: 'Confiar',              sub: 'Servicios financieros' },
+];
+---
+
+<!-- ════════════════════════════════════
+     CONVENIOS
+════════════════════════════════════ -->
+<section id="convenios" class="convenios-section" aria-labelledby="convenios-title">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center max-w-xl mx-auto mb-12 reveal">
+      <div class="section-eyebrow" style="justify-content:center;">Red de aliados</div>
+      <h2
+        id="convenios-title"
+        class="font-display"
+        style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;margin-bottom:1rem;"
+      >
+        Convenios para nuestros asociados
+      </h2>
+      <p style="font-size:1rem;color:#172B36;opacity:0.6;line-height:1.7;">
+        Una red de aliados estratégicos con descuentos y beneficios exclusivos
+        para asociados y sus familias.
+      </p>
+    </div>
+
+    <div class="convenios-grid reveal">
+      {convenios.map((c) => (
+        <div class="convenio-item">
+          <div class="convenio-icon">
+            <Icon name={c.icon} class="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div class="convenio-body">
+            <div class="convenio-titulo">{c.titulo}</div>
+            <div class="convenio-sub">{c.sub}</div>
+          </div>
+          <span class="badge badge-success" style="margin-left:auto;flex-shrink:0;">Activo</span>
+        </div>
+      ))}
+    </div>
+
+
+  </div>
+</section>
+
+<style>
+  .convenios-section {
+    background: #fff;
+    padding: 8rem 0;
+  }
+
+  .convenios-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .convenios-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .convenio-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #F1F6F4;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+  }
+
+  .convenio-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(23, 43, 54, 0.08);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #172B36;
+  }
+
+  .convenio-body {
+    flex: 1;
+  }
+  .convenio-titulo {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #172B36;
+  }
+  .convenio-sub {
+    font-size: 0.875rem;
+    color: #172B36;
+    opacity: 0.6;
+    margin-top: 2px;
+  }
+
+  @media (min-width: 1024px) {
+    .convenios-grid { grid-template-columns: repeat(3, 1fr); }
+    .convenios-section { padding: 8rem 0; }
+  }
+  @media (max-width: 1023px) {
+    .convenios-section { padding: 6rem 0; }
+  }
+  @media (max-width: 639px) {
+    .convenios-section { padding: 3.5rem 0; }
+  }
+</style>

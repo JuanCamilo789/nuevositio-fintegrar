@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Rutas de administración — nunca indexar
+Disallow: /admin/
+Disallow: /legales/admin/
+
+# Endpoints de API — nunca indexar
+Disallow: /api/
+
+Sitemap: https://cooperamigo.coop/sitemap-index.xml

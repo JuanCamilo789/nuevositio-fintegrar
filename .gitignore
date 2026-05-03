@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+.astro
+dist
+.vercel
+.netlify
+*.log
+.env
+.env.*
+.env.local
+.env.production
+
+supabase/.temp

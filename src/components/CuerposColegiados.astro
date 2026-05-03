@@ -1,0 +1,326 @@
+---
+const consejo = {
+  titulo: "Consejo de Administración",
+  principales: [
+    "Diego León Carvajal Serna",
+    "Elías Alexander Vallejo Montoya",
+    "Diego León Restrepo López",
+    "Luis Fernando Atehortúa Correa",
+    "Eder Alonso Acevedo Marín",
+  ],
+  suplentes: [
+    "Victor Hugo Merino Córdoba",
+    "Sandra Milena Malavera Pineda",
+    "Victor Hugo Giraldo Grisales",
+    "Edison Francisco Viveros Chavarría",
+    "Laura Stella Parra Espitia",
+  ],
+};
+
+const junta = {
+  titulo: "Junta de Vigilancia",
+  principales: [
+    "Carlos Adolfo Agudelo Duque",
+    "Alberto Vargas Cárdenas",
+    "Oscar Darío Bohórquez Marín",
+  ],
+  suplentes: [
+    "Lina María Rua Galeano",
+    "Yenny Achury Prada",
+    "Laura Elena Zapata Jiménez",
+  ],
+};
+---
+
+<!-- ════════════════════════════════════
+     CUERPOS COLEGIADOS
+════════════════════════════════════ -->
+<section class="cc-section" aria-labelledby="cc-title">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+      <div class="section-eyebrow" style="justify-content:center;">
+        Gobernanza Cooperativa
+      </div>
+      <h2 id="cc-title" class="font-display cc-heading">Cuerpos Colegiados</h2>
+      <p class="cc-intro">
+        Órganos de administración, vigilancia y representación que garantizan la
+        transparencia y el buen gobierno de la Cooperativa Multiactiva Luis
+        Amigó.
+      </p>
+    </div>
+
+    <!-- ── Consejo de Administración ── -->
+    <div class="cc-card reveal">
+      <div class="cc-card-header">
+        <div class="cc-card-badge">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"
+            ></path>
+          </svg>
+        </div>
+        <h3 class="cc-card-titulo">{consejo.titulo}</h3>
+      </div>
+      <div class="cc-cols">
+        <div class="cc-grupo">
+          <div class="cc-grupo-label">Principales</div>
+          <ul class="cc-lista cc-lista--main">
+            {
+              consejo.principales.map((nombre) => (
+                <li class="cc-item">
+                  <span class="cc-dot cc-dot--main" />
+                  {nombre}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="cc-grupo">
+          <div class="cc-grupo-label">Suplentes</div>
+          <ul class="cc-lista cc-lista--alt">
+            {
+              consejo.suplentes.map((nombre) => (
+                <li class="cc-item cc-item--alt">
+                  <span class="cc-dot cc-dot--alt" />
+                  {nombre}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Junta de Vigilancia ── -->
+    <div class="cc-card reveal reveal-delay-1">
+      <div class="cc-card-header">
+        <div class="cc-card-badge">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+            ></path>
+          </svg>
+        </div>
+        <h3 class="cc-card-titulo">{junta.titulo}</h3>
+      </div>
+      <div class="cc-cols">
+        <div class="cc-grupo">
+          <div class="cc-grupo-label">Principales</div>
+          <ul class="cc-lista cc-lista--main">
+            {
+              junta.principales.map((nombre) => (
+                <li class="cc-item">
+                  <span class="cc-dot cc-dot--main" />
+                  {nombre}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="cc-grupo">
+          <div class="cc-grupo-label">Suplentes</div>
+          <ul class="cc-lista cc-lista--alt">
+            {
+              junta.suplentes.map((nombre) => (
+                <li class="cc-item cc-item--alt">
+                  <span class="cc-dot cc-dot--alt" />
+                  {nombre}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Revisoría Fiscal ── -->
+    <div class="cc-card reveal reveal-delay-2">
+      <div class="cc-card-header">
+        <div class="cc-card-badge">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            ></path>
+          </svg>
+        </div>
+        <h3 class="cc-card-titulo">Revisoría Fiscal</h3>
+      </div>
+      <div class="cc-revisoria-nombre">AUDITAMOS GAVIRIA ASOCIADOS SAS</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cc-section {
+    background: white;
+    padding: 5rem 0 6rem;
+  }
+
+  .cc-heading {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: #172b36;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .cc-intro {
+    font-size: 1rem;
+    color: #172b36;
+    opacity: 0.6;
+    line-height: 1.7;
+  }
+
+  /* ── Tarjeta cuerpo ── */
+  .cc-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 2px 12px rgba(23, 43, 54, 0.08);
+    margin-bottom: 1.5rem;
+  }
+
+  .cc-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #f1f6f4;
+  }
+
+  .cc-card-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(23, 43, 54, 0.08);
+    color: #172b36;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cc-card-titulo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #172b36;
+    line-height: 1.2;
+  }
+
+  /* ── Columnas principales / suplentes ── */
+  .cc-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .cc-grupo-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #172b36;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+  }
+
+  .cc-lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .cc-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #172b36;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+
+  .cc-item--alt {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #172b36;
+    opacity: 0.6;
+  }
+
+  .cc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .cc-dot--main {
+    background: #172b36;
+  }
+  .cc-dot--alt {
+    background: #172b36;
+    opacity: 0.4;
+  }
+
+  /* ── Revisoría Fiscal ── */
+  .cc-revisoria-nombre {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #172b36;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1023px) {
+    .cc-section {
+      padding: 3.5rem 0 4.5rem;
+    }
+    .cc-card {
+      padding: 1.5rem 2rem;
+    }
+    .cc-cols {
+      gap: 1.5rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .cc-section {
+      padding: 2.5rem 0 3rem;
+    }
+    .cc-card {
+      padding: 1.5rem;
+    }
+    .cc-cols {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

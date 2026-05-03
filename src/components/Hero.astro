@@ -1,0 +1,615 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const slides = [
+  {
+    id: 'slide-punta-cana',
+    bg: '#172B36',
+    tag: 'Campaña Especial Bienestar',
+    tagIcon: 'tabler:plane-departure',
+    heading: 'Punta Cana\nte está esperando\n¡Viaje ahora!',
+    headingEm: '¡Viaje ahora!',
+    lead: 'Disfrute 6 días y 5 noches en el paraíso con todo incluido. Financiación especial para asociados con tasas desde 1.5% m.v sujeto a estudio de crédito. ¡Cupos limitados!',
+    cta1: { label: 'Reservar mi cupo', icon: 'tabler:mail-forward', href: 'mailto:bienestarsocial@cooperamigo.coop' },
+    cta2: { label: 'Más información', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/573044550161' },
+    trust: [
+      { icon: 'tabler:calendar-event', label: '2 al 7 Julio 2026' },
+      { icon: 'tabler:hotel-service', label: 'Hotel Catalonia' },
+      { icon: 'tabler:percentage', label: 'Tasa 1.5% m.v.' },
+    ],
+    image: '/assets/img/promos/publicidad11.png',
+    imageAlt: 'Campaña Punta Cana Cooperamigó',
+    isVertical: true,
+    floatValue: '',
+    floatLabel: '',
+    badgeValue: '',
+    badgeLabel: '',
+    badgeIcon: '',
+  },
+  {
+    id: 'slide-0',
+    bg: '#172B36',
+    tag: 'Cooperativa Multiactiva Luis Amigó',
+    tagIcon: 'tabler:building-bank',
+    heading: 'Donde su esfuerzo\nse convierte en\nbienestar',
+    headingEm: 'bienestar',
+    lead: 'Más de 30 años brindando soluciones financieras confiables, promoviendo el acceso al crédito, la cultura del aporte y el bienestar integral de nuestros asociados.',
+    cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: '#' },
+    cta2: { label: 'Conózcanos', icon: 'tabler:arrow-right', href: '/nosotros' },
+    trust: [
+      { icon: 'tabler:shield-check', label: 'Vigilada Supersolidaria' },
+      { icon: 'tabler:rosette-discount-check', label: 'Desde 1993' },
+      { icon: 'tabler:users-group', label: '+400 asociados' },
+    ],
+    image: '/assets/img/promos/publicidad2.png',
+    imageAlt: 'Asociados Cooperamigó',
+    floatValue: '+400',
+    floatLabel: 'Asociados activos',
+    badgeValue: '+30',
+    badgeLabel: 'años de trayectoria',
+    badgeIcon: 'tabler:award',
+  },
+  {
+    id: 'slide-1',
+    bg: '#172B36',
+    tag: 'Líneas de crédito',
+    tagIcon: 'tabler:trending-up',
+    heading: 'Crédito ágil,\ncondiciones que\nse adaptan a usted',
+    headingEm: 'se adaptan a usted',
+    lead: 'Ofrecemos líneas de Crédito Ordinario/Consumo y crédito educativo, con tasas desde el 1.35% M.V., aprobación ágil y procesos completamente virtuales.',
+    cta1: { label: 'Ver líneas de crédito', icon: 'tabler:credit-card', href: '/creditos' },
+    cta2: { label: 'Simular crédito', icon: 'tabler:calculator', href: '/creditos#simulador' },
+    trust: [
+      { icon: 'tabler:percentage', label: 'Desde 1.2% M.V.' },
+      { icon: 'tabler:clock', label: 'Aprobación en 48h' },
+      { icon: 'tabler:cash', label: 'Desembolso ágil' },
+    ],
+    image: '/assets/img/promos/publicidad6.png',
+    imageAlt: 'Líneas de crédito Cooperamigó',
+    floatValue: '4',
+    floatLabel: 'líneas disponibles',
+    badgeValue: '1.2%',
+    badgeLabel: 'tasa M.V. mín.',
+    badgeIcon: 'tabler:percentage',
+  },
+  {
+    id: 'slide-2',
+    bg: '#172B36',
+    tag: 'Bienestar social',
+    tagIcon: 'tabler:heart',
+    heading: 'Cuidamos a su\nfamilia en los\nmomentos que importan',
+    headingEm: 'momentos que importan',
+    lead: 'Gestionamos una amplia red de convenios que facilita a nuestros asociados el acceso a servicios en salud, educación, turismo y otros sectores.',
+    cta1: { label: 'Explorar beneficios', icon: 'tabler:heart', href: '/nosotros#auxilios' },
+    cta2: { label: 'Ver convenios', icon: 'tabler:building-store', href: '/nosotros#convenios' },
+    trust: [
+      { icon: 'tabler:users', label: '1.240 auxilios/año' },
+      { icon: 'tabler:building-store', label: '+20 convenios' },
+      { icon: 'tabler:mood-happy', label: '96% satisfacción' },
+    ],
+    image: '/assets/img/promos/publicidad7.png',
+    imageAlt: 'Bienestar social Cooperamigó',
+    floatValue: '1.240',
+    floatLabel: 'auxilios en 2024',
+    badgeValue: '+20',
+    badgeLabel: 'aliados estratégicos',
+    badgeIcon: 'tabler:building-store',
+  },
+];
+---
+
+<!-- ════════════════════════════════════
+     HERO SLIDER
+════════════════════════════════════ -->
+<section id="heroSlider" class="hero-slider" aria-label="Presentación Cooperamigó" data-dark-bg>
+
+  <!-- ── Slides ── -->
+  {slides.map((s, i) => (
+    <div
+      class={`slide${i === 0 ? ' is-active' : ''}`}
+      id={s.id}
+      style={`background:${s.bg};`}
+      aria-hidden={i !== 0 ? 'true' : 'false'}
+    >
+      <!-- Imagen: absoluta, izquierda, altura completa, difuminada a la derecha -->
+      <div class="slide-img-bg">
+        <img
+          src={s.image}
+          alt=""
+          class="slide-img-fill"
+          width="720"
+          height="1080"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : 'low'}
+          decoding={i === 0 ? 'sync' : 'async'}
+        />
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 h-full" style="position:relative;z-index:1;">
+        <div class="slide-grid">
+
+          <!-- Contenido -->
+          <div class="slide-content">
+            <span class="slide-tag">
+              <Icon name={s.tagIcon} class="w-3.5 h-3.5" aria-hidden="true" />
+              {s.tag}
+            </span>
+
+            <h1 class="slide-h1">
+              {s.heading.split('\n').map((line, li) =>
+                s.headingEm && line === s.headingEm
+                  ? <span>{li > 0 && <br />}<em style="color:#FFC801;">{line}</em></span>
+                  : <span>{li > 0 && <br />}{line}</span>
+              )}
+            </h1>
+
+            <p class="slide-lead">{s.lead}</p>
+
+            <div class="slide-ctas">
+              <a href={s.cta1.href} class="btn btn-accent btn-lg">
+                <Icon name={s.cta1.icon} class="w-5 h-5" aria-hidden="true" />
+                {s.cta1.label}
+              </a>
+              <a href={s.cta2.href} class="btn btn-outline-light">
+                {s.cta2.label}
+                <Icon name={s.cta2.icon} class="w-4 h-4" aria-hidden="true" />
+              </a>
+            </div>
+
+            <div class="slide-trust">
+              {s.trust.map(t => (
+                <span class="trust-pill">
+                  <Icon name={t.icon} class="w-3.5 h-3.5" aria-hidden="true" />
+                  {t.label}
+                </span>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <!-- ── Dot Navigation ── -->
+  <div class="slider-dots" role="tablist" aria-label="Slides">
+    {slides.map((_, i) => (
+      <button
+        class={`slider-dot${i === 0 ? ' active' : ''}`}
+        data-index={i}
+        role="tab"
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-label={`Ir al slide ${i + 1}`}
+      />
+    ))}
+  </div>
+
+  <!-- ── Progress bar ── -->
+  <div class="slider-progress" aria-hidden="true">
+    <div class="slider-progress-bar" id="sliderProgressBar"></div>
+  </div>
+
+</section>
+
+<!-- ── Stats Bar ── -->
+<div class="hero-stats-bar">
+  <div class="stats-container max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+      <div class="stat-cell border-b border-white/5 md:border-b-0">
+        <div class="stat-num">+400</div>
+        <div class="stat-lbl">Asociados activos</div>
+      </div>
+      <div class="stat-cell border-b border-white/5 md:border-b-0">
+        <div class="stat-num">+12</div>
+        <div class="stat-lbl">Convenios activos</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">97.4%</div>
+        <div class="stat-lbl">
+          <span class="sm:hidden">Tasa satisfacción</span>
+          <span class="hidden sm:inline">Tasa de satisfacción</span>
+        </div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">+30</div>
+        <div class="stat-lbl">
+          <span class="sm:hidden">Años trayectoria</span>
+          <span class="hidden sm:inline">Años de trayectoria</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Keyframe Animations ── */
+  @keyframes slideInUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(36px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes progressFill {
+    from { width: 0%; }
+    to   { width: 100%; }
+  }
+
+  /* ── Slider Container ── */
+  .hero-slider {
+    position: relative;
+    height: 736px;
+    background: #172B36;
+    overflow: hidden;
+  }
+  @media (max-width: 1023px) {
+    .hero-slider { height: 740px; }
+  }
+  @media (max-width: 639px) {
+    .hero-slider { height: 640px; }
+  }
+
+  /* ── Slides ── */
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .slide.is-active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 1;
+  }
+
+  /* ── Imagen de fondo: izquierda, altura completa ── */
+  .slide-img-bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 65%;
+    z-index: 0;
+    overflow: hidden;
+  }
+  /* Difuminado hacia la izquierda */
+  .slide-img-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to left,
+      rgba(23, 43, 54, 0.0) 0%,
+      rgba(23, 43, 54, 0.0) 30%,
+      rgba(23, 43, 54, 0.5) 60%,
+      rgba(23, 43, 54, 0.92) 80%,
+      #172B36 100%
+    );
+    pointer-events: none;
+  }
+  .slide-img-fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  /*
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │              CONFIGURACIÓN DE IMÁGENES POR SLIDE (solo desktop)         │
+  │─────────────────────────────────────────────────────────────────────────│
+  │  width           → ancho del contenedor de imagen (lado derecho).       │
+  │                    Más % = imagen más grande. Ej: 60% | 65% | 72%       │
+  │  object-position → qué parte de la foto se muestra al recortar.         │
+  │                    Formato: "horizontal vertical"                        │
+  │                    Ej: "center center" | "center 30%" | "right top"     │
+  └─────────────────────────────────────────────────────────────────────────┘
+  */
+  @media (min-width: 1024px) {
+    /* ── Slide 1 · Punta Cana (publicidad11.png) ── */
+    #slide-punta-cana .slide-img-bg   { width: 68%; }
+    #slide-punta-cana .slide-img-fill { object-position: center 14%; }
+
+    /* ── Slide 2 · Cooperamigó / Quiénes Somos (publicidad2.png) ── */
+    #slide-0 .slide-img-bg   { width: 56%; }
+    #slide-0 .slide-img-fill { object-position: center center; }
+
+    /* ── Slide 3 · Créditos (publicidad6.png) ── */
+    #slide-1 .slide-img-bg   { width: 60%; }
+    #slide-1 .slide-img-fill { object-position: center 18%; }
+
+    /* ── Slide 4 · Bienestar Social (publicidad7.png) ── */
+    #slide-2 .slide-img-bg   { width: 72%; }
+    #slide-2 .slide-img-fill { object-position: center center; }
+  }
+
+  /* ── Slide Grid Layout ── */
+  .slide-grid {
+    display: flex;
+    align-items: center;
+    padding: 2rem 0 4rem;
+    height: 100%;
+  }
+  .slide-content {
+    width: 40%;
+    max-width: 580px;
+    flex-shrink: 0;
+  }
+
+  /* ── Slide Content Animations (only when active) ── */
+  .slide.is-active .slide-img-bg  { animation: slideInUp 0.6s ease 0s both; }
+  .slide.is-active .slide-tag     { animation: slideInUp 0.5s ease 0.15s both; }
+  .slide.is-active .slide-h1      { animation: slideInUp 0.55s ease 0.25s both; }
+  .slide.is-active .slide-lead    { animation: slideInUp 0.5s ease 0.35s both; }
+  .slide.is-active .slide-ctas    { animation: slideInUp 0.5s ease 0.45s both; }
+  .slide.is-active .slide-trust   { animation: slideInUp 0.5s ease 0.55s both; }
+
+  /* ── Tag ── */
+  .slide-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FFC801;
+    border: 1px solid rgba(255, 200, 1, 0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.75rem;
+  }
+
+  /* ── Heading ── */
+  .slide-h1 {
+    font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+    font-weight: 800;
+    line-height: 0.90;
+    letter-spacing: -0.025m;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  .slide-h1 em {
+    font-style: normal;
+  }
+
+  /* ── Lead ── */
+  .slide-lead {
+    font-size: 1.0625rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.75;
+    max-width: 460px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── CTAs ── */
+  .slide-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-bottom: 2.25rem;
+  }
+
+  /* ── Trust pills ── */
+  .slide-trust {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+  }
+  .trust-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.35rem 0.875rem;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.07);
+    white-space: nowrap;
+  }
+
+
+  /* ── Dot Navigation ── */
+  .slider-dots {
+    position: absolute;
+    bottom: 1.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, width 0.3s, border-radius 0.3s;
+    padding: 0;
+  }
+  .slider-dot.active {
+    width: 28px;
+    border-radius: 4px;
+    background: #FFC801;
+  }
+
+  /* ── Progress bar ── */
+  .slider-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 10;
+  }
+  .slider-progress-bar {
+    height: 100%;
+    background: #FFC801;
+    width: 0%;
+  }
+  .slider-progress-bar.animating {
+    animation: progressFill 6s linear forwards;
+  }
+
+  /* ── Stats Bar ── */
+  .hero-stats-bar {
+    background: #172B36;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+    z-index: 5;
+  }
+  .stat-cell {
+    padding: 1.5rem 2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #FFC801;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-lbl {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.3rem;
+    font-weight: 500;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1023px) {
+    .stat-cell { padding: 1.25rem 1rem; }
+    .stat-num  { font-size: 1.5rem; }
+    .stat-lbl  { font-size: 0.75rem; }
+
+    /* En tablet: imagen ocupa la parte superior como franja */
+    .slide-img-bg {
+      width: 100%;
+      left: 0;
+      right: 0;
+      height: 300px;
+      bottom: auto;
+    }
+    .slide-img-bg::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(23, 43, 54, 0.1) 20%,
+        rgba(23, 43, 54, 0.7) 70%,
+        #172B36 100%
+      );
+    }
+    .slide-grid { padding: 18rem 0 4rem; }
+    .slide-content { width: 100%; max-width: 100%; }
+  }
+  @media (max-width: 639px) {
+    .hero-slider { height: auto; min-height: 100vh; }
+    .slide-img-bg { height: 260px; left: 0; right: 0; width: 100%; }
+    .slide-grid { padding: 16rem 0 5rem; }
+    .slide-content { width: 100%; max-width: 100%; }
+    .slide-h1 { font-size: 2.25rem; line-height: 1.05; margin-bottom: 1rem; }
+    .slide-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 1.75rem; color: rgba(255, 255, 255, 0.85); }
+    .slide-tag { margin-bottom: 1rem; }
+    .slide-ctas {
+      margin-bottom: 1.5rem;
+      flex-direction: column;
+      align-items: center;
+    }
+    .slide-ctas .btn {
+      width: 100%;
+      max-width: 320px;
+      justify-content: center;
+      padding: 0.875rem 1.5rem;
+      font-size: 0.9375rem;
+      border-radius: 9999px;
+    }
+    .slide-trust { display: none; }
+    .stat-cell { padding: 1.5rem 0.5rem; }
+    .stat-num { font-size: 1.625rem; }
+    .stat-lbl { font-size: 0.75rem; line-height: 1.3; }
+  }
+</style>
+
+<script>
+  const slides  = document.querySelectorAll<HTMLElement>('.slide');
+  const dots    = document.querySelectorAll<HTMLElement>('.slider-dot');
+  const bar     = document.getElementById('sliderProgressBar');
+  const slider  = document.getElementById('heroSlider');
+
+  let current = 0;
+  let timer: ReturnType<typeof setInterval>;
+  let paused  = false;
+
+  function activateSlide(n: number) {
+    // Remove active from current
+    slides[current].classList.remove('is-active');
+    slides[current].setAttribute('aria-hidden', 'true');
+    dots[current].classList.remove('active');
+    dots[current].setAttribute('aria-selected', 'false');
+
+    // Set new current
+    current = (n + slides.length) % slides.length;
+
+    slides[current].classList.add('is-active');
+    slides[current].setAttribute('aria-hidden', 'false');
+    dots[current].classList.add('active');
+    dots[current].setAttribute('aria-selected', 'true');
+
+    // Restart progress bar
+    if (bar) {
+      bar.classList.remove('animating');
+      // Force reflow
+      void bar.offsetWidth;
+      bar.classList.add('animating');
+    }
+  }
+
+  function next() { activateSlide(current + 1); }
+  function prev() { activateSlide(current - 1); }
+
+  function startAuto() {
+    timer = setInterval(() => { if (!paused) next(); }, 6000);
+  }
+  function resetTimer() {
+    clearInterval(timer);
+    startAuto();
+  }
+
+  // Init
+  if (bar) {
+    bar.classList.add('animating');
+  }
+  startAuto();
+
+  // Dots
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { activateSlide(i); resetTimer(); });
+  });
+
+  // Pause on hover
+  slider?.addEventListener('mouseenter', () => { paused = true; });
+  slider?.addEventListener('mouseleave', () => { paused = false; });
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  slider?.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  slider?.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) { next(); } else { prev(); }
+      resetTimer();
+    }
+  }, { passive: true });
+</script>

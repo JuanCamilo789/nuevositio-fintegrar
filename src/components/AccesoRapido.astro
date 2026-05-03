@@ -1,0 +1,162 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<!-- ════════════════════════════════════
+     ACCESO RÁPIDO — tira de acciones
+════════════════════════════════════ -->
+<div class="acceso-wrap" aria-label="Accesos rápidos">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="acceso-grid">
+
+      <a href="#" class="acceso-card">
+        <div class="acceso-icon acceso-icon--primary">
+          <Icon name="tabler:layout-dashboard" class="w-6 h-6" aria-hidden="true" />
+        </div>
+        <div class="acceso-body">
+          <div class="acceso-title">Portal Asociados</div>
+          <div class="acceso-sub">Consulte saldo, créditos y más</div>
+        </div>
+        <Icon name="tabler:arrow-right" class="acceso-arrow" aria-hidden="true" />
+      </a>
+
+      <a href="https://www.zonapagos.net/formulariosNV/?cod=BTK3a53qAPJK5dFzuUb9xoOMEi6GjxTVEz6jgj8WOG4kf7Z7mmbU2N6iG2sClbz5isF7xpuvz4ec%2FstAKWghYq2ihH6ea5Ab%2BfJXSgfBIPShwQxb9hHbzgY1XqGlsllif2sqgYeyszPfE%2Fq5SNonDhF9ZhqXm7OyDm%2Ba4lfdMItrvmOCQ5Py2gAq%2BvwFtoRMoNDPxeZKzglBDlEyqykoMK2kz6zyhc7dmjJO23oOZfDrWY5p5hfLu%2BH0xUIIx2%2F2zJLthSgc28WEY9rneC44s4DORf3zdoMntL1Bmxpscus%3D" class="acceso-card" target="_blank" rel="noopener noreferrer">
+        <div class="acceso-icon acceso-icon--accent">
+          <Icon name="tabler:device-mobile-dollar" class="w-6 h-6" aria-hidden="true" />
+        </div>
+        <div class="acceso-body">
+          <div class="acceso-title">Pagos PSE</div>
+          <div class="acceso-sub">Pague su cuota en línea</div>
+        </div>
+        <Icon name="tabler:arrow-right" class="acceso-arrow" aria-hidden="true" />
+      </a>
+
+      <a href="#simulador" class="acceso-card">
+        <div class="acceso-icon acceso-icon--neutral">
+          <Icon name="tabler:calculator" class="w-6 h-6" aria-hidden="true" />
+        </div>
+        <div class="acceso-body">
+          <div class="acceso-title">
+            <span class="sm:hidden">Simulador</span>
+            <span class="hidden sm:inline">Simulador de Crédito</span>
+          </div>
+          <div class="acceso-sub">Calcule su cuota ideal</div>
+        </div>
+        <Icon name="tabler:arrow-right" class="acceso-arrow" aria-hidden="true" />
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .acceso-wrap {
+    background: #fff;
+    border-bottom: 1px solid #F1F6F4;
+  }
+
+  .acceso-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .acceso-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 2.25rem 1.5rem;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  .acceso-card:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background: #F1F6F4;
+  }
+  .acceso-card:hover {
+    background: #F1F6F4;
+  }
+  .acceso-card:hover .acceso-arrow {
+    transform: translateX(6px);
+    color: #172B36;
+  }
+
+  .acceso-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #F1F6F4;
+    color: #172B36;
+    transition: background 0.2s;
+  }
+  .acceso-card:hover .acceso-icon {
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .acceso-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .acceso-title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: #172B36;
+    margin-bottom: 0.125rem;
+  }
+  .acceso-sub {
+    font-size: 0.875rem;
+    color: #172B36;
+    opacity: 0.6;
+  }
+
+  .acceso-arrow {
+    width: 16px;
+    height: 16px;
+    color: #172B36;
+    opacity: 0.3;
+    flex-shrink: 0;
+    transition: transform 0.2s, color 0.2s, opacity 0.2s;
+  }
+  .acceso-card:hover .acceso-arrow {
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .acceso-grid { grid-template-columns: repeat(2, 1fr); }
+    /* Remove right-edge divider from last card in the first row */
+    .acceso-card:nth-child(2n)::after { display: none; }
+  }
+
+  @media (max-width: 767px) {
+    .acceso-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.25rem 0.5rem;
+      gap: 0.5rem;
+    }
+    .acceso-card:not(:last-child)::after {
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      right: 0;
+      bottom: auto;
+      left: auto;
+    }
+    .acceso-body { min-width: 0; }
+    .acceso-title { font-size: 0.75rem; }
+    .acceso-sub { font-size: 0.625rem; line-height: 1.3; }
+    .acceso-arrow { display: none; }
+  }
+</style>

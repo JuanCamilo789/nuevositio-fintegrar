@@ -1,0 +1,7 @@
+[build]
+buildCommand = "npm run build -- --omit=dev"
+
+[deploy]
+startCommand = "HOST=0.0.0.0 npm start"
+healthcheckPath = "/"
+restartPolicyType = "on_failure"

@@ -1,0 +1,258 @@
+---
+import InnerLayout from '../layouts/InnerLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+export const prerender = true;
+---
+
+<InnerLayout 
+  pageTitle="Página no encontrada" 
+  pageSubtitle="Error 404 — Lo sentimos, no pudimos encontrar lo que buscabas."
+  description="La página que buscas no existe o ha sido movida. Regresa al inicio de Cooperamigó."
+>
+  <div class="error-container">
+    <div class="error-visual">
+      <div class="error-number">
+        <span>4</span>
+        <div class="error-icon-wrapper">
+          <Icon name="tabler:help-hexagon" class="error-icon" />
+        </div>
+        <span>4</span>
+      </div>
+      <div class="error-decoration"></div>
+    </div>
+
+    <div class="error-content">
+      <h2 class="error-message">¿Te has perdido en nuestro portal?</h2>
+      <p class="error-description">
+        Es posible que la dirección sea incorrecta o que hayamos movido el contenido a una nueva ubicación. 
+        No te preocupes, puedes volver a navegar desde nuestra página principal.
+      </p>
+      
+      <div class="error-actions">
+        <a href="/" class="btn-primary">
+          <Icon name="tabler:home" class="w-5 h-5" />
+          Volver al Inicio
+        </a>
+      </div>
+    </div>
+
+    <div class="quick-links">
+      <h3 class="quick-links-title">Enlaces rápidos</h3>
+      <div class="links-grid">
+        <a href="/nosotros" class="quick-link">
+          <Icon name="tabler:users" class="icon" />
+          <span>Sobre Nosotros</span>
+        </a>
+        <a href="/creditos" class="quick-link">
+          <Icon name="tabler:wallet" class="icon" />
+          <span>Créditos</span>
+        </a>
+        <a href="/bienestar-social" class="quick-link">
+          <Icon name="tabler:heart" class="icon" />
+          <span>Bienestar</span>
+        </a>
+        <a href="/directorio" class="quick-link">
+          <Icon name="tabler:address-book" class="icon" />
+          <span>Directorio</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</InnerLayout>
+
+<style>
+  .error-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 10rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
+  }
+
+  /* Visual Error 404 */
+  .error-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .error-number {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: clamp(8rem, 15vw, 12rem);
+    font-weight: 800;
+    color: #172B36;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .error-icon-wrapper {
+    background: #FFC801;
+    color: #172B36;
+    width: 0.85em;
+    height: 0.85em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.5rem;
+    transform: rotate(12deg);
+    box-shadow: 0 12px 30px rgba(255, 200, 1, 0.3);
+    margin: 0 -0.1em;
+  }
+
+  .error-icon {
+    width: 65%;
+    height: 65%;
+  }
+
+  .error-decoration {
+    position: absolute;
+    width: 140%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(17, 76, 90, 0.05) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Content */
+  .error-content {
+    max-width: 600px;
+  }
+
+  .error-message {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #172B36;
+    margin-bottom: 1.25rem;
+  }
+
+  .error-description {
+    font-size: 1.125rem;
+    color: rgba(23, 43, 54, 0.7);
+    margin-bottom: 2.5rem;
+  }
+
+  /* Actions */
+  .error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #114C5A;
+    color: #fff;
+    padding: 1rem 2.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(17, 76, 90, 0.15);
+  }
+
+  .btn-primary:hover {
+    background: #0d3a45;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(17, 76, 90, 0.2);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: transparent;
+    color: #172B36;
+    padding: 1rem 2rem;
+    border: 2px solid rgba(23, 43, 54, 0.1);
+    border-radius: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: rgba(23, 43, 54, 0.04);
+    border-color: rgba(23, 43, 54, 0.2);
+  }
+
+  /* Quick Links */
+  .quick-links {
+    width: 100%;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(23, 43, 54, 0.08);
+  }
+
+  .quick-links-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(23, 43, 54, 0.4);
+    margin-bottom: 2rem;
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    background: #fff;
+    border: 1px solid rgba(23, 43, 54, 0.05);
+    border-radius: 1rem;
+    text-decoration: none;
+    color: #172B36;
+    transition: all 0.2s;
+  }
+
+  .quick-link:hover {
+    background: #f8faf9;
+    border-color: #114C5A;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(23, 43, 54, 0.06);
+  }
+
+  .quick-link .icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: #114C5A;
+  }
+
+  .quick-link span {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .error-container {
+      padding: 4rem 1.25rem 6rem;
+    }
+    .error-number {
+      gap: 0.75rem;
+    }
+    .links-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

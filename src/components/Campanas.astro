@@ -1,0 +1,104 @@
+---
+
+const campanas = [
+  {
+    id: 'punta-cana',
+    image: '/assets/img/promos/publicidad10.png',
+    alt: 'Campaña Punta Cana te espera - Julio 2026',
+  },
+{
+    id: 2,
+    image: '/assets/img/promos/publicidad9.png',
+    alt: 'Campaña Créditos listos para otorgar - Ordinario, Educativo, Consumo',
+  },
+  {
+    id: 3,
+    image: '/assets/img/promos/publicidad8.png',
+    alt: 'Campaña Solicita tu Crédito hoy mismo - Tus sueños llegaron',
+  },
+  {
+    id: 4,
+    image: '/assets/img/promos/publicidad11.png',
+    alt: 'Campaña Especial Bienestar - Punta Cana Julio 2026',
+  }
+];
+---
+
+<section class="campanas-section reveal">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="section-header text-center mb-12">
+      <div class="section-eyebrow campanas-eyebrow">Campañas Vigentes</div>
+      <h2 class="font-display" style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;">
+        Oportunidades para su progreso
+      </h2>
+    </div>
+
+    <div class="campanas-grid">
+      {campanas.map((c) => (
+        <div class="campana-card card-base">
+          <img
+            src={c.image}
+            alt={c.alt}
+            class="campana-img"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .campanas-section {
+    padding: 8rem 0;
+    background: #fff;
+    overflow: hidden;
+  }
+  .campanas-eyebrow {
+    justify-content: center;
+  }
+
+  .campanas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .campana-card {
+    position: relative;
+    border-radius: 16px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .campana-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1023px) {
+    .campanas-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 639px) {
+    .campanas-section { padding: 3.5rem 0; }
+    .campanas-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .section-header {
+      text-align: left;
+    }
+    .campanas-eyebrow {
+      justify-content: flex-start;
+    }
+  }
+
+</style>
+
