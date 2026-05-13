@@ -226,6 +226,7 @@ try {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ id, content: quill.root.innerHTML }),
+        credentials: 'include',
       });
 
       if (res.ok) {
