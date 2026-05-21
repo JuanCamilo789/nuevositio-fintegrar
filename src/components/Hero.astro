@@ -1,25 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-/**
- * SLIDE PUBLICITARIO (Cambiar aquí para nuevas promociones)
- * Este slide siempre aparecerá de primero.
- */
-const publicidadSlide = {
-  id: 'slide-profesor',
-  bg: '#172B36',
-  tag: 'Felicitaciones',
-  tagIcon: 'tabler:award',
-  heading: '¡Feliz día\na todos los\nprofesores!',
-  headingEm: 'profesores!',
-  lead: 'En Cooperamigó celebramos su dedicación y compromiso con la educación. Reconocemos la labor de quienes transforman el futuro.',
-  image: '/assets/img/diaprofesor.jpeg',
-  imageAlt: 'Homenaje Día del Profesor Cooperamigó',
-  cta1: undefined,
-  cta2: undefined,
-  trust: [],
-};
-
 const fixedSlides = [
   {
     id: 'slide-punta-cana',
@@ -50,21 +31,21 @@ const fixedSlides = [
     bg: '#172B36',
     tag: 'Cooperativa Multiactiva Luis Amigó',
     tagIcon: 'tabler:building-bank',
-    heading: 'Donde su esfuerzo\nse convierte en\nbienestar',
-    headingEm: 'bienestar',
+    heading: 'Donde su esfuerzo\nse convierte en bienestar',
+    headingEm: 'se convierte en bienestar',
     lead: 'Más de 30 años brindando soluciones financieras confiables, promoviendo el acceso al crédito, la cultura del aporte y el bienestar integral de nuestros asociados.',
     cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: '#' },
     cta2: { label: 'Conózcanos', icon: 'tabler:arrow-right', href: '/nosotros' },
     trust: [
       { icon: 'tabler:shield-check', label: 'Vigilada Supersolidaria' },
       { icon: 'tabler:rosette-discount-check', label: 'Desde 1993' },
-      { icon: 'tabler:users-group', label: '+400 asociados' },
+      { icon: 'tabler:users-group', label: '+420 asociados' },
     ],
     image: '/assets/img/promos/publicidad2.png',
     imageAlt: 'Asociados Cooperamigó',
-    floatValue: '+400',
+    floatValue: '+420',
     floatLabel: 'Asociados activos',
-    badgeValue: '+30',
+    badgeValue: '+33',
     badgeLabel: 'años de trayectoria',
     badgeIcon: 'tabler:award',
   },
@@ -116,7 +97,7 @@ const fixedSlides = [
   },
 ];
 
-const slides = [publicidadSlide, ...fixedSlides];
+const slides = fixedSlides;
 ---
 
 <!-- ════════════════════════════════════
@@ -221,7 +202,7 @@ const slides = [publicidadSlide, ...fixedSlides];
   <div class="stats-container max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16">
     <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
       <div class="stat-cell border-b border-white/5 md:border-b-0">
-        <div class="stat-num">+400</div>
+        <div class="stat-num">+420</div>
         <div class="stat-lbl">Asociados activos</div>
       </div>
       <div class="stat-cell border-b border-white/5 md:border-b-0">
@@ -229,14 +210,14 @@ const slides = [publicidadSlide, ...fixedSlides];
         <div class="stat-lbl">Convenios activos</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-num">97.4%</div>
+        <div class="stat-num">98.2%</div>
         <div class="stat-lbl">
           <span class="sm:hidden">Tasa satisfacción</span>
           <span class="hidden sm:inline">Tasa de satisfacción</span>
         </div>
       </div>
       <div class="stat-cell">
-        <div class="stat-num">+30</div>
+        <div class="stat-num">+33</div>
         <div class="stat-lbl">
           <span class="sm:hidden">Años trayectoria</span>
           <span class="hidden sm:inline">Años de trayectoria</span>
@@ -336,27 +317,6 @@ const slides = [publicidadSlide, ...fixedSlides];
   └─────────────────────────────────────────────────────────────────────────┘
   */
   @media (min-width: 1024px) {
-    /* ── Slide 0 · Día del Profesor (diaprofesor.jpeg) ── */
-    #slide-profesor .slide-img-bg   { width: 50%; right: 5%; }
-    #slide-profesor .slide-img-fill { 
-      object-fit: contain; 
-      width: 80%; 
-      height: 80%; 
-      margin: auto;
-      position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      transform: rotate(2deg);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-    #slide-profesor .slide-img-bg::after {
-      background: linear-gradient(
-        to left,
-        rgba(23, 43, 54, 0.0) 0%,
-        rgba(23, 43, 54, 0.0) 100%
-      );
-    }
-
     /* ── Slide 1 · Punta Cana (publicidad11.png) ── */
     #slide-punta-cana .slide-img-bg   { width: 68%; }
     #slide-punta-cana .slide-img-fill { object-position: center 14%; }
@@ -364,6 +324,7 @@ const slides = [publicidadSlide, ...fixedSlides];
     /* ── Slide 2 · Cooperamigó / Quiénes Somos (publicidad2.png) ── */
     #slide-0 .slide-img-bg   { width: 56%; }
     #slide-0 .slide-img-fill { object-position: center center; }
+    #slide-0 .slide-content  { width: 58%; max-width: none; }
 
     /* ── Slide 3 · Créditos (publicidad6.png) ── */
     #slide-1 .slide-img-bg   { width: 60%; }
@@ -558,66 +519,11 @@ const slides = [publicidadSlide, ...fixedSlides];
     .slide-grid { padding: 18rem 0 4rem; }
     .slide-content { width: 100%; max-width: 100%; }
 
-    /* Override para slide profesor en tablet */
-    #slide-profesor .slide-img-bg { 
-      height: 320px; 
-      background: #172B36; 
-      overflow: visible; /* Para que la rotación no se corte */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #slide-profesor .slide-img-fill { 
-      object-fit: contain; 
-      width: auto; 
-      height: 85%; 
-      max-width: 90%;
-      margin: auto;
-      border-radius: 12px;
-      transform: rotate(-2deg);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      position: relative; /* Cambiado de absolute para facilitar centrado */
-    }
-    #slide-profesor .slide-img-bg::after { display: none; }
-    #slide-profesor .slide-grid { 
-      padding-top: 22rem; 
-      text-align: center;
-      justify-content: center;
-    }
-    #slide-profesor .slide-content {
-      margin: 0 auto;
-    }
-    #slide-profesor .slide-lead {
-      margin-left: auto;
-      margin-right: auto;
-    }
   }
   @media (max-width: 639px) {
     .hero-slider { height: auto; min-height: 100vh; }
     .slide-img-bg { height: 260px; left: 0; right: 0; width: 100%; }
     .slide-grid { padding: 16rem 0 5rem; }
-
-    /* Override para slide profesor en mobile: MOSTRAR IMAGEN Y TEXTO */
-    #slide-profesor { height: auto; min-height: auto; padding-bottom: 4rem; }
-    #slide-profesor .slide-img-bg { height: 260px; top: 0; position: relative; margin-bottom: 1.5rem; }
-    #slide-profesor .slide-grid { 
-      display: flex; 
-      padding-top: 0; 
-      padding-bottom: 0;
-      text-align: center;
-      justify-content: center;
-      height: auto;
-    }
-    #slide-profesor .slide-tag { margin-bottom: 1.25rem; }
-    #slide-profesor .slide-h1 { font-size: 1.85rem; margin-bottom: 1.25rem; }
-    #slide-profesor .slide-lead { font-size: 0.95rem; max-width: 100%; margin-bottom: 0; }
-    #slide-profesor .slide-img-fill { 
-      height: 90%;
-      transform: rotate(-1.5deg);
-      position: relative;
-      inset: auto;
-      border-radius: 12px;
-    }
 
     .slide-content { width: 100%; max-width: 100%; }
     .slide-h1 { font-size: 2.25rem; line-height: 1.05; margin-bottom: 1rem; }

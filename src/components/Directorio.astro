@@ -31,6 +31,18 @@ const equipo = [
     cargo: "Bienestar Social · Auxiliar Administrativa",
     email: ["bienestarsocial@cooperamigo.coop"],
   },
+  {
+    iniciales: "JP",
+    nombre: "Juan Pablo Bustamante",
+    cargo: "Líder Marketing",
+    email: ["marketing@cooperamigo.coop"],
+  },
+  {
+    iniciales: "LR",
+    nombre: "Lina María Restrepo",
+    cargo: "Ejecutiva Comercial",
+    email: ["comercial@cooperamigo.coop"],
+  },
 ];
 ---
 
@@ -186,6 +198,8 @@ const equipo = [
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
   }
+  .dir-grid > :nth-child(5) { grid-column-start: 2; }
+  .dir-grid > :nth-child(6) { grid-column-start: 3; }
 
   .dir-card {
     background: #fff;

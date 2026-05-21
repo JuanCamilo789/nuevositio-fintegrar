@@ -188,7 +188,7 @@ import { Icon } from 'astro-icon/components';
             <div class="mega-item-sub">Balances financieros y sociales</div>
           </div>
         </a>
-        <a href="/sarlaft" class="mega-item">
+        <a href="/normatividad" class="mega-item">
           <div>
             <div class="mega-item-title">SARLAFT</div>
             <div class="mega-item-sub">Prevención lavado de activos</div>
@@ -408,7 +408,7 @@ import { Icon } from 'astro-icon/components';
   <a href="/cuerpos-colegiados" class="mobile-menu-link mobile-menu-sub">Cuerpos Colegiados</a>
   <a href="/normatividad"           class="mobile-menu-link mobile-menu-sub">Normatividad</a>
   <a href="/manual-procedimientos" class="mobile-menu-link mobile-menu-sub">Manual de Procedimientos</a>
-  <a href="/sarlaft"               class="mobile-menu-link mobile-menu-sub">SARLAFT</a>
+  <a href="/normatividad"               class="mobile-menu-link mobile-menu-sub">SARLAFT</a>
   <div class="mobile-menu-section">Créditos</div>
   <a href="/creditos"          class="mobile-menu-link mobile-menu-sub">Libre inversión</a>
   <a href="/creditos#educativo" class="mobile-menu-link mobile-menu-sub">Educativo</a>
@@ -469,8 +469,10 @@ import { Icon } from 'astro-icon/components';
   // ── Mega menu ──
   let activeTrigger: HTMLElement | null = null;
   let activePanel:   HTMLElement | null = null;
+  let closeTimer: ReturnType<typeof setTimeout> | null = null;
 
   function openMega(trigger: HTMLElement) {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
     if (activeTrigger && activeTrigger !== trigger) closeMega();
     const target = trigger.dataset.target;
     const panel  = document.getElementById(`mega-${target}`);
@@ -483,6 +485,7 @@ import { Icon } from 'astro-icon/components';
   }
 
   function closeMega() {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
     activeTrigger?.setAttribute('aria-expanded', 'false');
     activePanel?.classList.remove('is-active');
     backdrop?.classList.remove('is-active');
@@ -490,11 +493,24 @@ import { Icon } from 'astro-icon/components';
     activePanel   = null;
   }
 
+  function scheduleClose() {
+    closeTimer = setTimeout(closeMega, 120);
+  }
+
   document.querySelectorAll<HTMLElement>('.mega-trigger').forEach((trigger) => {
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
       activeTrigger === trigger ? closeMega() : openMega(trigger);
     });
+    trigger.addEventListener('mouseenter', () => openMega(trigger));
+    trigger.addEventListener('mouseleave', scheduleClose);
+  });
+
+  document.querySelectorAll<HTMLElement>('.mega-panel').forEach((panel) => {
+    panel.addEventListener('mouseenter', () => {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    });
+    panel.addEventListener('mouseleave', scheduleClose);
   });
 
   backdrop?.addEventListener('click', closeMega);
