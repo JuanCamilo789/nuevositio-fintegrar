@@ -3,28 +3,29 @@ import { Icon } from 'astro-icon/components';
 
 const fixedSlides = [
   {
-    id: 'slide-punta-cana',
+    id: 'slide-futuro-todos',
     bg: '#172B36',
-    tag: 'Campaña Especial Bienestar',
-    tagIcon: 'tabler:plane-departure',
-    heading: 'Punta Cana\nte está esperando\n¡Viaje ahora!',
-    headingEm: '¡Viaje ahora!',
-    lead: 'Disfrute 6 días y 5 noches en el paraíso con todo incluido. Financiación especial para asociados con tasas desde 1.5% m.v sujeto a estudio de crédito. ¡Cupos limitados!',
-    cta1: { label: 'Reservar mi cupo', icon: 'tabler:mail-forward', href: 'mailto:bienestarsocial@cooperamigo.coop' },
-    cta2: { label: 'Más información', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/573044550161' },
+    tag: 'Tu mejor aliado',
+    tagIcon: 'tabler:building-bank',
+    heading: 'El futuro\nes de todos',
+    headingEm: 'es de todos',
+    lead: 'Únete a Cooperamigó y construye un futuro más seguro para ti y tu familia. Descubre todos los beneficios de ser asociado.',
+    cta1: { label: 'Quiero ser asociado', icon: 'tabler:user-plus', href: 'https://serviciosdigitales.cooperamigo.coop/' },
+    cta2: { label: 'Conocer más', icon: 'tabler:arrow-right', href: '/nosotros' },
     trust: [
-      { icon: 'tabler:calendar-event', label: '2 al 7 Julio 2026' },
-      { icon: 'tabler:hotel-service', label: 'Hotel Catalonia' },
-      { icon: 'tabler:percentage', label: 'Tasa 1.5% m.v.' },
+      { icon: 'tabler:shield-check', label: 'Vigilada Supersolidaria' },
+      { icon: 'tabler:rosette-discount-check', label: 'Desde 1993' },
+      { icon: 'tabler:users-group', label: '+420 asociados' },
     ],
-    image: '/assets/img/promos/publicidad11.png',
-    imageAlt: 'Campaña Punta Cana Cooperamigó',
+    image: '/assets/img/imagen1.png',
+    imageAlt: 'Campaña El futuro es de todos',
     isVertical: true,
     floatValue: '',
     floatLabel: '',
     badgeValue: '',
     badgeLabel: '',
     badgeIcon: '',
+    alignRight: true,
   },
   {
     id: 'slide-0',
@@ -108,12 +109,12 @@ const slides = fixedSlides;
   <!-- ── Slides ── -->
   {slides.map((s, i) => (
     <div
-      class={`slide${i === 0 ? ' is-active' : ''}`}
+      class={`slide${i === 0 ? ' is-active' : ''}${s.alignRight ? ' slide--align-right' : ''}`}
       id={s.id}
       style={`background:${s.bg};`}
       aria-hidden={i !== 0 ? 'true' : 'false'}
     >
-      <!-- Imagen: absoluta, izquierda, altura completa, difuminada a la derecha -->
+      <!-- Imagen: absoluta, izquierda o derecha, altura completa, difuminada -->
       <div class="slide-img-bg">
         <img
           src={s.image}
@@ -203,23 +204,29 @@ const slides = fixedSlides;
     <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
       <div class="stat-cell border-b border-white/5 md:border-b-0">
         <div class="stat-num">+420</div>
-        <div class="stat-lbl">Asociados activos</div>
+        <div class="stat-lbl">
+          <span class="sm:hidden">Asociados<br />activos</span>
+          <span class="hidden sm:inline">Asociados activos</span>
+        </div>
       </div>
       <div class="stat-cell border-b border-white/5 md:border-b-0">
         <div class="stat-num">+12</div>
-        <div class="stat-lbl">Convenios activos</div>
+        <div class="stat-lbl">
+          <span class="sm:hidden">Convenios<br />activos</span>
+          <span class="hidden sm:inline">Convenios activos</span>
+        </div>
       </div>
       <div class="stat-cell">
         <div class="stat-num">98.2%</div>
         <div class="stat-lbl">
-          <span class="sm:hidden">Tasa satisfacción</span>
+          <span class="sm:hidden">Tasa<br />satisfacción</span>
           <span class="hidden sm:inline">Tasa de satisfacción</span>
         </div>
       </div>
       <div class="stat-cell">
         <div class="stat-num">+33</div>
         <div class="stat-lbl">
-          <span class="sm:hidden">Años trayectoria</span>
+          <span class="sm:hidden">Años<br />trayectoria</span>
           <span class="hidden sm:inline">Años de trayectoria</span>
         </div>
       </div>
@@ -297,6 +304,28 @@ const slides = fixedSlides;
     );
     pointer-events: none;
   }
+
+  /* ── Slide alineado a la derecha: imagen a la izquierda, contenido a la derecha ── */
+  .slide--align-right .slide-img-bg {
+    right: auto;
+    left: 0;
+  }
+  /* Difuminado más oscuro para que el texto se lea bien, solo el lado derecho donde está el contenido */
+  .slide--align-right .slide-img-bg::after {
+    background: linear-gradient(
+      to right,
+      rgba(23, 43, 54, 0.0) 0%,
+      rgba(23, 43, 54, 0.2) 30%,
+      rgba(23, 43, 54, 0.95) 70%,
+      #172B36 100%
+    );
+  }
+  .slide--align-right .slide-grid {
+    justify-content: flex-end;
+  }
+  .slide--align-right .slide-content {
+    margin-left: auto;
+  }
   .slide-img-fill {
     width: 100%;
     height: 100%;
@@ -317,9 +346,9 @@ const slides = fixedSlides;
   └─────────────────────────────────────────────────────────────────────────┘
   */
   @media (min-width: 1024px) {
-    /* ── Slide 1 · Punta Cana (publicidad11.png) ── */
-    #slide-punta-cana .slide-img-bg   { width: 68%; }
-    #slide-punta-cana .slide-img-fill { object-position: center 14%; }
+    /* ── Slide 1 · El futuro es de todos (imagen1.png) ── */
+    #slide-futuro-todos .slide-img-bg   { width: 100%; }
+    #slide-futuro-todos .slide-img-fill { object-position: center center; }
 
     /* ── Slide 2 · Cooperamigó / Quiénes Somos (publicidad2.png) ── */
     #slide-0 .slide-img-bg   { width: 56%; }
@@ -516,14 +545,59 @@ const slides = fixedSlides;
         #172B36 100%
       );
     }
+    /* Para nuestro banner específico, resetear los estilos de desktop en tablet */
+    .slide--align-right .slide-img-bg {
+      right: 0;
+      left: 0;
+    }
+    .slide--align-right .slide-img-bg::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(23, 43, 54, 0.1) 20%,
+        rgba(23, 43, 54, 0.7) 70%,
+        #172B36 100%
+      );
+    }
+    .slide--align-right .slide-grid {
+      justify-content: flex-start;
+    }
+    .slide--align-right .slide-content {
+      margin-left: 0;
+    }
     .slide-grid { padding: 18rem 0 4rem; }
     .slide-content { width: 100%; max-width: 100%; }
 
   }
   @media (max-width: 639px) {
-    .hero-slider { height: auto; min-height: 100vh; }
-    .slide-img-bg { height: 260px; left: 0; right: 0; width: 100%; }
-    .slide-grid { padding: 16rem 0 5rem; }
+    .hero-slider { height: auto; min-height: 700px; }
+    .slider-dots { display: none; } /* Ocultamos los puntos de navegación en móviles */
+    .slide-tag { display: none; } /* Ocultamos las etiquetas de los banners en móviles */
+    /* Aseguramos que la barra de progreso se vea en móviles */
+    .slider-progress { display: block !important; }
+    .slide-img-bg { height: 380px; left: 0; right: 0; width: 100%; }
+    .slide-img-fill {
+      object-position: left center; /* Alineamos la imagen hacia la izquierda para que no quede espacio blanco */
+    }
+    /* Para nuestro banner específico, resetear los estilos de desktop en móvil */
+    .slide--align-right .slide-img-bg {
+      right: 0;
+      left: 0;
+    }
+    .slide--align-right .slide-img-bg::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(23, 43, 54, 0.1) 20%,
+        rgba(23, 43, 54, 0.7) 70%,
+        #172B36 100%
+      );
+    }
+    .slide--align-right .slide-grid {
+      justify-content: flex-start;
+    }
+    .slide--align-right .slide-content {
+      margin-left: 0;
+    }
+    .slide-grid { padding: 24rem 0 12rem; } /* Aumentamos aún más el espacio inferior para separar de las stats */
 
     .slide-content { width: 100%; max-width: 100%; }
     .slide-h1 { font-size: 2.25rem; line-height: 1.05; margin-bottom: 1rem; }
@@ -543,9 +617,16 @@ const slides = fixedSlides;
       border-radius: 9999px;
     }
     .slide-trust { display: none; }
-    .stat-cell { padding: 1.5rem 0.5rem; }
-    .stat-num { font-size: 1.625rem; }
-    .stat-lbl { font-size: 0.75rem; line-height: 1.3; }
+    
+    /* Ajustamos el grid de stats para que se vea en 1 fila y 4 columnas en móviles */
+    .stats-container .grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+    .stat-cell { padding: 1rem 0.25rem; } /* Reducimos el padding para que quepan todas */
+    .stat-cell { border-right: 1px solid rgba(255, 255, 255, 0.1); } /* Mantenemos los bordes entre ellas */
+    .stat-cell:last-child { border-right: none; } /* Quitamos el último borde */
+    .stat-num { font-size: 1.125rem; } /* Reducimos solo un poquito el tamaño de los números */
+    .stat-lbl { font-size: 0.65rem; line-height: 1.2; } /* Reducimos un poco el tamaño de las etiquetas */
   }
 </style>
 
@@ -563,16 +644,20 @@ const slides = fixedSlides;
     // Remove active from current
     slides[current].classList.remove('is-active');
     slides[current].setAttribute('aria-hidden', 'true');
-    dots[current].classList.remove('active');
-    dots[current].setAttribute('aria-selected', 'false');
+    if (dots.length > 0) {
+      dots[current].classList.remove('active');
+      dots[current].setAttribute('aria-selected', 'false');
+    }
 
     // Set new current
     current = (n + slides.length) % slides.length;
 
     slides[current].classList.add('is-active');
     slides[current].setAttribute('aria-hidden', 'false');
-    dots[current].classList.add('active');
-    dots[current].setAttribute('aria-selected', 'true');
+    if (dots.length > 0) {
+      dots[current].classList.add('active');
+      dots[current].setAttribute('aria-selected', 'true');
+    }
 
     // Restart progress bar
     if (bar) {
@@ -581,33 +666,43 @@ const slides = fixedSlides;
       void bar.offsetWidth;
       bar.classList.add('animating');
     }
+    
+    // Resetear timer
+    resetTimer();
   }
 
   function next() { activateSlide(current + 1); }
   function prev() { activateSlide(current - 1); }
 
-  function startAuto() {
-    timer = setInterval(() => { if (!paused) next(); }, 6000);
-  }
   function resetTimer() {
     clearInterval(timer);
-    startAuto();
+    timer = setInterval(() => { if (!paused) next(); }, 6000);
   }
 
   // Init
+  console.log('Slider inicializado - slides:', slides.length);
   if (bar) {
+    console.log('Barra de progreso encontrada');
     bar.classList.add('animating');
   }
-  startAuto();
+  timer = setInterval(() => { 
+    console.log('Timer ejecutado - paused:', paused);
+    if (!paused) {
+      console.log('Cambiando al siguiente slide');
+      next(); 
+    }
+  }, 6000);
 
   // Dots
   dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => { activateSlide(i); resetTimer(); });
+    dot.addEventListener('click', () => { activateSlide(i); });
   });
 
-  // Pause on hover
-  slider?.addEventListener('mouseenter', () => { paused = true; });
-  slider?.addEventListener('mouseleave', () => { paused = false; });
+  // Pause on hover (solo en desktop)
+  if (window.innerWidth > 1023) {
+    slider?.addEventListener('mouseenter', () => { paused = true; });
+    slider?.addEventListener('mouseleave', () => { paused = false; });
+  }
 
   // Touch/swipe support
   let touchStartX = 0;
