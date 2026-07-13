@@ -1,0 +1,973 @@
+---
+import InnerLayout from "../layouts/InnerLayout.astro";
+import { Icon } from "astro-icon/components";
+import FloatingInput from "../components/form/FloatingInput.astro";
+import FloatingSelect from "../components/form/FloatingSelect.astro";
+---
+
+<InnerLayout
+  pageTitle="Actualización de datos"
+  pageSubtitle="Tu información actualizada nos ayuda a atenderte mejor y ser más oportunos en nuestras comunicaciones. ¡Solo te tomará un momento!"
+  breadcrumbs={[{ label: "Actualización de datos" }]}
+>
+  <section class="ad-section">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="ad-card">
+
+        <!-- ═══ Stepper ═══ -->
+        <div class="ad-stepper" id="ad-stepper">
+          <div class="ad-stepper-item" data-step="cedula">
+            <span class="ad-stepper-num">1</span>
+            <span>Documento</span>
+          </div>
+          <div class="ad-stepper-line"></div>
+          <div class="ad-stepper-item" data-step="form">
+            <span class="ad-stepper-num">2</span>
+            <span>Datos</span>
+          </div>
+          <div class="ad-stepper-line"></div>
+          <div class="ad-stepper-item" data-step="confirm">
+            <span class="ad-stepper-num">3</span>
+            <span>Confirmar</span>
+          </div>
+        </div>
+
+        <!-- ═══ Paso 1: Cédula ═══ -->
+        <div id="ad-step-cedula" class="ad-step">
+          <h2 class="ad-step-title">Ingresa tu número de documento</h2>
+          <p class="ad-step-desc">
+            A continuación podrás revisar y actualizar tu información.
+          </p>
+
+          <form id="ad-form-cedula" novalidate>
+            <FloatingSelect id="ad-tipo-identificacion" label="Tipo de identificación">
+              <option value="CC">Cédula de ciudadanía</option>
+              <option value="CE">Cédula de extranjería</option>
+            </FloatingSelect>
+            <FloatingInput
+              id="ad-cedula"
+              label="Número de documento"
+              maxlength="11"
+              inputmode="numeric"
+              pattern="[0-9]+"
+              autocomplete="off"
+              autofocus
+            />
+
+            <div id="ad-cedula-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;"></div>
+
+            <button type="submit" id="ad-btn-buscar" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.875rem;">
+              <Icon name="tabler:search" class="w-4 h-4" aria-hidden="true" />
+              Continuar
+            </button>
+          </form>
+        </div>
+
+        <!-- ═══ Paso 2: Formulario de actualización ═══ -->
+        <div id="ad-step-form" class="ad-step" style="display:none;">
+          <h2 class="ad-step-title">Actualiza tus datos</h2>
+          <p class="ad-step-desc">
+            Revisa y actualiza la información que necesites. Nuestro equipo revisará los cambios antes
+            de aplicarlos definitivamente.
+          </p>
+          <p class="ad-hint">
+            Todos los campos son opcionales — solo se enviarán a revisión los que modifiques.
+          </p>
+
+          <form id="ad-form-datos" novalidate>
+
+            <!-- Contacto y residencia -->
+            <div class="ad-accordion-item open">
+              <button type="button" class="ad-accordion-header" data-target="acc-contacto">
+                <span>Contacto y residencia</span>
+                <Icon name="tabler:chevron-down" class="w-4 h-4 chevron" aria-hidden="true" />
+              </button>
+              <div id="acc-contacto" class="ad-accordion-body">
+                <div class="form-row">
+                  <FloatingInput id="f-email" label="Correo electrónico" type="email" data-campo="email" maxlength="100" />
+                  <FloatingInput id="f-otro_email" label="Correo alterno" type="email" data-campo="otro_email" maxlength="100" />
+                </div>
+                <div class="form-row">
+                  <FloatingInput id="f-celular" label="Celular" type="tel" data-campo="celular" maxlength="15" />
+                  <FloatingInput id="f-telefono" label="Teléfono fijo" type="tel" data-campo="telefono" maxlength="15" />
+                </div>
+                <FloatingInput id="f-direccion" label="Dirección" data-campo="direccion" maxlength="200" />
+                <div class="form-row">
+                  <FloatingInput id="f-ciudad" label="Ciudad" data-campo="ciudad" maxlength="100" />
+                  <FloatingInput id="f-barrio" label="Barrio" data-campo="barrio" maxlength="100" />
+                </div>
+                <div class="form-row">
+                  <FloatingSelect id="f-tipo_vivienda" label="Tipo de vivienda" data-campo="tipo_vivienda">
+                    <option value="">Seleccione</option>
+                    <option value="Propia">Propia</option>
+                    <option value="Arrendada">Arrendada</option>
+                    <option value="Familiar">Familiar</option>
+                  </FloatingSelect>
+                  <FloatingSelect id="f-estrato" label="Estrato" data-campo="estrato">
+                    <option value="">Seleccione</option>
+                    {[1, 2, 3, 4, 5, 6].map((n) => <option value={n}>{n}</option>)}
+                  </FloatingSelect>
+                </div>
+                <FloatingInput id="f-tiempo_residencia_meses" label="Tiempo de residencia (meses)" type="number" data-campo="tiempo_residencia_meses" min="0" max="1200" />
+                <div class="form-group">
+                  <label id="lbl-canales">¿Por cuál medio prefieres que te contactemos?</label>
+                  <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-canales">
+                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="correo" /> Correo electrónico</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="llamada" /> Llamada telefónica</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="whatsapp" /> WhatsApp</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="sms" /> Mensaje de texto (SMS)</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="apps_web" /> Notificaciones de la app/portal</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="direccion_principal" /> Correspondencia a mi dirección</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="direccion_empresa" /> Correspondencia a mi empresa</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Datos personales -->
+            <div class="ad-accordion-item">
+              <button type="button" class="ad-accordion-header" data-target="acc-personales">
+                <span>Datos personales</span>
+                <Icon name="tabler:chevron-down" class="w-4 h-4 chevron" aria-hidden="true" />
+              </button>
+              <div id="acc-personales" class="ad-accordion-body">
+                <div class="form-row">
+                  <FloatingInput id="f-fecha_nacimiento" label="Fecha de nacimiento" type="date" data-campo="fecha_nacimiento" />
+                  <FloatingSelect id="f-rh" label="RH" data-campo="rh">
+                    <option value="">Seleccione</option>
+                    {["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"].map((rh) => <option value={rh}>{rh}</option>)}
+                  </FloatingSelect>
+                </div>
+                <div class="form-row">
+                  <FloatingSelect id="f-estado_civil" label="Estado civil" data-campo="estado_civil">
+                    <option value="">Seleccione</option>
+                    <option value="Soltero">Soltero(a)</option>
+                    <option value="Casado">Casado(a)</option>
+                    <option value="Union Libre">Unión libre</option>
+                    <option value="Separado">Separado(a)</option>
+                    <option value="Viudo">Viudo(a)</option>
+                  </FloatingSelect>
+                  <FloatingSelect id="f-genero" label="Género" data-campo="genero">
+                    <option value="">Seleccione</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                  </FloatingSelect>
+                </div>
+                <div class="form-row">
+                  <FloatingSelect id="f-nivel_academico" label="Nivel académico" data-campo="nivel_academico">
+                    <option value="">Seleccione</option>
+                    <option value="Primaria">Primaria</option>
+                    <option value="Bachiller">Bachiller</option>
+                    <option value="Tecnico Tecnologo">Técnico / Tecnólogo</option>
+                    <option value="Universitario">Universitario</option>
+                    <option value="Otro">Otro</option>
+                  </FloatingSelect>
+                  <FloatingInput id="f-titulo" label="Título obtenido" data-campo="titulo" maxlength="100" />
+                </div>
+                <div class="form-row">
+                  <FloatingInput id="f-personas_a_cargo" label="Personas a cargo" type="number" data-campo="personas_a_cargo" min="0" max="20" />
+                  <FloatingInput id="f-personas_economicamente_activas" label="Personas económ. activas en el hogar" type="number" data-campo="personas_economicamente_activas" min="0" max="20" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Información laboral -->
+            <div class="ad-accordion-item">
+              <button type="button" class="ad-accordion-header" data-target="acc-laboral">
+                <span>Información laboral</span>
+                <Icon name="tabler:chevron-down" class="w-4 h-4 chevron" aria-hidden="true" />
+              </button>
+              <div id="acc-laboral" class="ad-accordion-body">
+                <FloatingSelect id="f-fuente_ingresos" label="Fuente de ingresos" data-campo="fuente_ingresos">
+                  <option value="">Seleccione</option>
+                  <option value="empleado">Empleado</option>
+                  <option value="independiente">Independiente</option>
+                  <option value="pensionado">Pensionado</option>
+                  <option value="rentista">Rentista de capital</option>
+                  <option value="estudiante">Estudiante</option>
+                </FloatingSelect>
+
+                <div id="ad-grupo-empleado" class="ad-grupo-condicional">
+                  <div class="form-row">
+                    <FloatingInput id="f-empresa" label="Empresa" data-campo="empresa" maxlength="200" />
+                    <FloatingInput id="f-cargo" label="Cargo" data-campo="cargo" maxlength="100" />
+                  </div>
+                  <div class="form-row">
+                    <FloatingSelect id="f-tipo_contrato" label="Tipo de contrato" data-campo="tipo_contrato">
+                      <option value="">Seleccione</option>
+                      <option value="indefinido">Término indefinido</option>
+                      <option value="fijo">Término fijo</option>
+                      <option value="prestacion_servicios">Prestación de servicios</option>
+                      <option value="obra_labor">Obra y labor</option>
+                    </FloatingSelect>
+                    <FloatingInput id="f-fecha_ingreso_empresa" label="Fecha de ingreso" type="date" data-campo="fecha_ingreso_empresa" />
+                  </div>
+                  <FloatingInput id="f-direccion_empresa" label="Dirección de la empresa" data-campo="direccion_empresa" maxlength="200" />
+                  <div class="form-row">
+                    <FloatingInput id="f-ciudad_empresa" label="Ciudad de la empresa" data-campo="ciudad_empresa" maxlength="100" />
+                    <FloatingInput id="f-telefono_empresa" label="Teléfono de la empresa" type="tel" data-campo="telefono_empresa" maxlength="15" />
+                  </div>
+                  <FloatingInput id="f-email_corporativo" label="Correo corporativo" type="email" data-campo="email_corporativo" maxlength="100" />
+                </div>
+
+                <div id="ad-grupo-pensionado" class="ad-grupo-condicional">
+                  <FloatingInput id="f-entidad_pagadora" label="Entidad pagadora" data-campo="entidad_pagadora" maxlength="150" />
+                </div>
+
+                <div id="ad-grupo-estudiante" class="ad-grupo-condicional">
+                  <div class="form-row">
+                    <FloatingInput id="f-institucion_educativa" label="Institución educativa" data-campo="institucion_educativa" maxlength="150" />
+                    <FloatingInput id="f-nivel_educativo" label="Nivel educativo" data-campo="nivel_educativo" maxlength="50" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Situación financiera -->
+            <div class="ad-accordion-item">
+              <button type="button" class="ad-accordion-header" data-target="acc-financiera">
+                <span>Situación financiera</span>
+                <Icon name="tabler:chevron-down" class="w-4 h-4 chevron" aria-hidden="true" />
+              </button>
+              <div id="acc-financiera" class="ad-accordion-body">
+                <div class="form-row">
+                  <FloatingInput id="f-salario" label="Salario / ingresos fijos mensuales" data-campo="salario" inputmode="numeric" />
+                  <FloatingInput id="f-ingresos_independiente" label="Ingresos como independiente" data-campo="ingresos_independiente" inputmode="numeric" />
+                </div>
+                <div class="form-row">
+                  <FloatingInput id="f-mesada_pensional" label="Mesada pensional" data-campo="mesada_pensional" inputmode="numeric" />
+                  <FloatingInput id="f-otros_ingresos" label="Otros ingresos" data-campo="otros_ingresos" inputmode="numeric" />
+                </div>
+                <div class="form-row">
+                  <FloatingInput id="f-gastos_familiares" label="Gastos familiares mensuales" data-campo="gastos_familiares" inputmode="numeric" />
+                  <FloatingInput id="f-otros_gastos" label="Otros gastos mensuales" data-campo="otros_gastos" inputmode="numeric" />
+                </div>
+                <FloatingInput id="f-obligaciones_financieras" label="Cuotas / obligaciones financieras mensuales" data-campo="obligaciones_financieras" inputmode="numeric" />
+              </div>
+            </div>
+
+            <div id="ad-form-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;margin-top:1.25rem;"></div>
+
+            <div class="ad-btn-row">
+              <button type="button" id="ad-btn-volver-form" class="btn btn-outline-sm">
+                Volver
+              </button>
+              <button type="submit" id="ad-btn-revisar" class="btn btn-primary" style="flex:1;justify-content:center;padding:0.875rem;">
+                Revisar cambios
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ═══ Paso 3: Confirmación ═══ -->
+        <div id="ad-step-confirm" class="ad-step" style="display:none;">
+          <h2 class="ad-step-title">Confirma los cambios</h2>
+          <p class="ad-step-desc">
+            Vas a enviar estos cambios para que nuestro equipo los revise y los aplique:
+          </p>
+
+          <div id="ad-resumen-cambios" class="ad-resumen"></div>
+
+          <div id="ad-confirm-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;"></div>
+
+          <div class="ad-btn-row">
+            <button type="button" id="ad-btn-volver-confirm" class="btn btn-outline-sm">
+              Volver a editar
+            </button>
+            <button type="button" id="ad-btn-guardar" class="btn btn-primary" style="flex:1;justify-content:center;padding:0.875rem;">
+              <Icon name="tabler:check" class="w-4 h-4" aria-hidden="true" />
+              Confirmar y enviar
+            </button>
+          </div>
+        </div>
+
+        <!-- ═══ Éxito ═══ -->
+        <div id="ad-step-success" class="ad-step ad-success" style="display:none;">
+          <div class="success-icon">
+            <Icon name="tabler:circle-check" class="w-12 h-12" aria-hidden="true" />
+          </div>
+          <h3 class="success-title">¡Información recibida!</h3>
+          <p class="success-body">
+            Hemos recibido los cambios que enviaste. Nuestro equipo los revisará y los aplicará
+            una vez confirme la información contigo si es necesario.
+          </p>
+          <div id="ad-resumen-final" class="ad-resumen" style="text-align:left;"></div>
+          <button type="button" class="btn btn-outline-sm" id="ad-nueva" style="margin-top:1.25rem;">
+            Actualizar otro registro
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</InnerLayout>
+
+<style>
+  .ad-section {
+    background: #fff;
+    padding: 3.5rem 0 5rem;
+  }
+  .ad-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 2rem;
+  }
+
+  /* ── Stepper ────────────────────────────────────────────────────── */
+  .ad-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .ad-stepper-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    opacity: 0.4;
+  }
+  .ad-stepper-item.activo,
+  .ad-stepper-item.completado {
+    opacity: 1;
+  }
+  .ad-stepper-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e4e8ed;
+    color: #172b36;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+  }
+  .ad-stepper-item.activo .ad-stepper-num {
+    background: #172b36;
+    color: #fff;
+  }
+  .ad-stepper-item.completado .ad-stepper-num {
+    background: #114c5a;
+    color: #fff;
+  }
+  .ad-stepper-item span:last-child {
+    font-size: 0.68rem;
+    color: #4b5563;
+    font-weight: 600;
+  }
+  .ad-stepper-line {
+    width: 36px;
+    height: 2px;
+    background: #e4e8ed;
+  }
+
+  .ad-step-title {
+    font-family: var(--ff-heading, inherit);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #172b36;
+    margin-bottom: 0.375rem;
+  }
+  .ad-step-desc {
+    font-size: 0.85rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .ad-hint {
+    font-size: 0.78rem;
+    color: #6b7280;
+    font-style: italic;
+    margin: -0.5rem 0 1.25rem;
+  }
+  #ad-step-cedula .ad-step-title,
+  #ad-step-cedula .ad-step-desc {
+    text-align: center;
+  }
+  #ad-form-cedula {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* ── Acordeón ───────────────────────────────────────────────────── */
+  .ad-accordion-item {
+    border: 1px solid #e4e8ed;
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+  .ad-accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1rem;
+    background: #f8fafa;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #172b36;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: inherit;
+  }
+  .ad-accordion-header .chevron {
+    transition: transform 0.2s;
+    color: #6b7280;
+    flex-shrink: 0;
+  }
+  .ad-accordion-item.open .ad-accordion-header .chevron {
+    transform: rotate(180deg);
+  }
+  .ad-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    padding: 0 1rem;
+  }
+  .ad-accordion-item.open .ad-accordion-body {
+    max-height: 3000px;
+    padding: 1.125rem 1rem 0.375rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin-bottom: 1rem;
+  }
+  .form-group label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #172b36;
+  }
+  .ad-checkbox-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .ad-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #172b36;
+    cursor: pointer;
+  }
+  .ad-checkbox input {
+    width: 16px;
+    height: 16px;
+    accent-color: #114c5a;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .ad-grupo-condicional {
+    display: none;
+  }
+  .ad-grupo-condicional.activo {
+    display: block;
+  }
+  .ad-error {
+    padding: 0.625rem 0.875rem;
+    background: #fef2f2;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: #dc2626;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .ad-btn-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  /* ── Resumen de cambios ─────────────────────────────────────────── */
+  .ad-resumen {
+    border: 1px solid #e4e8ed;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+  .ad-resumen-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .ad-resumen-row:last-child {
+    border-bottom: none;
+  }
+  .ad-resumen-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .ad-resumen-valores {
+    font-size: 0.875rem;
+  }
+  .ad-resumen-anterior {
+    color: #9ca3af;
+    text-decoration: line-through;
+    margin-right: 0.4rem;
+  }
+  .ad-resumen-nuevo {
+    color: #114c5a;
+    font-weight: 700;
+  }
+
+  .ad-success {
+    text-align: center;
+    padding: 1rem 0;
+  }
+  .success-icon {
+    color: #16a34a;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .success-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #172b36;
+    margin-bottom: 0.5rem;
+  }
+  .success-body {
+    font-size: 0.875rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, opacity 0.15s;
+  }
+  .btn-primary {
+    background: #172b36;
+    color: #fff;
+  }
+  .btn-primary:hover { background: #0f1f27; }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .btn-outline-sm {
+    background: transparent;
+    border: 1px solid #d9e8e2;
+    color: #172b36;
+    padding: 0.625rem 1rem;
+  }
+  .btn-outline-sm:hover {
+    background: #172b36;
+    color: #fff;
+  }
+
+  @media (max-width: 639px) {
+    .ad-card { padding: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .ad-stepper-item span:last-child { display: none; }
+  }
+</style>
+
+<script>
+  import { createClient } from "@supabase/supabase-js";
+
+  const supabase = createClient(
+    import.meta.env.PUBLIC_SUPABASE_URL,
+    import.meta.env.PUBLIC_SUPABASE_ANON_KEY,
+  );
+
+  // Columnas editables — deben coincidir con la lista blanca del RPC
+  // actualizar_datos_asociado en la base de datos.
+  const CAMPOS_TEXT = [
+    "email", "otro_email", "celular", "telefono", "direccion", "ciudad", "barrio",
+    "tipo_vivienda", "estrato", "fecha_nacimiento", "rh", "estado_civil", "genero",
+    "nivel_academico", "titulo", "empresa", "cargo", "tipo_contrato",
+    "fecha_ingreso_empresa", "direccion_empresa", "ciudad_empresa", "telefono_empresa",
+    "email_corporativo", "entidad_pagadora", "institucion_educativa",
+    "nivel_educativo",
+  ];
+  const CAMPOS_NUMERICOS = [
+    "tiempo_residencia_meses", "personas_a_cargo", "personas_economicamente_activas",
+    "salario", "ingresos_independiente", "mesada_pensional", "otros_ingresos",
+    "gastos_familiares", "otros_gastos", "obligaciones_financieras",
+  ];
+  // Campos monetarios: se muestran formateados con separador de miles.
+  const CAMPOS_DINERO = [
+    "salario", "ingresos_independiente", "mesada_pensional", "otros_ingresos",
+    "gastos_familiares", "otros_gastos", "obligaciones_financieras",
+  ];
+  // fuente_ingresos se maneja aparte porque escribe en dos columnas gemelas
+  // (fuente_ingresos y tipo_trabajador) y salario/obligaciones también.
+  // canales_comunicacion también se maneja aparte (checkboxes → arreglo).
+  const TODOS_LOS_CAMPOS = [...CAMPOS_TEXT, ...CAMPOS_NUMERICOS, "fuente_ingresos", "canales_comunicacion"];
+
+  const ETIQUETAS_CANAL: Record<string, string> = {
+    correo: "Correo electrónico", llamada: "Llamada telefónica", whatsapp: "WhatsApp",
+    sms: "Mensaje de texto (SMS)", apps_web: "Notificaciones de la app/portal",
+    direccion_principal: "Correspondencia a mi dirección", direccion_empresa: "Correspondencia a mi empresa",
+  };
+
+  const ETIQUETAS_CAMPO: Record<string, string> = {
+    email: "Correo electrónico", otro_email: "Correo alterno", celular: "Celular",
+    telefono: "Teléfono fijo", direccion: "Dirección", ciudad: "Ciudad", barrio: "Barrio",
+    tipo_vivienda: "Tipo de vivienda", estrato: "Estrato",
+    tiempo_residencia_meses: "Tiempo de residencia (meses)",
+    canales_comunicacion: "Medios de contacto preferidos",
+    fecha_nacimiento: "Fecha de nacimiento", rh: "RH", estado_civil: "Estado civil",
+    genero: "Género", nivel_academico: "Nivel académico", titulo: "Título obtenido",
+    personas_a_cargo: "Personas a cargo",
+    personas_economicamente_activas: "Personas económ. activas en el hogar",
+    fuente_ingresos: "Fuente de ingresos", empresa: "Empresa", cargo: "Cargo",
+    tipo_contrato: "Tipo de contrato", fecha_ingreso_empresa: "Fecha de ingreso",
+    direccion_empresa: "Dirección de la empresa", ciudad_empresa: "Ciudad de la empresa",
+    telefono_empresa: "Teléfono de la empresa", email_corporativo: "Correo corporativo",
+    entidad_pagadora: "Entidad pagadora", institucion_educativa: "Institución educativa",
+    nivel_educativo: "Nivel educativo", salario: "Salario / ingresos fijos mensuales",
+    ingresos_independiente: "Ingresos como independiente", mesada_pensional: "Mesada pensional",
+    otros_ingresos: "Otros ingresos", gastos_familiares: "Gastos familiares mensuales",
+    otros_gastos: "Otros gastos mensuales",
+    obligaciones_financieras: "Cuotas / obligaciones financieras mensuales",
+  };
+
+  let cedulaActual = "";
+  let tipoIdentificacionActual = "CC";
+  let valoresOriginales: Record<string, unknown> = {};
+  let cambiosPendientes: Record<string, unknown> = {};
+
+  const $ = (id: string) => document.getElementById(id);
+
+  // ── Helpers de números con separador de miles ──────────────────────────
+  function limpiarNumero(v: string): string {
+    return v.replace(/\D/g, "");
+  }
+  function formatearMiles(v: string): string {
+    const limpio = limpiarNumero(v);
+    if (!limpio) return "";
+    return Number(limpio).toLocaleString("es-CO");
+  }
+  CAMPOS_DINERO.forEach((campo) => {
+    const el = $(`f-${campo}`) as HTMLInputElement | null;
+    if (!el) return;
+    el.addEventListener("focus", () => { el.value = limpiarNumero(el.value); });
+    el.addEventListener("blur", () => { el.value = formatearMiles(el.value); });
+  });
+
+  // ── Navegación entre pasos + stepper ────────────────────────────────────
+  const ORDEN_PASOS = ["cedula", "form", "confirm"];
+
+  function mostrarPaso(paso: "cedula" | "form" | "confirm" | "success") {
+    for (const p of ["cedula", "form", "confirm", "success"]) {
+      const el = $(`ad-step-${p}`);
+      if (el) el.style.display = p === paso ? "block" : "none";
+    }
+    const stepper = $("ad-stepper");
+    if (stepper) stepper.style.display = paso === "success" ? "none" : "flex";
+
+    if (paso !== "success") {
+      const idxActual = ORDEN_PASOS.indexOf(paso);
+      document.querySelectorAll(".ad-stepper-item").forEach((el) => {
+        const idx = ORDEN_PASOS.indexOf((el as HTMLElement).dataset.step ?? "");
+        el.classList.toggle("activo", idx === idxActual);
+        el.classList.toggle("completado", idx < idxActual);
+      });
+    }
+    $(`ad-step-${paso}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function mostrarError(id: string, msg: string) {
+    const el = $(id);
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = "block";
+  }
+  function ocultarError(id: string) {
+    const el = $(id);
+    if (el) el.style.display = "none";
+  }
+
+  // Ejecuta una acción async mostrando un texto de carga en el botón y
+  // restaurando su contenido original al terminar.
+  async function conEstadoCarga(btn: HTMLButtonElement, textoCargando: string, fn: () => Promise<void>) {
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.textContent = textoCargando;
+    try {
+      await fn();
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = original;
+    }
+  }
+
+  // ── Acordeón ─────────────────────────────────────────────────────────────
+  document.querySelectorAll(".ad-accordion-header").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.closest(".ad-accordion-item")?.classList.toggle("open");
+    });
+  });
+
+  // ── Paso 1: buscar por cédula y cargar formulario ──────────────────────
+  $("ad-form-cedula")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    ocultarError("ad-cedula-error");
+    const cedulaInput = $("ad-cedula") as HTMLInputElement;
+    const cedula = (cedulaInput?.value ?? "").trim();
+
+    if (!/^[0-9]{5,11}$/.test(cedula)) {
+      mostrarError("ad-cedula-error", "Ingresa un número de documento válido.");
+      return;
+    }
+
+    const btn = $("ad-btn-buscar") as HTMLButtonElement;
+    await conEstadoCarga(btn, "Buscando…", async () => {
+      cedulaActual = cedula;
+      tipoIdentificacionActual = ($("ad-tipo-identificacion") as HTMLSelectElement)?.value || "CC";
+      await cargarDatosYMostrarFormulario();
+    });
+  });
+
+  $("ad-btn-volver-form")?.addEventListener("click", () => mostrarPaso("cedula"));
+
+  // ── Paso 2: cargar datos actuales (si existen) y mostrar formulario ────
+  async function cargarDatosYMostrarFormulario() {
+    // Se consulta vía RPC (con rate limiting) en vez de un SELECT directo a
+    // asociados: la política RLS que permite leer por cédula no tiene límite
+    // de intentos, lo que permitiría fuerza bruta de cédulas para extraer
+    // datos sensibles (salario, dirección, teléfono) de cualquier asociado.
+    const { data: resultado, error } = await supabase.rpc("obtener_datos_actuales_asociado", {
+      p_cedula: cedulaActual,
+      p_tipo_identificacion: tipoIdentificacionActual,
+    });
+
+    if (error) {
+      mostrarError("ad-cedula-error", error.message.includes("Demasiados")
+        ? "Demasiados intentos. Intenta de nuevo más tarde."
+        : "Ocurrió un error. Intenta nuevamente.");
+      return;
+    }
+
+    // Si la cédula/tipo no corresponde a ningún asociado (base desactualizada),
+    // seguimos igual con el formulario en blanco — el usuario lo diligencia
+    // por completo y la solicitud queda para revisión manual del equipo.
+    const data = resultado as Record<string, unknown> | null;
+    valoresOriginales = data ?? {};
+
+    for (const campo of TODOS_LOS_CAMPOS) {
+      const el = $(`f-${campo}`) as HTMLInputElement | HTMLSelectElement | null;
+      if (!el) continue;
+      let valor = data ? (data as Record<string, unknown>)[campo] : null;
+      if (data && campo === "fuente_ingresos") valor = data.fuente_ingresos ?? data.tipo_trabajador;
+      if (data && campo === "salario") valor = data.salario ?? data.salario_ingresos_fijos;
+      if (data && campo === "obligaciones_financieras") valor = data.obligaciones_financieras ?? data.cuotas_credito;
+      el.value = valor == null ? "" : String(valor);
+      if (CAMPOS_DINERO.includes(campo) && el.value) el.value = formatearMiles(el.value);
+    }
+
+    const canalesActuales = (data ? (data.canales_comunicacion as string[] | null) : null) ?? [];
+    document.querySelectorAll<HTMLInputElement>(".f-canales").forEach((cb) => {
+      cb.checked = canalesActuales.includes(cb.value);
+    });
+
+    actualizarGruposCondicionales();
+    mostrarPaso("form");
+  }
+
+  function actualizarGruposCondicionales() {
+    const fuente = ($("f-fuente_ingresos") as HTMLSelectElement)?.value;
+    const grupos: Record<string, string[]> = {
+      "ad-grupo-empleado": ["empleado"],
+      "ad-grupo-pensionado": ["pensionado", "rentista"],
+      "ad-grupo-estudiante": ["estudiante"],
+    };
+    for (const [id, valores] of Object.entries(grupos)) {
+      $(id)?.classList.toggle("activo", valores.includes(fuente));
+    }
+  }
+  $("f-fuente_ingresos")?.addEventListener("change", actualizarGruposCondicionales);
+
+  // ── Calcula qué campos cambiaron respecto a los valores originales ─────
+  function calcularCambios(): Record<string, unknown> {
+    const cambios: Record<string, unknown> = {};
+
+    for (const campo of [...CAMPOS_TEXT, ...CAMPOS_NUMERICOS]) {
+      const el = $(`f-${campo}`) as HTMLInputElement | HTMLSelectElement | null;
+      if (!el) continue;
+      const nuevo = CAMPOS_DINERO.includes(campo) ? limpiarNumero(el.value) : el.value.trim();
+      const anterior = valoresOriginales[campo];
+      const anteriorStr = anterior == null ? "" : String(anterior);
+      if (nuevo !== anteriorStr) cambios[campo] = nuevo === "" ? null : nuevo;
+    }
+
+    // Campos gemelos: fuente_ingresos/tipo_trabajador, salario/salario_ingresos_fijos
+    // y obligaciones_financieras/cuotas_credito se mantienen sincronizados.
+    const fuenteEl = $("f-fuente_ingresos") as HTMLSelectElement;
+    const fuenteAnterior = valoresOriginales.fuente_ingresos ?? valoresOriginales.tipo_trabajador;
+    if (fuenteEl.value !== (fuenteAnterior ?? "")) {
+      cambios.fuente_ingresos = fuenteEl.value || null;
+      cambios.tipo_trabajador = fuenteEl.value || null;
+    }
+
+    const salarioEl = $("f-salario") as HTMLInputElement;
+    const salarioNuevo = limpiarNumero(salarioEl.value);
+    const salarioAnterior = valoresOriginales.salario ?? valoresOriginales.salario_ingresos_fijos;
+    const salarioAnteriorStr = salarioAnterior == null ? "" : String(salarioAnterior);
+    if (salarioNuevo !== salarioAnteriorStr) {
+      cambios.salario = salarioNuevo || null;
+      cambios.salario_ingresos_fijos = salarioNuevo || null;
+    }
+
+    const obligEl = $("f-obligaciones_financieras") as HTMLInputElement;
+    const obligNuevo = limpiarNumero(obligEl.value);
+    const obligAnterior = valoresOriginales.obligaciones_financieras ?? valoresOriginales.cuotas_credito;
+    const obligAnteriorStr = obligAnterior == null ? "" : String(obligAnterior);
+    if (obligNuevo !== obligAnteriorStr) {
+      cambios.obligaciones_financieras = obligNuevo || null;
+      cambios.cuotas_credito = obligNuevo || null;
+    }
+
+    // Canales de contacto preferidos (checkboxes, arreglo).
+    const canalesNuevos = Array.from(
+      document.querySelectorAll<HTMLInputElement>(".f-canales:checked"),
+    ).map((cb) => cb.value).sort();
+    const canalesAnteriores = ((valoresOriginales.canales_comunicacion as string[] | null) ?? []).slice().sort();
+    if (JSON.stringify(canalesNuevos) !== JSON.stringify(canalesAnteriores)) {
+      cambios.canales_comunicacion = canalesNuevos;
+    }
+
+    return cambios;
+  }
+
+  // Formatea un valor para mostrarlo en el resumen: usa el texto de la
+  // opción seleccionada si es un <select>, o el monto con separador de
+  // miles si es un campo de dinero.
+  function formatoValorResumen(campo: string, el: Element | null, valorCrudo: unknown): string {
+    if (valorCrudo === null || valorCrudo === undefined || valorCrudo === "") return "(sin dato)";
+    if (Array.isArray(valorCrudo)) {
+      if (valorCrudo.length === 0) return "(sin dato)";
+      return valorCrudo.map((v) => ETIQUETAS_CANAL[String(v)] ?? String(v)).join(", ");
+    }
+    if (el && el.tagName === "SELECT") {
+      const opt = (el as HTMLSelectElement).querySelector(`option[value="${CSS.escape(String(valorCrudo))}"]`);
+      if (opt) return opt.textContent ?? String(valorCrudo);
+    }
+    if (CAMPOS_DINERO.includes(campo)) {
+      const n = Number(valorCrudo);
+      return Number.isNaN(n) ? String(valorCrudo) : `$ ${n.toLocaleString("es-CO")}`;
+    }
+    return String(valorCrudo);
+  }
+
+  function renderizarResumen(contenedorId: string, cambios: Record<string, unknown>) {
+    const cont = $(contenedorId);
+    if (!cont) return;
+    cont.innerHTML = "";
+    for (const campo of TODOS_LOS_CAMPOS) {
+      if (!(campo in cambios)) continue;
+      const el = $(`f-${campo}`);
+      let anterior = valoresOriginales[campo];
+      if (campo === "fuente_ingresos") anterior = valoresOriginales.fuente_ingresos ?? valoresOriginales.tipo_trabajador;
+      if (campo === "salario") anterior = valoresOriginales.salario ?? valoresOriginales.salario_ingresos_fijos;
+      if (campo === "obligaciones_financieras") anterior = valoresOriginales.obligaciones_financieras ?? valoresOriginales.cuotas_credito;
+      // Construido con createElement/textContent (no innerHTML) para que
+      // cualquier valor ingresado por el usuario (ej. en "Dirección" u
+      // "Otro correo") nunca pueda inyectar HTML/JS en la página — ni aquí
+      // ni en la vista de auditoría del ERP si algún día reutiliza este dato.
+      const row = document.createElement("div");
+      row.className = "ad-resumen-row";
+
+      const label = document.createElement("span");
+      label.className = "ad-resumen-label";
+      label.textContent = ETIQUETAS_CAMPO[campo] ?? campo;
+
+      const valores = document.createElement("span");
+      valores.className = "ad-resumen-valores";
+
+      const spanAnterior = document.createElement("span");
+      spanAnterior.className = "ad-resumen-anterior";
+      spanAnterior.textContent = formatoValorResumen(campo, el, anterior);
+
+      const spanNuevo = document.createElement("span");
+      spanNuevo.className = "ad-resumen-nuevo";
+      spanNuevo.textContent = formatoValorResumen(campo, el, cambios[campo]);
+
+      valores.append(spanAnterior, spanNuevo);
+      row.append(label, valores);
+      cont.appendChild(row);
+    }
+  }
+
+  // ── Paso 2 → 3: revisar cambios ─────────────────────────────────────────
+  $("ad-form-datos")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    ocultarError("ad-form-error");
+
+    const cambios = calcularCambios();
+    if (Object.keys(cambios).length === 0) {
+      mostrarError("ad-form-error", "No realizaste ningún cambio.");
+      return;
+    }
+
+    cambiosPendientes = cambios;
+    renderizarResumen("ad-resumen-cambios", cambios);
+    mostrarPaso("confirm");
+  });
+
+  $("ad-btn-volver-confirm")?.addEventListener("click", () => mostrarPaso("form"));
+
+  // ── Paso 3: confirmar y enviar ───────────────────────────────────────────
+  $("ad-btn-guardar")?.addEventListener("click", async () => {
+    ocultarError("ad-confirm-error");
+    const btn = $("ad-btn-guardar") as HTMLButtonElement;
+
+    await conEstadoCarga(btn, "Enviando…", async () => {
+      const { data, error } = await supabase.rpc("actualizar_datos_asociado", {
+        p_cedula: cedulaActual,
+        p_tipo_identificacion: tipoIdentificacionActual,
+        p_cambios: cambiosPendientes,
+      });
+
+      if (error || !data?.ok) {
+        mostrarError("ad-confirm-error", error?.message ?? "No se pudieron guardar los cambios. Intenta nuevamente.");
+        return;
+      }
+
+      renderizarResumen("ad-resumen-final", cambiosPendientes);
+      mostrarPaso("success");
+    });
+  });
+
+  $("ad-nueva")?.addEventListener("click", () => {
+    cedulaActual = "";
+    tipoIdentificacionActual = "CC";
+    valoresOriginales = {};
+    cambiosPendientes = {};
+    (document.getElementById("ad-cedula") as HTMLInputElement).value = "";
+    (document.getElementById("ad-tipo-identificacion") as HTMLSelectElement).value = "CC";
+    mostrarPaso("cedula");
+  });
+</script>

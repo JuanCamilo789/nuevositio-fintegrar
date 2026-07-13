@@ -34,8 +34,8 @@ export default defineConfig({
           'heart', 'heart-handshake', 'help', 'help-hexagon', 'home', 'home-heart', 
           'hotel-service', 'id-badge', 'layout-dashboard', 'mail', 'mail-forward', 
           'map-pin', 'menu-2', 'message-x', 'mood-happy', 'percentage', 'phone', 
-          'plane', 'plane-departure', 'receipt', 'rosette-discount-check', 'scale', 
-          'school', 'send', 'shield-check', 'stethoscope', 'target', 'trending-up', 
+          'plane', 'plane-departure', 'receipt', 'rosette-discount-check', 'scale',
+          'school', 'search', 'send', 'shield-check', 'stethoscope', 'target', 'trending-up',
           'upload', 'user-plus', 'users', 'users-group', 'wallet', 'x', 'arrow-up-right'
         ],
       },

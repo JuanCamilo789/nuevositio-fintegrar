@@ -1,0 +1,65 @@
+---
+// Select con label incrustado en la línea superior del borde, hermano de
+// FloatingInput. Las <option> se pasan como children (slot).
+interface Props {
+  id: string;
+  label: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const { id, label, class: className, ...rest } = Astro.props;
+---
+
+<div class="ff-field">
+  <select id={id} class={className} {...rest}>
+    <slot />
+  </select>
+  <label for={id}>{label}</label>
+</div>
+
+<style>
+  .ff-field {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  .ff-field label {
+    position: absolute;
+    top: 0;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 0 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #4b5563;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .ff-field select {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    padding: 0 2.25rem 0 0.875rem;
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #172b36;
+    background-color: #fff;
+    font-family: inherit;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234B5563' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+  }
+  .ff-field select:focus {
+    outline: none;
+    border-color: #114c5a;
+    box-shadow: 0 0 0 3px rgba(17, 76, 90, 0.1);
+  }
+  .ff-field select:focus + label {
+    color: #114c5a;
+  }
+</style>

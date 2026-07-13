@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/node": "^10.0.4",
+    "@astrojs/node": "^11.0.2",
     "@astrojs/sitemap": "^3.7.2",
     "@iconify-json/tabler": "^1.2.33",
     "@supabase/supabase-js": "^2.101.0",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.3.3",
+    "astro": "^7.0.7",
     "astro-icon": "^1.1.5",
     "install": "^0.13.0",
     "npm": "^11.12.1",

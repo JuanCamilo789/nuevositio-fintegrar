@@ -3,35 +3,8 @@ import { Icon } from 'astro-icon/components';
 
 const fixedSlides = [
   {
-    id: 'slide-futuro-todos',
-    bg: '#172B36',
-    tag: 'Tu mejor aliado',
-    tagIcon: 'tabler:building-bank',
-    heading: 'El futuro\nes de todos',
-    headingEm: 'es de todos',
-    lead: 'Únete a Cooperamigó y construye un futuro más seguro para ti y tu familia. Descubre todos los beneficios de ser asociado.',
-    cta1: { label: 'Quiero ser asociado', icon: 'tabler:user-plus', href: 'https://serviciosdigitales.cooperamigo.coop/' },
-    cta2: { label: 'Conocer más', icon: 'tabler:arrow-right', href: '/nosotros' },
-    trust: [
-      { icon: 'tabler:shield-check', label: 'Vigilada Supersolidaria' },
-      { icon: 'tabler:rosette-discount-check', label: 'Desde 1993' },
-      { icon: 'tabler:users-group', label: '+420 asociados' },
-    ],
-    image: '/assets/img/imagen1.png',
-    imageAlt: 'Campaña El futuro es de todos',
-    isVertical: true,
-    floatValue: '',
-    floatLabel: '',
-    badgeValue: '',
-    badgeLabel: '',
-    badgeIcon: '',
-    alignRight: true,
-  },
-  {
     id: 'slide-0',
     bg: '#172B36',
-    tag: 'Cooperativa Multiactiva Luis Amigó',
-    tagIcon: 'tabler:building-bank',
     heading: 'Donde su esfuerzo\nse convierte en bienestar',
     headingEm: 'se convierte en bienestar',
     lead: 'Más de 30 años brindando soluciones financieras confiables, promoviendo el acceso al crédito, la cultura del aporte y el bienestar integral de nuestros asociados.',
@@ -42,21 +15,15 @@ const fixedSlides = [
       { icon: 'tabler:rosette-discount-check', label: 'Desde 1993' },
       { icon: 'tabler:users-group', label: '+420 asociados' },
     ],
-    image: '/assets/img/promos/publicidad2.png',
+    image: '/assets/img/promos/publicidad2.webp',
     imageAlt: 'Asociados Cooperamigó',
-    floatValue: '+420',
-    floatLabel: 'Asociados activos',
-    badgeValue: '+33',
-    badgeLabel: 'años de trayectoria',
-    badgeIcon: 'tabler:award',
+    imagePos: 'center center',
   },
   {
     id: 'slide-1',
     bg: '#172B36',
-    tag: 'Líneas de crédito',
-    tagIcon: 'tabler:trending-up',
-    heading: 'Crédito ágil,\ncondiciones que\nse adaptan a usted',
-    headingEm: 'se adaptan a usted',
+    heading: 'Crédito ágil, condiciones\nque se adaptan a usted',
+    headingEm: 'que se adaptan a usted',
     lead: 'Ofrecemos líneas de Crédito Ordinario/Consumo y crédito educativo, con tasas desde el 1.35% M.V., aprobación ágil y procesos completamente virtuales.',
     cta1: { label: 'Ver líneas de crédito', icon: 'tabler:credit-card', href: '/creditos' },
     cta2: { label: 'Simular crédito', icon: 'tabler:calculator', href: '/creditos#simulador' },
@@ -65,21 +32,15 @@ const fixedSlides = [
       { icon: 'tabler:clock', label: 'Aprobación en 48h' },
       { icon: 'tabler:cash', label: 'Desembolso ágil' },
     ],
-    image: '/assets/img/promos/publicidad6.png',
+    image: '/assets/img/promos/publicidad6.webp',
     imageAlt: 'Líneas de crédito Cooperamigó',
-    floatValue: '4',
-    floatLabel: 'líneas disponibles',
-    badgeValue: '1.2%',
-    badgeLabel: 'tasa M.V. mín.',
-    badgeIcon: 'tabler:percentage',
+    imagePos: 'center 18%',
   },
   {
     id: 'slide-2',
     bg: '#172B36',
-    tag: 'Bienestar social',
-    tagIcon: 'tabler:heart',
-    heading: 'Cuidamos a su\nfamilia en los\nmomentos que importan',
-    headingEm: 'momentos que importan',
+    heading: 'Cuidamos a su familia en\nlos momentos que importan',
+    headingEm: 'los momentos que importan',
     lead: 'Gestionamos una amplia red de convenios que facilita a nuestros asociados el acceso a servicios en salud, educación, turismo y otros sectores.',
     cta1: { label: 'Explorar beneficios', icon: 'tabler:heart', href: '/nosotros#auxilios' },
     cta2: { label: 'Ver convenios', icon: 'tabler:building-store', href: '/nosotros#convenios' },
@@ -88,13 +49,27 @@ const fixedSlides = [
       { icon: 'tabler:building-store', label: '+20 convenios' },
       { icon: 'tabler:mood-happy', label: '96% satisfacción' },
     ],
-    image: '/assets/img/promos/publicidad7.png',
+    image: '/assets/img/promos/publicidad7.webp',
     imageAlt: 'Bienestar social Cooperamigó',
-    floatValue: '1.240',
-    floatLabel: 'auxilios en 2024',
-    badgeValue: '+20',
-    badgeLabel: 'aliados estratégicos',
-    badgeIcon: 'tabler:building-store',
+    imagePos: 'center center',
+  },
+  {
+    id: 'slide-alivio-financiero',
+    bg: '#172B36',
+    heading: 'Reorganicemos sus\nobligaciones, juntos',
+    headingEm: 'obligaciones, juntos',
+    lead: 'Si tiene cuotas atrasadas o quiere ponerse al día, le ayudamos a encontrar un plan de pago que se ajuste a su realidad. Sin trámites complicados y con total confidencialidad.',
+    cta1: { label: 'Hablemos ahora', icon: 'tabler:phone', href: 'tel:+573054070612' },
+    cta2: { label: 'Escribir por correo', icon: 'tabler:mail', href: 'mailto:creditos@cooperamigo.coop' },
+    trust: [
+      { icon: 'tabler:check', label: 'Sin trámites complicados' },
+      { icon: 'tabler:clock', label: 'Respuesta ágil' },
+      { icon: 'tabler:shield-check', label: 'Total confidencialidad' },
+    ],
+    image: '/assets/img/deudas.webp',
+    imageAlt: 'Persona revisando tranquilamente sus finanzas en casa',
+    imagePos: '70% 22%',
+    imagePosMobile: '65% 25%',
   },
 ];
 
@@ -109,35 +84,33 @@ const slides = fixedSlides;
   <!-- ── Slides ── -->
   {slides.map((s, i) => (
     <div
-      class={`slide${i === 0 ? ' is-active' : ''}${s.alignRight ? ' slide--align-right' : ''}`}
+      class={`slide${i === 0 ? ' is-active' : ''}${s.alignRight ? ' slide--align-right' : ''}${!s.image ? ' slide--no-image' : ''}`}
       id={s.id}
-      style={`background:${s.bg};`}
+      style={`background:${s.bg}; --img-pos:${s.imagePos ?? 'center center'}; --img-pos-m:${s.imagePosMobile ?? 'left center'};`}
       aria-hidden={i !== 0 ? 'true' : 'false'}
     >
-      <!-- Imagen: absoluta, izquierda o derecha, altura completa, difuminada -->
-      <div class="slide-img-bg">
-        <img
-          src={s.image}
-          alt=""
-          class="slide-img-fill"
-          width="720"
-          height="1080"
-          loading={i === 0 ? 'eager' : 'lazy'}
-          fetchpriority={i === 0 ? 'high' : 'low'}
-          decoding={i === 0 ? 'sync' : 'async'}
-        />
-      </div>
+      <!-- Imagen: absoluta, izquierda o derecha, altura completa, difuminada
+           (algunos slides no llevan imagen — solo tipografía sobre el fondo) -->
+      {s.image && (
+        <div class="slide-img-bg">
+          <img
+            src={s.image}
+            alt=""
+            class="slide-img-fill"
+            width="720"
+            height="1080"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : 'low'}
+            decoding={i === 0 ? 'sync' : 'async'}
+          />
+        </div>
+      )}
 
       <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 h-full" style="position:relative;z-index:1;">
         <div class="slide-grid">
 
           <!-- Contenido -->
           <div class="slide-content">
-            <span class="slide-tag">
-              <Icon name={s.tagIcon} class="w-3.5 h-3.5" aria-hidden="true" />
-              {s.tag}
-            </span>
-
             <h1 class="slide-h1">
               {s.heading.split('\n').map((line, li) =>
                 s.headingEm && line === s.headingEm
@@ -191,11 +164,6 @@ const slides = fixedSlides;
     ))}
   </div>
 
-  <!-- ── Progress bar ── -->
-  <div class="slider-progress" aria-hidden="true">
-    <div class="slider-progress-bar" id="sliderProgressBar"></div>
-  </div>
-
 </section>
 
 <!-- ── Stats Bar ── -->
@@ -244,11 +212,6 @@ const slides = fixedSlides;
     from { opacity: 0; transform: translateX(36px); }
     to   { opacity: 1; transform: translateX(0); }
   }
-  @keyframes progressFill {
-    from { width: 0%; }
-    to   { width: 100%; }
-  }
-
   /* ── Slider Container ── */
   .hero-slider {
     position: relative;
@@ -279,13 +242,16 @@ const slides = fixedSlides;
     z-index: 1;
   }
 
-  /* ── Imagen de fondo: izquierda, altura completa ── */
+  /* ── Imagen de fondo: mismo marco para todas las slides (60% del ancho
+     en desktop, degradado idéntico hacia la columna de texto). El ajuste
+     fino de cada foto se hace con `imagePos` en los datos de la slide, no
+     con CSS por id. ── */
   .slide-img-bg {
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
-    width: 65%;
+    width: 60%;
     z-index: 0;
     overflow: hidden;
   }
@@ -330,38 +296,9 @@ const slides = fixedSlides;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    /* Recorte por slide: viene de `imagePos` en los datos (--img-pos) */
+    object-position: var(--img-pos, center center);
     display: block;
-  }
-
-  /*
-  ┌─────────────────────────────────────────────────────────────────────────┐
-  │              CONFIGURACIÓN DE IMÁGENES POR SLIDE (solo desktop)         │
-  │─────────────────────────────────────────────────────────────────────────│
-  │  width           → ancho del contenedor de imagen (lado derecho).       │
-  │                    Más % = imagen más grande. Ej: 60% | 65% | 72%       │
-  │  object-position → qué parte de la foto se muestra al recortar.         │
-  │                    Formato: "horizontal vertical"                        │
-  │                    Ej: "center center" | "center 30%" | "right top"     │
-  └─────────────────────────────────────────────────────────────────────────┘
-  */
-  @media (min-width: 1024px) {
-    /* ── Slide 1 · El futuro es de todos (imagen1.png) ── */
-    #slide-futuro-todos .slide-img-bg   { width: 100%; }
-    #slide-futuro-todos .slide-img-fill { object-position: center center; }
-
-    /* ── Slide 2 · Cooperamigó / Quiénes Somos (publicidad2.png) ── */
-    #slide-0 .slide-img-bg   { width: 56%; }
-    #slide-0 .slide-img-fill { object-position: center center; }
-    #slide-0 .slide-content  { width: 58%; max-width: none; }
-
-    /* ── Slide 3 · Créditos (publicidad6.png) ── */
-    #slide-1 .slide-img-bg   { width: 60%; }
-    #slide-1 .slide-img-fill { object-position: center 18%; }
-
-    /* ── Slide 4 · Bienestar Social (publicidad7.png) ── */
-    #slide-2 .slide-img-bg   { width: 72%; }
-    #slide-2 .slide-img-fill { object-position: center center; }
   }
 
   /* ── Slide Grid Layout ── */
@@ -371,44 +308,52 @@ const slides = fixedSlides;
     padding: 2rem 0 4rem;
     height: 100%;
   }
+  /* Columna de texto: mismo ancho en todas las slides */
   .slide-content {
-    width: 40%;
-    max-width: 580px;
+    width: 56%;
+    max-width: 780px;
     flex-shrink: 0;
+  }
+
+  /* ── Slide sin imagen: contenido centrado y más ancho, ya que no hay
+     foto a la derecha compitiendo por espacio ── */
+  .slide--no-image .slide-grid {
+    justify-content: center;
+  }
+  .slide--no-image .slide-content {
+    width: 100%;
+    max-width: 640px;
+    text-align: center;
+  }
+  .slide--no-image .slide-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .slide--no-image .slide-ctas {
+    justify-content: center;
+  }
+  .slide--no-image .slide-trust {
+    justify-content: center;
   }
 
   /* ── Slide Content Animations (only when active) ── */
   .slide.is-active .slide-img-bg  { animation: slideInUp 0.6s ease 0s both; }
-  .slide.is-active .slide-tag     { animation: slideInUp 0.5s ease 0.15s both; }
   .slide.is-active .slide-h1      { animation: slideInUp 0.55s ease 0.25s both; }
   .slide.is-active .slide-lead    { animation: slideInUp 0.5s ease 0.35s both; }
   .slide.is-active .slide-ctas    { animation: slideInUp 0.5s ease 0.45s both; }
   .slide.is-active .slide-trust   { animation: slideInUp 0.5s ease 0.55s both; }
 
-  /* ── Tag ── */
-  .slide-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #FFC801;
-    border: 1px solid rgba(255, 200, 1, 0.3);
-    padding: 0.4rem 1rem;
-    border-radius: 100px;
-    margin-bottom: 1.75rem;
-  }
-
   /* ── Heading ── */
   .slide-h1 {
-    font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+    font-size: clamp(2.5rem, 4vw, 3.4rem);
     font-weight: 800;
-    line-height: 0.90;
-    letter-spacing: -0.025m;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
     color: #fff;
     margin-bottom: 1.5rem;
+    /* Cada línea del título viene con su salto explícito (\n en los datos);
+       evitamos que el navegador la parta en dos */
+    white-space: nowrap;
   }
   .slide-h1 em {
     font-style: normal;
@@ -479,25 +424,6 @@ const slides = fixedSlides;
     background: #FFC801;
   }
 
-  /* ── Progress bar ── */
-  .slider-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.08);
-    z-index: 10;
-  }
-  .slider-progress-bar {
-    height: 100%;
-    background: #FFC801;
-    width: 0%;
-  }
-  .slider-progress-bar.animating {
-    animation: progressFill 6s linear forwards;
-  }
-
   /* ── Stats Bar ── */
   .hero-stats-bar {
     background: #172B36;
@@ -566,17 +492,18 @@ const slides = fixedSlides;
     }
     .slide-grid { padding: 18rem 0 4rem; }
     .slide-content { width: 100%; max-width: 100%; }
+    /* Sin imagen no hay franja superior que compensar */
+    .slide--no-image .slide-grid { padding: 3rem 0; }
 
   }
   @media (max-width: 639px) {
     .hero-slider { height: auto; min-height: 700px; }
     .slider-dots { display: none; } /* Ocultamos los puntos de navegación en móviles */
-    .slide-tag { display: none; } /* Ocultamos las etiquetas de los banners en móviles */
-    /* Aseguramos que la barra de progreso se vea en móviles */
-    .slider-progress { display: block !important; }
     .slide-img-bg { height: 380px; left: 0; right: 0; width: 100%; }
     .slide-img-fill {
-      object-position: left center; /* Alineamos la imagen hacia la izquierda para que no quede espacio blanco */
+      /* Recorte móvil por slide (imagePosMobile); por defecto alineada a la
+         izquierda para que no quede espacio blanco */
+      object-position: var(--img-pos-m, left center);
     }
     /* Para nuestro banner específico, resetear los estilos de desktop en móvil */
     .slide--align-right .slide-img-bg {
@@ -598,11 +525,14 @@ const slides = fixedSlides;
       margin-left: 0;
     }
     .slide-grid { padding: 24rem 0 12rem; } /* Aumentamos aún más el espacio inferior para separar de las stats */
+    /* Sin imagen no hay franja superior que compensar */
+    .slide--no-image .slide-grid { padding: 3rem 0 6rem; }
 
     .slide-content { width: 100%; max-width: 100%; }
-    .slide-h1 { font-size: 2.25rem; line-height: 1.05; margin-bottom: 1rem; }
+    /* En móvil el título vuelve a partir línea libremente: con nowrap se
+       saldría de la pantalla */
+    .slide-h1 { font-size: 2.25rem; line-height: 1.05; margin-bottom: 1rem; white-space: normal; }
     .slide-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 1.75rem; color: rgba(255, 255, 255, 0.85); }
-    .slide-tag { margin-bottom: 1rem; }
     .slide-ctas {
       margin-bottom: 1.5rem;
       flex-direction: column;
@@ -633,7 +563,6 @@ const slides = fixedSlides;
 <script>
   const slides  = document.querySelectorAll<HTMLElement>('.slide');
   const dots    = document.querySelectorAll<HTMLElement>('.slider-dot');
-  const bar     = document.getElementById('sliderProgressBar');
   const slider  = document.getElementById('heroSlider');
 
   let current = 0;
@@ -659,14 +588,6 @@ const slides = fixedSlides;
       dots[current].setAttribute('aria-selected', 'true');
     }
 
-    // Restart progress bar
-    if (bar) {
-      bar.classList.remove('animating');
-      // Force reflow
-      void bar.offsetWidth;
-      bar.classList.add('animating');
-    }
-    
     // Resetear timer
     resetTimer();
   }
@@ -680,18 +601,7 @@ const slides = fixedSlides;
   }
 
   // Init
-  console.log('Slider inicializado - slides:', slides.length);
-  if (bar) {
-    console.log('Barra de progreso encontrada');
-    bar.classList.add('animating');
-  }
-  timer = setInterval(() => { 
-    console.log('Timer ejecutado - paused:', paused);
-    if (!paused) {
-      console.log('Cambiando al siguiente slide');
-      next(); 
-    }
-  }, 6000);
+  timer = setInterval(() => { if (!paused) next(); }, 6000);
 
   // Dots
   dots.forEach((dot, i) => {

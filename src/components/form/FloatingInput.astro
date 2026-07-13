@@ -1,0 +1,72 @@
+---
+// Input con label incrustado en la línea superior del borde (estilo
+// "outlined" con muesca), en vez del label flotando arriba del campo o
+// como placeholder interno. Reutilizable en cualquier formulario del sitio:
+// cambiar el estilo acá lo cambia en todos los campos que usen este componente.
+interface Props {
+  id: string;
+  label: string;
+  type?: string;
+  class?: string;
+  [key: string]: any;
+}
+
+const { id, label, type = "text", class: className, ...rest } = Astro.props;
+---
+
+<div class="ff-field">
+  <input id={id} type={type} class={className} {...rest} />
+  <label for={id}>{label}</label>
+</div>
+
+<style>
+  .ff-field {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  .ff-field label {
+    position: absolute;
+    top: 0;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 0 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #4b5563;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .ff-field input {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    padding: 0 0.875rem;
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #172b36;
+    background: #fff;
+    font-family: inherit;
+  }
+  .ff-field input:focus {
+    outline: none;
+    border-color: #114c5a;
+    box-shadow: 0 0 0 3px rgba(17, 76, 90, 0.1);
+  }
+  .ff-field input:focus + label {
+    color: #114c5a;
+  }
+
+  /* Neutraliza el fondo amarillo/azul que el navegador aplica al
+     autocompletar, para que el input prellenado se vea igual que uno
+     escrito a mano — sin heredar estilos por defecto del navegador. */
+  .ff-field input:-webkit-autofill,
+  .ff-field input:-webkit-autofill:hover,
+  .ff-field input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #172b36;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+</style>
