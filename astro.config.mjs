@@ -28,7 +28,7 @@ export default defineConfig({
           'address-book', 'alert-circle', 'arrow-left', 'arrow-right', 'award', 
           'baby-carriage', 'brand-instagram', 'brand-linkedin', 'brand-whatsapp', 
           'building-bank', 'building-store', 'bulb', 'calculator', 'calendar-check', 
-          'calendar-event', 'candle', 'cash', 'check', 'chevron-down', 'chevron-right', 
+          'calendar-event', 'candle', 'cash', 'check', 'chevron-down', 'chevron-left', 'chevron-right',
           'circle-check', 'clock', 'clock-hour-4', 'credit-card', 'device-mobile-dollar', 
           'equal', 'eye', 'file-text', 'file-type-pdf', 'file-upload', 'headset', 
           'heart', 'heart-handshake', 'help', 'help-hexagon', 'home', 'home-heart', 

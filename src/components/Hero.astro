@@ -3,6 +3,15 @@ import { Icon } from 'astro-icon/components';
 
 const fixedSlides = [
   {
+    id: 'slide-horarios',
+    bg: '#172B36',
+    imageOnly: true,
+    image: '/assets/img/nuevos-horarios.webp',
+    imageMobile: '/assets/img/nuevo-horario-mobil.webp',
+    imageAlt:
+      'Nuevos horarios de atención: lunes a jueves de 8:00 a.m. a 4:30 p.m. y viernes de 8:00 a.m. a 3:30 p.m. Cll 50 #65-42 Local 120, Centro Comercial Contemporáneo',
+  },
+  {
     id: 'slide-0',
     bg: '#172B36',
     heading: 'Donde su esfuerzo\nse convierte en bienestar',
@@ -84,7 +93,7 @@ const slides = fixedSlides;
   <!-- ── Slides ── -->
   {slides.map((s, i) => (
     <div
-      class={`slide${i === 0 ? ' is-active' : ''}${s.alignRight ? ' slide--align-right' : ''}${!s.image ? ' slide--no-image' : ''}`}
+      class={`slide${i === 0 ? ' is-active' : ''}${s.alignRight ? ' slide--align-right' : ''}${!s.image ? ' slide--no-image' : ''}${s.imageOnly ? ' slide--image-only' : ''}`}
       id={s.id}
       style={`background:${s.bg}; --img-pos:${s.imagePos ?? 'center center'}; --img-pos-m:${s.imagePosMobile ?? 'left center'};`}
       aria-hidden={i !== 0 ? 'true' : 'false'}
@@ -93,19 +102,33 @@ const slides = fixedSlides;
            (algunos slides no llevan imagen — solo tipografía sobre el fondo) -->
       {s.image && (
         <div class="slide-img-bg">
-          <img
-            src={s.image}
-            alt=""
-            class="slide-img-fill"
-            width="720"
-            height="1080"
-            loading={i === 0 ? 'eager' : 'lazy'}
-            fetchpriority={i === 0 ? 'high' : 'low'}
-            decoding={i === 0 ? 'sync' : 'async'}
-          />
+          {s.imageOnly && (
+            <img
+              src={s.image}
+              alt=""
+              class="slide-img-blur"
+              aria-hidden="true"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          )}
+          <picture>
+            {s.imageMobile && <source media="(max-width: 639px)" srcset={s.imageMobile} />}
+            <img
+              src={s.image}
+              alt={s.imageOnly ? s.imageAlt : ''}
+              class="slide-img-fill"
+              width={s.imageOnly ? 2560 : 720}
+              height={s.imageOnly ? 1440 : 1080}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : 'low'}
+              decoding={i === 0 ? 'sync' : 'async'}
+            />
+          </picture>
         </div>
       )}
 
+      {!s.imageOnly && (
       <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 h-full" style="position:relative;z-index:1;">
         <div class="slide-grid">
 
@@ -148,8 +171,17 @@ const slides = fixedSlides;
 
         </div>
       </div>
+      )}
     </div>
   ))}
+
+  <!-- ── Flechas laterales ── -->
+  <button class="slider-arrow slider-arrow--prev" type="button" aria-label="Slide anterior">
+    <Icon name="tabler:chevron-left" class="w-6 h-6" aria-hidden="true" />
+  </button>
+  <button class="slider-arrow slider-arrow--next" type="button" aria-label="Slide siguiente">
+    <Icon name="tabler:chevron-right" class="w-6 h-6" aria-hidden="true" />
+  </button>
 
   <!-- ── Dot Navigation ── -->
   <div class="slider-dots" role="tablist" aria-label="Slides">
@@ -292,6 +324,39 @@ const slides = fixedSlides;
   .slide--align-right .slide-content {
     margin-left: auto;
   }
+  /* ── Slide solo imagen: la pieza gráfica ocupa todo el ancho del slide,
+     sin degradado ni textos. En desktop la imagen cubre el marco completo
+     (cover); en tablet/móvil se muestra completa (contain) sobre una copia
+     difuminada de sí misma que rellena el espacio restante. El selector
+     compuesto gana en especificidad a los ajustes responsive de
+     .slide-img-bg. ── */
+  .slide--image-only .slide-img-bg {
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+  }
+  .slide--image-only .slide-img-bg::after {
+    display: none;
+  }
+  .slide--image-only .slide-img-fill {
+    position: relative;
+    z-index: 1;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .slide-img-blur {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(28px) brightness(0.75);
+    transform: scale(1.12);
+  }
+
   .slide-img-fill {
     width: 100%;
     height: 100%;
@@ -397,6 +462,34 @@ const slides = fixedSlides;
   }
 
 
+  /* ── Flechas laterales ── */
+  .slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .slider-arrow:hover {
+    background: #FFC801;
+    color: #172B36;
+    border-color: transparent;
+  }
+  .slider-arrow--prev { left: 1.25rem; }
+  .slider-arrow--next { right: 1.25rem; }
+
   /* ── Dot Navigation ── */
   .slider-dots {
     position: absolute;
@@ -495,10 +588,20 @@ const slides = fixedSlides;
     /* Sin imagen no hay franja superior que compensar */
     .slide--no-image .slide-grid { padding: 3rem 0; }
 
+    /* Slide solo imagen: se muestra completa a todo el ancho; el fondo
+       difuminado rellena el alto restante */
+    .slide--image-only .slide-img-fill { object-fit: contain; }
+
+    .slider-arrow { width: 38px; height: 38px; }
+    .slider-arrow--prev { left: 0.75rem; }
+    .slider-arrow--next { right: 0.75rem; }
   }
   @media (max-width: 639px) {
     .hero-slider { height: auto; min-height: 700px; }
     .slider-dots { display: none; } /* Ocultamos los puntos de navegación en móviles */
+
+    /* En móvil no mostramos flechas: la navegación es por swipe */
+    .slider-arrow { display: none; }
     .slide-img-bg { height: 380px; left: 0; right: 0; width: 100%; }
     .slide-img-fill {
       /* Recorte móvil por slide (imagePosMobile); por defecto alineada a la
@@ -607,6 +710,10 @@ const slides = fixedSlides;
   dots.forEach((dot, i) => {
     dot.addEventListener('click', () => { activateSlide(i); });
   });
+
+  // Flechas laterales
+  document.querySelector('.slider-arrow--prev')?.addEventListener('click', () => { prev(); });
+  document.querySelector('.slider-arrow--next')?.addEventListener('click', () => { next(); });
 
   // Pause on hover (solo en desktop)
   if (window.innerWidth > 1023) {
