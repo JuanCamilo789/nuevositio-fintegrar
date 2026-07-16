@@ -250,12 +250,13 @@ const slides = fixedSlides;
     height: 736px;
     background: #172B36;
     overflow: hidden;
+    /* El selector global `section { padding: ... }` (global.css) aplicaría
+       aquí también; el hero necesita ir a todo el ancho/alto sin ese
+       padding, tanto en desktop como en el layout apilado de mobile/tablet. */
+    padding: 0;
   }
   @media (max-width: 1023px) {
-    .hero-slider { height: 740px; }
-  }
-  @media (max-width: 639px) {
-    .hero-slider { height: 640px; }
+    .hero-slider { height: auto; }
   }
 
   /* ── Slides ── */
@@ -416,12 +417,14 @@ const slides = fixedSlides;
     letter-spacing: -0.025em;
     color: #fff;
     margin-bottom: 1.5rem;
-    /* Cada línea del título viene con su salto explícito (\n en los datos);
-       evitamos que el navegador la parta en dos */
-    white-space: nowrap;
   }
   .slide-h1 em {
     font-style: normal;
+  }
+  @media (min-width: 1024px) {
+    /* En desktop cada línea del título viene con su salto explícito
+       (\n en los datos); evitamos que el navegador la parta en dos */
+    .slide-h1 { white-space: nowrap; }
   }
 
   /* ── Lead ── */
@@ -542,124 +545,99 @@ const slides = fixedSlides;
     font-weight: 500;
   }
 
-  /* ── Responsive ── */
+  /* ── Responsive: tablet + mobile ──
+     El carrusel deja de usar posicionamiento absoluto/superpuesto: cada
+     slide fluye en el documento (imagen arriba, texto abajo) y solo el
+     slide activo ocupa espacio. Así el alto se ajusta al contenido real
+     en vez de depender de paddings calculados a mano. */
   @media (max-width: 1023px) {
     .stat-cell { padding: 1.25rem 1rem; }
     .stat-num  { font-size: 1.5rem; }
     .stat-lbl  { font-size: 0.75rem; }
 
-    /* En tablet: imagen ocupa la parte superior como franja */
+    .slide {
+      position: static;
+      display: none;
+      flex-direction: column;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .slide.is-active { display: flex; }
+
+    /* Imagen: franja superior con proporción fija, ya no absoluta */
     .slide-img-bg {
+      position: static;
       width: 100%;
-      left: 0;
-      right: 0;
-      height: 300px;
-      bottom: auto;
+      height: auto;
+      aspect-ratio: 4 / 3;
     }
     .slide-img-bg::after {
       background: linear-gradient(
         to bottom,
-        rgba(23, 43, 54, 0.1) 20%,
-        rgba(23, 43, 54, 0.7) 70%,
+        rgba(23, 43, 54, 0) 55%,
         #172B36 100%
       );
     }
-    /* Para nuestro banner específico, resetear los estilos de desktop en tablet */
-    .slide--align-right .slide-img-bg {
-      right: 0;
-      left: 0;
-    }
+    .slide--align-right .slide-img-bg { right: 0; left: 0; }
     .slide--align-right .slide-img-bg::after {
       background: linear-gradient(
         to bottom,
-        rgba(23, 43, 54, 0.1) 20%,
-        rgba(23, 43, 54, 0.7) 70%,
+        rgba(23, 43, 54, 0) 55%,
         #172B36 100%
       );
     }
-    .slide--align-right .slide-grid {
-      justify-content: flex-start;
-    }
-    .slide--align-right .slide-content {
-      margin-left: 0;
-    }
-    .slide-grid { padding: 18rem 0 4rem; }
+    .slide-img-fill { object-position: var(--img-pos-m, center center); }
+
+    /* Contenido: en flujo normal debajo de la imagen */
+    .slide-grid { display: block; height: auto; padding: 2rem 0 3rem; }
     .slide-content { width: 100%; max-width: 100%; }
-    /* Sin imagen no hay franja superior que compensar */
+    .slide--align-right .slide-content { margin-left: 0; }
     .slide--no-image .slide-grid { padding: 3rem 0; }
 
-    /* Slide solo imagen: se muestra completa a todo el ancho; el fondo
-       difuminado rellena el alto restante */
-    .slide--image-only .slide-img-fill { object-fit: contain; }
+    /* Slide solo imagen: se muestra completa, sin recortes ni relleno difuminado */
+    .slide--image-only .slide-img-bg { aspect-ratio: auto; }
+    .slide--image-only .slide-img-fill { object-fit: contain; height: auto; }
+    .slide--image-only .slide-img-blur { display: none; }
 
     .slider-arrow { width: 38px; height: 38px; }
     .slider-arrow--prev { left: 0.75rem; }
     .slider-arrow--next { right: 0.75rem; }
   }
+
   @media (max-width: 639px) {
-    .hero-slider { height: auto; min-height: 700px; }
-    .slider-dots { display: none; } /* Ocultamos los puntos de navegación en móviles */
-
-    /* En móvil no mostramos flechas: la navegación es por swipe */
+    .slider-dots { display: none; } /* Navegación por swipe en móvil */
     .slider-arrow { display: none; }
-    .slide-img-bg { height: 380px; left: 0; right: 0; width: 100%; }
-    .slide-img-fill {
-      /* Recorte móvil por slide (imagePosMobile); por defecto alineada a la
-         izquierda para que no quede espacio blanco */
-      object-position: var(--img-pos-m, left center);
-    }
-    /* Para nuestro banner específico, resetear los estilos de desktop en móvil */
-    .slide--align-right .slide-img-bg {
-      right: 0;
-      left: 0;
-    }
-    .slide--align-right .slide-img-bg::after {
-      background: linear-gradient(
-        to bottom,
-        rgba(23, 43, 54, 0.1) 20%,
-        rgba(23, 43, 54, 0.7) 70%,
-        #172B36 100%
-      );
-    }
-    .slide--align-right .slide-grid {
-      justify-content: flex-start;
-    }
-    .slide--align-right .slide-content {
-      margin-left: 0;
-    }
-    .slide-grid { padding: 24rem 0 12rem; } /* Aumentamos aún más el espacio inferior para separar de las stats */
-    /* Sin imagen no hay franja superior que compensar */
-    .slide--no-image .slide-grid { padding: 3rem 0 6rem; }
 
-    .slide-content { width: 100%; max-width: 100%; }
-    /* En móvil el título vuelve a partir línea libremente: con nowrap se
-       saldría de la pantalla */
-    .slide-h1 { font-size: 2.25rem; line-height: 1.05; margin-bottom: 1rem; white-space: normal; }
-    .slide-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 1.75rem; color: rgba(255, 255, 255, 0.85); }
+    .slide-img-bg { aspect-ratio: 1 / 1; }
+    .slide-img-fill { object-position: var(--img-pos-m, center center); }
+
+    .slide-grid { padding: 1.75rem 0 2.5rem; }
+    .slide--no-image .slide-grid { padding: 2.5rem 0; }
+
+    .slide-h1 { font-size: 2.1rem; line-height: 1.08; margin-bottom: 0.875rem; white-space: normal; }
+    .slide-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.85); }
     .slide-ctas {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
     }
     .slide-ctas .btn {
       width: 100%;
-      max-width: 320px;
       justify-content: center;
       padding: 0.875rem 1.5rem;
       font-size: 0.9375rem;
       border-radius: 9999px;
     }
     .slide-trust { display: none; }
-    
-    /* Ajustamos el grid de stats para que se vea en 1 fila y 4 columnas en móviles */
+
+    /* Stats en 1 fila y 4 columnas en móviles */
     .stats-container .grid {
       grid-template-columns: repeat(4, 1fr) !important;
     }
-    .stat-cell { padding: 1rem 0.25rem; } /* Reducimos el padding para que quepan todas */
-    .stat-cell { border-right: 1px solid rgba(255, 255, 255, 0.1); } /* Mantenemos los bordes entre ellas */
-    .stat-cell:last-child { border-right: none; } /* Quitamos el último borde */
-    .stat-num { font-size: 1.125rem; } /* Reducimos solo un poquito el tamaño de los números */
-    .stat-lbl { font-size: 0.65rem; line-height: 1.2; } /* Reducimos un poco el tamaño de las etiquetas */
+    .stat-cell { padding: 1rem 0.25rem; border-right: 1px solid rgba(255, 255, 255, 0.1); }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num { font-size: 1.125rem; }
+    .stat-lbl { font-size: 0.65rem; line-height: 1.2; }
   }
 </style>
 
