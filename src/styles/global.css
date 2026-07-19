@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* DM Sans: solo para los números de la stats bar del hero */
+@import "@fontsource/dm-sans/800.css";
 @config "../../tailwind.config.mjs";
 
 /* ── Brand Font: Bilmond ── */
@@ -485,6 +487,19 @@
     box-shadow: 0 4px 12px rgba(23, 43, 54, 0.3);
   }
 
+  /* Píldora translúcida sobre fondos oscuros (CTA secundario del hero y del banner) */
+  .btn-ghost-light {
+    background: rgba(255, 255, 255, 0.09);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0.875rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+  }
+  .btn-ghost-light:hover {
+    background: rgba(255, 255, 255, 0.16);
+    color: #FFC801;
+  }
+
   .btn-outline {
     background: transparent;
     color: #172B36;
@@ -698,7 +713,6 @@
   .badge-success {
     background: rgba(23, 43, 54, 0.1);
     color: #172B36;
-    border: 1px solid rgba(23, 43, 54, 0.2);
   }
 
   /* ── Mobile Menu ── */
@@ -860,6 +874,96 @@
   }
 }
 
+/* ── Botones flotantes (PSE + WhatsApp) ── */
+.fab-stack {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 1.5rem;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.whatsapp-fab,
+.pse-fab,
+.portal-fab {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 24px rgba(23, 43, 54, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.whatsapp-fab:hover,
+.pse-fab:hover,
+.portal-fab:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 32px rgba(23, 43, 54, 0.35);
+}
+
+.whatsapp-fab {
+  background: #25d366;
+  color: #fff;
+}
+.whatsapp-fab:hover {
+  color: #fff;
+}
+/* Anillo pulsante */
+.whatsapp-fab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  z-index: -1;
+  animation: fab-pulse 2.2s ease-out infinite;
+}
+
+.pse-fab {
+  background: #ffc801;
+  color: #172b36;
+}
+.pse-fab:hover {
+  color: #172b36;
+}
+
+.portal-fab {
+  background: #172b36;
+  color: #fff;
+}
+.portal-fab:hover {
+  color: #fff;
+}
+
+@keyframes fab-pulse {
+  0%   { transform: scale(1);   opacity: 0.45; }
+  70%  { transform: scale(1.65); opacity: 0; }
+  100% { transform: scale(1.65); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-fab::before { animation: none; opacity: 0; }
+}
+
+@media (max-width: 767px) {
+  .fab-stack {
+    bottom: 1.75rem;
+    right: 1rem;
+    gap: 0.625rem;
+  }
+  .whatsapp-fab,
+  .pse-fab,
+  .portal-fab {
+    width: 52px;
+    height: 52px;
+  }
+}
+
 /* ── Vigilada Supersolidaria ── */
 .supersolidaria-badge {
   position: fixed;
@@ -883,6 +987,13 @@
 
 .supersolidaria-badge:hover {
   opacity: 0.7;
+}
+
+/* Oculto mientras el viewport está sobre el hero (las piezas del carrusel
+   ya traen la leyenda impresa) — lo alterna el script del Layout */
+.supersolidaria-badge.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Bloque VIGILADA con líneas */

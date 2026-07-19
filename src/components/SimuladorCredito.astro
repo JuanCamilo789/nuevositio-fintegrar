@@ -292,7 +292,6 @@ const lineas = [
     margin: 0 auto;
     border-radius: 24px;
     box-shadow: 0 4px 48px rgba(23, 43, 54, 0.10);
-    border: 1px solid #F1F6F4;
     overflow: hidden;
   }
 
@@ -380,6 +379,9 @@ const lineas = [
   }
   #step-0:not(.active) { display: none; }
   #step-0 .step-icon-wrap { margin-bottom: 0; }
+  /* Paso 0 siempre centrado en el contenedor */
+  #step-0 .step-header { justify-content: center; }
+  #step-0 .choice-grid { margin-left: auto; margin-right: auto; }
 
   .step-title {
     font-family: var(--ff-heading);
@@ -388,6 +390,7 @@ const lineas = [
     color: #172B36;
     line-height: 1.2;
     margin-bottom: 0.625rem;
+    text-align: center;
   }
   .step-desc {
     font-size: 0.9375rem;
@@ -395,6 +398,9 @@ const lineas = [
     opacity: 0.65;
     line-height: 1.65;
     max-width: 540px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* ── Paso 0: opciones ── */
@@ -529,7 +535,7 @@ const lineas = [
   /* ── Layout paso 2 ── */
   .sim-layout {
     display: grid;
-    grid-template-columns: 1fr 320px;
+    grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
     margin-top: 2rem;
     align-items: start;
@@ -540,11 +546,11 @@ const lineas = [
     gap: 1.75rem;
   }
 
-  /* ── Monto + Plazo en 2 columnas ── */
+  /* ── Monto + Plazo apilados: la columna derecha queda para el resultado ── */
   .inputs-2col {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
     align-items: start;
   }
 
@@ -702,10 +708,9 @@ const lineas = [
   @media (max-width: 767px) {
     .sim-section { padding: 3.5rem 0; }
 
-    /* Tarjeta: menos sombra y bordes más suaves */
+    /* Tarjeta: bordes más suaves */
     .sim-card {
       border-radius: 16px;
-      box-shadow: 0 2px 20px rgba(23, 43, 54, 0.08);
     }
 
     /* Barra de progreso compacta */

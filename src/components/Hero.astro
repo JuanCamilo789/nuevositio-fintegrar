@@ -1,144 +1,87 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-const fixedSlides = [
+const slides = [
   {
     id: 'slide-horarios',
-    bg: '#172B36',
-    imageOnly: true,
-    image: '/assets/img/nuevos-horarios.webp',
-    imageMobile: '/assets/img/nuevo-horario-mobil.webp',
+    heading: 'Nuevos horarios de atención',
+    lead: 'Lo atendemos de lunes a jueves de 8:00 a.m. a 4:30 p.m. y viernes de 8:00 a.m. a 3:30 p.m.',
+    cta1: { label: 'Cómo llegar', icon: 'tabler:map-pin', href: 'https://maps.google.com/?q=Calle+50+%2365-42+Local+120,+Medell%C3%ADn' },
+    cta2: { label: 'Ver directorio', icon: 'tabler:arrow-right', href: '/directorio' },
+    image: '/assets/img/nuevo-horario-mobil.webp',
     imageAlt:
       'Nuevos horarios de atención: lunes a jueves de 8:00 a.m. a 4:30 p.m. y viernes de 8:00 a.m. a 3:30 p.m. Cll 50 #65-42 Local 120, Centro Comercial Contemporáneo',
   },
   {
     id: 'slide-0',
-    bg: '#172B36',
-    heading: 'Donde su esfuerzo\nse convierte en bienestar',
-    headingEm: 'se convierte en bienestar',
-    lead: 'Más de 30 años brindando soluciones financieras confiables, promoviendo el acceso al crédito, la cultura del aporte y el bienestar integral de nuestros asociados.',
-    cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: '#' },
+    heading: 'Donde su esfuerzo\nse convierte en\nbienestar',
+    headingForce: true,
+    lead: 'Más de 30 años brindando soluciones financieras confiables a nuestros asociados.',
+    cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: 'https://serviciosdigitales.cooperamigo.coop/' },
     cta2: { label: 'Conózcanos', icon: 'tabler:arrow-right', href: '/nosotros' },
-    trust: [
-      { icon: 'tabler:shield-check', label: 'Vigilada Supersolidaria' },
-      { icon: 'tabler:rosette-discount-check', label: 'Desde 1993' },
-      { icon: 'tabler:users-group', label: '+420 asociados' },
-    ],
     image: '/assets/img/promos/publicidad2.webp',
-    imageAlt: 'Asociados Cooperamigó',
-    imagePos: 'center center',
+    imageAlt: 'A veces no necesitas más tiempo, necesitas un empujón — Cooperamigó',
   },
   {
     id: 'slide-1',
-    bg: '#172B36',
-    heading: 'Crédito ágil, condiciones\nque se adaptan a usted',
-    headingEm: 'que se adaptan a usted',
-    lead: 'Ofrecemos líneas de Crédito Ordinario/Consumo y crédito educativo, con tasas desde el 1.35% M.V., aprobación ágil y procesos completamente virtuales.',
+    heading: 'Crédito ágil, condiciones que se adaptan a usted',
+    lead: 'Tasas desde el 1.35% M.V., aprobación ágil y trámites completamente virtuales.',
     cta1: { label: 'Ver líneas de crédito', icon: 'tabler:credit-card', href: '/creditos' },
     cta2: { label: 'Simular crédito', icon: 'tabler:calculator', href: '/creditos#simulador' },
-    trust: [
-      { icon: 'tabler:percentage', label: 'Desde 1.2% M.V.' },
-      { icon: 'tabler:clock', label: 'Aprobación en 48h' },
-      { icon: 'tabler:cash', label: 'Desembolso ágil' },
-    ],
     image: '/assets/img/promos/publicidad6.webp',
-    imageAlt: 'Líneas de crédito Cooperamigó',
-    imagePos: 'center 18%',
+    imageAlt: 'Créditos a la medida de todos: Ordinario, Educativo y Consumo — Cooperamigó',
   },
   {
     id: 'slide-2',
-    bg: '#172B36',
-    heading: 'Cuidamos a su familia en\nlos momentos que importan',
-    headingEm: 'los momentos que importan',
-    lead: 'Gestionamos una amplia red de convenios que facilita a nuestros asociados el acceso a servicios en salud, educación, turismo y otros sectores.',
+    heading: 'Cuidamos a su\nfamilia en los momentos\nque importan',
+    headingForce: true,
+    lead: 'Convenios en salud, educación y turismo para usted y su familia.',
     cta1: { label: 'Explorar beneficios', icon: 'tabler:heart', href: '/nosotros#auxilios' },
     cta2: { label: 'Ver convenios', icon: 'tabler:building-store', href: '/nosotros#convenios' },
-    trust: [
-      { icon: 'tabler:users', label: '1.240 auxilios/año' },
-      { icon: 'tabler:building-store', label: '+20 convenios' },
-      { icon: 'tabler:mood-happy', label: '96% satisfacción' },
-    ],
     image: '/assets/img/promos/publicidad7.webp',
-    imageAlt: 'Bienestar social Cooperamigó',
-    imagePos: 'center center',
+    imageAlt: 'Lo que hoy te mueve, nos importa — Cooperamigó',
   },
   {
     id: 'slide-alivio-financiero',
-    bg: '#172B36',
-    heading: 'Reorganicemos sus\nobligaciones, juntos',
-    headingEm: 'obligaciones, juntos',
-    lead: 'Si tiene cuotas atrasadas o quiere ponerse al día, le ayudamos a encontrar un plan de pago que se ajuste a su realidad. Sin trámites complicados y con total confidencialidad.',
+    heading: '¿Se atrasó con sus cuotas? Pongámonos al día',
+    lead: 'Cuéntenos su situación y armamos juntos un plan de pago que sí pueda cumplir — sin regaños y en total confidencialidad.',
     cta1: { label: 'Hablemos ahora', icon: 'tabler:phone', href: 'tel:+573054070612' },
     cta2: { label: 'Escribir por correo', icon: 'tabler:mail', href: 'mailto:creditos@cooperamigo.coop' },
-    trust: [
-      { icon: 'tabler:check', label: 'Sin trámites complicados' },
-      { icon: 'tabler:clock', label: 'Respuesta ágil' },
-      { icon: 'tabler:shield-check', label: 'Total confidencialidad' },
-    ],
     image: '/assets/img/deudas.webp',
     imageAlt: 'Persona revisando tranquilamente sus finanzas en casa',
-    imagePos: '70% 22%',
-    imagePosMobile: '65% 25%',
   },
 ];
-
-const slides = fixedSlides;
 ---
 
 <!-- ════════════════════════════════════
      HERO SLIDER
 ════════════════════════════════════ -->
-<section id="heroSlider" class="hero-slider" aria-label="Presentación Cooperamigó" data-dark-bg>
+<!-- data-hide-badge: las piezas gráficas de las slides ya traen impreso
+     "VIGILADA SUPERSOLIDARIA"; el badge fijo se oculta sobre esta sección -->
+<section id="heroSlider" class="hero-slider" aria-label="Presentación Cooperamigó" data-dark-bg data-hide-badge>
+
+  <!-- ── Marca de agua: isotipo en blanco al fondo ── -->
+  <div class="hero-watermark" aria-hidden="true">
+    <img src="/favicon.svg" alt="" decoding="async" />
+  </div>
 
   <!-- ── Slides ── -->
   {slides.map((s, i) => (
     <div
-      class={`slide${i === 0 ? ' is-active' : ''}${s.alignRight ? ' slide--align-right' : ''}${!s.image ? ' slide--no-image' : ''}${s.imageOnly ? ' slide--image-only' : ''}`}
+      class={`slide${i === 0 ? ' is-active' : ''}`}
       id={s.id}
-      style={`background:${s.bg}; --img-pos:${s.imagePos ?? 'center center'}; --img-pos-m:${s.imagePosMobile ?? 'left center'};`}
       aria-hidden={i !== 0 ? 'true' : 'false'}
     >
-      <!-- Imagen: absoluta, izquierda o derecha, altura completa, difuminada
-           (algunos slides no llevan imagen — solo tipografía sobre el fondo) -->
-      {s.image && (
-        <div class="slide-img-bg">
-          {s.imageOnly && (
-            <img
-              src={s.image}
-              alt=""
-              class="slide-img-blur"
-              aria-hidden="true"
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
-          )}
-          <picture>
-            {s.imageMobile && <source media="(max-width: 639px)" srcset={s.imageMobile} />}
-            <img
-              src={s.image}
-              alt={s.imageOnly ? s.imageAlt : ''}
-              class="slide-img-fill"
-              width={s.imageOnly ? 2560 : 720}
-              height={s.imageOnly ? 1440 : 1080}
-              loading={i === 0 ? 'eager' : 'lazy'}
-              fetchpriority={i === 0 ? 'high' : 'low'}
-              decoding={i === 0 ? 'sync' : 'async'}
-            />
-          </picture>
-        </div>
-      )}
-
-      {!s.imageOnly && (
       <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 h-full" style="position:relative;z-index:1;">
         <div class="slide-grid">
 
           <!-- Contenido -->
           <div class="slide-content">
+            <!-- Por defecto sin saltos forzados (text-wrap balance reparte);
+                 con headingForce los \n del texto se respetan tal cual -->
             <h1 class="slide-h1">
               {s.heading.split('\n').map((line, li) =>
-                s.headingEm && line === s.headingEm
-                  ? <span>{li > 0 && <br />}<em style="color:#FFC801;">{line}</em></span>
-                  : <span>{li > 0 && <br />}{line}</span>
+                li > 0 ? <span>{s.headingForce ? <br /> : ' '}{line}</span> : <span>{line}</span>
               )}
             </h1>
 
@@ -150,28 +93,31 @@ const slides = fixedSlides;
                   <Icon name={s.cta1.icon} class="w-5 h-5" aria-hidden="true" />
                   {s.cta1.label}
                 </a>
-                <a href={s.cta2.href} class="btn btn-outline-light">
+                <a href={s.cta2.href} class="btn btn-ghost-light">
                   {s.cta2.label}
                   <Icon name={s.cta2.icon} class="w-4 h-4" aria-hidden="true" />
                 </a>
               </div>
             )}
-
-            {s.trust && s.trust.length > 0 && (
-              <div class="slide-trust">
-                {s.trust.map((t: any) => (
-                  <span class="trust-pill">
-                    <Icon name={t.icon} class="w-3.5 h-3.5" aria-hidden="true" />
-                    {t.label}
-                  </span>
-                ))}
-              </div>
-            )}
           </div>
+
+          <!-- Pieza gráfica: tarjeta inclinada a la derecha -->
+          {s.image && (
+            <div class="slide-visual">
+              <div class="slide-card">
+                <img
+                  src={s.image}
+                  alt={s.imageAlt}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={i === 0 ? 'high' : undefined}
+                  decoding="async"
+                />
+              </div>
+            </div>
+          )}
 
         </div>
       </div>
-      )}
     </div>
   ))}
 
@@ -201,34 +147,22 @@ const slides = fixedSlides;
 <!-- ── Stats Bar ── -->
 <div class="hero-stats-bar">
   <div class="stats-container max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16">
-    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
-      <div class="stat-cell border-b border-white/5 md:border-b-0">
+    <div class="grid grid-cols-2 md:grid-cols-4">
+      <div class="stat-cell">
         <div class="stat-num">+420</div>
-        <div class="stat-lbl">
-          <span class="sm:hidden">Asociados<br />activos</span>
-          <span class="hidden sm:inline">Asociados activos</span>
-        </div>
+        <div class="stat-lbl">Asociados activos</div>
       </div>
-      <div class="stat-cell border-b border-white/5 md:border-b-0">
+      <div class="stat-cell">
         <div class="stat-num">+12</div>
-        <div class="stat-lbl">
-          <span class="sm:hidden">Convenios<br />activos</span>
-          <span class="hidden sm:inline">Convenios activos</span>
-        </div>
+        <div class="stat-lbl">Convenios activos</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num">98.2%</div>
-        <div class="stat-lbl">
-          <span class="sm:hidden">Tasa<br />satisfacción</span>
-          <span class="hidden sm:inline">Tasa de satisfacción</span>
-        </div>
+        <div class="stat-lbl">Tasa de satisfacción</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num">+33</div>
-        <div class="stat-lbl">
-          <span class="sm:hidden">Años<br />trayectoria</span>
-          <span class="hidden sm:inline">Años de trayectoria</span>
-        </div>
+        <div class="stat-lbl">Años de trayectoria</div>
       </div>
     </div>
   </div>
@@ -275,156 +209,91 @@ const slides = fixedSlides;
     z-index: 1;
   }
 
-  /* ── Imagen de fondo: mismo marco para todas las slides (60% del ancho
-     en desktop, degradado idéntico hacia la columna de texto). El ajuste
-     fino de cada foto se hace con `imagePos` en los datos de la slide, no
-     con CSS por id. ── */
-  .slide-img-bg {
+  /* ── Marca de agua: isotipo del favicon en blanco, gigante y sutil ── */
+  .hero-watermark {
     position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 60%;
-    z-index: 0;
+    inset: 0;
     overflow: hidden;
-  }
-  /* Difuminado hacia la izquierda */
-  .slide-img-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to left,
-      rgba(23, 43, 54, 0.0) 0%,
-      rgba(23, 43, 54, 0.0) 30%,
-      rgba(23, 43, 54, 0.5) 60%,
-      rgba(23, 43, 54, 0.92) 80%,
-      #172B36 100%
-    );
     pointer-events: none;
+    z-index: 0;
   }
-
-  /* ── Slide alineado a la derecha: imagen a la izquierda, contenido a la derecha ── */
-  .slide--align-right .slide-img-bg {
-    right: auto;
-    left: 0;
-  }
-  /* Difuminado más oscuro para que el texto se lea bien, solo el lado derecho donde está el contenido */
-  .slide--align-right .slide-img-bg::after {
-    background: linear-gradient(
-      to right,
-      rgba(23, 43, 54, 0.0) 0%,
-      rgba(23, 43, 54, 0.2) 30%,
-      rgba(23, 43, 54, 0.95) 70%,
-      #172B36 100%
-    );
-  }
-  .slide--align-right .slide-grid {
-    justify-content: flex-end;
-  }
-  .slide--align-right .slide-content {
-    margin-left: auto;
-  }
-  /* ── Slide solo imagen: la pieza gráfica ocupa todo el ancho del slide,
-     sin degradado ni textos. En desktop la imagen cubre el marco completo
-     (cover); en tablet/móvil se muestra completa (contain) sobre una copia
-     difuminada de sí misma que rellena el espacio restante. El selector
-     compuesto gana en especificidad a los ajustes responsive de
-     .slide-img-bg. ── */
-  .slide--image-only .slide-img-bg {
-    width: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-  }
-  .slide--image-only .slide-img-bg::after {
-    display: none;
-  }
-  .slide--image-only .slide-img-fill {
-    position: relative;
-    z-index: 1;
-    object-fit: cover;
-    object-position: center center;
-  }
-  .slide-img-blur {
+  .hero-watermark img {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(28px) brightness(0.75);
-    transform: scale(1.12);
+    right: -6%;
+    top: 50%;
+    transform: translateY(-50%) rotate(-10deg);
+    height: 150%;
+    width: auto;
+    /* El SVG trae sus propios colores; esto lo aplana a blanco puro */
+    filter: brightness(0) invert(1);
+    opacity: 0.045;
   }
 
-  .slide-img-fill {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Recorte por slide: viene de `imagePos` en los datos (--img-pos) */
-    object-position: var(--img-pos, center center);
-    display: block;
-  }
-
-  /* ── Slide Grid Layout ── */
+  /* ── Slide Grid Layout: texto a la izquierda, tarjeta a la derecha ── */
   .slide-grid {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
     padding: 2rem 0 4rem;
     height: 100%;
   }
   /* Columna de texto: mismo ancho en todas las slides */
   .slide-content {
-    width: 56%;
-    max-width: 780px;
+    width: 60%;
+    max-width: 800px;
     flex-shrink: 0;
   }
 
-  /* ── Slide sin imagen: contenido centrado y más ancho, ya que no hay
-     foto a la derecha compitiendo por espacio ── */
-  .slide--no-image .slide-grid {
+  /* ── Pieza gráfica como tarjeta inclinada ── */
+  .slide-visual {
+    flex: 1;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    min-width: 0;
   }
-  .slide--no-image .slide-content {
-    width: 100%;
-    max-width: 640px;
-    text-align: center;
+  .slide-card {
+    position: relative;
+    transform: rotate(3.5deg);
   }
-  .slide--no-image .slide-lead {
-    margin-left: auto;
-    margin-right: auto;
+  /* Marco fantasma detrás, inclinado al lado contrario */
+  .slide-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: rotate(-6deg);
+    border-radius: 1.25rem;
+    background: rgba(255, 200, 1, 0.14);
   }
-  .slide--no-image .slide-ctas {
-    justify-content: center;
-  }
-  .slide--no-image .slide-trust {
-    justify-content: center;
+  .slide-card img {
+    position: relative;
+    display: block;
+    max-height: 520px;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 1.25rem;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
   }
 
   /* ── Slide Content Animations (only when active) ── */
-  .slide.is-active .slide-img-bg  { animation: slideInUp 0.6s ease 0s both; }
+  .slide.is-active .slide-visual  { animation: slideInRight 0.65s ease 0.15s both; }
   .slide.is-active .slide-h1      { animation: slideInUp 0.55s ease 0.25s both; }
   .slide.is-active .slide-lead    { animation: slideInUp 0.5s ease 0.35s both; }
   .slide.is-active .slide-ctas    { animation: slideInUp 0.5s ease 0.45s both; }
-  .slide.is-active .slide-trust   { animation: slideInUp 0.5s ease 0.55s both; }
 
   /* ── Heading ── */
   .slide-h1 {
-    font-size: clamp(2.5rem, 4vw, 3.4rem);
+    font-size: clamp(2.7rem, 4.2vw, 3.9rem);
     font-weight: 800;
-    line-height: 0.98;
+    line-height: 1.05;
     letter-spacing: -0.025em;
     color: #fff;
     margin-bottom: 1.5rem;
-  }
-  .slide-h1 em {
-    font-style: normal;
-  }
-  @media (min-width: 1024px) {
-    /* En desktop cada línea del título viene con su salto explícito
-       (\n en los datos); evitamos que el navegador la parta en dos */
-    .slide-h1 { white-space: nowrap; }
+    /* Si una línea no cabe, se parte en líneas equilibradas —
+       nunca una palabra suelta ocupando una línea entera */
+    text-wrap: balance;
   }
 
   /* ── Lead ── */
@@ -439,32 +308,10 @@ const slides = fixedSlides;
   /* ── CTAs ── */
   .slide-ctas {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.875rem;
-    margin-bottom: 2.25rem;
-  }
-
-  /* ── Trust pills ── */
-  .slide-trust {
-    display: flex;
     align-items: center;
-    gap: 0.625rem;
     flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
   }
-  .trust-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.6);
-    padding: 0.35rem 0.875rem;
-    border-radius: 100px;
-    background: rgba(255, 255, 255, 0.07);
-    white-space: nowrap;
-  }
-
-
   /* ── Flechas laterales ── */
   .slider-arrow {
     position: absolute;
@@ -521,9 +368,9 @@ const slides = fixedSlides;
   }
 
   /* ── Stats Bar ── */
+  /* Continuación visual del hero: mismo fondo, sin líneas */
   .hero-stats-bar {
     background: #172B36;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
     position: relative;
     z-index: 5;
   }
@@ -532,6 +379,7 @@ const slides = fixedSlides;
     text-align: center;
   }
   .stat-num {
+    font-family: 'DM Sans', var(--ff-sans);
     font-size: 1.875rem;
     font-weight: 800;
     color: #FFC801;
@@ -564,40 +412,14 @@ const slides = fixedSlides;
     }
     .slide.is-active { display: flex; }
 
-    /* Imagen: franja superior con proporción fija, ya no absoluta */
-    .slide-img-bg {
-      position: static;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
-    }
-    .slide-img-bg::after {
-      background: linear-gradient(
-        to bottom,
-        rgba(23, 43, 54, 0) 55%,
-        #172B36 100%
-      );
-    }
-    .slide--align-right .slide-img-bg { right: 0; left: 0; }
-    .slide--align-right .slide-img-bg::after {
-      background: linear-gradient(
-        to bottom,
-        rgba(23, 43, 54, 0) 55%,
-        #172B36 100%
-      );
-    }
-    .slide-img-fill { object-position: var(--img-pos-m, center center); }
-
-    /* Contenido: en flujo normal debajo de la imagen */
-    .slide-grid { display: block; height: auto; padding: 2rem 0 3rem; }
+    /* Contenido: en flujo normal, texto arriba y tarjeta debajo */
+    .slide-grid { display: block; height: auto; padding: 2.5rem 0 3rem; }
     .slide-content { width: 100%; max-width: 100%; }
-    .slide--align-right .slide-content { margin-left: 0; }
-    .slide--no-image .slide-grid { padding: 3rem 0; }
 
-    /* Slide solo imagen: se muestra completa, sin recortes ni relleno difuminado */
-    .slide--image-only .slide-img-bg { aspect-ratio: auto; }
-    .slide--image-only .slide-img-fill { object-fit: contain; height: auto; }
-    .slide--image-only .slide-img-blur { display: none; }
+    /* Tarjeta inclinada: centrada bajo el texto, más pequeña */
+    .slide-visual { margin-top: 2.5rem; }
+    .slide-card { transform: rotate(2.5deg); }
+    .slide-card img { max-height: 380px; }
 
     .slider-arrow { width: 38px; height: 38px; }
     .slider-arrow--prev { left: 0.75rem; }
@@ -608,18 +430,14 @@ const slides = fixedSlides;
     .slider-dots { display: none; } /* Navegación por swipe en móvil */
     .slider-arrow { display: none; }
 
-    .slide-img-bg { aspect-ratio: 1 / 1; }
-    .slide-img-fill { object-position: var(--img-pos-m, center center); }
-
     .slide-grid { padding: 1.75rem 0 2.5rem; }
-    .slide--no-image .slide-grid { padding: 2.5rem 0; }
 
-    .slide-h1 { font-size: 2.1rem; line-height: 1.08; margin-bottom: 0.875rem; white-space: normal; }
-    .slide-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.85); }
+    .slide-h1 { font-size: 1.9rem; line-height: 1.1; margin-bottom: 0.875rem; text-align: center; }
+    .slide-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.85); text-align: center; margin-left: auto; margin-right: auto; }
     .slide-ctas {
-      margin-bottom: 1.25rem;
       flex-direction: column;
       align-items: stretch;
+      gap: 0.5rem;
     }
     .slide-ctas .btn {
       width: 100%;
@@ -628,16 +446,12 @@ const slides = fixedSlides;
       font-size: 0.9375rem;
       border-radius: 9999px;
     }
-    .slide-trust { display: none; }
+    .slide-visual { margin-top: 2rem; }
+    .slide-card img { max-height: 320px; }
 
-    /* Stats en 1 fila y 4 columnas en móviles */
-    .stats-container .grid {
-      grid-template-columns: repeat(4, 1fr) !important;
-    }
-    .stat-cell { padding: 1rem 0.25rem; border-right: 1px solid rgba(255, 255, 255, 0.1); }
-    .stat-cell:last-child { border-right: none; }
-    .stat-num { font-size: 1.125rem; }
-    .stat-lbl { font-size: 0.65rem; line-height: 1.2; }
+    .stat-cell { padding: 1.25rem 0.5rem; }
+    .stat-num { font-size: 1.375rem; }
+    .stat-lbl { font-size: 0.7rem; line-height: 1.2; }
   }
 </style>
 

@@ -8,7 +8,11 @@ import developerLogo from "../assets/img/developers/logo-completo-blanco.png";
      FOOTER
 ════════════════════════════════════ -->
 <footer class="site-footer" role="contentinfo" data-dark-bg>
-  <div class="max-w-7xl mx-auto px-6">
+  <!-- Marca de agua: mismo isotipo en blanco que usa el hero -->
+  <div class="footer-watermark" aria-hidden="true">
+    <img src="/favicon.svg" alt="" loading="lazy" decoding="async" />
+  </div>
+  <div class="max-w-7xl mx-auto px-6" style="position:relative;z-index:1;">
     <div
       class="grid sm:grid-cols-2 lg:grid-cols-12 gap-12 pb-16"
       style="border-bottom:1px solid rgba(255,255,255,0.08);"
@@ -43,6 +47,10 @@ import developerLogo from "../assets/img/developers/logo-completo-blanco.png";
 
         <!-- Redes Sociales -->
         <div style="display:flex;align-items:center;gap:1rem;">
+          <!-- Facebook: aún sin página, se muestra sin enlace por ahora -->
+          <span class="footer-social-link" aria-label="Facebook">
+            <Icon name="tabler:brand-facebook" class="w-5 h-5" />
+          </span>
           <a
             href="https://www.instagram.com/cooperamigo.co/"
             target="_blank"
@@ -97,9 +105,7 @@ import developerLogo from "../assets/img/developers/logo-completo-blanco.png";
           </li>
           <li><a href="/directorio" class="footer-link">Directorio</a></li>
           <li>
-            <a href="/pqrsf" class="footer-link footer-link--pqrs"
-              >Radicar PQRSF</a
-            >
+            <a href="/pqrsf" class="footer-link">Radicar PQRSF</a>
           </li>
         </ul>
       </div>
@@ -244,13 +250,11 @@ import developerLogo from "../assets/img/developers/logo-completo-blanco.png";
     background: rgba(255, 255, 255, 0.04);
     color: rgba(255, 255, 255, 0.6);
     transition: all 0.2s ease;
-    border: 1px solid rgba(255, 255, 255, 0.05);
   }
   .footer-social-link:hover {
     background: rgba(255, 255, 255, 0.08);
     color: #ffc801;
     transform: translateY(-3px);
-    border-color: rgba(255, 200, 1, 0.3);
   }
 
   .footer-quick-link {
@@ -274,11 +278,6 @@ import developerLogo from "../assets/img/developers/logo-completo-blanco.png";
   }
   .footer-quick-link--accent:hover {
     background: rgba(255, 200, 1, 0.12);
-  }
-
-  .footer-link--pqrs {
-    color: #ffc801 !important;
-    font-weight: 600;
   }
 
   .footer-bottom-link {
@@ -311,7 +310,37 @@ import developerLogo from "../assets/img/developers/logo-completo-blanco.png";
   .site-footer {
     background: #172b36;
     padding: 6rem 0 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    position: relative;
+    /* Por encima del CTA (z-10): la marca de agua puede dibujarse sobre la
+       costura entre ambas secciones sin verse recortada */
+    z-index: 11;
+  }
+
+  /* Marca de agua: isotipo del favicon en blanco, asomándose desde la
+     esquina inferior derecha del footer. El wrapper se extiende 20rem
+     hacia arriba (sobre el CTA, mismo color) para que la figura no se
+     moche en la costura; el overflow hidden recorta lados y fondo sin
+     dejar espacio fantasma en el scroll. */
+  .footer-watermark {
+    position: absolute;
+    top: -20rem;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .footer-watermark img {
+    position: absolute;
+    right: -10%;
+    bottom: -18rem;
+    height: 68rem;
+    width: auto;
+    transform: rotate(-10deg);
+    /* El SVG trae sus propios colores; esto lo aplana a blanco puro */
+    filter: brightness(0) invert(1);
+    opacity: 0.012;
   }
 
   .footer-bottom {

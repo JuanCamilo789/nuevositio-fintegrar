@@ -1,8 +1,8 @@
 ---
-// Input con label incrustado en la línea superior del borde (estilo
-// "outlined" con muesca), en vez del label flotando arriba del campo o
-// como placeholder interno. Reutilizable en cualquier formulario del sitio:
-// cambiar el estilo acá lo cambia en todos los campos que usen este componente.
+// Campo con label encima del input (negrita, oscuro, asterisco rojo si es
+// requerido) e input rectangular simple. Reutilizable en cualquier
+// formulario del sitio: cambiar el estilo acá lo cambia en todos los
+// campos que usen este componente.
 interface Props {
   id: string;
   label: string;
@@ -12,50 +12,46 @@ interface Props {
 }
 
 const { id, label, type = "text", class: className, ...rest } = Astro.props;
+const requerido = "required" in rest && rest.required !== false;
 ---
 
 <div class="ff-field">
+  <label for={id}>{label}{requerido && <span class="ff-req" aria-hidden="true">*</span>}</label>
   <input id={id} type={type} class={className} {...rest} />
-  <label for={id}>{label}</label>
 </div>
 
 <style>
   .ff-field {
-    position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 1.125rem;
   }
   .ff-field label {
-    position: absolute;
-    top: 0;
-    left: 0.75rem;
-    transform: translateY(-50%);
-    background: #fff;
-    padding: 0 0.35rem;
-    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.875rem;
     font-weight: 700;
-    color: #4b5563;
-    pointer-events: none;
-    white-space: nowrap;
+    color: #172b36;
+  }
+  .ff-req {
+    color: #dc2626;
+    margin-left: 2px;
   }
   .ff-field input {
     width: 100%;
     height: 48px;
     box-sizing: border-box;
     padding: 0 0.875rem;
-    border: 1px solid #d9e8e2;
+    border: 1px solid #cbd5e1;
     border-radius: 8px;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     color: #172b36;
     background: #fff;
     font-family: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
   }
   .ff-field input:focus {
     outline: none;
     border-color: #114c5a;
     box-shadow: 0 0 0 3px rgba(17, 76, 90, 0.1);
-  }
-  .ff-field input:focus + label {
-    color: #114c5a;
   }
 
   /* Neutraliza el fondo amarillo/azul que el navegador aplica al

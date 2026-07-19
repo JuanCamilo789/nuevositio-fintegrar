@@ -107,4 +107,8 @@ const metaDesc  = description ?? `${pageTitle} — Cooperativa Multiactiva Luis 
     line-height: 1.6;
     max-width: 640px;
   }
+  @media (min-width: 1024px) {
+    /* En desktop el subtítulo cabe en una sola línea */
+    .pg-subtitle { max-width: none; }
+  }
 </style>

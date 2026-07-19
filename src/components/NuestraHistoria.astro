@@ -70,8 +70,8 @@ import { Icon } from 'astro-icon/components';
       </div>
 
       <div class="mv-card reveal reveal-delay-1">
-        <div class="mv-card-top mv-card-top--vision">
-          <div class="mv-card-icon-wrap mv-card-icon-wrap--vision">
+        <div class="mv-card-top">
+          <div class="mv-card-icon-wrap">
             <Icon name="tabler:eye" class="w-6 h-6" aria-hidden="true" />
           </div>
           <span class="mv-card-tag">Visión</span>
@@ -205,8 +205,6 @@ import { Icon } from 'astro-icon/components';
 
   .timeline-founders {
     margin-top: 1.5rem;
-    background: rgba(23, 43, 54, 0.08);
-    border-radius: 12px;
     padding: 1rem 1.5rem;
     width: 100%;
   }
@@ -261,30 +259,24 @@ import { Icon } from 'astro-icon/components';
     gap: 1.5rem;
   }
 
+  /* Cards sin fondo ni sombra: encabezado limpio + línea divisoria fina */
   .mv-card {
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 2px 16px rgba(23, 43, 54, 0.09);
     display: flex;
     flex-direction: column;
   }
 
   .mv-card-top {
-    background: #172B36;
-    padding: 1.75rem 2rem;
+    padding: 0 0 1.25rem;
+    border-bottom: 1px solid rgba(23, 43, 54, 0.12);
     display: flex;
     align-items: center;
     gap: 1rem;
   }
 
-  .mv-card-top--vision {
-    background: #172B36;
-  }
-
   .mv-card-icon-wrap {
     width: 44px;
     height: 44px;
-    background: rgba(255, 255, 255, 0.12);
+    background: #172B36;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -293,15 +285,11 @@ import { Icon } from 'astro-icon/components';
     flex-shrink: 0;
   }
 
-  .mv-card-icon-wrap--vision {
-    background: rgba(255, 200, 1, 0.18);
-  }
-
   .mv-card-tag {
     font-family: var(--ff-heading);
     font-size: 1.25rem;
     font-weight: 700;
-    color: #fff;
+    color: #172B36;
     letter-spacing: 0.01em;
   }
 
@@ -310,8 +298,7 @@ import { Icon } from 'astro-icon/components';
     color: #172B36;
     opacity: 0.8;
     line-height: 1.85;
-    padding: 2rem;
-    background: #fff;
+    padding: 1.5rem 0 0;
     flex: 1;
   }
 

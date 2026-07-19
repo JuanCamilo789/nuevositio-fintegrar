@@ -26,7 +26,7 @@ export default defineConfig({
       include: {
         tabler: [
           'address-book', 'alert-circle', 'arrow-left', 'arrow-right', 'award', 
-          'baby-carriage', 'brand-instagram', 'brand-linkedin', 'brand-whatsapp', 
+          'baby-carriage', 'brand-facebook', 'brand-instagram', 'brand-linkedin', 'brand-whatsapp',
           'building-bank', 'building-store', 'bulb', 'calculator', 'calendar-check', 
           'calendar-event', 'candle', 'cash', 'check', 'chevron-down', 'chevron-left', 'chevron-right',
           'circle-check', 'clock', 'clock-hour-4', 'credit-card', 'device-mobile-dollar', 
