@@ -81,6 +81,7 @@ Deno.serve(async (req) => {
     const nombre    = esc(r.nombre);
     const radicado  = esc(r.radicado);
     const asunto    = esc(r.asunto);
+    const tipoDocumento = esc(r.tipo_documento);
     const documento = esc(r.documento);
     const emailEsc  = esc(r.email);
     const telefono  = r.telefono ? esc(r.telefono) : "—";
@@ -157,7 +158,7 @@ Deno.serve(async (req) => {
         </tr>
         <tr style="border-bottom:1px solid #F1F5F9;">
           <td style="padding:9px 0;color:#6B7280;font-family:Arial,Helvetica,sans-serif;">Documento</td>
-          <td style="padding:9px 0;color:#172B36;font-family:Arial,Helvetica,sans-serif;">${documento}</td>
+          <td style="padding:9px 0;color:#172B36;font-family:Arial,Helvetica,sans-serif;">${tipoDocumento} ${documento}</td>
         </tr>
         <tr style="border-bottom:1px solid #F1F5F9;">
           <td style="padding:9px 0;color:#6B7280;font-family:Arial,Helvetica,sans-serif;">Correo</td>

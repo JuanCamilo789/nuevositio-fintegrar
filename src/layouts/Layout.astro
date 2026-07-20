@@ -43,7 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <body>
     <!-- ── Vigilada Supersolidaria — fixed left badge ── -->
     <div
-      class="supersolidaria-badge"
+      class="supersolidaria-badge is-hidden"
       role="note"
       aria-label="Vigilada por la Superintendencia de la Economía Solidaria"
     >
@@ -52,31 +52,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <span class="ss-vigilada">VIGILADA</span>
         <span class="ss-line"></span>
       </div>
-      <span class="ss-nombre">SUPERSOLIDARIA</span>
+      <span class="ss-nombre">
+        <span class="ss-nombre-line">SUPERINTENDENCIA DE LA</span>
+        <span class="ss-nombre-line">ECONOMÍA SOLIDARIA</span>
+      </span>
     </div>
 
     <slot />
 
-    <!-- ── Botones flotantes: Pagos PSE + WhatsApp ── -->
+    <!-- ── Botón flotante: WhatsApp ── -->
     <div class="fab-stack">
-      <a
-        href="https://serviciosdigitales.cooperamigo.coop/"
-        class="portal-fab"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Portal Asociados — acceso a trámites digitales"
-      >
-        <Icon name="tabler:layout-dashboard" class="w-6 h-6" aria-hidden="true" />
-      </a>
-      <a
-        href="https://www.zonapagos.net/formulariosNV/?cod=BTK3a53qAPJK5dFzuUb9xoOMEi6GjxTVEz6jgj8WOG4kf7Z7mmbU2N6iG2sClbz5isF7xpuvz4ec%2FstAKWghYq2ihH6ea5Ab%2BfJXSgfBIPShwQxb9hHbzgY1XqGlsllif2sqgYeyszPfE%2Fq5SNonDhF9ZhqXm7OyDm%2Ba4lfdMItrvmOCQ5Py2gAq%2BvwFtoRMoNDPxeZKzglBDlEyqykoMK2kz6zyhc7dmjJO23oOZfDrWY5p5hfLu%2BH0xUIIx2%2F2zJLthSgc28WEY9rneC44s4DORf3zdoMntL1Bmxpscus%3D"
-        class="pse-fab"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Pagos PSE — pague su cuota en línea"
-      >
-        <Icon name="tabler:device-mobile-dollar" class="w-7 h-7" aria-hidden="true" />
-      </a>
       <a
         href="https://wa.me/573054070612?text=Hola%2C%20quisiera%20informaci%C3%B3n%20sobre%20cr%C3%A9dito%2Fcartera."
         class="whatsapp-fab"
@@ -197,20 +182,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       const darkSections = Array.from(
         document.querySelectorAll("[data-dark-bg]"),
       ) as HTMLElement[];
+      const hideSections = Array.from(
+        document.querySelectorAll("[data-hide-badge]"),
+      ) as HTMLElement[];
 
       function updateBadgeColor() {
         if (!badge) return;
         const midY = window.innerHeight * 0.5;
+        const b = badge.getBoundingClientRect();
+        // Color según la sección oscura bajo el centro del viewport
         let onDark = false;
-        // Secciones con data-hide-badge (además de data-dark-bg) ocultan
-        // el badge mientras están bajo el centro del viewport
-        let hideBadge = false;
         for (const el of darkSections) {
           const r = el.getBoundingClientRect();
-          if (midY >= r.top && midY <= r.bottom) {
-            onDark = true;
-            if (el.hasAttribute("data-hide-badge")) hideBadge = true;
-          }
+          if (midY >= r.top && midY <= r.bottom) onDark = true;
+        }
+        // Secciones con data-hide-badge ocultan el badge mientras
+        // cualquier parte de su caja se solape con ellas
+        let hideBadge = false;
+        for (const el of hideSections) {
+          const r = el.getBoundingClientRect();
+          if (b.top < r.bottom && b.bottom > r.top) hideBadge = true;
         }
         badge.classList.toggle("is-hidden", hideBadge);
         badge.style.setProperty("--badge-color", onDark ? "#ffffff" : "#191919");
@@ -218,6 +209,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
       updateBadgeColor();
       window.addEventListener("scroll", updateBadgeColor, { passive: true });
+      window.addEventListener("resize", updateBadgeColor, { passive: true });
     </script>
   </body>
 </html>

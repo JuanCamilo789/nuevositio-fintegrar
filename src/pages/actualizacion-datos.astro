@@ -11,250 +11,169 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   breadcrumbs={[{ label: "Actualización de datos" }]}
 >
   <section class="ad-section">
-    <div class="max-w-3xl mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
       <div class="ad-card">
 
-        <!-- ═══ Stepper ═══ -->
-        <div class="ad-stepper" id="ad-stepper">
-          <div class="ad-stepper-item" data-step="cedula">
-            <span class="ad-stepper-num">1</span>
-            <span>Documento</span>
-          </div>
-          <div class="ad-stepper-line"></div>
-          <div class="ad-stepper-item" data-step="form">
-            <span class="ad-stepper-num">2</span>
-            <span>Datos</span>
-          </div>
-          <div class="ad-stepper-line"></div>
-          <div class="ad-stepper-item" data-step="confirm">
-            <span class="ad-stepper-num">3</span>
-            <span>Confirmar</span>
-          </div>
-        </div>
-
-        <!-- ═══ Paso 1: Cédula ═══ -->
-        <div id="ad-step-cedula" class="ad-step">
-          <h2 class="ad-step-title">Ingresa tu número de documento</h2>
-          <p class="ad-step-desc">
-            A continuación podrás revisar y actualizar tu información.
-          </p>
-
-          <form id="ad-form-cedula" novalidate>
-            <FloatingSelect id="ad-tipo-identificacion" label="Tipo de identificación" required>
-              <option value="CC">Cédula de ciudadanía</option>
-              <option value="CE">Cédula de extranjería</option>
-            </FloatingSelect>
-            <FloatingInput
-              id="ad-cedula"
-              label="Número de documento"
-              required
-              maxlength="11"
-              inputmode="numeric"
-              pattern="[0-9]+"
-              autocomplete="off"
-              autofocus
-            />
-
-            <div id="ad-cedula-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;"></div>
-
-            <button type="submit" id="ad-btn-buscar" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.875rem;">
-              <Icon name="tabler:search" class="w-4 h-4" aria-hidden="true" />
-              Continuar
-            </button>
-          </form>
-        </div>
-
-        <!-- ═══ Paso 2: Formulario de actualización ═══ -->
-        <div id="ad-step-form" class="ad-step" style="display:none;">
-          <h2 class="ad-step-title">Actualiza tus datos</h2>
-          <p class="ad-step-desc">
-            Revisa y actualiza la información que necesites. Nuestro equipo revisará los cambios antes
-            de aplicarlos definitivamente.
-          </p>
-          <p class="ad-hint">
-            Todos los campos son opcionales — solo se enviarán a revisión los que modifiques.
-          </p>
+        <!-- ═══ Formulario de actualización ═══ -->
+        <div id="ad-step-form" class="ad-step">
 
           <form id="ad-form-datos" novalidate>
 
-            <!-- Contacto y residencia -->
+            <!-- Identificación -->
             <div class="ad-accordion-item open">
-              <button type="button" class="ad-accordion-header" data-target="acc-contacto">
-                <span>Contacto y residencia</span>
-                <Icon name="tabler:chevron-down" class="w-4 h-4 chevron" aria-hidden="true" />
-              </button>
-              <div id="acc-contacto" class="ad-accordion-body">
+              <div id="acc-identificacion" class="ad-accordion-body" style="padding-top:0;">
                 <div class="form-row">
-                  <FloatingInput id="f-email" label="Correo electrónico" type="email" data-campo="email" maxlength="100" />
-                  <FloatingInput id="f-otro_email" label="Correo alterno" type="email" data-campo="otro_email" maxlength="100" />
-                </div>
-                <div class="form-row">
-                  <FloatingInput id="f-celular" label="Celular" type="tel" data-campo="celular" maxlength="15" />
-                  <FloatingInput id="f-telefono" label="Teléfono fijo" type="tel" data-campo="telefono" maxlength="15" />
-                </div>
-                <FloatingInput id="f-direccion" label="Dirección" data-campo="direccion" maxlength="200" />
-                <div class="form-row">
-                  <FloatingInput id="f-ciudad" label="Ciudad" data-campo="ciudad" maxlength="100" />
-                  <FloatingInput id="f-barrio" label="Barrio" data-campo="barrio" maxlength="100" />
-                </div>
-                <div class="form-row">
-                  <FloatingSelect id="f-tipo_vivienda" label="Tipo de vivienda" data-campo="tipo_vivienda">
-                    <option value="">Seleccione</option>
-                    <option value="Propia">Propia</option>
-                    <option value="Arrendada">Arrendada</option>
-                    <option value="Familiar">Familiar</option>
+                  <FloatingSelect id="ad-tipo-identificacion" label="Tipo de identificación" required data-campo="tipo_identificacion">
+                    <option value="CC">Cédula de ciudadanía</option>
+                    <option value="CE">Cédula de extranjería</option>
                   </FloatingSelect>
-                  <FloatingSelect id="f-estrato" label="Estrato" data-campo="estrato">
+                  <FloatingInput id="ad-cedula" label="Número de identificación" required maxlength="11" inputmode="numeric" pattern="[0-9]+" data-campo="cedula" />
+                </div>
+                <div class="form-row">
+                  <FloatingInput id="f-nombres" label="Nombres completos" required data-campo="nombres" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras y espacios" class="uppercase" oninput="this.value=this.value.toUpperCase()" />
+                  <FloatingInput id="f-apellidos" label="Apellidos completos" required data-campo="apellidos" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras y espacios" class="uppercase" oninput="this.value=this.value.toUpperCase()" />
+                </div>
+                <div class="form-row">
+                  <FloatingInput id="f-fecha_nacimiento" type="date" label="Fecha de nacimiento" required data-campo="fecha_nacimiento" />
+                  <FloatingSelect id="f-estrato" label="Estrato" required data-campo="estrato">
                     <option value="">Seleccione</option>
-                    {[1, 2, 3, 4, 5, 6].map((n) => <option value={n}>{n}</option>)}
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                   </FloatingSelect>
                 </div>
-                <FloatingInput id="f-tiempo_residencia_meses" label="Tiempo de residencia (meses)" type="number" data-campo="tiempo_residencia_meses" min="0" max="1200" />
-                <div class="form-group">
-                  <label id="lbl-canales">¿Por cuál medio prefieres que te contactemos?</label>
-                  <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-canales">
-                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="correo" /> Correo electrónico</label>
-                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="llamada" /> Llamada telefónica</label>
-                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="whatsapp" /> WhatsApp</label>
-                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="sms" /> Mensaje de texto (SMS)</label>
-                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="apps_web" /> Notificaciones de la app/portal</label>
-                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="direccion_principal" /> Correspondencia a mi dirección</label>
-                    <label class="ad-checkbox"><input type="checkbox" class="f-canales" value="direccion_empresa" /> Correspondencia a mi empresa</label>
+                <div class="form-row">
+                  <FloatingInput id="f-direccion_completa" label="Dirección con ciudad y barrio" required data-campo="direccion_completa" readonly class="cursor-pointer" placeholder="Haz clic para ingresar dirección" />
+                </div>
+                <div class="form-row">
+                  <FloatingInput id="f-contacto_principal" label="Contacto principal" type="tel" required data-campo="contacto_principal" inputmode="numeric" pattern="^[0-9]+$" title="Solo se permiten números" />
+                  <FloatingInput id="f-email" label="Correo electrónico" type="email" required data-campo="email" pattern="^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$" title="Ingrese un correo electrónico válido" />
+                </div>
+                
+                <div class="form-group mb-6 mt-2">
+                  <label id="lbl-preferencias" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">Preferencias de contacto</label>
+                  <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-preferencias">
+                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="whatsapp" /> WhatsApp</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="correo" /> Correo electrónico</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="llamada" /> Llamada telefónica</label>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <!-- Datos personales -->
-            <div class="ad-accordion-item">
-              <button type="button" class="ad-accordion-header" data-target="acc-personales">
-                <span>Datos personales</span>
-                <Icon name="tabler:chevron-down" class="w-4 h-4 chevron" aria-hidden="true" />
-              </button>
-              <div id="acc-personales" class="ad-accordion-body">
                 <div class="form-row">
-                  <FloatingInput id="f-fecha_nacimiento" label="Fecha de nacimiento" type="date" data-campo="fecha_nacimiento" />
-                  <FloatingSelect id="f-rh" label="RH" data-campo="rh">
-                    <option value="">Seleccione</option>
-                    {["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"].map((rh) => <option value={rh}>{rh}</option>)}
-                  </FloatingSelect>
-                </div>
-                <div class="form-row">
-                  <FloatingSelect id="f-estado_civil" label="Estado civil" data-campo="estado_civil">
-                    <option value="">Seleccione</option>
-                    <option value="Soltero">Soltero(a)</option>
-                    <option value="Casado">Casado(a)</option>
-                    <option value="Union Libre">Unión libre</option>
-                    <option value="Separado">Separado(a)</option>
-                    <option value="Viudo">Viudo(a)</option>
-                  </FloatingSelect>
-                  <FloatingSelect id="f-genero" label="Género" data-campo="genero">
-                    <option value="">Seleccione</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                  </FloatingSelect>
-                </div>
-                <div class="form-row">
-                  <FloatingSelect id="f-nivel_academico" label="Nivel académico" data-campo="nivel_academico">
+                  <div class="form-group">
+                    <label id="lbl-horarios" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">Horario preferido de contacto</label>
+                    <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-horarios">
+                      <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="mañana" /> Mañana</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="tarde" /> Tarde</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="noche" /> Noche</label>
+                    </div>
+                  </div>
+                  <FloatingSelect id="f-nivel_educativo" label="Nivel educativo" required data-campo="nivel_educativo">
                     <option value="">Seleccione</option>
                     <option value="Primaria">Primaria</option>
-                    <option value="Bachiller">Bachiller</option>
-                    <option value="Tecnico Tecnologo">Técnico / Tecnólogo</option>
+                    <option value="Bachillerato">Bachillerato</option>
+                    <option value="Tecnico">Técnico / Tecnólogo</option>
                     <option value="Universitario">Universitario</option>
-                    <option value="Otro">Otro</option>
+                    <option value="Posgrado">Posgrado</option>
                   </FloatingSelect>
-                  <FloatingInput id="f-titulo" label="Título obtenido" data-campo="titulo" maxlength="100" />
                 </div>
+                
                 <div class="form-row">
-                  <FloatingInput id="f-personas_a_cargo" label="Personas a cargo" type="number" data-campo="personas_a_cargo" min="0" max="20" />
-                  <FloatingInput id="f-personas_economicamente_activas" label="Personas económ. activas en el hogar" type="number" data-campo="personas_economicamente_activas" min="0" max="20" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Información laboral -->
-            <div class="ad-accordion-item">
-              <button type="button" class="ad-accordion-header" data-target="acc-laboral">
-                <span>Información laboral</span>
-                <Icon name="tabler:chevron-down" class="w-4 h-4 chevron" aria-hidden="true" />
-              </button>
-              <div id="acc-laboral" class="ad-accordion-body">
-                <FloatingSelect id="f-fuente_ingresos" label="Fuente de ingresos" data-campo="fuente_ingresos">
-                  <option value="">Seleccione</option>
-                  <option value="empleado">Empleado</option>
-                  <option value="independiente">Independiente</option>
-                  <option value="pensionado">Pensionado</option>
-                  <option value="rentista">Rentista de capital</option>
-                  <option value="estudiante">Estudiante</option>
-                </FloatingSelect>
-
-                <div id="ad-grupo-empleado" class="ad-grupo-condicional">
-                  <div class="form-row">
-                    <FloatingInput id="f-empresa" label="Empresa" data-campo="empresa" maxlength="200" />
-                    <FloatingInput id="f-cargo" label="Cargo" data-campo="cargo" maxlength="100" />
-                  </div>
-                  <div class="form-row">
-                    <FloatingSelect id="f-tipo_contrato" label="Tipo de contrato" data-campo="tipo_contrato">
-                      <option value="">Seleccione</option>
-                      <option value="indefinido">Término indefinido</option>
-                      <option value="fijo">Término fijo</option>
-                      <option value="prestacion_servicios">Prestación de servicios</option>
-                      <option value="obra_labor">Obra y labor</option>
-                    </FloatingSelect>
-                    <FloatingInput id="f-fecha_ingreso_empresa" label="Fecha de ingreso" type="date" data-campo="fecha_ingreso_empresa" />
-                  </div>
-                  <FloatingInput id="f-direccion_empresa" label="Dirección de la empresa" data-campo="direccion_empresa" maxlength="200" />
-                  <div class="form-row">
-                    <FloatingInput id="f-ciudad_empresa" label="Ciudad de la empresa" data-campo="ciudad_empresa" maxlength="100" />
-                    <FloatingInput id="f-telefono_empresa" label="Teléfono de la empresa" type="tel" data-campo="telefono_empresa" maxlength="15" />
-                  </div>
-                  <FloatingInput id="f-email_corporativo" label="Correo corporativo" type="email" data-campo="email_corporativo" maxlength="100" />
+                  <FloatingInput id="f-ocupacion" label="Ocupación actual" required data-campo="ocupacion" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras y espacios" class="uppercase" oninput="this.value=this.value.toUpperCase()" />
+                  <FloatingSelect id="f-tipo_vivienda" label="Tipo de vivienda" required data-campo="tipo_vivienda">
+                    <option value="">Seleccione</option>
+                    <option value="Familiar">Familiar</option>
+                    <option value="Propia">Propia</option>
+                    <option value="Arrendada">Arrendada</option>
+                  </FloatingSelect>
                 </div>
 
-                <div id="ad-grupo-pensionado" class="ad-grupo-condicional">
-                  <FloatingInput id="f-entidad_pagadora" label="Entidad pagadora" data-campo="entidad_pagadora" maxlength="150" />
-                </div>
-
-                <div id="ad-grupo-estudiante" class="ad-grupo-condicional">
-                  <div class="form-row">
-                    <FloatingInput id="f-institucion_educativa" label="Institución educativa" data-campo="institucion_educativa" maxlength="150" />
-                    <FloatingInput id="f-nivel_educativo" label="Nivel educativo" data-campo="nivel_educativo" maxlength="50" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Situación financiera -->
-            <div class="ad-accordion-item">
-              <button type="button" class="ad-accordion-header" data-target="acc-financiera">
-                <span>Situación financiera</span>
-                <Icon name="tabler:chevron-down" class="w-4 h-4 chevron" aria-hidden="true" />
-              </button>
-              <div id="acc-financiera" class="ad-accordion-body">
                 <div class="form-row">
-                  <FloatingInput id="f-salario" label="Salario / ingresos fijos mensuales" data-campo="salario" inputmode="numeric" />
-                  <FloatingInput id="f-ingresos_independiente" label="Ingresos como independiente" data-campo="ingresos_independiente" inputmode="numeric" />
+                  <FloatingSelect id="f-tiene_vehiculo" label="¿Tiene vehículo?" required data-campo="tiene_vehiculo">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
+                  <FloatingSelect id="f-tiene_vivienda_propia" label="¿Tiene vivienda propia?" required data-campo="tiene_vivienda_propia">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
                 </div>
+
                 <div class="form-row">
-                  <FloatingInput id="f-mesada_pensional" label="Mesada pensional" data-campo="mesada_pensional" inputmode="numeric" />
-                  <FloatingInput id="f-otros_ingresos" label="Otros ingresos" data-campo="otros_ingresos" inputmode="numeric" />
+                  <FloatingSelect id="f-practica_deporte" label="¿Practica algún deporte?" data-campo="practica_deporte">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
+                  <FloatingSelect id="f-viaja_frecuencia" label="¿Viaja con frecuencia?" data-campo="viaja_frecuencia">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
                 </div>
+
                 <div class="form-row">
-                  <FloatingInput id="f-gastos_familiares" label="Gastos familiares mensuales" data-campo="gastos_familiares" inputmode="numeric" />
-                  <FloatingInput id="f-otros_gastos" label="Otros gastos mensuales" data-campo="otros_gastos" inputmode="numeric" />
+                  <FloatingSelect id="f-compras_online" label="¿Hace compras online?" data-campo="compras_online">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
+                  <FloatingSelect id="f-usa_tarjeta_credito" label="¿Usa tarjeta de crédito?" data-campo="usa_tarjeta_credito">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
                 </div>
-                <FloatingInput id="f-obligaciones_financieras" label="Cuotas / obligaciones financieras mensuales" data-campo="obligaciones_financieras" inputmode="numeric" />
+
+                <div class="form-row">
+                  <FloatingSelect id="f-usa_billeteras_digitales" label="¿Usa billeteras digitales?" data-campo="usa_billeteras_digitales">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
+                  <FloatingSelect id="f-interes_promociones" label="Nivel de interés en promociones" required data-campo="interes_promociones">
+                    <option value="">Seleccione</option>
+                    <option value="Alto">Alto</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Bajo">Bajo</option>
+                  </FloatingSelect>
+                </div>
+
+                <div class="form-row">
+                  <FloatingSelect id="f-usa_redes_sociales" label="¿Usa redes sociales?" data-campo="usa_redes_sociales">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
+                  <div id="wrapper_cuales_redes" style="display:none; flex:1;">
+                    <FloatingInput id="f-cuales_redes" label="¿Cuáles?" data-campo="cuales_redes" />
+                  </div>
+                </div>
+
               </div>
             </div>
 
             <div id="ad-form-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;margin-top:1.25rem;"></div>
 
-            <div class="ad-btn-row">
+            <!-- Autorización Legal -->
+            <div class="mt-8 mb-6 flex items-start gap-3">
+              <input type="checkbox" id="ad-autorizacion" class="mt-1 w-4 h-4 accent-[var(--color-link)] cursor-pointer shrink-0" required />
+              <label for="ad-autorizacion" class="text-[0.75rem] text-slate-500 leading-relaxed cursor-pointer text-justify">
+                Autorizo de manera previa, expresa, libre e informada a Cooperamigó para recolectar, almacenar, usar, actualizar, circular, transmitir, transferir y, en general, realizar el tratamiento de mis datos personales, de conformidad con la Ley 1581 de 2012 y la <a href="/politica-tratamiento-datos" class="text-[var(--color-link)] hover:underline font-semibold" target="_blank">Política de Tratamiento de Datos Personales</a> de la Cooperativa, disponible en sus oficinas y en su página web, con el fin de gestionar mi vinculación como asociado, mantener actualizada mi información, prestar los servicios de la Cooperativa, dar cumplimiento a obligaciones legales y estatutarias, y enviar información institucional, comercial, educativa, promocional y de bienestar. Declaro conocer mis derechos como titular de la información y los canales habilitados para ejercerlos.<span class="text-red-600 font-bold ml-1">*</span>
+              </label>
+            </div>
+
+            <div class="ad-btn-row" style="justify-content: flex-end;">
               <button type="button" id="ad-btn-volver-form" class="btn btn-outline-sm">
                 Volver
               </button>
-              <button type="submit" id="ad-btn-revisar" class="btn btn-primary" style="flex:1;justify-content:center;padding:0.875rem;">
-                Revisar cambios
+              <button type="submit" id="ad-btn-revisar" class="btn btn-primary" style="width:20%;justify-content:center;padding:0.875rem;" disabled>
+                Actualizar datos <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" aria-hidden="true" />
               </button>
             </div>
           </form>
@@ -301,19 +220,127 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
       </div>
     </div>
   </section>
+
+        <!-- Modal Dirección -->
+        <div id="modal-direccion" class="modal-backdrop" style="display:none;">
+          <div class="modal-dir-content">
+            <div class="modal-dir-header">
+              <div class="modal-dir-title-group">
+                <div class="modal-dir-icon">
+                  <Icon name="tabler:map-pin" class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 class="font-extrabold text-[1.125rem] text-[#172B36] leading-tight">Ingresar dirección</h3>
+                  <p class="text-[0.875rem] text-slate-500 font-medium">Estructura la dirección de manera estándar</p>
+                </div>
+              </div>
+              <button type="button" id="btn-cerrar-modal" class="modal-dir-close">
+                <Icon name="tabler:x" class="w-5 h-5" />
+              </button>
+            </div>
+            <div class="modal-dir-body">
+              <div class="grid-2">
+                <div class="ff-field">
+                  <label>Departamento <span class="ff-req">*</span></label>
+                  <select id="md-depto" class="md-input"><option value="">Seleccione</option></select>
+                </div>
+                <div class="ff-field">
+                  <label>Ciudad / Municipio <span class="ff-req">*</span></label>
+                  <select id="md-ciudad" class="md-input" disabled><option value="">Seleccione</option></select>
+                </div>
+              </div>
+
+              <div class="md-box">
+                <div class="grid-via">
+                  <div class="ff-field">
+                    <label>Vía principal <span class="ff-req">*</span></label>
+                    <select id="md-via" class="md-input"><option value="">Sel.</option></select>
+                  </div>
+                  <div class="ff-field">
+                    <label>Número <span class="ff-req">*</span></label>
+                    <input type="text" id="md-num1" class="md-input uppercase" placeholder="45" />
+                  </div>
+                  <div class="ff-field">
+                    <label>Letra</label>
+                    <input type="text" id="md-letra1" class="md-input uppercase" placeholder="A" />
+                  </div>
+                  <div class="ff-field">
+                    <label>Cuadrante</label>
+                    <select id="md-cuad1" class="md-input">
+                      <option value="">Sel.</option><option value="NORTE">Norte</option><option value="SUR">Sur</option><option value="ESTE">Este</option><option value="OESTE">Oeste</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="md-sep">
+                  <div class="md-line"></div>
+                  <div class="md-hash">#</div>
+                  <div class="md-line"></div>
+                </div>
+
+                <div class="grid-cruce">
+                  <div class="ff-field">
+                    <label>Cruce</label>
+                    <input type="text" id="md-num2" class="md-input uppercase" placeholder="23" />
+                  </div>
+                  <div class="ff-field">
+                    <label>Letra</label>
+                    <input type="text" id="md-letra2" class="md-input uppercase" placeholder="B" />
+                  </div>
+                  <div class="ff-field">
+                    <label>Placa <span class="ff-req">*</span></label>
+                    <input type="text" id="md-placa" class="md-input uppercase" placeholder="18" />
+                  </div>
+                  <div class="ff-field">
+                    <label>Cuadrante</label>
+                    <select id="md-cuad2" class="md-input">
+                      <option value="">Sel.</option><option value="NORTE">Norte</option><option value="SUR">Sur</option><option value="ESTE">Este</option><option value="OESTE">Oeste</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid-2">
+                <div class="ff-field">
+                  <label>Complemento</label>
+                  <input type="text" id="md-comp" class="md-input uppercase" placeholder="Ej: APTO 301" />
+                </div>
+                <div class="ff-field">
+                  <label>Barrio</label>
+                  <input type="text" id="md-barrio" class="md-input uppercase" placeholder="Nombre del barrio" />
+                </div>
+              </div>
+
+              <div id="md-preview-box" class="md-preview" style="display:none;">
+                <Icon name="tabler:check" class="w-5 h-5 text-[var(--color-accent-teal)]" />
+                <div>
+                  <div class="text-[0.7rem] font-bold text-[var(--color-accent-teal)] uppercase tracking-wider">Dirección generada</div>
+                  <div id="md-preview-text" class="text-[0.875rem] font-bold text-[#172B36]"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="modal-dir-footer">
+              <button type="button" id="btn-cancelar-modal" class="modal-dir-btn-sec">Cancelar</button>
+              <button type="button" id="btn-confirmar-modal" class="modal-dir-btn-pri" disabled>
+                Confirmar <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" />
+              </button>
+            </div>
+          </div>
+        </div>
+
 </InnerLayout>
 
 <style>
   .ad-section {
-    background: #fff;
+    background: #ffffff;
     padding: 3.5rem 0 5rem;
   }
-  /* Tarjeta con la misma presencia que la del simulador de crédito */
+  /* Tarjeta principal sin bordes ni sombras */
   .ad-card {
     background: #fff;
-    border-radius: 24px;
+    border-radius: var(--radius-lg);
     padding: 2.5rem;
-    box-shadow: 0 4px 48px rgba(23, 43, 54, 0.10);
   }
 
   /* ── Stepper ────────────────────────────────────────────────────── */
@@ -341,7 +368,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #F1F6F4;
+    background: var(--color-surface);
     color: #172b36;
     display: flex;
     align-items: center;
@@ -360,38 +387,36 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
   .ad-stepper-item span:last-child {
     font-size: 0.72rem;
-    color: #4b5563;
+    color: var(--color-label);
     font-weight: 700;
   }
   .ad-stepper-line {
     flex: 1;
     height: 2px;
-    background: #F1F6F4;
+    background: var(--color-surface);
     margin-top: 17px; /* centrada respecto al círculo de 36px */
     border-radius: 1px;
   }
 
   .ad-step-title {
     font-family: var(--ff-heading, inherit);
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #172b36;
     margin-bottom: 0.375rem;
-    text-align: center;
+    text-align: left;
   }
   .ad-step-desc {
     font-size: 0.9375rem;
-    color: #4b5563;
+    color: var(--color-text-muted);
     line-height: 1.6;
     margin-bottom: 1.5rem;
-    text-align: center;
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: left;
+    max-width: 100%;
   }
   .ad-hint {
     font-size: 0.8125rem;
-    color: #6b7280;
+    color: var(--color-text-muted);
     text-align: center;
     background: #F8FAFA;
     border-radius: 9999px;
@@ -404,23 +429,25 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     margin: 0 auto;
   }
 
-  /* ── Acordeón: bloques suaves sin bordes ────────────────────────── */
+  /* ── Acordeón plano (ahora completamente invisible) ────────────────── */
   .ad-accordion-item {
-    background: #F8FAFA;
-    border-radius: 14px;
-    margin-bottom: 0.75rem;
+    background: transparent;
+    border: none;
+    margin-bottom: 0;
     overflow: hidden;
-    transition: background 0.2s;
+  }
+  .ad-accordion-item:last-child {
+    border-bottom: none;
   }
   .ad-accordion-item.open {
-    background: #F4F8F7;
+    box-shadow: none;
   }
   .ad-accordion-header {
+    display: none; /* Se ocultan los títulos de sección a petición del usuario */
     width: 100%;
-    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.125rem 1.25rem;
+    padding: 1.5rem 0;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -433,24 +460,22 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
   .ad-accordion-header .chevron {
     transition: transform 0.2s;
-    color: #6b7280;
+    color: var(--color-text-muted);
     flex-shrink: 0;
   }
   .ad-accordion-item.open .ad-accordion-header .chevron {
     transform: rotate(180deg);
   }
-  /* Cuerpo blanco: los labels con muesca de los campos (fondo blanco)
-     se funden bien; el gris queda solo en la cabecera del bloque */
   .ad-accordion-body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.25s ease;
-    padding: 0 1.25rem;
-    background: #fff;
+    padding: 0;
+    background: transparent;
   }
   .ad-accordion-item.open .ad-accordion-body {
     max-height: 3000px;
-    padding: 1.375rem 1.25rem 0.5rem;
+    padding: 0.5rem 0 1.5rem;
   }
 
   .form-row {
@@ -486,7 +511,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   .ad-checkbox input {
     width: 16px;
     height: 16px;
-    accent-color: #114c5a;
+    accent-color: var(--color-accent-teal);
     cursor: pointer;
     flex-shrink: 0;
   }
@@ -499,7 +524,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   .ad-error {
     padding: 0.625rem 0.875rem;
     background: #fef2f2;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     font-size: 0.8125rem;
     color: #dc2626;
     font-weight: 600;
@@ -515,7 +540,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   /* ── Resumen de cambios: bloque suave sin bordes ────────────────── */
   .ad-resumen {
     background: #F8FAFA;
-    border-radius: 14px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     margin-bottom: 1.25rem;
     padding: 0.375rem 0;
@@ -533,7 +558,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   .ad-resumen-label {
     font-size: 0.7rem;
     font-weight: 700;
-    color: #6b7280;
+    color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
@@ -541,12 +566,12 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     font-size: 0.875rem;
   }
   .ad-resumen-anterior {
-    color: #9ca3af;
+    color: var(--color-text-subtle);
     text-decoration: line-through;
     margin-right: 0.4rem;
   }
   .ad-resumen-nuevo {
-    color: #114c5a;
+    color: var(--color-accent-teal);
     font-weight: 700;
   }
 
@@ -573,7 +598,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
   .success-body {
     font-size: 0.875rem;
-    color: #4b5563;
+    color: var(--color-label);
     line-height: 1.6;
     margin-bottom: 1.5rem;
     max-width: 440px;
@@ -591,12 +616,12 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     cursor: pointer;
     transition: background 0.15s, color 0.15s, opacity 0.15s;
   }
-  /* Primario en el amarillo de marca, como los CTA del resto del sitio */
+  /* Botón Primario: Azul corporativo en lugar de amarillo */
   .btn-primary {
-    background: #FFC801;
-    color: #172b36;
+    background: var(--color-accent-teal);
+    color: #fff;
   }
-  .btn-primary:hover { background: #edb900; }
+  .btn-primary:hover { background: #0f3e49; }
   .btn-primary:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -613,7 +638,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
 
   @media (max-width: 639px) {
-    .ad-card { padding: 1.5rem 1.25rem; border-radius: 16px; }
+    .ad-card { padding: 1.5rem 1.25rem; border-radius: var(--radius-md); }
     .form-row { grid-template-columns: 1fr; }
     .ad-stepper-item span:last-child { display: none; }
     .ad-stepper-line { margin-top: 17px; }
@@ -624,6 +649,8 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
 </style>
 
 <script>
+import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombiaData.js';
+
   import { createClient } from "@supabase/supabase-js";
 
   const supabase = createClient(
@@ -633,55 +660,36 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
 
   // Columnas editables — deben coincidir con la lista blanca del RPC
   // actualizar_datos_asociado en la base de datos.
-  const CAMPOS_TEXT = [
-    "email", "otro_email", "celular", "telefono", "direccion", "ciudad", "barrio",
-    "tipo_vivienda", "estrato", "fecha_nacimiento", "rh", "estado_civil", "genero",
-    "nivel_academico", "titulo", "empresa", "cargo", "tipo_contrato",
-    "fecha_ingreso_empresa", "direccion_empresa", "ciudad_empresa", "telefono_empresa",
-    "email_corporativo", "entidad_pagadora", "institucion_educativa",
-    "nivel_educativo",
+    const CAMPOS_TEXT = [
+    "tipo_identificacion", "cedula", "nombres", "apellidos", "fecha_nacimiento",
+    "estrato", "direccion_completa", "contacto_principal", "email",
+    "nivel_educativo", "ocupacion", "tipo_vivienda",
+    "tiene_vehiculo", "tiene_vivienda_propia", "practica_deporte",
+    "viaja_frecuencia", "compras_online", "usa_tarjeta_credito",
+    "usa_billeteras_digitales", "interes_promociones", "usa_redes_sociales",
+    "cuales_redes"
   ];
-  const CAMPOS_NUMERICOS = [
-    "tiempo_residencia_meses", "personas_a_cargo", "personas_economicamente_activas",
-    "salario", "ingresos_independiente", "mesada_pensional", "otros_ingresos",
-    "gastos_familiares", "otros_gastos", "obligaciones_financieras",
-  ];
-  // Campos monetarios: se muestran formateados con separador de miles.
-  const CAMPOS_DINERO = [
-    "salario", "ingresos_independiente", "mesada_pensional", "otros_ingresos",
-    "gastos_familiares", "otros_gastos", "obligaciones_financieras",
-  ];
-  // fuente_ingresos se maneja aparte porque escribe en dos columnas gemelas
-  // (fuente_ingresos y tipo_trabajador) y salario/obligaciones también.
-  // canales_comunicacion también se maneja aparte (checkboxes → arreglo).
-  const TODOS_LOS_CAMPOS = [...CAMPOS_TEXT, ...CAMPOS_NUMERICOS, "fuente_ingresos", "canales_comunicacion"];
+  const CAMPOS_NUMERICOS: string[] = [];
+  const CAMPOS_DINERO: string[] = [];
+  const TODOS_LOS_CAMPOS = [...CAMPOS_TEXT, "preferencias_contacto", "horario_contacto"];
 
   const ETIQUETAS_CANAL: Record<string, string> = {
-    correo: "Correo electrónico", llamada: "Llamada telefónica", whatsapp: "WhatsApp",
-    sms: "Mensaje de texto (SMS)", apps_web: "Notificaciones de la app/portal",
-    direccion_principal: "Correspondencia a mi dirección", direccion_empresa: "Correspondencia a mi empresa",
+    whatsapp: "WhatsApp", correo: "Correo electrónico", llamada: "Llamada telefónica",
   };
 
   const ETIQUETAS_CAMPO: Record<string, string> = {
-    email: "Correo electrónico", otro_email: "Correo alterno", celular: "Celular",
-    telefono: "Teléfono fijo", direccion: "Dirección", ciudad: "Ciudad", barrio: "Barrio",
-    tipo_vivienda: "Tipo de vivienda", estrato: "Estrato",
-    tiempo_residencia_meses: "Tiempo de residencia (meses)",
-    canales_comunicacion: "Medios de contacto preferidos",
-    fecha_nacimiento: "Fecha de nacimiento", rh: "RH", estado_civil: "Estado civil",
-    genero: "Género", nivel_academico: "Nivel académico", titulo: "Título obtenido",
-    personas_a_cargo: "Personas a cargo",
-    personas_economicamente_activas: "Personas económ. activas en el hogar",
-    fuente_ingresos: "Fuente de ingresos", empresa: "Empresa", cargo: "Cargo",
-    tipo_contrato: "Tipo de contrato", fecha_ingreso_empresa: "Fecha de ingreso",
-    direccion_empresa: "Dirección de la empresa", ciudad_empresa: "Ciudad de la empresa",
-    telefono_empresa: "Teléfono de la empresa", email_corporativo: "Correo corporativo",
-    entidad_pagadora: "Entidad pagadora", institucion_educativa: "Institución educativa",
-    nivel_educativo: "Nivel educativo", salario: "Salario / ingresos fijos mensuales",
-    ingresos_independiente: "Ingresos como independiente", mesada_pensional: "Mesada pensional",
-    otros_ingresos: "Otros ingresos", gastos_familiares: "Gastos familiares mensuales",
-    otros_gastos: "Otros gastos mensuales",
-    obligaciones_financieras: "Cuotas / obligaciones financieras mensuales",
+    tipo_identificacion: "Tipo de identificación", cedula: "Número de identificación",
+    nombres: "Nombres completos", apellidos: "Apellidos completos", fecha_nacimiento: "Fecha de nacimiento",
+    estrato: "Estrato", direccion_completa: "Dirección completa",
+    contacto_principal: "Contacto principal", email: "Correo electrónico",
+    preferencias_contacto: "Preferencias de contacto",
+    horario_contacto: "Horario preferido", nivel_educativo: "Nivel educativo",
+    ocupacion: "Ocupación actual", tipo_vivienda: "Tipo de vivienda",
+    tiene_vehiculo: "¿Tiene vehículo?", tiene_vivienda_propia: "¿Tiene vivienda propia?",
+    practica_deporte: "¿Practica algún deporte?", viaja_frecuencia: "¿Viaja con frecuencia?",
+    compras_online: "¿Hace compras online?", usa_tarjeta_credito: "¿Usa tarjeta de crédito?",
+    usa_billeteras_digitales: "¿Usa billeteras digitales?", interes_promociones: "Interés en promociones",
+    usa_redes_sociales: "¿Usa redes sociales?", cuales_redes: "¿Cuáles redes?"
   };
 
   let cedulaActual = "";
@@ -690,6 +698,92 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   let cambiosPendientes: Record<string, unknown> = {};
 
   const $ = (id: string) => document.getElementById(id);
+
+  
+  // ── Validación de Correo ───────────────────────────────────────────────
+  function validarCorreo() {
+    const el = $("f-email") as HTMLInputElement;
+    if (el && el.value.trim().toLowerCase().endsWith("@amigo.edu.co")) {
+      el.setCustomValidity("No se permiten correos corporativos (@amigo.edu.co). Ingresa un correo personal.");
+    } else if (el) {
+      el.setCustomValidity("");
+    }
+  }
+  $("f-email")?.addEventListener("input", validarCorreo);
+  
+  // ── Lógica Modal Dirección ───────────────────────────────────────────────
+  const inputDireccion = $("f-direccion_completa") as HTMLInputElement;
+  const modalDir = $("modal-direccion");
+  const mdDepto = $("md-depto") as HTMLSelectElement;
+  const mdCiudad = $("md-ciudad") as HTMLSelectElement;
+  const mdVia = $("md-via") as HTMLSelectElement;
+  const btnConf = $("btn-confirmar-modal") as HTMLButtonElement;
+  const previewBox = $("md-preview-box");
+  const previewText = $("md-preview-text");
+
+  if (inputDireccion && modalDir) {
+    inputDireccion.addEventListener("click", () => { modalDir.style.display = "flex"; });
+    $("btn-cerrar-modal")?.addEventListener("click", () => { modalDir.style.display = "none"; });
+    $("btn-cancelar-modal")?.addEventListener("click", () => { modalDir.style.display = "none"; });
+    
+    // Cargar listas
+    VIAS_PRINCIPALES.forEach(v => {
+      const opt = document.createElement("option"); opt.value = v; opt.textContent = v; mdVia.appendChild(opt);
+    });
+    DEPARTAMENTOS.forEach(d => {
+      const opt = document.createElement("option"); opt.value = d.codigo; opt.textContent = d.nombre; mdDepto.appendChild(opt);
+    });
+    
+    mdDepto.addEventListener("change", (e) => {
+      mdCiudad.innerHTML = '<option value="">Seleccione</option>';
+      const cod = (e.target as HTMLSelectElement).value;
+      if (!cod) { mdCiudad.disabled = true; return; }
+      mdCiudad.disabled = false;
+      getMunicipios(cod).forEach(m => {
+        const opt = document.createElement("option"); opt.value = m.codigo; opt.textContent = m.nombre; mdCiudad.appendChild(opt);
+      });
+      actualizarPreview();
+    });
+    
+    const dirInputs = ["md-depto", "md-ciudad", "md-via", "md-num1", "md-letra1", "md-cuad1", "md-num2", "md-letra2", "md-placa", "md-cuad2", "md-comp", "md-barrio"];
+    dirInputs.forEach(id => {
+      const el = $(id);
+      if (el) el.addEventListener("input", actualizarPreview);
+    });
+    
+    function actualizarPreview() {
+      const vals = dirInputs.reduce((acc, id) => { acc[id] = ($(id) as HTMLInputElement).value.toUpperCase().trim(); return acc; }, {} as any);
+      
+      let deptoNom = mdDepto.options[mdDepto.selectedIndex]?.text || "";
+      let ciudadNom = mdCiudad.options[mdCiudad.selectedIndex]?.text || "";
+      
+      if (!vals["md-via"] || !vals["md-num1"] || !vals["md-placa"] || !deptoNom || !ciudadNom || ciudadNom==="Seleccione") {
+        previewBox.style.display = "none";
+        btnConf.disabled = true;
+        return;
+      }
+      
+      let s = `${vals["md-via"]} ${vals["md-num1"]}`;
+      if (vals["md-letra1"]) s += ` ${vals["md-letra1"]}`;
+      if (vals["md-cuad1"]) s += ` ${vals["md-cuad1"]}`;
+      s += ` # ${vals["md-num2"] || ""}`;
+      if (vals["md-letra2"]) s += ` ${vals["md-letra2"]}`;
+      s += ` - ${vals["md-placa"]}`;
+      if (vals["md-cuad2"]) s += ` ${vals["md-cuad2"]}`;
+      if (vals["md-comp"]) s += `, ${vals["md-comp"]}`;
+      if (vals["md-barrio"]) s += `, ${vals["md-barrio"]}`;
+      s += `, ${ciudadNom} (${deptoNom})`;
+      
+      previewText.textContent = s;
+      previewBox.style.display = "flex";
+      btnConf.disabled = false;
+    }
+    
+    btnConf.addEventListener("click", () => {
+      inputDireccion.value = previewText.textContent || "";
+      modalDir.style.display = "none";
+    });
+  }
 
   // ── Helpers de números con separador de miles ──────────────────────────
   function limpiarNumero(v: string): string {
@@ -707,24 +801,13 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     el.addEventListener("blur", () => { el.value = formatearMiles(el.value); });
   });
 
-  // ── Navegación entre pasos + stepper ────────────────────────────────────
-  const ORDEN_PASOS = ["cedula", "form", "confirm"];
+  // ── Navegación entre pasos ───────────────────────────────────────────────
+  const ORDEN_PASOS = ["form", "confirm", "success"];
 
-  function mostrarPaso(paso: "cedula" | "form" | "confirm" | "success") {
-    for (const p of ["cedula", "form", "confirm", "success"]) {
+  function mostrarPaso(paso: "form" | "confirm" | "success") {
+    for (const p of ORDEN_PASOS) {
       const el = $(`ad-step-${p}`);
       if (el) el.style.display = p === paso ? "block" : "none";
-    }
-    const stepper = $("ad-stepper");
-    if (stepper) stepper.style.display = paso === "success" ? "none" : "flex";
-
-    if (paso !== "success") {
-      const idxActual = ORDEN_PASOS.indexOf(paso);
-      document.querySelectorAll(".ad-stepper-item").forEach((el) => {
-        const idx = ORDEN_PASOS.indexOf((el as HTMLElement).dataset.step ?? "");
-        el.classList.toggle("activo", idx === idxActual);
-        el.classList.toggle("completado", idx < idxActual);
-      });
     }
     $(`ad-step-${paso}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -738,6 +821,15 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   function ocultarError(id: string) {
     const el = $(id);
     if (el) el.style.display = "none";
+  }
+
+  // ── Autorización Legal ───────────────────────────────────────────────────
+  const checkAutorizacion = document.getElementById("ad-autorizacion") as HTMLInputElement;
+  const btnRevisar = document.getElementById("ad-btn-revisar") as HTMLButtonElement;
+  if (checkAutorizacion && btnRevisar) {
+    checkAutorizacion.addEventListener("change", (e) => {
+      btnRevisar.disabled = !(e.target as HTMLInputElement).checked;
+    });
   }
 
   // Ejecuta una acción async mostrando un texto de carga en el botón y
@@ -761,132 +853,90 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     });
   });
 
-  // ── Paso 1: buscar por cédula y cargar formulario ──────────────────────
-  $("ad-form-cedula")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    ocultarError("ad-cedula-error");
+  // ── Autocompletar al digitar la cédula ───────────────────────────────────
+  $("ad-cedula")?.addEventListener("blur", async () => {
     const cedulaInput = $("ad-cedula") as HTMLInputElement;
     const cedula = (cedulaInput?.value ?? "").trim();
+    if (!/^[0-9]{5,11}$/.test(cedula)) return;
 
-    if (!/^[0-9]{5,11}$/.test(cedula)) {
-      mostrarError("ad-cedula-error", "Ingresa un número de documento válido.");
-      return;
-    }
+    cedulaActual = cedula;
+    tipoIdentificacionActual = ($("ad-tipo-identificacion") as HTMLSelectElement)?.value || "CC";
 
-    const btn = $("ad-btn-buscar") as HTMLButtonElement;
-    await conEstadoCarga(btn, "Buscando…", async () => {
-      cedulaActual = cedula;
-      tipoIdentificacionActual = ($("ad-tipo-identificacion") as HTMLSelectElement)?.value || "CC";
-      await cargarDatosYMostrarFormulario();
-    });
-  });
-
-  $("ad-btn-volver-form")?.addEventListener("click", () => mostrarPaso("cedula"));
-
-  // ── Paso 2: cargar datos actuales (si existen) y mostrar formulario ────
-  async function cargarDatosYMostrarFormulario() {
-    // Se consulta vía RPC (con rate limiting) en vez de un SELECT directo a
-    // asociados: la política RLS que permite leer por cédula no tiene límite
-    // de intentos, lo que permitiría fuerza bruta de cédulas para extraer
-    // datos sensibles (salario, dirección, teléfono) de cualquier asociado.
-    const { data: resultado, error } = await supabase.rpc("obtener_datos_actuales_asociado", {
+    const { data, error } = await supabase.rpc("obtener_datos_actuales_asociado", {
       p_cedula: cedulaActual,
       p_tipo_identificacion: tipoIdentificacionActual,
     });
 
-    if (error) {
-      mostrarError("ad-cedula-error", error.message.includes("Demasiados")
-        ? "Demasiados intentos. Intenta de nuevo más tarde."
-        : "Ocurrió un error. Intenta nuevamente.");
-      return;
-    }
+    if (error || !data) return;
 
-    // Si la cédula/tipo no corresponde a ningún asociado (base desactualizada),
-    // seguimos igual con el formulario en blanco — el usuario lo diligencia
-    // por completo y la solicitud queda para revisión manual del equipo.
-    const data = resultado as Record<string, unknown> | null;
-    valoresOriginales = data ?? {};
+    const dataObj = data as Record<string, unknown>;
+    valoresOriginales = dataObj;
 
     for (const campo of TODOS_LOS_CAMPOS) {
-      const el = $(`f-${campo}`) as HTMLInputElement | HTMLSelectElement | null;
+      let elId = `f-${campo}`;
+      if (campo === "cedula") elId = "ad-cedula";
+      if (campo === "tipo_identificacion") elId = "ad-tipo-identificacion";
+      const el = $(elId) as HTMLInputElement | HTMLSelectElement | null;
       if (!el) continue;
-      let valor = data ? (data as Record<string, unknown>)[campo] : null;
-      if (data && campo === "fuente_ingresos") valor = data.fuente_ingresos ?? data.tipo_trabajador;
-      if (data && campo === "salario") valor = data.salario ?? data.salario_ingresos_fijos;
-      if (data && campo === "obligaciones_financieras") valor = data.obligaciones_financieras ?? data.cuotas_credito;
-      el.value = valor == null ? "" : String(valor);
-      if (CAMPOS_DINERO.includes(campo) && el.value) el.value = formatearMiles(el.value);
+      let valor = dataObj[campo];
+      
+      if (valor != null && el.value === "") {
+        el.value = String(valor);
+      }
     }
 
-    const canalesActuales = (data ? (data.canales_comunicacion as string[] | null) : null) ?? [];
-    document.querySelectorAll<HTMLInputElement>(".f-canales").forEach((cb) => {
-      cb.checked = canalesActuales.includes(cb.value);
+    const preferenciasActuales = (dataObj.preferencias_contacto as string[] | null) ?? [];
+    document.querySelectorAll<HTMLInputElement>(".f-preferencias").forEach((cb) => {
+      if (!cb.checked && preferenciasActuales.includes(cb.value)) cb.checked = true;
+    });
+    const horariosActuales = (dataObj.horario_contacto as string[] | null) ?? [];
+    document.querySelectorAll<HTMLInputElement>(".f-horarios").forEach((cb) => {
+      if (!cb.checked && horariosActuales.includes(cb.value)) cb.checked = true;
     });
 
     actualizarGruposCondicionales();
-    mostrarPaso("form");
-  }
+  });
 
   function actualizarGruposCondicionales() {
-    const fuente = ($("f-fuente_ingresos") as HTMLSelectElement)?.value;
-    const grupos: Record<string, string[]> = {
-      "ad-grupo-empleado": ["empleado"],
-      "ad-grupo-pensionado": ["pensionado", "rentista"],
-      "ad-grupo-estudiante": ["estudiante"],
-    };
-    for (const [id, valores] of Object.entries(grupos)) {
-      $(id)?.classList.toggle("activo", valores.includes(fuente));
+    const usaRedes = ($("f-usa_redes_sociales") as HTMLSelectElement)?.value;
+    const wrapper = $("wrapper_cuales_redes");
+    if (wrapper) {
+      wrapper.style.display = usaRedes === "Si" ? "block" : "none";
     }
   }
-  $("f-fuente_ingresos")?.addEventListener("change", actualizarGruposCondicionales);
+  $("f-usa_redes_sociales")?.addEventListener("change", actualizarGruposCondicionales);
 
   // ── Calcula qué campos cambiaron respecto a los valores originales ─────
   function calcularCambios(): Record<string, unknown> {
     const cambios: Record<string, unknown> = {};
 
     for (const campo of [...CAMPOS_TEXT, ...CAMPOS_NUMERICOS]) {
-      const el = $(`f-${campo}`) as HTMLInputElement | HTMLSelectElement | null;
+      let elId = `f-${campo}`;
+      if (campo === "cedula") elId = "ad-cedula";
+      if (campo === "tipo_identificacion") elId = "ad-tipo-identificacion";
+      const el = $(elId) as HTMLInputElement | HTMLSelectElement | null;
       if (!el) continue;
-      const nuevo = CAMPOS_DINERO.includes(campo) ? limpiarNumero(el.value) : el.value.trim();
+      const nuevo = el.value.trim();
       const anterior = valoresOriginales[campo];
       const anteriorStr = anterior == null ? "" : String(anterior);
       if (nuevo !== anteriorStr) cambios[campo] = nuevo === "" ? null : nuevo;
     }
 
-    // Campos gemelos: fuente_ingresos/tipo_trabajador, salario/salario_ingresos_fijos
-    // y obligaciones_financieras/cuotas_credito se mantienen sincronizados.
-    const fuenteEl = $("f-fuente_ingresos") as HTMLSelectElement;
-    const fuenteAnterior = valoresOriginales.fuente_ingresos ?? valoresOriginales.tipo_trabajador;
-    if (fuenteEl.value !== (fuenteAnterior ?? "")) {
-      cambios.fuente_ingresos = fuenteEl.value || null;
-      cambios.tipo_trabajador = fuenteEl.value || null;
-    }
-
-    const salarioEl = $("f-salario") as HTMLInputElement;
-    const salarioNuevo = limpiarNumero(salarioEl.value);
-    const salarioAnterior = valoresOriginales.salario ?? valoresOriginales.salario_ingresos_fijos;
-    const salarioAnteriorStr = salarioAnterior == null ? "" : String(salarioAnterior);
-    if (salarioNuevo !== salarioAnteriorStr) {
-      cambios.salario = salarioNuevo || null;
-      cambios.salario_ingresos_fijos = salarioNuevo || null;
-    }
-
-    const obligEl = $("f-obligaciones_financieras") as HTMLInputElement;
-    const obligNuevo = limpiarNumero(obligEl.value);
-    const obligAnterior = valoresOriginales.obligaciones_financieras ?? valoresOriginales.cuotas_credito;
-    const obligAnteriorStr = obligAnterior == null ? "" : String(obligAnterior);
-    if (obligNuevo !== obligAnteriorStr) {
-      cambios.obligaciones_financieras = obligNuevo || null;
-      cambios.cuotas_credito = obligNuevo || null;
-    }
-
     // Canales de contacto preferidos (checkboxes, arreglo).
-    const canalesNuevos = Array.from(
-      document.querySelectorAll<HTMLInputElement>(".f-canales:checked"),
+    const prefNuevos = Array.from(
+      document.querySelectorAll<HTMLInputElement>(".f-preferencias:checked"),
     ).map((cb) => cb.value).sort();
-    const canalesAnteriores = ((valoresOriginales.canales_comunicacion as string[] | null) ?? []).slice().sort();
-    if (JSON.stringify(canalesNuevos) !== JSON.stringify(canalesAnteriores)) {
-      cambios.canales_comunicacion = canalesNuevos;
+    const prefAnteriores = ((valoresOriginales.preferencias_contacto as string[] | null) ?? []).slice().sort();
+    if (JSON.stringify(prefNuevos) !== JSON.stringify(prefAnteriores)) {
+      cambios.preferencias_contacto = prefNuevos;
+    }
+
+    const horNuevos = Array.from(
+      document.querySelectorAll<HTMLInputElement>(".f-horarios:checked"),
+    ).map((cb) => cb.value).sort();
+    const horAnteriores = ((valoresOriginales.horario_contacto as string[] | null) ?? []).slice().sort();
+    if (JSON.stringify(horNuevos) !== JSON.stringify(horAnteriores)) {
+      cambios.horario_contacto = horNuevos;
     }
 
     return cambios;
@@ -951,14 +1001,41 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     }
   }
 
-  // ── Paso 2 → 3: revisar cambios ─────────────────────────────────────────
+  // ── Revisar cambios ─────────────────────────────────────────
   $("ad-form-datos")?.addEventListener("submit", (e) => {
     e.preventDefault();
     ocultarError("ad-form-error");
 
+    const form = e.target as HTMLFormElement;
+
+    validarCorreo();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const prefsChecked = document.querySelectorAll<HTMLInputElement>(".f-preferencias:checked").length;
+    if (prefsChecked === 0) {
+      mostrarError("ad-form-error", "Debes seleccionar al menos una preferencia de contacto.");
+      return;
+    }
+    const horasChecked = document.querySelectorAll<HTMLInputElement>(".f-horarios:checked").length;
+    if (horasChecked === 0) {
+      mostrarError("ad-form-error", "Debes seleccionar al menos un horario preferido.");
+      return;
+    }
+
+
+    cedulaActual = ($("ad-cedula") as HTMLInputElement).value.trim();
+    tipoIdentificacionActual = ($("ad-tipo-identificacion") as HTMLSelectElement).value || "CC";
+
+    if (!/^[0-9]{5,11}$/.test(cedulaActual)) {
+      mostrarError("ad-form-error", "Ingresa un número de documento válido.");
+      return;
+    }
+
     const cambios = calcularCambios();
     if (Object.keys(cambios).length === 0) {
-      mostrarError("ad-form-error", "No realizaste ningún cambio.");
+      mostrarError("ad-form-error", "Ingresa la información que deseas actualizar.");
       return;
     }
 
@@ -1001,3 +1078,82 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     mostrarPaso("cedula");
   });
 </script>
+<style>
+  /* ── Modal Dirección ── */
+  .modal-backdrop {
+    position: fixed; inset: 0; z-index: 75;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+    background: rgba(23,43,54,0.55);
+    backdrop-filter: blur(3px);
+  }
+  .modal-dir-content {
+    position: relative; width: 100%; max-width: 640px;
+    background: #ffffff; border-radius: var(--radius-md);
+    box-shadow: 0 10px 32px rgba(23,43,54,0.12);
+    max-height: 95vh; display: flex; flex-direction: column;
+  }
+  .modal-dir-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 1.5rem; border-bottom: 1px solid #E4E8ED;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+  .modal-dir-title-group { display: flex; align-items: center; gap: 1rem; }
+  .modal-dir-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--color-accent-teal); display: flex; align-items: center; justify-content: center;
+  }
+  .modal-dir-close {
+    background: none; border: none; cursor: pointer;
+    padding: 0.5rem; color: var(--color-text-muted); border-radius: 8px;
+  }
+  .modal-dir-body {
+    padding: 1.5rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 1.25rem;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-via { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 1rem; align-items: start; }
+  .grid-cruce { display: grid; grid-template-columns: 1fr 1fr 1fr 1.5fr; gap: 1rem; align-items: start; }
+  
+  @media (max-width: 640px) {
+    .grid-via, .grid-cruce { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 420px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .md-box {
+    background: #ffffff; padding: 1.25rem; border-radius: 8px;
+    border: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 1.25rem;
+  }
+  .md-sep { display: flex; align-items: center; gap: 1rem; }
+  .md-line { flex: 1; height: 1px; background: var(--color-border); }
+  .md-hash { font-size: 1.25rem; font-weight: 800; color: var(--color-accent-teal); }
+  
+  .md-input {
+    width: 100%; height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--color-border);
+    border-radius: 0.5rem; font-size: 0.875rem; color: var(--color-text-muted); background: transparent;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); outline: none;
+  }
+  .md-input:focus { border-color: var(--color-border-strong); }
+  .md-input.uppercase { text-transform: uppercase; }
+  
+  .md-preview {
+    background: #ffffff; border-radius: 8px; padding: 1.25rem;
+    border: 1px dashed var(--color-accent-teal); display: flex; align-items: center; gap: 1rem;
+  }
+  
+  .modal-dir-footer {
+    display: flex; gap: 1rem; justify-content: flex-end;
+    padding: 1.25rem 1.5rem; border-top: 1px solid #E4E8ED;
+  }
+  .modal-dir-btn-sec {
+    height: 44px; padding: 0 1.5rem; border-radius: 9999px; cursor: pointer;
+    background: transparent; color: var(--color-border-strong); border: 1px solid var(--color-border); font-weight: 600;
+  }
+  .modal-dir-btn-pri {
+    height: 44px; padding: 0 1.5rem; border-radius: 9999px; cursor: pointer;
+    background: var(--color-accent-teal); color: #ffffff; font-weight: 600; display: flex; align-items: center;
+  }
+  .modal-dir-btn-pri:disabled { opacity: 0.55; cursor: not-allowed; }
+</style>

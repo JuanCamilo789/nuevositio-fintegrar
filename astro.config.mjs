@@ -25,18 +25,18 @@ export default defineConfig({
     icon({
       include: {
         tabler: [
-          'address-book', 'alert-circle', 'arrow-left', 'arrow-right', 'award', 
+          'address-book', 'alert-circle', 'arrow-left', 'arrow-right', 'award',
           'baby-carriage', 'brand-facebook', 'brand-instagram', 'brand-linkedin', 'brand-whatsapp',
-          'building-bank', 'building-store', 'bulb', 'calculator', 'calendar-check', 
-          'calendar-event', 'candle', 'cash', 'check', 'chevron-down', 'chevron-left', 'chevron-right',
-          'circle-check', 'clock', 'clock-hour-4', 'credit-card', 'device-mobile-dollar', 
-          'equal', 'eye', 'file-text', 'file-type-pdf', 'file-upload', 'headset', 
-          'heart', 'heart-handshake', 'help', 'help-hexagon', 'home', 'home-heart', 
-          'hotel-service', 'id-badge', 'layout-dashboard', 'mail', 'mail-forward', 
-          'map-pin', 'menu-2', 'message-x', 'mood-happy', 'percentage', 'phone', 
-          'plane', 'plane-departure', 'receipt', 'rosette-discount-check', 'scale',
-          'school', 'search', 'send', 'shield-check', 'stethoscope', 'target', 'trending-up',
-          'upload', 'user-plus', 'users', 'users-group', 'wallet', 'x', 'arrow-up-right'
+          'building-bank', 'building-store', 'bulb', 'calculator', 'calendar-check',
+          'calendar-event', 'candle', 'check', 'chevron-down', 'chevron-left', 'chevron-right',
+          'circle-check', 'clock', 'clock-hour-4', 'credit-card', 'device-mobile-dollar',
+          'equal', 'eye', 'file-text', 'file-type-pdf', 'file-upload', 'headset',
+          'heart', 'heart-handshake', 'help', 'help-hexagon', 'home', 'home-heart',
+          'id-badge', 'layout-dashboard', 'mail',
+          'map-pin', 'menu-2', 'message-x', 'mood-happy', 'phone',
+          'plane', 'receipt', 'scale',
+          'school', 'send', 'shield-check', 'stethoscope', 'target', 'trending-up',
+          'upload', 'user', 'user-plus', 'users', 'users-group', 'wallet', 'x', 'refresh'
         ],
       },
     }),

@@ -2,11 +2,11 @@
 
 const campanas = [
   {
-    id: 'punta-cana',
+    id: 1,
     image: '/assets/img/promos/publicidad10.webp',
-    alt: 'Campaña Punta Cana te espera - Julio 2026',
+    alt: 'Campaña ¿Necesitas un crédito? - Créditos a tu medida y en poco tiempo',
   },
-{
+  {
     id: 2,
     image: '/assets/img/promos/publicidad9.webp',
     alt: 'Campaña Créditos listos para otorgar - Ordinario, Educativo, Consumo',
@@ -15,11 +15,6 @@ const campanas = [
     id: 3,
     image: '/assets/img/promos/publicidad8.webp',
     alt: 'Campaña Solicita tu Crédito hoy mismo - Tus sueños llegaron',
-  },
-  {
-    id: 4,
-    image: '/assets/img/promos/publicidad11.webp',
-    alt: 'Campaña Especial Bienestar - Punta Cana Julio 2026',
   }
 ];
 ---
@@ -60,15 +55,15 @@ const campanas = [
 
   .campanas-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
   .campana-card {
     position: relative;
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     background: #fff;
     overflow: hidden;
   }

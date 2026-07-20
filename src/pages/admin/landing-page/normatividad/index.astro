@@ -67,11 +67,18 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
   <title>Normatividad — Admin Cooperamigó</title>
   <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
   <style is:global>
+    :root {
+      --admin-surface: #F4F6F8;
+      --admin-border: #E8ECF0;
+      --admin-border-hover: #D1D9E0;
+      --admin-text-muted: #7A8E99;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-      background: #F4F6F8;
+      background: var(--admin-surface);
       color: #172B36;
       min-height: 100vh;
     }
@@ -101,7 +108,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     .sidebar-brand-icon {
       width: 36px; height: 36px;
       background: #FFC801;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
@@ -121,7 +128,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     .sidebar-nav-label:first-child { margin-top: 0; }
     .sidebar-link {
       display: flex; align-items: center; gap: 0.625rem;
-      padding: 0.6rem 0.75rem; border-radius: 8px;
+      padding: 0.6rem 0.75rem; border-radius: var(--radius-sm);
       font-size: 0.8125rem; font-weight: 600;
       color: rgba(255,255,255,0.55);
       text-decoration: none;
@@ -139,7 +146,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     }
     .sidebar-logout {
       display: flex; align-items: center; gap: 0.625rem;
-      padding: 0.6rem 0.75rem; border-radius: 8px;
+      padding: 0.6rem 0.75rem; border-radius: var(--radius-sm);
       font-size: 0.8rem; font-weight: 600;
       color: rgba(255,255,255,0.35);
       cursor: pointer; border: none; background: transparent;
@@ -153,7 +160,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
 
     .topbar {
       background: #fff;
-      border-bottom: 1px solid #E8ECF0;
+      border-bottom: 1px solid var(--admin-border);
       box-shadow: 0 1px 4px rgba(23,43,54,0.05);
       padding: 0 2rem; height: 60px;
       display: flex; align-items: center; justify-content: space-between;
@@ -163,11 +170,11 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
       display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;
     }
     .topbar-breadcrumb a {
-      color: #7A8E99; text-decoration: none; font-weight: 500;
+      color: var(--admin-text-muted); text-decoration: none; font-weight: 500;
       transition: color 0.15s;
     }
     .topbar-breadcrumb a:hover { color: #172B36; }
-    .topbar-breadcrumb span { color: #E8ECF0; }
+    .topbar-breadcrumb span { color: var(--admin-border); }
     .topbar-breadcrumb strong { color: #172B36; font-weight: 700; }
     .topbar-right { display: flex; align-items: center; gap: 1rem; }
     .topbar-badge {
@@ -179,7 +186,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     .topbar-badge-dot { width: 6px; height: 6px; background: #22C55E; border-radius: 50%; }
     .topbar-visit {
       display: inline-flex; align-items: center; gap: 0.375rem;
-      font-size: 0.8rem; font-weight: 600; color: #7A8E99;
+      font-size: 0.8rem; font-weight: 600; color: var(--admin-text-muted);
       text-decoration: none; transition: color 0.15s;
     }
     .topbar-visit:hover { color: #172B36; }
@@ -195,14 +202,14 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     .page-header-text h1 {
       font-size: 1.375rem; font-weight: 800; color: #172B36; margin-bottom: 0.25rem;
     }
-    .page-header-text p { font-size: 0.875rem; color: #7A8E99; }
+    .page-header-text p { font-size: 0.875rem; color: var(--admin-text-muted); }
 
     .add-btn {
       display: inline-flex; align-items: center; gap: 0.5rem;
       padding: 0.65rem 1.25rem;
       background: #172B36; color: #fff;
       font-size: 0.875rem; font-weight: 700;
-      border: none; border-radius: 10px; cursor: pointer;
+      border: none; border-radius: var(--radius-sm); cursor: pointer;
       box-shadow: 0 2px 8px rgba(23,43,54,0.2);
       transition: opacity 0.15s, box-shadow 0.15s;
       white-space: nowrap; flex-shrink: 0;
@@ -215,7 +222,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
       margin-bottom: 1rem;
     }
     .doc-count {
-      font-size: 0.775rem; font-weight: 600; color: #7A8E99;
+      font-size: 0.775rem; font-weight: 600; color: var(--admin-text-muted);
     }
 
     /* ── Lista de documentos ── */
@@ -223,8 +230,8 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
 
     .doc-row {
       background: #fff;
-      border: 1px solid #E8ECF0;
-      border-radius: 12px;
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
       padding: 1rem 1.25rem;
       display: flex; align-items: center; gap: 1rem;
       box-shadow: 0 1px 3px rgba(23,43,54,0.04), 0 2px 8px rgba(23,43,54,0.04);
@@ -237,9 +244,9 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     }
     .doc-row-icon {
       width: 42px; height: 42px; flex-shrink: 0;
-      background: #F4F6F8;
-      border: 1px solid #E8ECF0;
-      border-radius: 10px;
+      background: var(--admin-surface);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-sm);
       display: flex; align-items: center; justify-content: center;
       color: #172B36;
     }
@@ -260,7 +267,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
       padding: 0.18rem 0.6rem; border-radius: 100px;
     }
     .date-chip {
-      font-size: 0.75rem; color: #7A8E99; font-weight: 500;
+      font-size: 0.75rem; color: var(--admin-text-muted); font-weight: 500;
       display: inline-flex; align-items: center; gap: 0.3rem;
     }
     .file-chip {
@@ -272,14 +279,14 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     .doc-row-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
     .btn-edit, .btn-del {
       display: inline-flex; align-items: center; gap: 0.35rem;
-      padding: 0.4rem 0.875rem; border-radius: 8px;
+      padding: 0.4rem 0.875rem; border-radius: var(--radius-sm);
       font-size: 0.775rem; font-weight: 700;
       border: 1px solid; cursor: pointer; transition: background 0.15s, border-color 0.15s;
     }
     .btn-edit {
-      background: #F4F6F8; color: #172B36; border-color: #E8ECF0;
+      background: var(--admin-surface); color: #172B36; border-color: var(--admin-border);
     }
-    .btn-edit:hover { background: #E8ECF0; border-color: #D1D9E0; }
+    .btn-edit:hover { background: var(--admin-border); border-color: var(--admin-border-hover); }
     .btn-del {
       background: #FEF2F2; color: #DC2626; border-color: #FECACA;
     }
@@ -288,15 +295,15 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     /* ── Estado vacío ── */
     .empty-state {
       background: #fff;
-      border: 1px solid #E8ECF0;
-      border-radius: 12px;
+      border: 1px solid var(--admin-border);
+      border-radius: var(--radius-md);
       padding: 4rem 2rem;
       text-align: center;
       box-shadow: 0 1px 3px rgba(23,43,54,0.04);
     }
-    .empty-state svg { margin: 0 auto 1rem; display: block; color: #D1D9E0; }
+    .empty-state svg { margin: 0 auto 1rem; display: block; color: var(--admin-border-hover); }
     .empty-state h3 { font-size: 1rem; font-weight: 700; color: #172B36; margin-bottom: 0.375rem; }
-    .empty-state p  { font-size: 0.8125rem; color: #7A8E99; }
+    .empty-state p  { font-size: 0.8125rem; color: var(--admin-text-muted); }
 
     /* ══ Overlay + Drawer ══ */
     .overlay {
@@ -321,16 +328,16 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
 
     .drawer-header {
       padding: 1.5rem 1.75rem 1.25rem;
-      border-bottom: 1px solid #E8ECF0;
+      border-bottom: 1px solid var(--admin-border);
       display: flex; align-items: center; justify-content: space-between;
     }
     .drawer-title { font-size: 1.0625rem; font-weight: 800; color: #172B36; }
     .drawer-close {
       width: 34px; height: 34px;
-      background: #F4F6F8; border: 1px solid #E8ECF0;
+      background: var(--admin-surface); border: 1px solid var(--admin-border);
       border-radius: 50%; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      color: #7A8E99; font-size: 1rem; line-height: 1;
+      color: var(--admin-text-muted); font-size: 1rem; line-height: 1;
       transition: color 0.15s, border-color 0.15s, background 0.15s;
     }
     .drawer-close:hover { color: #172B36; border-color: #172B36; background: #fff; }
@@ -346,9 +353,9 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     .field input, .field select, .field textarea {
       width: 100%; padding: 0.675rem 0.9rem;
       font-size: 0.9rem; color: #172B36;
-      background: #F4F6F8;
-      border: 1.5px solid #E8ECF0;
-      border-radius: 10px; outline: none;
+      background: var(--admin-surface);
+      border: 1.5px solid var(--admin-border);
+      border-radius: var(--radius-sm); outline: none;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
       font-family: inherit;
     }
@@ -364,8 +371,8 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     .file-upload-label {
       display: flex; flex-direction: column; align-items: center;
       justify-content: center; gap: 0.5rem; padding: 1.5rem;
-      border: 2px dashed #E8ECF0; border-radius: 12px;
-      cursor: pointer; text-align: center; background: #F4F6F8;
+      border: 2px dashed var(--admin-border); border-radius: var(--radius-md);
+      cursor: pointer; text-align: center; background: var(--admin-surface);
       transition: border-color 0.2s, background 0.2s;
     }
     .file-upload-label:hover { border-color: #172B36; background: #fff; }
@@ -373,7 +380,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
       border-style: solid; border-color: #16a34a; background: #F0FDF4;
     }
     .file-name { font-size: 0.8rem; font-weight: 600; color: #172B36; }
-    .file-hint { font-size: 0.725rem; color: #7A8E99; }
+    .file-hint { font-size: 0.725rem; color: var(--admin-text-muted); }
     .file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 
     .current-file {
@@ -385,7 +392,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     .current-file:hover { opacity: 0.75; }
 
     .progress-bar {
-      height: 4px; background: #E8ECF0; border-radius: 100px;
+      height: 4px; background: var(--admin-border); border-radius: 100px;
       overflow: hidden; display: none; margin-top: 0.625rem;
     }
     .progress-bar.show { display: block; }
@@ -395,7 +402,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     }
 
     .drawer-footer {
-      padding: 1.25rem 1.75rem; border-top: 1px solid #E8ECF0;
+      padding: 1.25rem 1.75rem; border-top: 1px solid var(--admin-border);
       display: flex; gap: 0.75rem; justify-content: flex-end;
       background: #FAFBFC;
     }
@@ -403,15 +410,15 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
       padding: 0.625rem 1.25rem;
       background: #fff; color: #172B36;
       font-size: 0.875rem; font-weight: 700;
-      border: 1.5px solid #E8ECF0; border-radius: 10px; cursor: pointer;
+      border: 1.5px solid var(--admin-border); border-radius: var(--radius-sm); cursor: pointer;
       transition: background 0.15s, border-color 0.15s;
     }
-    .btn-cancel:hover { background: #F4F6F8; border-color: #D1D9E0; }
+    .btn-cancel:hover { background: var(--admin-surface); border-color: var(--admin-border-hover); }
     .btn-save {
       padding: 0.625rem 1.5rem;
       background: #172B36; color: #fff;
       font-size: 0.875rem; font-weight: 700;
-      border: none; border-radius: 10px; cursor: pointer;
+      border: none; border-radius: var(--radius-sm); cursor: pointer;
       box-shadow: 0 2px 8px rgba(23,43,54,0.2);
       transition: opacity 0.15s;
     }
@@ -422,7 +429,7 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     #toast {
       position: fixed; bottom: 2rem; right: 2rem;
       background: #172B36; color: #fff;
-      padding: 0.875rem 1.5rem; border-radius: 12px;
+      padding: 0.875rem 1.5rem; border-radius: var(--radius-md);
       font-size: 0.875rem; font-weight: 600;
       box-shadow: 0 8px 32px rgba(23,43,54,0.28);
       transform: translateY(80px); opacity: 0;

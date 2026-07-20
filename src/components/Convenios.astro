@@ -42,7 +42,6 @@ const convenios = [
             <div class="convenio-titulo">{c.titulo}</div>
             <div class="convenio-sub">{c.sub}</div>
           </div>
-          <span class="badge badge-success" style="margin-left:auto;flex-shrink:0;">Activo</span>
         </div>
       ))}
     </div>
@@ -70,8 +69,8 @@ const convenios = [
     display: flex;
     align-items: center;
     gap: 1rem;
-    background: #F1F6F4;
-    border-radius: 12px;
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
     padding: 1rem 1.25rem;
   }
 
@@ -79,7 +78,7 @@ const convenios = [
     width: 44px;
     height: 44px;
     background: rgba(23, 43, 54, 0.08);
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;

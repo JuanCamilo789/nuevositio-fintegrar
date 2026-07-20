@@ -3,526 +3,300 @@ import { Icon } from 'astro-icon/components';
 
 const slides = [
   {
-    id: 'slide-horarios',
-    heading: 'Nuevos horarios de atención',
-    lead: 'Lo atendemos de lunes a jueves de 8:00 a.m. a 4:30 p.m. y viernes de 8:00 a.m. a 3:30 p.m.',
-    cta1: { label: 'Cómo llegar', icon: 'tabler:map-pin', href: 'https://maps.google.com/?q=Calle+50+%2365-42+Local+120,+Medell%C3%ADn' },
-    cta2: { label: 'Ver directorio', icon: 'tabler:arrow-right', href: '/directorio' },
-    image: '/assets/img/nuevo-horario-mobil.webp',
-    imageAlt:
-      'Nuevos horarios de atención: lunes a jueves de 8:00 a.m. a 4:30 p.m. y viernes de 8:00 a.m. a 3:30 p.m. Cll 50 #65-42 Local 120, Centro Comercial Contemporáneo',
+    id: 'slide-0',
+    subtitle: 'BIENESTAR PARA USTED Y SU FAMILIA',
+    heading: 'Cuidamos a su familia<br>en los momentos <span class="text-accent">que importan</span>',
+    lead: 'Convenios exclusivos en salud, educación, turismo y más. Beneficios diseñados para mejorar su calidad de vida.',
+    cta1: { label: 'Explorar beneficios', icon: 'tabler:heart', href: '/nosotros#auxilios', primary: true },
+    cta2: { label: 'Ver convenios', icon: 'tabler:building-store', href: '/nosotros#convenios', primary: false },
+    bgImage: '/assets/img/banner1.png',
   },
   {
-    id: 'slide-0',
-    heading: 'Donde su esfuerzo\nse convierte en\nbienestar',
-    headingForce: true,
-    lead: 'Más de 30 años brindando soluciones financieras confiables a nuestros asociados.',
-    cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: 'https://serviciosdigitales.cooperamigo.coop/' },
-    cta2: { label: 'Conózcanos', icon: 'tabler:arrow-right', href: '/nosotros' },
-    image: '/assets/img/promos/publicidad2.webp',
-    imageAlt: 'A veces no necesitas más tiempo, necesitas un empujón — Cooperamigó',
+    id: 'slide-alivio',
+    subtitle: 'ALIVIO FINANCIERO',
+    heading: '¿Se atrasó con sus cuotas?<br><span class="text-accent">Pongámonos al día</span>',
+    lead: 'Comuníquese con nosotros para evaluar su caso y diseñar un plan de pagos personalizado que se ajuste a su capacidad financiera actual, con total confidencialidad.',
+    cta1: { label: 'Hablemos ahora', icon: 'tabler:phone', href: 'tel:+573054070612', primary: true },
+    cta2: { label: 'Escribir por correo', icon: 'tabler:mail', href: 'mailto:creditos@cooperamigo.coop', primary: false },
+    bgImage: '/assets/img/banner3.png',
   },
   {
     id: 'slide-1',
-    heading: 'Crédito ágil, condiciones que se adaptan a usted',
-    lead: 'Tasas desde el 1.35% M.V., aprobación ágil y trámites completamente virtuales.',
-    cta1: { label: 'Ver líneas de crédito', icon: 'tabler:credit-card', href: '/creditos' },
-    cta2: { label: 'Simular crédito', icon: 'tabler:calculator', href: '/creditos#simulador' },
-    image: '/assets/img/promos/publicidad6.webp',
-    imageAlt: 'Créditos a la medida de todos: Ordinario, Educativo y Consumo — Cooperamigó',
+    subtitle: 'SOLUCIONES FINANCIERAS',
+    heading: 'Donde su esfuerzo<br>se convierte en <span class="text-accent">bienestar</span>',
+    lead: 'Más de 30 años brindando soluciones financieras confiables a nuestros asociados.',
+    cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: 'https://serviciosdigitales.cooperamigo.coop/', primary: true },
+    cta2: { label: 'Conózcanos', icon: 'tabler:arrow-right', href: '/nosotros', primary: false },
+    bgImage: '/assets/img/banner2.png',
   },
   {
     id: 'slide-2',
-    heading: 'Cuidamos a su\nfamilia en los momentos\nque importan',
-    headingForce: true,
-    lead: 'Convenios en salud, educación y turismo para usted y su familia.',
-    cta1: { label: 'Explorar beneficios', icon: 'tabler:heart', href: '/nosotros#auxilios' },
-    cta2: { label: 'Ver convenios', icon: 'tabler:building-store', href: '/nosotros#convenios' },
-    image: '/assets/img/promos/publicidad7.webp',
-    imageAlt: 'Lo que hoy te mueve, nos importa — Cooperamigó',
-  },
-  {
-    id: 'slide-alivio-financiero',
-    heading: '¿Se atrasó con sus cuotas? Pongámonos al día',
-    lead: 'Cuéntenos su situación y armamos juntos un plan de pago que sí pueda cumplir — sin regaños y en total confidencialidad.',
-    cta1: { label: 'Hablemos ahora', icon: 'tabler:phone', href: 'tel:+573054070612' },
-    cta2: { label: 'Escribir por correo', icon: 'tabler:mail', href: 'mailto:creditos@cooperamigo.coop' },
-    image: '/assets/img/deudas.webp',
-    imageAlt: 'Persona revisando tranquilamente sus finanzas en casa',
+    subtitle: 'CRÉDITO FÁCIL',
+    heading: 'Crédito ágil, condiciones<br>que se adaptan a usted',
+    lead: 'Soluciones de crédito para cada etapa de su vida. Crédito ordinario, educativo y nuevas opciones diseñadas para acompañar sus proyectos.',
+    cta1: { label: 'Líneas de crédito', icon: 'tabler:credit-card', href: '/creditos', primary: true },
+    cta2: { label: 'Simular crédito', icon: 'tabler:calculator', href: '/creditos#simulador', primary: false },
+    bgImage: '/assets/img/banner4.png',
   },
 ];
 ---
 
-<!-- ════════════════════════════════════
-     HERO SLIDER
-════════════════════════════════════ -->
-<!-- data-hide-badge: las piezas gráficas de las slides ya traen impreso
-     "VIGILADA SUPERSOLIDARIA"; el badge fijo se oculta sobre esta sección -->
-<section id="heroSlider" class="hero-slider" aria-label="Presentación Cooperamigó" data-dark-bg data-hide-badge>
+<section id="heroSlider" class="hero-slider relative w-full bg-slate-100 overflow-hidden" aria-label="Presentación Cooperamigó" data-hide-badge>
 
-  <!-- ── Marca de agua: isotipo en blanco al fondo ── -->
-  <div class="hero-watermark" aria-hidden="true">
-    <img src="/favicon.svg" alt="" decoding="async" />
-  </div>
-
-  <!-- ── Slides ── -->
+  <!-- Slides -->
   {slides.map((s, i) => (
     <div
-      class={`slide${i === 0 ? ' is-active' : ''}`}
+      class={`slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-1000 ${i === 0 ? 'is-active' : ''}`}
       id={s.id}
       aria-hidden={i !== 0 ? 'true' : 'false'}
     >
-      <div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 h-full" style="position:relative;z-index:1;">
-        <div class="slide-grid">
+      <!-- Background Image -->
+      <img
+        src={s.bgImage}
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover object-center"
+        loading={i === 0 ? 'eager' : 'lazy'}
+        fetchpriority={i === 0 ? 'high' : undefined}
+      />
+      
+      <!-- Tinted + Gradient Overlay for Text Readability and Brand Consistency -->
+      <div class="absolute inset-0 bg-[#172B36]/10 mix-blend-multiply"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#FFC801] via-[#FFC801]/85 to-transparent"></div>
 
-          <!-- Contenido -->
-          <div class="slide-content">
-            <!-- Por defecto sin saltos forzados (text-wrap balance reparte);
-                 con headingForce los \n del texto se respetan tal cual -->
-            <h1 class="slide-h1">
-              {s.heading.split('\n').map((line, li) =>
-                li > 0 ? <span>{s.headingForce ? <br /> : ' '}{line}</span> : <span>{line}</span>
-              )}
-            </h1>
+      <!-- Slide Content Container -->
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 h-full flex flex-col justify-center min-w-0">
 
-            <p class="slide-lead">{s.lead}</p>
+        <div class="max-w-2xl w-full min-w-0 mt-12 md:mt-0">
 
-            {s.cta1 && s.cta2 && (
-              <div class="slide-ctas">
-                <a href={s.cta1.href} class="btn btn-accent btn-lg">
-                  <Icon name={s.cta1.icon} class="w-5 h-5" aria-hidden="true" />
+          <span class="slide-accent block w-12 h-1 rounded-full bg-[#FFC801] mb-5 animate-fade-in-up" style="animation-delay: 0.15s; animation-fill-mode: both;" aria-hidden="true"></span>
+
+          <h1 class="slide-title text-4xl md:text-5xl lg:text-[4rem] font-extrabold text-[#172B36] leading-[1.1] mb-6 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: both;" set:html={s.heading} />
+
+          <p class="slide-lead text-lg md:text-xl text-slate-600 mb-8 max-w-xl animate-fade-in-up" style="animation-delay: 0.4s; animation-fill-mode: both;">
+            {s.lead}
+          </p>
+
+          {(s.cta1 || s.cta2) && (
+            <div class="slide-ctas flex flex-wrap items-center gap-4 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
+              {s.cta1 && (
+                <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold transition-colors ${s.cta1.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                  {s.cta1.icon && <Icon name={s.cta1.icon} class="w-5 h-5" />}
                   {s.cta1.label}
                 </a>
-                <a href={s.cta2.href} class="btn btn-ghost-light">
+              )}
+              {s.cta2 && (
+                <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold transition-colors ${s.cta2.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                   {s.cta2.label}
-                  <Icon name={s.cta2.icon} class="w-4 h-4" aria-hidden="true" />
+                  {s.cta2.icon && <Icon name={s.cta2.icon} class="w-5 h-5" />}
                 </a>
-              </div>
-            )}
-          </div>
-
-          <!-- Pieza gráfica: tarjeta inclinada a la derecha -->
-          {s.image && (
-            <div class="slide-visual">
-              <div class="slide-card">
-                <img
-                  src={s.image}
-                  alt={s.imageAlt}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  fetchpriority={i === 0 ? 'high' : undefined}
-                  decoding="async"
-                />
-              </div>
+              )}
             </div>
           )}
-
         </div>
       </div>
     </div>
   ))}
 
-  <!-- ── Flechas laterales ── -->
-  <button class="slider-arrow slider-arrow--prev" type="button" aria-label="Slide anterior">
-    <Icon name="tabler:chevron-left" class="w-6 h-6" aria-hidden="true" />
+  <!-- Arrows -->
+  <button class="slider-arrow slider-arrow--prev absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 hover:bg-white hidden lg:flex items-center justify-center text-[#172B36] shadow-lg transition-all z-20 backdrop-blur-sm" aria-label="Slide anterior">
+    <Icon name="tabler:chevron-left" class="w-6 h-6" />
   </button>
-  <button class="slider-arrow slider-arrow--next" type="button" aria-label="Slide siguiente">
-    <Icon name="tabler:chevron-right" class="w-6 h-6" aria-hidden="true" />
+  <button class="slider-arrow slider-arrow--next absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 hover:bg-white hidden lg:flex items-center justify-center text-[#172B36] shadow-lg transition-all z-20 backdrop-blur-sm" aria-label="Slide siguiente">
+    <Icon name="tabler:chevron-right" class="w-6 h-6" />
   </button>
 
-  <!-- ── Dot Navigation ── -->
-  <div class="slider-dots" role="tablist" aria-label="Slides">
+  <!-- Dots -->
+  <div class="slider-dots absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2.5 z-20">
     {slides.map((_, i) => (
-      <button
-        class={`slider-dot${i === 0 ? ' active' : ''}`}
-        data-index={i}
-        role="tab"
-        aria-selected={i === 0 ? 'true' : 'false'}
-        aria-label={`Ir al slide ${i + 1}`}
-      />
+      <button class={`slider-dot w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-[#FFC801] w-8' : 'bg-black/10 hover:bg-black/30 shadow-sm'}`} data-index={i} aria-label={`Slide ${i + 1}`} />
     ))}
   </div>
-
 </section>
 
-<!-- ── Stats Bar ── -->
-<div class="hero-stats-bar">
-  <div class="stats-container max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16">
-    <div class="grid grid-cols-2 md:grid-cols-4">
-      <div class="stat-cell">
-        <div class="stat-num">+420</div>
-        <div class="stat-lbl">Asociados activos</div>
+<!-- Stats Bar -->
+<div class="relative z-30 max-w-[85rem] mx-auto px-4 sm:px-6 md:px-10 -mt-14 sm:-mt-16 mb-12">
+  <div class="bg-white rounded-lg shadow-2xl shadow-slate-200/50 overflow-hidden border border-slate-100">
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-slate-100">
+      <div class="p-6 md:p-8 flex items-center justify-center gap-4 hover:bg-slate-50 transition-colors">
+        <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
+          <Icon name="tabler:users" class="w-6 h-6" />
+        </div>
+        <div class="text-left">
+          <div class="stat-num text-2xl md:text-3xl font-extrabold text-[#172B36]">+420</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Asociados activos</div>
+        </div>
       </div>
-      <div class="stat-cell">
-        <div class="stat-num">+12</div>
-        <div class="stat-lbl">Convenios activos</div>
+      <div class="p-6 md:p-8 flex items-center justify-center gap-4 hover:bg-slate-50 transition-colors">
+        <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
+          <Icon name="tabler:heart-handshake" class="w-6 h-6" />
+        </div>
+        <div class="text-left">
+          <div class="stat-num text-2xl md:text-3xl font-extrabold text-[#172B36]">+12</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Convenios activos</div>
+        </div>
       </div>
-      <div class="stat-cell">
-        <div class="stat-num">98.2%</div>
-        <div class="stat-lbl">Tasa de satisfacción</div>
+      <div class="p-6 md:p-8 flex items-center justify-center gap-4 hover:bg-slate-50 transition-colors">
+        <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
+          <Icon name="tabler:mood-happy" class="w-6 h-6" />
+        </div>
+        <div class="text-left">
+          <div class="stat-num text-2xl md:text-3xl font-extrabold text-[#172B36]">98.2%</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Tasa de satisfacción</div>
+        </div>
       </div>
-      <div class="stat-cell">
-        <div class="stat-num">+33</div>
-        <div class="stat-lbl">Años de trayectoria</div>
+      <div class="p-6 md:p-8 flex items-center justify-center gap-4 hover:bg-slate-50 transition-colors">
+        <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
+          <Icon name="tabler:trending-up" class="w-6 h-6" />
+        </div>
+        <div class="text-left">
+          <div class="stat-num text-2xl md:text-3xl font-extrabold text-[#172B36]">+33</div>
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Años de trayectoria</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <style>
-  /* ── Keyframe Animations ── */
-  @keyframes slideInUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(36px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-  /* ── Slider Container ── */
   .hero-slider {
-    position: relative;
-    height: 736px;
-    background: #172B36;
-    overflow: hidden;
-    /* El selector global `section { padding: ... }` (global.css) aplicaría
-       aquí también; el hero necesita ir a todo el ancho/alto sin ese
-       padding, tanto en desktop como en el layout apilado de mobile/tablet. */
-    padding: 0;
+    height: 700px;
+    min-height: 85vh;
   }
-  @media (max-width: 1023px) {
-    .hero-slider { height: auto; }
+  @media (max-width: 768px) {
+    .hero-slider {
+      height: 650px;
+      min-height: auto;
+    }
   }
 
-  /* ── Slides ── */
-  .slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.8s ease;
-    z-index: 0;
-    overflow: hidden;
-  }
   .slide.is-active {
     opacity: 1;
-    pointer-events: all;
-    z-index: 1;
-  }
-
-  /* ── Marca de agua: isotipo del favicon en blanco, gigante y sutil ── */
-  .hero-watermark {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-watermark img {
-    position: absolute;
-    right: -6%;
-    top: 50%;
-    transform: translateY(-50%) rotate(-10deg);
-    height: 150%;
-    width: auto;
-    /* El SVG trae sus propios colores; esto lo aplana a blanco puro */
-    filter: brightness(0) invert(1);
-    opacity: 0.045;
-  }
-
-  /* ── Slide Grid Layout: texto a la izquierda, tarjeta a la derecha ── */
-  .slide-grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 3rem;
-    padding: 2rem 0 4rem;
-    height: 100%;
-  }
-  /* Columna de texto: mismo ancho en todas las slides */
-  .slide-content {
-    width: 60%;
-    max-width: 800px;
-    flex-shrink: 0;
-  }
-
-  /* ── Pieza gráfica como tarjeta inclinada ── */
-  .slide-visual {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 0;
-  }
-  .slide-card {
-    position: relative;
-    transform: rotate(3.5deg);
-  }
-  /* Marco fantasma detrás, inclinado al lado contrario */
-  .slide-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    transform: rotate(-6deg);
-    border-radius: 1.25rem;
-    background: rgba(255, 200, 1, 0.14);
-  }
-  .slide-card img {
-    position: relative;
-    display: block;
-    max-height: 520px;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    border-radius: 1.25rem;
-    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  }
-
-  /* ── Slide Content Animations (only when active) ── */
-  .slide.is-active .slide-visual  { animation: slideInRight 0.65s ease 0.15s both; }
-  .slide.is-active .slide-h1      { animation: slideInUp 0.55s ease 0.25s both; }
-  .slide.is-active .slide-lead    { animation: slideInUp 0.5s ease 0.35s both; }
-  .slide.is-active .slide-ctas    { animation: slideInUp 0.5s ease 0.45s both; }
-
-  /* ── Heading ── */
-  .slide-h1 {
-    font-size: clamp(2.7rem, 4.2vw, 3.9rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    color: #fff;
-    margin-bottom: 1.5rem;
-    /* Si una línea no cabe, se parte en líneas equilibradas —
-       nunca una palabra suelta ocupando una línea entera */
-    text-wrap: balance;
-  }
-
-  /* ── Lead ── */
-  .slide-lead {
-    font-size: 1.0625rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.75;
-    max-width: 460px;
-    margin-bottom: 2.5rem;
-  }
-
-  /* ── CTAs ── */
-  .slide-ctas {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-  }
-  /* ── Flechas laterales ── */
-  .slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    pointer-events: auto;
     z-index: 10;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
-  .slider-arrow:hover {
-    background: #FFC801;
-    color: #172B36;
-    border-color: transparent;
-  }
-  .slider-arrow--prev { left: 1.25rem; }
-  .slider-arrow--next { right: 1.25rem; }
-
-  /* ── Dot Navigation ── */
-  .slider-dots {
-    position: absolute;
-    bottom: 1.75rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  .slider-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, width 0.3s, border-radius 0.3s;
-    padding: 0;
-  }
-  .slider-dot.active {
-    width: 28px;
-    border-radius: 4px;
-    background: #FFC801;
   }
 
-  /* ── Stats Bar ── */
-  /* Continuación visual del hero: mismo fondo, sin líneas */
-  .hero-stats-bar {
-    background: #172B36;
-    position: relative;
-    z-index: 5;
-  }
-  .stat-cell {
-    padding: 1.5rem 2rem;
-    text-align: center;
-  }
   .stat-num {
-    font-family: 'DM Sans', var(--ff-sans);
-    font-size: 1.875rem;
-    font-weight: 800;
-    color: #FFC801;
-    line-height: 1;
+    font-family: var(--ff-sans);
+  }
+
+  .slide-title,
+  .slide-lead {
+    font-family: var(--ff-heading);
+  }
+
+  .slide-title {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
     letter-spacing: -0.02em;
   }
-  .stat-lbl {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-top: 0.3rem;
-    font-weight: 500;
+
+  .slide-lead {
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.6;
   }
 
-  /* ── Responsive: tablet + mobile ──
-     El carrusel deja de usar posicionamiento absoluto/superpuesto: cada
-     slide fluye en el documento (imagen arriba, texto abajo) y solo el
-     slide activo ocupa espacio. Así el alto se ajusta al contenido real
-     en vez de depender de paddings calculados a mano. */
-  @media (max-width: 1023px) {
-    .stat-cell { padding: 1.25rem 1rem; }
-    .stat-num  { font-size: 1.5rem; }
-    .stat-lbl  { font-size: 0.75rem; }
-
-    .slide {
-      position: static;
-      display: none;
-      flex-direction: column;
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .slide.is-active { display: flex; }
-
-    /* Contenido: en flujo normal, texto arriba y tarjeta debajo */
-    .slide-grid { display: block; height: auto; padding: 2.5rem 0 3rem; }
-    .slide-content { width: 100%; max-width: 100%; }
-
-    /* Tarjeta inclinada: centrada bajo el texto, más pequeña */
-    .slide-visual { margin-top: 2.5rem; }
-    .slide-card { transform: rotate(2.5deg); }
-    .slide-card img { max-height: 380px; }
-
-    .slider-arrow { width: 38px; height: 38px; }
-    .slider-arrow--prev { left: 0.75rem; }
-    .slider-arrow--next { right: 0.75rem; }
+  /* Custom utility classes */
+  .text-accent {
+    color: #FFC801;
   }
-
-  @media (max-width: 639px) {
-    .slider-dots { display: none; } /* Navegación por swipe en móvil */
-    .slider-arrow { display: none; }
-
-    .slide-grid { padding: 1.75rem 0 2.5rem; }
-
-    .slide-h1 { font-size: 1.9rem; line-height: 1.1; margin-bottom: 0.875rem; text-align: center; }
-    .slide-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.85); text-align: center; margin-left: auto; margin-right: auto; }
-    .slide-ctas {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0.5rem;
-    }
-    .slide-ctas .btn {
-      width: 100%;
-      justify-content: center;
-      padding: 0.875rem 1.5rem;
-      font-size: 0.9375rem;
-      border-radius: 9999px;
-    }
-    .slide-visual { margin-top: 2rem; }
-    .slide-card img { max-height: 320px; }
-
-    .stat-cell { padding: 1.25rem 0.5rem; }
-    .stat-num { font-size: 1.375rem; }
-    .stat-lbl { font-size: 0.7rem; line-height: 1.2; }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  .animate-fade-in-up {
+    animation-name: fadeInUp;
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .animate-fade-in-left {
+    animation-name: fadeInLeft;
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  /* Retrigger animations when slide becomes active */
+  .slide:not(.is-active) .animate-fade-in-up,
+  .slide:not(.is-active) .animate-fade-in-left {
+    animation: none;
+    opacity: 0;
   }
 </style>
 
 <script>
-  const slides  = document.querySelectorAll<HTMLElement>('.slide');
-  const dots    = document.querySelectorAll<HTMLElement>('.slider-dot');
-  const slider  = document.getElementById('heroSlider');
+  function initSlider() {
+    const slides = document.querySelectorAll<HTMLElement>('.slide');
+    const dots = document.querySelectorAll<HTMLElement>('.slider-dot');
+    const slider = document.getElementById('heroSlider');
+    
+    if (!slides.length) return;
 
-  let current = 0;
-  let timer: ReturnType<typeof setInterval>;
-  let paused  = false;
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+    let paused = false;
 
-  function activateSlide(n: number) {
-    // Remove active from current
-    slides[current].classList.remove('is-active');
-    slides[current].setAttribute('aria-hidden', 'true');
-    if (dots.length > 0) {
-      dots[current].classList.remove('active');
-      dots[current].setAttribute('aria-selected', 'false');
-    }
+    function activateSlide(n: number) {
+      slides[current].classList.remove('is-active');
+      slides[current].setAttribute('aria-hidden', 'true');
+      if (dots.length) {
+        dots[current].classList.remove('bg-[#FFC801]', 'w-8');
+        dots[current].classList.add('bg-white/50');
+      }
 
-    // Set new current
-    current = (n + slides.length) % slides.length;
+      current = (n + slides.length) % slides.length;
 
-    slides[current].classList.add('is-active');
-    slides[current].setAttribute('aria-hidden', 'false');
-    if (dots.length > 0) {
-      dots[current].classList.add('active');
-      dots[current].setAttribute('aria-selected', 'true');
-    }
+      slides[current].classList.add('is-active');
+      slides[current].setAttribute('aria-hidden', 'false');
+      if (dots.length) {
+        dots[current].classList.remove('bg-white/50');
+        dots[current].classList.add('bg-[#FFC801]', 'w-8');
+      }
 
-    // Resetear timer
-    resetTimer();
-  }
-
-  function next() { activateSlide(current + 1); }
-  function prev() { activateSlide(current - 1); }
-
-  function resetTimer() {
-    clearInterval(timer);
-    timer = setInterval(() => { if (!paused) next(); }, 6000);
-  }
-
-  // Init
-  timer = setInterval(() => { if (!paused) next(); }, 6000);
-
-  // Dots
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => { activateSlide(i); });
-  });
-
-  // Flechas laterales
-  document.querySelector('.slider-arrow--prev')?.addEventListener('click', () => { prev(); });
-  document.querySelector('.slider-arrow--next')?.addEventListener('click', () => { next(); });
-
-  // Pause on hover (solo en desktop)
-  if (window.innerWidth > 1023) {
-    slider?.addEventListener('mouseenter', () => { paused = true; });
-    slider?.addEventListener('mouseleave', () => { paused = false; });
-  }
-
-  // Touch/swipe support
-  let touchStartX = 0;
-  slider?.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  slider?.addEventListener('touchend', (e) => {
-    const diff = touchStartX - e.changedTouches[0].screenX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) { next(); } else { prev(); }
       resetTimer();
     }
-  }, { passive: true });
+
+    function next() { activateSlide(current + 1); }
+    function prev() { activateSlide(current - 1); }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => { if (!paused) next(); }, 6000);
+    }
+
+    resetTimer();
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => activateSlide(i));
+    });
+
+    document.querySelector('.slider-arrow--prev')?.addEventListener('click', prev);
+    document.querySelector('.slider-arrow--next')?.addEventListener('click', next);
+
+    if (window.innerWidth > 1023 && slider) {
+      slider.addEventListener('mouseenter', () => paused = true);
+      slider.addEventListener('mouseleave', () => paused = false);
+    }
+
+    let touchStartX = 0;
+    slider?.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    slider?.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) next();
+        else prev();
+        resetTimer();
+      }
+    }, { passive: true });
+  }
+
+  initSlider();
+  document.addEventListener('astro:after-swap', initSlider);
 </script>

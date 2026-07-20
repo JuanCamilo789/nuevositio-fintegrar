@@ -22,40 +22,41 @@ const requerido = "required" in rest && rest.required !== false;
 <style>
   .ff-field {
     margin-bottom: 1.125rem;
+    display: flex;
+    flex-direction: column;
   }
   .ff-field label {
     display: block;
-    margin-bottom: 0.4rem;
-    font-size: 0.875rem;
-    font-weight: 700;
+    margin-bottom: 0.375rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
     color: #172b36;
   }
   .ff-req {
     color: #dc2626;
-    margin-left: 2px;
+    margin-left: 0;
   }
   .ff-field select {
     width: 100%;
-    height: 48px;
     box-sizing: border-box;
-    padding: 0 2.25rem 0 0.875rem;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.9375rem;
+    padding: 0.75rem 2.25rem 0.75rem 1rem;
+    border: 1px solid rgba(23, 43, 54, 0.1);
+    border-radius: var(--radius-md, 0.5rem);
+    font-size: 0.875rem;
     color: #172b36;
-    background-color: #fff;
+    background-color: transparent;
     font-family: inherit;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234B5563' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 0.9rem center;
-    transition: border-color 0.15s, box-shadow 0.15s;
+    background-position: right 1rem center;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   }
   .ff-field select:focus {
     outline: none;
-    border-color: #114c5a;
-    box-shadow: 0 0 0 3px rgba(17, 76, 90, 0.1);
+    background: #fff;
+    border-color: var(--color-accent-teal, #0d9488);
   }
 </style>

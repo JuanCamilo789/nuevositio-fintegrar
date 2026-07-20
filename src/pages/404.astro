@@ -48,7 +48,7 @@ export const prerender = true;
           <Icon name="tabler:wallet" class="icon" />
           <span>Créditos</span>
         </a>
-        <a href="/bienestar-social" class="quick-link">
+        <a href="/nosotros#auxilios" class="quick-link">
           <Icon name="tabler:heart" class="icon" />
           <span>Bienestar</span>
         </a>
@@ -102,7 +102,7 @@ export const prerender = true;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 1.5rem;
+    border-radius: var(--radius-lg);
     transform: rotate(12deg);
     box-shadow: 0 12px 30px rgba(255, 200, 1, 0.3);
     margin: 0 -0.1em;
@@ -154,7 +154,7 @@ export const prerender = true;
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    background: #114C5A;
+    background: var(--color-accent-teal);
     color: #fff;
     padding: 1rem 2.5rem;
     border-radius: 9999px;
@@ -178,7 +178,7 @@ export const prerender = true;
     color: #172B36;
     padding: 1rem 2rem;
     border: 2px solid rgba(23, 43, 54, 0.1);
-    border-radius: 0.75rem;
+    border-radius: var(--radius-md);
     font-weight: 600;
     text-decoration: none;
     transition: all 0.2s;
@@ -220,7 +220,7 @@ export const prerender = true;
     padding: 1.5rem 1rem;
     background: #fff;
     border: 1px solid rgba(23, 43, 54, 0.05);
-    border-radius: 1rem;
+    border-radius: var(--radius-md);
     text-decoration: none;
     color: #172B36;
     transition: all 0.2s;
@@ -228,7 +228,7 @@ export const prerender = true;
 
   .quick-link:hover {
     background: #f8faf9;
-    border-color: #114C5A;
+    border-color: var(--color-accent-teal);
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(23, 43, 54, 0.06);
   }
@@ -236,7 +236,7 @@ export const prerender = true;
   .quick-link .icon {
     width: 1.75rem;
     height: 1.75rem;
-    color: #114C5A;
+    color: var(--color-accent-teal);
   }
 
   .quick-link span {

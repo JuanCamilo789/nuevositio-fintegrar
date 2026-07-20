@@ -46,7 +46,7 @@ import { Icon } from 'astro-icon/components';
   <!-- ── Navbar ── -->
   <header class="navbar" id="navbar">
     <div class="max-w-7xl mx-auto px-6 w-full">
-      <div class="flex items-center justify-between lg:grid lg:grid-cols-3 h-16">
+      <div class="flex items-center justify-between xl:grid xl:grid-cols-[auto_1fr_auto] xl:gap-4 h-16">
 
         <!-- Logo (Izquierda) -->
         <div class="flex justify-start">
@@ -61,7 +61,7 @@ import { Icon } from 'astro-icon/components';
         </div>
 
         <!-- Desktop Nav (Centro) -->
-        <nav class="hidden lg:flex items-center justify-center gap-1" aria-label="Navegación principal">
+        <nav class="hidden xl:flex items-center justify-center gap-1 min-w-0" aria-label="Navegación principal">
           <a href="/" class="nav-link active">Inicio</a>
 
           <button
@@ -101,24 +101,21 @@ import { Icon } from 'astro-icon/components';
         </nav>
 
         <!-- CTA Buttons (Derecha) -->
-        <!-- pointer-events-none: la zona vacía de esta columna se solapa con el
-             final del menú central (grid-cols-3) y bloqueaba el clic en "Directorio";
-             los hijos recuperan el clic con pointer-events-auto -->
-        <div class="hidden lg:flex items-center justify-end gap-2 pointer-events-none">
+        <div class="hidden xl:flex items-center justify-end gap-2">
           <!-- Portal Asociados: enlace directo a Servicios Digitales -->
-          <a href="https://serviciosdigitales.cooperamigo.coop/" class="btn btn-dark btn-sm flex items-center gap-1.5 pointer-events-auto" target="_blank" rel="noopener noreferrer">
+          <a href="https://serviciosdigitales.cooperamigo.coop/" class="btn btn-dark btn-sm flex items-center gap-1.5" target="_blank" rel="noopener noreferrer">
             <Icon name="tabler:layout-dashboard" class="w-4 h-4" aria-hidden="true" />
             Portal Asociados
           </a>
 
-          <a href="https://www.zonapagos.net/formulariosNV/?cod=BTK3a53qAPJK5dFzuUb9xoOMEi6GjxTVEz6jgj8WOG4kf7Z7mmbU2N6iG2sClbz5isF7xpuvz4ec%2FstAKWghYq2ihH6ea5Ab%2BfJXSgfBIPShwQxb9hHbzgY1XqGlsllif2sqgYeyszPfE%2Fq5SNonDhF9ZhqXm7OyDm%2Ba4lfdMItrvmOCQ5Py2gAq%2BvwFtoRMoNDPxeZKzglBDlEyqykoMK2kz6zyhc7dmjJO23oOZfDrWY5p5hfLu%2BH0xUIIx2%2F2zJLthSgc28WEY9rneC44s4DORf3zdoMntL1Bmxpscus%3D" class="btn btn-accent btn-sm pointer-events-auto" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.zonapagos.net/formulariosNV/?cod=BTK3a53qAPJK5dFzuUb9xoOMEi6GjxTVEz6jgj8WOG4kf7Z7mmbU2N6iG2sClbz5isF7xpuvz4ec%2FstAKWghYq2ihH6ea5Ab%2BfJXSgfBIPShwQxb9hHbzgY1XqGlsllif2sqgYeyszPfE%2Fq5SNonDhF9ZhqXm7OyDm%2Ba4lfdMItrvmOCQ5Py2gAq%2BvwFtoRMoNDPxeZKzglBDlEyqykoMK2kz6zyhc7dmjJO23oOZfDrWY5p5hfLu%2BH0xUIIx2%2F2zJLthSgc28WEY9rneC44s4DORf3zdoMntL1Bmxpscus%3D" class="btn btn-accent btn-sm" target="_blank" rel="noopener noreferrer">
             <Icon name="tabler:device-mobile-dollar" class="w-4 h-4" aria-hidden="true" />
             Pagos PSE
           </a>
         </div>
 
         <!-- Mobile Toggle (Solo visible en móvil) -->
-        <div class="lg:hidden flex justify-end">
+        <div class="xl:hidden flex justify-end">
           <button
             id="mobileMenuToggle"
             class="p-2 -mr-2 text-[#172B36] flex flex-col items-center"
@@ -207,8 +204,8 @@ import { Icon } from 'astro-icon/components';
       </div>
 
       <!-- Featured -->
-      <div class="mega-featured" style="background:#F1F6F4;color:#172B36;margin-left:1.5rem;border:1px solid #F1F6F4;">
-        <div class="mega-featured-icon" style="background:#fff;border:1px solid #F1F6F4;">
+      <div class="mega-featured" style="background:var(--color-surface);color:#172B36;margin-left:1.5rem;border:1px solid var(--color-surface);">
+        <div class="mega-featured-icon" style="background:#fff;border:1px solid var(--color-surface);">
           <Icon name="tabler:award" class="w-5 h-5" style="color:#172B36;" aria-hidden="true" />
         </div>
         <div class="mega-featured-title" style="color:#172B36;">30 años de trayectoria</div>
@@ -241,9 +238,18 @@ import { Icon } from 'astro-icon/components';
         <a href="/creditos#educativo" class="mega-item">
           <div>
             <div class="mega-item-title">Crédito educativo</div>
-            <div class="mega-item-sub">Posgrados y especializaciones</div>
+            <div class="mega-item-sub">Pregrados y postgrados</div>
           </div>
         </a>
+        <div class="mega-item opacity-80 cursor-default hover:bg-transparent">
+          <div>
+            <div class="mega-item-title flex items-center gap-2">
+              Crédito rotativo
+              <span class="badge badge-accent text-[0.6rem] py-0.5 px-2">Próximamente</span>
+            </div>
+            <div class="mega-item-sub">Disponibilidad inmediata</div>
+          </div>
+        </div>
       </div>
 
       <div class="mega-col">
@@ -285,13 +291,13 @@ import { Icon } from 'astro-icon/components';
       </div>
 
       <!-- Featured -->
-      <div class="mega-featured" style="background:#F1F6F4;color:#172B36;margin-left:1.5rem;border:1px solid #F1F6F4;">
-        <div class="mega-featured-icon" style="background:#fff;border:1px solid #F1F6F4;">
+      <div class="mega-featured" style="background:var(--color-surface);color:#172B36;margin-left:1.5rem;border:1px solid var(--color-surface);">
+        <div class="mega-featured-icon" style="background:#fff;border:1px solid var(--color-surface);">
           <Icon name="tabler:trending-up" class="w-5 h-5" style="color:#172B36;" aria-hidden="true" />
         </div>
-        <div class="mega-featured-title" style="color:#172B36;">Desde 1.2% M.V.</div>
+        <div class="mega-featured-title" style="color:#172B36;">Tasas preferenciales</div>
         <div class="mega-featured-sub" style="color:#172B36; opacity: 0.6;">
-          Tasas preferenciales para asociados activos con aprobación ágil.
+          Tasas de colocación preferenciales para nuestros asociados, con aprobación ágil.
         </div>
         <a href="/creditos" class="mega-featured-cta" style="background:#172B36;color:#fff;">
           Ver líneas
@@ -369,8 +375,8 @@ import { Icon } from 'astro-icon/components';
       </div>
 
       <!-- Featured -->
-      <div class="mega-featured" style="background:#F1F6F4;color:#172B36;margin-left:1.5rem;border:1px solid #F1F6F4;">
-        <div class="mega-featured-icon" style="background:#fff;border:1px solid #F1F6F4;">
+      <div class="mega-featured" style="background:var(--color-surface);color:#172B36;margin-left:1.5rem;border:1px solid var(--color-surface);">
+        <div class="mega-featured-icon" style="background:#fff;border:1px solid var(--color-surface);">
           <Icon name="tabler:heart" class="w-5 h-5" style="color:#172B36;" aria-hidden="true" />
         </div>
         <div class="mega-featured-title" style="color:#172B36;">Bienestar para todos</div>

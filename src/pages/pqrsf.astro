@@ -1,6 +1,9 @@
 ---
 import InnerLayout from "../layouts/InnerLayout.astro";
 import { Icon } from "astro-icon/components";
+import FloatingInput from "../components/form/FloatingInput.astro";
+import FloatingSelect from "../components/form/FloatingSelect.astro";
+import FloatingTextarea from "../components/form/FloatingTextarea.astro";
 
 const tipos = [
   {
@@ -32,12 +35,12 @@ const tipos = [
 ---
 
 <InnerLayout
-  pageTitle="PQRSF"
+  pageTitle="Radicar PQRSF"
   pageSubtitle="Peticiones, Quejas, Reclamos, Sugerencias y Felicitaciones — Su voz es importante para nosotros"
   breadcrumbs={[{ label: "PQRSF" }]}
 >
   <section class="pqrsf-section">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
       <div class="pqrsf-grid">
         <div class="pqrsf-left">
           <div class="tipos-grid reveal">
@@ -91,8 +94,7 @@ const tipos = [
             <div id="pqrsf-form-header">
               <h2 class="form-titulo">Radique su solicitud</h2>
               <p class="form-subtitulo">
-                Complete el formulario y le responderemos en los tiempos
-                estipulados.
+                Complete el formulario. Una vez recibamos su solicitud, le daremos respuesta dentro de los tiempos establecidos.
               </p>
             </div>
 
@@ -100,110 +102,93 @@ const tipos = [
               <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;pointer-events:none;">
                 <input type="text" name="website" id="pq-website" tabindex="-1" autocomplete="off" value="" />
               </div>
+              <FloatingInput
+                id="pq-nombre"
+                name="nombre"
+                label="Nombre completo"
+                minlength="10"
+                maxlength="100"
+                autocomplete="name"
+                style="text-transform:uppercase;"
+                required
+              >
+                <div slot="error" id="pq-nombre-error" style="display:none; color:#dc2626; font-size:0.75rem; font-weight: 500; margin-top: 0.25rem;">
+                  Por favor ingrese su nombre completo (mínimo 10 caracteres).
+                </div>
+              </FloatingInput>
               <div class="form-row">
-                <div class="form-group">
-                  <label for="pq-nombre"
-                    >Nombre completo <span class="req">*</span></label
-                  >
-                  <input
-                    type="text"
-                    id="pq-nombre"
-                    name="nombre"
-                    placeholder="JUAN GARCÍA"
-                    maxlength="100"
-                    autocomplete="name"
-                    style="text-transform:uppercase;"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="pq-doc"
-                    >Número de documento <span class="req">*</span></label
-                  >
-                  <input
-                    type="text"
-                    id="pq-doc"
-                    name="documento"
-                    placeholder="1234567890"
-                    maxlength="10"
-                    pattern="[0-9]+"
-                    inputmode="numeric"
-                    title="Solo números, máximo 10 dígitos"
-                    autocomplete="off"
-                    required
-                  />
-                </div>
+                <FloatingSelect id="pq-tipo-doc" name="tipo_documento" label="Tipo de documento" required>
+                  <option value="">Seleccione una opción</option>
+                  <option value="CC">Cédula de ciudadanía</option>
+                  <option value="CE">Cédula de extranjería</option>
+                  <option value="PA">Pasaporte</option>
+                  <option value="OT">Otro</option>
+                </FloatingSelect>
+                <FloatingInput
+                  id="pq-doc"
+                  name="documento"
+                  label="Número de documento"
+                  maxlength="10"
+                  pattern="[0-9]+"
+                  inputmode="numeric"
+                  title="Solo números, máximo 10 dígitos"
+                  autocomplete="off"
+                  required
+                />
               </div>
 
               <div class="form-row">
-                <div class="form-group">
-                  <label for="pq-email"
-                    >Correo electrónico <span class="req">*</span></label
-                  >
-                  <input
-                    type="email"
-                    id="pq-email"
-                    name="email"
-                    placeholder="correo@ejemplo.com"
-                    maxlength="100"
-                    autocomplete="email"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="pq-tel">Teléfono de contacto</label>
-                  <input
-                    type="tel"
-                    id="pq-tel"
-                    name="telefono"
-                    placeholder="3001234567"
-                    maxlength="10"
-                    inputmode="numeric"
-                    pattern="[0-9]+"
-                    title="Solo dígitos, máximo 10 números"
-                    autocomplete="tel"
-                  />
-                </div>
+                <FloatingInput
+                  type="email"
+                  id="pq-email"
+                  name="email"
+                  label="Correo electrónico"
+                  maxlength="100"
+                  autocomplete="email"
+                  required
+                />
+                <FloatingInput
+                  type="tel"
+                  id="pq-tel"
+                  name="telefono"
+                  label="Teléfono de contacto"
+                  maxlength="10"
+                  inputmode="numeric"
+                  pattern="[0-9]+"
+                  title="Solo dígitos, máximo 10 números"
+                  autocomplete="tel"
+                />
               </div>
 
-              <div class="form-group">
-                <label for="pq-tipo"
-                  >Tipo de solicitud <span class="req">*</span></label
-                >
-                <select id="pq-tipo" name="tipo" required>
+              <div class="form-row" style="grid-template-columns: 3fr 7fr;">
+                <FloatingSelect id="pq-tipo" name="tipo" label="Tipo de solicitud" required>
                   <option value="">Seleccione una opción</option>
                   <option value="peticion">Petición</option>
                   <option value="queja">Queja</option>
                   <option value="reclamo">Reclamo</option>
                   <option value="sugerencia">Sugerencia</option>
                   <option value="felicitacion">Felicitación</option>
-                </select>
-              </div>
+                </FloatingSelect>
 
-              <div class="form-group">
-                <label for="pq-asunto">Asunto <span class="req">*</span></label>
-                <input
-                  type="text"
+                <FloatingInput
                   id="pq-asunto"
                   name="asunto"
-                  placeholder="Resuma brevemente su solicitud"
-                  maxlength="150"
+                  label="Asunto"
+                  maxlength="50"
+                  style="text-transform:uppercase;"
                   required
                 />
               </div>
 
-              <div class="form-group">
-                <label for="pq-mensaje"
-                  >Descripción detallada <span class="req">*</span></label
-                >
-                <textarea
-                  id="pq-mensaje"
-                  name="mensaje"
-                  rows="4"
-                  placeholder="Describa su solicitud con el mayor detalle posible..."
-                  maxlength="2000"
-                  required></textarea>
-              </div>
+              <FloatingTextarea
+                id="pq-mensaje"
+                name="mensaje"
+                label="Descripción detallada"
+                rows={4}
+                maxlength="400"
+                style="text-transform:uppercase;"
+                required
+              />
 
               <div class="form-group">
                 <label
@@ -223,17 +208,27 @@ const tipos = [
                     </span>
                     <span class="file-hint">PDF, JPG, PNG — máx. 5 MB · Cargue un único archivo con todos los adjuntos</span>
                   </div>
-                  <div id="pq-drop-selected" class="file-drop-state file-drop-state--ready" style="display:none;">
-                    <Icon
-                      name="tabler:circle-check"
-                      class="w-6 h-6"
-                      style="color:#16a34a;flex-shrink:0;"
-                      aria-hidden="true"
-                    />
-                    <span id="pq-file-display-name" class="file-name-selected"></span>
-                    <span class="file-hint" style="color:#16a34a;opacity:1;font-weight:600;">
-                      ✓ Archivo listo — clic para cambiar
-                    </span>
+                  <div id="pq-drop-selected" class="file-drop-state file-drop-state--ready" style="display:none; flex-direction: row; justify-content: space-between; align-items: center; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; text-align: left; overflow: hidden;">
+                      <Icon
+                        name="tabler:circle-check"
+                        class="w-7 h-7"
+                        style="color:#16a34a;flex-shrink:0;"
+                        aria-hidden="true"
+                      />
+                      <div style="display: flex; flex-direction: column; overflow: hidden;">
+                        <span id="pq-file-display-name" class="file-name-selected" style="background: none; padding: 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
+                        <span class="file-hint" style="color:#16a34a;opacity:1;font-weight:600; text-align: left;">
+                          ✓ Listo para enviar
+                        </span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem; flex-shrink: 0; margin-left: 1rem;">
+                      <span style="font-size: 0.75rem; text-decoration: underline; color: #172b36; font-weight: 600;">Cambiar</span>
+                      <button type="button" id="pq-remove-file" aria-label="Eliminar archivo" style="color: #dc2626; display: flex; align-items: center; justify-content: center; padding: 0.25rem; border-radius: 9999px; transition: background 0.2s;" onmouseover="this.style.background='rgba(220, 38, 38, 0.1)'" onmouseout="this.style.background='transparent'">
+                        <Icon name="tabler:x" class="w-5 h-5" aria-hidden="true" />
+                      </button>
+                    </div>
                   </div>
                 </label>
                 <input
@@ -245,7 +240,7 @@ const tipos = [
                 />
               </div>
 
-              <div class="form-check">
+              <div class="form-check" style="margin-bottom: 1.125rem;">
                 <input
                   type="checkbox"
                   id="pq-autorizo"
@@ -253,18 +248,17 @@ const tipos = [
                   required
                 />
                 <label for="pq-autorizo">
-                  Autorizo el tratamiento de mis datos personales conforme a la
+                  Al radicar, autorizo a la Cooperativa Multiactiva Luis Amigó el tratamiento de mis datos personales conforme a la
                   <a href="/politica-tratamiento-datos" target="_blank" rel="noopener noreferrer"
                     >Política de Tratamiento de Datos</a
-                  >.
-                  <span class="req">*</span>
+                  > publicada en el sitio web www.cooperamigo.coop<span class="req">*</span>
                 </label>
               </div>
 
               <div
                 id="pqrsf-error"
                 role="alert"
-                style="display:none;padding:0.625rem 0.875rem;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:0.8125rem;color:#dc2626;font-weight:600;"
+                style="display:none;padding:0.625rem 0.875rem;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-sm);font-size:0.8125rem;color:#dc2626;font-weight:600;"
               ></div>
 
               <button
@@ -273,8 +267,8 @@ const tipos = [
                 disabled
                 style="width:100%;justify-content:center;padding:0.875rem;"
               >
-                <Icon name="tabler:send" class="w-4 h-4" aria-hidden="true" />
                 Enviar solicitud
+                <Icon name="tabler:send" class="w-4 h-4" aria-hidden="true" />
               </button>
             </form>
 
@@ -337,14 +331,13 @@ const tipos = [
     gap: 0.75rem;
     align-items: flex-start;
     background: #fff;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     padding: 0.625rem 0.875rem;
-    box-shadow: 0 1px 4px rgba(23, 43, 54, 0.06);
   }
   .tipo-icon {
     width: 28px;
     height: 28px;
-    border-radius: 7px;
+    border-radius: var(--radius-sm);
     background: rgba(23, 43, 54, 0.08);
     color: #172b36;
     display: flex;
@@ -369,10 +362,9 @@ const tipos = [
   .pqrsf-tiempos,
   .pqrsf-canales {
     background: #fff;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     padding: 1rem 1.125rem;
     margin-bottom: 0.875rem;
-    box-shadow: 0 1px 4px rgba(23, 43, 54, 0.06);
   }
   .tiempos-title {
     display: flex;
@@ -389,16 +381,17 @@ const tipos = [
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.78rem;
+    gap: 1rem;
+    font-size: 0.8125rem;
     color: #172b36;
-    opacity: 0.8;
-    padding: 0.3rem 0;
-    border-bottom: 1px solid #f1f6f4;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-surface);
   }
   .tiempos-row:last-child {
     border-bottom: none;
   }
   .tiempos-tipo {
+    font-size: 0.72rem;
     color: #172b36;
     opacity: 0.6;
   }
@@ -416,7 +409,7 @@ const tipos = [
     opacity: 0.8;
     text-decoration: none;
     padding: 0.3rem 0;
-    border-bottom: 1px solid #f1f6f4;
+    border-bottom: 1px solid var(--color-surface);
     transition:
       color 0.15s,
       opacity 0.15s;
@@ -431,8 +424,7 @@ const tipos = [
 
   .pqrsf-form-wrap {
     background: #fff;
-    border: 1px solid #f1f6f4;
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     padding: 2.5rem;
   }
   .form-titulo {
@@ -452,7 +444,6 @@ const tipos = [
   .pqrsf-form {
     display: flex;
     flex-direction: column;
-    gap: 1.125rem;
   }
   .form-row {
     display: grid;
@@ -463,6 +454,7 @@ const tipos = [
     display: flex;
     flex-direction: column;
     gap: 0.375rem;
+    margin-bottom: 1.125rem;
   }
   .form-group label {
     font-size: 0.8125rem;
@@ -470,8 +462,8 @@ const tipos = [
     color: #172b36;
   }
   .req {
-    color: #172b36;
-    margin-left: 1px;
+    color: #dc2626;
+    margin-left: 0;
   }
   .opt {
     font-weight: 400;
@@ -485,9 +477,9 @@ const tipos = [
     font-family: var(--ff-sans);
     font-size: 0.875rem;
     color: #172b36;
-    background: #f1f6f4;
-    border: 1px solid #f1f6f4;
-    border-radius: 8px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-surface);
+    border-radius: var(--radius-sm);
     padding: 0.625rem 0.875rem;
     outline: none;
     transition:
@@ -522,9 +514,9 @@ const tipos = [
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
-    background: #f1f6f4;
+    background: var(--color-surface);
     border: 1.5px dashed rgba(23, 43, 54, 0.2);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     padding: 1.25rem 1rem;
     text-align: center;
     cursor: pointer;
@@ -566,8 +558,11 @@ const tipos = [
   }
   .file-drop.has-file {
     border-style: solid;
-    border-color: #16a34a;
-    background: rgba(22, 163, 74, 0.04);
+    border-color: rgba(23, 43, 54, 0.1);
+    border-width: 1px 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0.75rem 0.25rem;
   }
   .file-name-selected {
     font-size: 0.875rem;
@@ -578,7 +573,7 @@ const tipos = [
     max-width: 100%;
     line-height: 1.4;
     background: rgba(22, 163, 74, 0.1);
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     padding: 0.25rem 0.75rem;
   }
   .file-selected {
@@ -677,9 +672,9 @@ const tipos = [
     font-size: 0.8125rem;
     color: #172b36;
     opacity: 0.8;
-    background: #f1f6f4;
-    border: 1px solid #f1f6f4;
-    border-radius: 8px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-surface);
+    border-radius: var(--radius-sm);
     padding: 0.625rem 1.25rem;
   }
   .success-radicado strong {
@@ -737,6 +732,7 @@ const tipos = [
   const TIPOS_VALIDOS = new Set([
     "peticion", "queja", "reclamo", "sugerencia", "felicitacion",
   ]);
+  const TIPOS_DOC_VALIDOS = new Set(["CC", "CE", "PA", "OT"]);
   const MIME_VALIDOS = new Set([
     "application/pdf", "image/jpeg", "image/png",
   ]);
@@ -745,7 +741,7 @@ const tipos = [
   const EMAIL_RE    = /^[^\s@]{1,64}@[^\s@]{1,253}\.[^\s@]{2,}$/;
   const MAX_LENGTHS: Record<string, number> = {
     nombre: 100, documento: 10, email: 100,
-    telefono: 10, asunto: 150, mensaje: 2000,
+    telefono: 10, asunto: 50, mensaje: 400,
   };
 
   const supabase = createClient(
@@ -824,11 +820,32 @@ const tipos = [
     enviando = false;
   }
 
+  const nombreError = document.getElementById("pq-nombre-error");
+
+  function validarNombreMinLength() {
+    if (!nombreInput || !nombreError) return;
+    const len = nombreInput.value.length;
+    if (len > 0 && len < 10) {
+      nombreError.style.display = "block";
+    } else {
+      nombreError.style.display = "none";
+    }
+  }
+
   nombreInput?.addEventListener("input", () => {
-    const pos = nombreInput.selectionStart ?? 0;
-    nombreInput.value = nombreInput.value.toUpperCase();
-    nombreInput.setSelectionRange(pos, pos);
+    let val = nombreInput.value;
+    const cleanVal = val.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '').toUpperCase();
+    if (val !== cleanVal) {
+      nombreInput.value = cleanVal;
+    } else {
+      const pos = nombreInput.selectionStart ?? 0;
+      nombreInput.value = cleanVal;
+      nombreInput.setSelectionRange(pos, pos);
+    }
+    validarNombreMinLength();
   });
+
+  nombreInput?.addEventListener("blur", validarNombreMinLength);
 
   docInput?.addEventListener("input", () => {
     const clean = docInput.value.replace(/\D/g, "").slice(0, 10);
@@ -852,12 +869,18 @@ const tipos = [
   }
 
   if (asuntoInput && asuntoCounter) {
-    asuntoInput.addEventListener("input", () =>
-      actualizarContador(asuntoInput, asuntoCounter, MAX_LENGTHS.asunto));
+    asuntoInput.addEventListener("input", () => {
+      actualizarContador(asuntoInput, asuntoCounter, MAX_LENGTHS.asunto);
+      const clean = asuntoInput.value.toUpperCase();
+      if (asuntoInput.value !== clean) asuntoInput.value = clean;
+    });
   }
   if (mensajeInput && mensajeCounter) {
-    mensajeInput.addEventListener("input", () =>
-      actualizarContador(mensajeInput, mensajeCounter, MAX_LENGTHS.mensaje));
+    mensajeInput.addEventListener("input", () => {
+      actualizarContador(mensajeInput, mensajeCounter, MAX_LENGTHS.mensaje);
+      const clean = mensajeInput.value.toUpperCase();
+      if (mensajeInput.value !== clean) mensajeInput.value = clean;
+    });
   }
 
   function toggleSubmit() {
@@ -878,6 +901,14 @@ const tipos = [
     }
     ocultarError();
     mostrarArchivoSeleccionado(file.name);
+  });
+
+  const removeFileBtn = document.getElementById("pq-remove-file");
+  removeFileBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (fileInput) fileInput.value = "";
+    limpiarArchivoSeleccionado();
   });
 
   fileDrop?.addEventListener("dragover", (e) => {
@@ -920,6 +951,12 @@ const tipos = [
     const tipo = (fd.get("tipo") as string ?? "").trim();
     if (!TIPOS_VALIDOS.has(tipo)) {
       mostrarError("Seleccione un tipo de solicitud válido.");
+      return;
+    }
+
+    const tipoDocumento = (fd.get("tipo_documento") as string ?? "").trim();
+    if (!TIPOS_DOC_VALIDOS.has(tipoDocumento)) {
+      mostrarError("Seleccione un tipo de documento válido.");
       return;
     }
 
@@ -977,6 +1014,8 @@ const tipos = [
       p_asunto:      sanitizar(campos.asunto,    MAX_LENGTHS.asunto),
       p_mensaje:     sanitizar(campos.mensaje,   MAX_LENGTHS.mensaje),
       p_archivo_url: archivoUrl,
+      p_autorizo:    autorizoCheck?.checked ?? false,
+      p_tipo_documento: tipoDocumento,
     });
 
     if (error || !radicado) {

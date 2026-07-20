@@ -5,12 +5,12 @@ const lineas = [
   {
     id: 'ordinario',
     icon: 'tabler:credit-card',
-    nombre: 'Crédito Ordinario',
-    subtitulo: 'Crédito de Consumo',
+    nombre: 'Crédito Libre Inversión',
+    subtitulo: 'Libre Inversión',
     tasa: 1.9,
     displayTasa: '1.5% – 1.9% M.V.',
     maxMeses: 60,
-    badge: 'Más solicitado',
+    badge: null,
     nota: 'La tasa final depende de su perfil de riesgo. Este cálculo usa la tasa máxima (1.9%).',
   },
   {
@@ -290,14 +290,14 @@ const lineas = [
   .sim-card {
     max-width: 940px;
     margin: 0 auto;
-    border-radius: 24px;
+    border-radius: var(--radius-lg);
     box-shadow: 0 4px 48px rgba(23, 43, 54, 0.10);
     overflow: hidden;
   }
 
   /* ── Barra de progreso ── */
   .sim-topbar {
-    background: #F1F6F4;
+    background: var(--color-surface);
     padding: 1.125rem 2.5rem;
   }
   .sim-bar-track {
@@ -363,8 +363,8 @@ const lineas = [
   .step-icon-wrap {
     width: 56px;
     height: 56px;
-    background: #F1F6F4;
-    border-radius: 16px;
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -417,9 +417,9 @@ const lineas = [
     gap: 1.25rem;
     width: 100%;
     padding: 1.25rem 1.5rem;
-    background: #F1F6F4;
+    background: var(--color-surface);
     border: 2px solid transparent;
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     cursor: pointer;
     text-align: left;
     transition: border-color 0.2s, background 0.2s, transform 0.15s;
@@ -432,7 +432,7 @@ const lineas = [
   .choice-icon-wrap {
     width: 44px;
     height: 44px;
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -474,9 +474,9 @@ const lineas = [
     align-items: flex-start;
     gap: 0.4rem;
     padding: 1.5rem;
-    background: #F1F6F4;
+    background: var(--color-surface);
     border: 2px solid transparent;
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     cursor: pointer;
     text-align: left;
     transition: border-color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
@@ -504,7 +504,7 @@ const lineas = [
     width: 44px;
     height: 44px;
     background: #172B36;
-    border-radius: 12px;
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -569,9 +569,9 @@ const lineas = [
     font-size: 1.5rem;
     font-weight: 800;
     color: #172B36;
-    background: #F1F6F4;
+    background: var(--color-surface);
     border: 2px solid transparent;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     padding: 0.5rem 0.875rem;
     width: 100%;
     margin-bottom: 0.875rem;
@@ -595,9 +595,9 @@ const lineas = [
     font-size: 1.5rem;
     font-weight: 800;
     color: #172B36;
-    background: #F1F6F4;
+    background: var(--color-surface);
     border: 2px solid transparent;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     padding: 0.5rem 0.75rem;
     width: 90px;
     text-align: center;
@@ -644,7 +644,7 @@ const lineas = [
   }
   .result-panel {
     background: #172B36;
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -710,7 +710,7 @@ const lineas = [
 
     /* Tarjeta: bordes más suaves */
     .sim-card {
-      border-radius: 16px;
+      border-radius: var(--radius-md);
     }
 
     /* Barra de progreso compacta */
@@ -724,7 +724,7 @@ const lineas = [
     .step-icon-wrap {
       width: 44px;
       height: 44px;
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
       flex-shrink: 0;
     }
     .step-header { gap: 1rem; margin-bottom: 1.5rem; }
@@ -778,7 +778,7 @@ const lineas = [
     }
 
     /* Panel de resultado */
-    .result-panel { padding: 1.5rem; border-radius: 16px; }
+    .result-panel { padding: 1.5rem; border-radius: var(--radius-md); }
     .rp-big { font-size: 1.75rem; margin-bottom: 1.25rem; }
   }
 </style>

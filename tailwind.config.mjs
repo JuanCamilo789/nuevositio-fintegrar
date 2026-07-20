@@ -41,12 +41,9 @@ export default {
         'xl':  '0 20px 48px rgba(23,43,54,0.14), 0 8px 16px rgba(23,43,54,0.08)',
       },
       borderRadius: {
-        'sm':  '4px',
-        'md':  '8px',
-        'lg':  '12px',
-        'xl':  '16px',
-        '2xl': '24px',
-        '3xl': '32px',
+        'sm': 'var(--radius-sm)', // 8px — íconos contenedores, inputs, badges
+        'md': 'var(--radius-md)', // 14px — tarjetas, botones
+        'lg': 'var(--radius-lg)', // 20px — paneles/modales, imágenes destacadas
       },
     },
   },

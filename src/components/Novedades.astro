@@ -43,7 +43,7 @@ const noticias = [
           Últimas noticias
         </h2>
       </div>
-      <a href="#heroSlider" class="btn btn-outline btn-sm flex-shrink-0">
+      <a href="#heroSlider" class="btn btn-outline btn-sm flex-shrink-0" style="border: none;">
         Ver todas las novedades
         <Icon name="tabler:arrow-right" class="w-4 h-4" aria-hidden="true" />
       </a>
@@ -99,8 +99,8 @@ const noticias = [
     justify-content: center;
     width: 36px;
     height: 36px;
-    border-radius: 8px;
-    background: #F1F6F4;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
     color: #172B36;
     flex-shrink: 0;
   }
@@ -113,7 +113,7 @@ const noticias = [
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #172B36;
-    background: #F1F6F4;
+    background: var(--color-surface);
     padding: 0.3rem 0.75rem;
     border-radius: 100px;
   }

@@ -1,19 +1,25 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 const lineas = [
   {
-    icon: 'tabler:credit-card',
-    nombre: 'Crédito Ordinario/Consumo',
-    tasa: 'Desde 1.5% M.V. según perfil de riesgo',
-    desc: 'Financiamiento ágil para sus necesidades personales, del hogar, viajes y más, con cuotas ajustadas a su realidad.',
-    badge: { texto: 'Más solicitado', clase: 'badge-primary' },
+    icon: "tabler:credit-card",
+    nombre: "Crédito Libre Inversión",
+    tasa: "Tasa según perfil de riesgo",
+    desc: "Financiamiento ágil para sus necesidades personales, del hogar, viajes y más, con cuotas ajustadas a su realidad.",
   },
   {
-    icon: 'tabler:school',
-    nombre: 'Crédito Educativo',
-    tasa: '1.35% M.V.',
-    desc: 'Crédito exclusivo con la Universidad Católica Luis Amigó. Apoye su formación académica con condiciones especiales para asociados.',
+    icon: "tabler:refresh",
+    nombre: "Crédito Rotativo",
+    tasa: "Próximamente",
+    desc: "Línea de crédito exclusiva para asociados con buen comportamiento de pago. ¡Muy pronto se habilitará!",
+    badge: { texto: "Próximamente", clase: "badge-secondary" },
+  },
+  {
+    icon: "tabler:school",
+    nombre: "Crédito Educativo",
+    tasa: "1.35% M.V. (Tasa preferencial)",
+    desc: "Crédito exclusivo con la Universidad Católica Luis Amigó. Apoye su formación académica con condiciones especiales para asociados.",
   },
 ];
 ---
@@ -23,7 +29,6 @@ const lineas = [
 ════════════════════════════════════ -->
 <section id="creditos" class="section-white" aria-labelledby="creditos-title">
   <div class="max-w-7xl mx-auto px-6">
-
     <!-- Cabecera -->
     <div class="section-header reveal">
       <div>
@@ -33,49 +38,77 @@ const lineas = [
           class="font-display"
           style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;"
         >
-          Soluciones financieras<br />para cada necesidad
+          Soluciones financieras para cada necesidad
         </h2>
       </div>
-      <p class="section-header-aside">
-      </p>
+      <p class="section-header-aside"></p>
     </div>
 
     <!-- Grid de tarjetas -->
     <div class="creditos-grid">
-      {lineas.map((l, i) => (
-        <div class={`credito-card card-base reveal${i > 0 ? ` reveal-delay-${Math.min(i, 4)}` : ''}`}>
-          <div class="credito-card-top">
-            <div class="credito-icon">
-              <Icon name={l.icon} class="w-5 h-5" aria-hidden="true" />
+      {
+        lineas.map((l, i) => (
+          <div
+            class={`credito-card card-base reveal${i > 0 ? ` reveal-delay-${Math.min(i, 4)}` : ""}`}
+          >
+            <div class="credito-card-top">
+              <div class="credito-icon">
+                <Icon name={l.icon} class="w-5 h-5" aria-hidden="true" />
+              </div>
+              {l.badge && (
+                <span class={`badge ${l.badge.clase}`}>{l.badge.texto}</span>
+              )}
             </div>
-            {l.badge && (
-              <span class={`badge ${l.badge.clase}`}>{l.badge.texto}</span>
-            )}
+            <div>
+              <h3 class="credito-nombre">{l.nombre}</h3>
+              <div class="credito-tasa">{l.tasa}</div>
+              <p class="credito-desc">{l.desc}</p>
+            </div>
+            <a
+              href="https://serviciosdigitales.cooperamigo.coop"
+              class="credito-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Solicitar crédito
+              <Icon
+                name="tabler:arrow-right"
+                class="w-4 h-4"
+                aria-hidden="true"
+              />
+            </a>
           </div>
-          <div>
-            <h3 class="credito-nombre">{l.nombre}</h3>
-            <div class="credito-tasa">{l.tasa}</div>
-            <p class="credito-desc">{l.desc}</p>
-          </div>
-          <a href="https://serviciosdigitales.cooperamigo.coop" class="credito-link" target="_blank" rel="noopener noreferrer">
-            Solicitar crédito
-            <Icon name="tabler:arrow-right" class="w-4 h-4" aria-hidden="true" />
-          </a>
-        </div>
-      ))}
+        ))
+      }
 
       <!-- CTA card -->
-      <div class="credito-card card-base credito-card--dark reveal reveal-delay-2">
+      <div
+        class="credito-card card-base credito-card--dark reveal reveal-delay-2"
+      >
         <div class="credito-icon credito-icon--light">
           <Icon name="tabler:headset" class="w-5 h-5" aria-hidden="true" />
         </div>
         <div>
-          <div class="credito-cta-eyebrow">¿Tiene dudas?</div>
-          <h3 class="credito-cta-titulo">Escríbanos o llámenos y le asesoramos</h3>
-          <p class="credito-cta-desc">Nuestro equipo de créditos le orientará para encontrar la opción ideal según su necesidad.</p>
+          <h3 class="credito-cta-titulo">¿Tiene dudas? Le asesoramos.</h3>
+          <p class="credito-cta-desc">
+            Nuestro personal experto le orientará para encontrar la opción ideal
+            según su necesidad.
+          </p>
         </div>
         <div class="credito-cta-acciones">
-          <a href="mailto:creditos@cooperamigo.coop" class="credito-contact-link">
+          <a
+            href="https://maps.google.com/?q=Calle+50+65+-+42"
+            class="credito-contact-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="tabler:map-pin" class="w-4 h-4" aria-hidden="true" />
+            Calle 50 65 - 42, Of. 120
+          </a>
+          <a
+            href="mailto:creditos@cooperamigo.coop"
+            class="credito-contact-link"
+          >
             <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
             creditos@cooperamigo.coop
           </a>
@@ -86,7 +119,6 @@ const lineas = [
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -106,7 +138,7 @@ const lineas = [
   }
   .section-header-aside {
     font-size: 1rem;
-    color: #172B36;
+    color: #172b36;
     opacity: 0.6;
     line-height: 1.8;
     max-width: 420px;
@@ -128,11 +160,28 @@ const lineas = [
     gap: 1.25rem;
   }
   .credito-card--dark {
-    background: #172B36;
+    background: #172b36;
     border-color: transparent;
+    grid-column: 1 / -1;
   }
   .credito-card--dark:hover {
     box-shadow: 0 12px 40px rgba(23, 43, 54, 0.25);
+  }
+  @media (min-width: 1024px) {
+    .credito-card--dark {
+      flex-direction: row;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 3rem 4rem;
+    }
+    .credito-card--dark > div:nth-child(2) {
+      flex: 1;
+    }
+    .credito-card--dark .credito-cta-acciones {
+      flex-direction: column;
+      margin-top: 0;
+      gap: 0.25rem;
+    }
   }
 
   /* Top: icono + badge */
@@ -146,9 +195,9 @@ const lineas = [
   .credito-icon {
     width: 44px;
     height: 44px;
-    border-radius: 8px;
-    background: #F1F6F4;
-    color: #172B36;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: #172b36;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -156,14 +205,14 @@ const lineas = [
   }
   .credito-icon--light {
     background: rgba(255, 255, 255, 0.1);
-    color: #FFC801;
+    color: #ffc801;
   }
 
   /* Texto de tarjeta */
   .credito-nombre {
     font-weight: 700;
     font-size: 1.125rem;
-    color: #172B36;
+    color: #172b36;
     margin-bottom: 0.25rem;
   }
   .credito-card--dark .credito-nombre {
@@ -172,15 +221,15 @@ const lineas = [
   .credito-tasa {
     font-size: 0.875rem;
     font-weight: 700;
-    color: #172B36;
+    color: #172b36;
     margin-bottom: 0.75rem;
   }
   .credito-card--dark .credito-tasa {
-    color: #FFC801;
+    color: #ffc801;
   }
   .credito-desc {
     font-size: 0.9375rem;
-    color: #172B36;
+    color: #172b36;
     opacity: 0.6;
     line-height: 1.6;
   }
@@ -195,7 +244,7 @@ const lineas = [
     gap: 6px;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #172B36;
+    color: #172b36;
     text-decoration: none;
     margin-top: auto;
     transition: gap 0.2s;
@@ -210,7 +259,7 @@ const lineas = [
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #FFC801;
+    color: #ffc801;
     margin-bottom: 0.5rem;
   }
   .credito-cta-titulo {
@@ -229,7 +278,7 @@ const lineas = [
   .credito-cta-acciones {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.25rem;
     margin-top: 0.5rem;
   }
   .credito-contact-link {
@@ -243,16 +292,20 @@ const lineas = [
     transition: color 0.15s;
   }
   .credito-contact-link:hover {
-    color: #FFC801;
+    color: #ffc801;
   }
   .credito-contact-link svg {
-    color: #FFC801;
+    color: #ffc801;
     flex-shrink: 0;
   }
 
   @media (max-width: 1023px) {
-    .section-white { padding: 6rem 0; }
-    .creditos-grid { grid-template-columns: repeat(2, 1fr); }
+    .section-white {
+      padding: 6rem 0;
+    }
+    .creditos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
     .section-header {
       flex-direction: column;
       align-items: flex-start;
@@ -261,8 +314,14 @@ const lineas = [
     }
   }
   @media (max-width: 639px) {
-    .section-white { padding: 3.5rem 0; }
-    .creditos-grid { grid-template-columns: 1fr; }
-    .credito-card { padding: 1.5rem; }
+    .section-white {
+      padding: 3.5rem 0;
+    }
+    .creditos-grid {
+      grid-template-columns: 1fr;
+    }
+    .credito-card {
+      padding: 1.5rem;
+    }
   }
 </style>

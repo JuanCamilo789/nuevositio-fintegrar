@@ -1,24 +1,20 @@
 ---
-// Campo con label encima del input (negrita, oscuro, asterisco rojo si es
-// requerido) e input rectangular simple. Reutilizable en cualquier
-// formulario del sitio: cambiar el estilo acá lo cambia en todos los
-// campos que usen este componente.
+// Textarea con label encima del campo, hermano de FloatingInput.
 interface Props {
   id: string;
   label: string;
-  type?: string;
   class?: string;
+  rows?: number;
   [key: string]: any;
 }
 
-const { id, label, type = "text", class: className, ...rest } = Astro.props;
+const { id, label, class: className, rows = 4, ...rest } = Astro.props;
 const requerido = "required" in rest && rest.required !== false;
 ---
 
 <div class="ff-field">
   <label for={id}>{label}{requerido && <span class="ff-req" aria-hidden="true">*</span>}</label>
-  <input id={id} type={type} class={className} {...rest} />
-  <slot name="error" />
+  <textarea id={id} class={className} rows={rows} {...rest}></textarea>
 </div>
 
 <style>
@@ -38,7 +34,7 @@ const requerido = "required" in rest && rest.required !== false;
     color: #dc2626;
     margin-left: 0;
   }
-  .ff-field input {
+  .ff-field textarea {
     width: 100%;
     box-sizing: border-box;
     padding: 0.75rem 1rem;
@@ -49,20 +45,12 @@ const requerido = "required" in rest && rest.required !== false;
     background: transparent;
     font-family: inherit;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    resize: none;
+    height: 100px;
   }
-  .ff-field input:focus {
+  .ff-field textarea:focus {
     outline: none;
     background: #fff;
     border-color: var(--color-accent-teal, #0d9488);
-  }
-
-  /* Neutraliza el fondo amarillo/azul que el navegador aplica al autocompletar */
-  .ff-field input:-webkit-autofill,
-  .ff-field input:-webkit-autofill:hover,
-  .ff-field input:-webkit-autofill:focus {
-    -webkit-text-fill-color: #172b36;
-    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-    box-shadow: 0 0 0px 1000px transparent inset;
-    transition: background-color 9999s ease-in-out 0s;
   }
 </style>
