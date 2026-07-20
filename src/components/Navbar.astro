@@ -405,16 +405,26 @@ import { Icon } from 'astro-icon/components';
   <a href="/"                class="mobile-menu-link">Inicio</a>
   <div class="mobile-menu-section">Nosotros</div>
   <a href="/nosotros"          class="mobile-menu-link mobile-menu-sub">Quiénes somos</a>
+  <a href="/nosotros#mision"   class="mobile-menu-link mobile-menu-sub">Misión y Visión</a>
+  <a href="/nosotros#historia" class="mobile-menu-link mobile-menu-sub">Historia</a>
   <a href="/cuerpos-colegiados" class="mobile-menu-link mobile-menu-sub">Cuerpos Colegiados</a>
-  <a href="/normatividad"           class="mobile-menu-link mobile-menu-sub">Normatividad</a>
   <a href="/manual-procedimientos" class="mobile-menu-link mobile-menu-sub">Manual de Procedimientos</a>
-  <a href="/normatividad"               class="mobile-menu-link mobile-menu-sub">SARLAFT</a>
+  <a href="/normatividad"           class="mobile-menu-link mobile-menu-sub">Normatividad</a>
+  <a href="/normatividad#informes" class="mobile-menu-link mobile-menu-sub">Informes anuales</a>
+  <a href="/normatividad#sarlaft"  class="mobile-menu-link mobile-menu-sub">SARLAFT</a>
   <div class="mobile-menu-section">Créditos</div>
-  <a href="/creditos"          class="mobile-menu-link mobile-menu-sub">Libre inversión</a>
-  <a href="/creditos#educativo" class="mobile-menu-link mobile-menu-sub">Educativo</a>
+  <a href="/creditos#libre-inversion" class="mobile-menu-link mobile-menu-sub">Libre inversión</a>
+  <a href="/creditos#educativo" class="mobile-menu-link mobile-menu-sub">Crédito educativo</a>
+  <a href="/#simulador"        class="mobile-menu-link mobile-menu-sub">Simulador de crédito</a>
+  <a href="/creditos#tasas"    class="mobile-menu-link mobile-menu-sub">Tasas de interés</a>
+  <a href="/creditos#documentos" class="mobile-menu-link mobile-menu-sub">Documentos requeridos</a>
+  <a href="/creditos#requisitos" class="mobile-menu-link mobile-menu-sub">Requisitos</a>
+  <a href="/creditos#proceso"  class="mobile-menu-link mobile-menu-sub">Proceso de solicitud</a>
   <div class="mobile-menu-section">Bienestar Social</div>
   <a href="/nosotros#auxilios" class="mobile-menu-link mobile-menu-sub">Auxilios y Beneficios</a>
   <a href="/nosotros#convenios" class="mobile-menu-link mobile-menu-sub">Convenios</a>
+  <a href="/nosotros#novedades" class="mobile-menu-link mobile-menu-sub">Novedades</a>
+  <a href="/nosotros#calendario" class="mobile-menu-link mobile-menu-sub">Calendario de actividades</a>
   <a href="/directorio"        class="mobile-menu-link">Directorio</a>
 
   <div style="margin-top:auto;padding-top:2rem;display:flex;flex-direction:column;gap:0.75rem;">
@@ -537,8 +547,8 @@ import { Icon } from 'astro-icon/components';
 <style>
   .mobile-menu-link {
     display: block;
-    padding: 1rem 0.5rem;
-    font-size: 1.125rem;
+    padding: 0.625rem 0.5rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #fff;
     text-decoration: none;
@@ -551,12 +561,14 @@ import { Icon } from 'astro-icon/components';
   }
   .mobile-menu-link.mobile-menu-sub {
     padding-left: 1.5rem;
-    font-size: 0.95rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.875rem;
     font-weight: 400;
     opacity: 0.8;
   }
   .mobile-menu-section {
-    padding: 1.5rem 0.5rem 0.5rem;
+    padding: 0.875rem 0.5rem 0.375rem;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;

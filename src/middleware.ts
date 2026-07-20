@@ -16,11 +16,11 @@ import type { MiddlewareHandler } from 'astro';
 const SUPABASE = 'https://*.supabase.co';
 const CSP = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net`,
+  `script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://static.cloudflareinsights.com`,
   `style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net`,
   `img-src 'self' data: blob: https://placehold.co ${SUPABASE}`,
   "font-src 'self' data:",
-  `connect-src 'self' ${SUPABASE} wss://*.supabase.co https://cdn.jsdelivr.net`,
+  `connect-src 'self' ${SUPABASE} wss://*.supabase.co https://cdn.jsdelivr.net https://static.cloudflareinsights.com`,
   `frame-src 'self' ${SUPABASE}`,
   "form-action 'self' https://www.zonapagos.net",
   "frame-ancestors 'self'",

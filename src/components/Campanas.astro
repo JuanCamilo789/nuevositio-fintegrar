@@ -40,6 +40,21 @@ const campanas = [
         </div>
       ))}
     </div>
+
+    <div class="campanas-marquee">
+      <div class="campanas-track">
+        {[...campanas, ...campanas].map((c) => (
+          <div class="campana-card card-base">
+            <img
+              src={c.image}
+              alt={c.alt}
+              class="campana-img"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -75,6 +90,10 @@ const campanas = [
     margin: 0 auto;
   }
 
+  .campanas-marquee {
+    display: none;
+  }
+
   @media (max-width: 1023px) {
     .campanas-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -84,14 +103,39 @@ const campanas = [
   @media (max-width: 639px) {
     .campanas-section { padding: 3.5rem 0; }
     .campanas-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      display: none;
     }
     .section-header {
       text-align: left;
     }
     .campanas-eyebrow {
       justify-content: flex-start;
+    }
+
+    .campanas-marquee {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
+    .campanas-track {
+      display: flex;
+      width: max-content;
+      gap: 1rem;
+      animation: campanas-scroll 18s linear infinite;
+    }
+    .campanas-track .campana-card {
+      flex: 0 0 auto;
+      width: 68vw;
+      max-width: 280px;
+    }
+    @keyframes campanas-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-50% - 0.5rem)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .campanas-track { animation: none; }
     }
   }
 

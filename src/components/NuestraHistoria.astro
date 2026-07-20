@@ -104,30 +104,36 @@ import { Icon } from 'astro-icon/components';
       </p>
     </div>
 
-    <div class="valores-grid reveal">
-      <div class="valor-pill">
-        <Icon name="tabler:heart-handshake" class="w-5 h-5" aria-hidden="true" />
-        <span>Respeto</span>
-      </div>
-      <div class="valor-pill">
-        <Icon name="tabler:scale" class="w-5 h-5" aria-hidden="true" />
-        <span>Equidad</span>
-      </div>
-      <div class="valor-pill">
-        <Icon name="tabler:users-group" class="w-5 h-5" aria-hidden="true" />
-        <span>Solidaridad</span>
-      </div>
-      <div class="valor-pill">
-        <Icon name="tabler:equal" class="w-5 h-5" aria-hidden="true" />
-        <span>Igualdad</span>
-      </div>
-      <div class="valor-pill">
-        <Icon name="tabler:heart" class="w-5 h-5" aria-hidden="true" />
-        <span>Amor</span>
-      </div>
-      <div class="valor-pill">
-        <Icon name="tabler:shield-check" class="w-5 h-5" aria-hidden="true" />
-        <span>Responsabilidad Social</span>
+    <div class="valores-marquee reveal">
+      <div class="valores-track">
+        {Array.from({ length: 2 }).map(() => (
+          <>
+            <div class="valor-pill">
+              <Icon name="tabler:heart-handshake" class="w-5 h-5" aria-hidden="true" />
+              <span>Respeto</span>
+            </div>
+            <div class="valor-pill">
+              <Icon name="tabler:scale" class="w-5 h-5" aria-hidden="true" />
+              <span>Equidad</span>
+            </div>
+            <div class="valor-pill">
+              <Icon name="tabler:users-group" class="w-5 h-5" aria-hidden="true" />
+              <span>Solidaridad</span>
+            </div>
+            <div class="valor-pill">
+              <Icon name="tabler:equal" class="w-5 h-5" aria-hidden="true" />
+              <span>Igualdad</span>
+            </div>
+            <div class="valor-pill">
+              <Icon name="tabler:heart" class="w-5 h-5" aria-hidden="true" />
+              <span>Amor</span>
+            </div>
+            <div class="valor-pill">
+              <Icon name="tabler:shield-check" class="w-5 h-5" aria-hidden="true" />
+              <span>Responsabilidad Social</span>
+            </div>
+          </>
+        ))}
       </div>
     </div>
 
@@ -313,19 +319,36 @@ import { Icon } from 'astro-icon/components';
     line-height: 1.7;
   }
 
-  .valores-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.875rem;
+  .valores-marquee {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  }
+  .valores-track {
+    display: flex;
+    width: max-content;
+    gap: 0.875rem;
+    animation: valores-scroll 22s linear infinite;
+  }
+  .valores-marquee:hover .valores-track {
+    animation-play-state: paused;
+  }
+  @keyframes valores-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-50% - 0.4375rem)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .valores-track { animation: none; }
   }
 
   .valor-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.625rem;
+    flex-shrink: 0;
     background: var(--color-surface);
     color: #172B36;
     opacity: 0.8;
@@ -335,6 +358,7 @@ import { Icon } from 'astro-icon/components';
     border-radius: 100px;
     box-shadow: 0 1px 4px rgba(23, 43, 54, 0.06);
     transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    white-space: nowrap;
   }
   .valor-pill svg {
     color: #172B36;
@@ -369,7 +393,7 @@ import { Icon } from 'astro-icon/components';
       gap: 1.75rem;
     }
     .mv-grid { grid-template-columns: 1fr; }
-    .mv-card-texto { padding: 1.5rem; }
+    .mv-card { padding: 1.5rem; }
     .valor-pill { padding: 0.75rem 1.25rem; font-size: 0.875rem; }
 
     .historia-timeline {
@@ -379,8 +403,6 @@ import { Icon } from 'astro-icon/components';
       column-gap: 1rem;
       row-gap: 0;
       align-items: start;
-      background: var(--color-surface);
-      border-radius: var(--radius-md);
       padding: 1.25rem 1rem;
       text-align: center;
     }
@@ -439,7 +461,6 @@ import { Icon } from 'astro-icon/components';
       margin-top: 1rem;
       width: 100%;
       padding: 0.625rem 1rem;
-      background: rgba(23, 43, 54, 0.1);
     }
 
     .timeline-founders-num { font-size: 1.5rem; }

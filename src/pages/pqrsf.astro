@@ -160,7 +160,7 @@ const tipos = [
                 />
               </div>
 
-              <div class="form-row" style="grid-template-columns: 3fr 7fr;">
+              <div class="form-row form-row-tipo-asunto">
                 <FloatingSelect id="pq-tipo" name="tipo" label="Tipo de solicitud" required>
                   <option value="">Seleccione una opción</option>
                   <option value="peticion">Petición</option>
@@ -450,6 +450,9 @@ const tipos = [
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
+  .form-row-tipo-asunto {
+    grid-template-columns: 3fr 7fr;
+  }
   .form-group {
     display: flex;
     flex-direction: column;
@@ -717,8 +720,10 @@ const tipos = [
     .pqrsf-left {
       display: block;
     }
-    .form-row {
+    .form-row,
+    .form-row-tipo-asunto {
       grid-template-columns: 1fr;
+      gap: 0;
     }
     .pqrsf-form-wrap {
       padding: 1.5rem;
