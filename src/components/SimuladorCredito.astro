@@ -27,9 +27,6 @@ const lineas = [
 ];
 ---
 
-<!-- ════════════════════════════════════
-     SIMULADOR DE CRÉDITO — wizard interactivo
-════════════════════════════════════ -->
 <section id="simulador" class="sim-section">
   <div class="max-w-7xl mx-auto px-6">
 
@@ -40,7 +37,6 @@ const lineas = [
 
     <div class="sim-card reveal" id="simCard">
 
-      <!-- Barra de progreso -->
       <div class="sim-topbar" aria-hidden="true">
         <div class="sim-bar-track">
           <div class="sim-bar-fill" id="simBarFill"></div>
@@ -54,8 +50,7 @@ const lineas = [
 
       <div class="sim-body">
 
-        <!-- ═══ PASO 0: ¿Sabe cuánto necesita? ═══ -->
-        <div class="sim-step active" id="step-0">
+                <div class="sim-step active" id="step-0">
           <div class="step-header">
             <div class="step-icon-wrap">
               <Icon name="tabler:calculator" class="w-7 h-7" aria-hidden="true" />
@@ -89,8 +84,7 @@ const lineas = [
           </div>
         </div>
 
-        <!-- ═══ PASO 1: Selección de línea (ambas rutas) ═══ -->
-        <div class="sim-step" id="step-1">
+                <div class="sim-step" id="step-1">
           <button class="btn-back" id="back-1">
             <Icon name="tabler:arrow-left" class="w-4 h-4" aria-hidden="true" /> Volver
           </button>
@@ -119,8 +113,7 @@ const lineas = [
           </div>
         </div>
 
-        <!-- ═══ PASO 2A: Monto + Plazo (ruta A — sé cuánto necesito) ═══ -->
-        <div class="sim-step" id="step-2a">
+                <div class="sim-step" id="step-2a">
           <button class="btn-back" id="back-2a">
             <Icon name="tabler:arrow-left" class="w-4 h-4" aria-hidden="true" /> Volver
           </button>
@@ -131,7 +124,6 @@ const lineas = [
             <div class="sim-inputs">
               <div class="inputs-2col">
 
-                <!-- Monto -->
                 <div class="input-blk">
                   <label class="input-lbl" for="a-monto-text">Monto del crédito</label>
                   <input
@@ -148,7 +140,6 @@ const lineas = [
                   <div class="range-ends"><span>$500K</span><span>$50M</span></div>
                 </div>
 
-                <!-- Plazo -->
                 <div class="input-blk">
                   <label class="input-lbl" for="a-plazo-input">Plazo (meses)</label>
                   <div class="plazo-input-wrap">
@@ -193,8 +184,7 @@ const lineas = [
           </div>
         </div>
 
-        <!-- ═══ PASO 2B: Cuota + Plazo → Monto (ruta B — no sé cuánto necesito) ═══ -->
-        <div class="sim-step" id="step-2b">
+                <div class="sim-step" id="step-2b">
           <button class="btn-back" id="back-2b">
             <Icon name="tabler:arrow-left" class="w-4 h-4" aria-hidden="true" /> Volver
           </button>
@@ -205,7 +195,6 @@ const lineas = [
             <div class="sim-inputs">
               <div class="inputs-2col">
 
-                <!-- Cuota mensual que puede pagar -->
                 <div class="input-blk">
                   <label class="input-lbl" for="b-cuota-text">Valor mensual a pagar</label>
                   <input
@@ -222,7 +211,6 @@ const lineas = [
                   <div class="range-ends"><span>$50K</span><span>$5M</span></div>
                 </div>
 
-                <!-- Plazo -->
                 <div class="input-blk">
                   <label class="input-lbl" for="b-plazo-input">Plazo (meses)</label>
                   <div class="plazo-input-wrap">
@@ -267,15 +255,12 @@ const lineas = [
           </div>
         </div>
 
-      </div><!-- /sim-body -->
-    </div><!-- /sim-card -->
-
+      </div>    </div>
   </div>
 </section>
 
 <style>
-  /* ── Sección ── */
-  .sim-section {
+    .sim-section {
     background: #fff;
     padding: 8rem 0;
   }
@@ -286,8 +271,7 @@ const lineas = [
     margin-bottom: 0.75rem;
   }
 
-  /* ── Tarjeta principal ── */
-  .sim-card {
+    .sim-card {
     max-width: 940px;
     margin: 0 auto;
     border-radius: var(--radius-lg);
@@ -295,8 +279,7 @@ const lineas = [
     overflow: hidden;
   }
 
-  /* ── Barra de progreso ── */
-  .sim-topbar {
+    .sim-topbar {
     background: var(--color-surface);
     padding: 1.125rem 2.5rem;
   }
@@ -328,8 +311,7 @@ const lineas = [
   }
   .sim-bar-lbl.active { color: #172B36; }
 
-  /* ── Steps ── */
-  .sim-step {
+    .sim-step {
     display: none;
     padding: 2.5rem;
     animation: simFadeIn 0.22s ease both;
@@ -341,8 +323,7 @@ const lineas = [
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── Botón volver ── */
-  .btn-back {
+    .btn-back {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -359,8 +340,7 @@ const lineas = [
   }
   .btn-back:hover { opacity: 1; }
 
-  /* ── Step header (paso 0) ── */
-  .step-icon-wrap {
+    .step-icon-wrap {
     width: 56px;
     height: 56px;
     background: var(--color-surface);
@@ -403,8 +383,7 @@ const lineas = [
     margin-right: auto;
   }
 
-  /* ── Paso 0: opciones ── */
-  .choice-grid {
+    .choice-grid {
     display: flex;
     flex-direction: column;
     gap: 0.875rem;
@@ -460,8 +439,7 @@ const lineas = [
   }
   .choice-btn:hover .choice-arrow { transform: translateX(4px); opacity: 0.7; }
 
-  /* ── Paso 1: líneas ── */
-  .lineas-grid {
+    .lineas-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -532,8 +510,7 @@ const lineas = [
     border-radius: 9999px;
   }
 
-  /* ── Layout paso 2 ── */
-  .sim-layout {
+    .sim-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
@@ -546,8 +523,7 @@ const lineas = [
     gap: 1.75rem;
   }
 
-  /* ── Monto + Plazo apilados: la columna derecha queda para el resultado ── */
-  .inputs-2col {
+    .inputs-2col {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.75rem;
@@ -563,8 +539,7 @@ const lineas = [
     margin-bottom: 0.625rem;
   }
 
-  /* ── Input de texto para montos ── */
-  .monto-input {
+    .monto-input {
     font-family: var(--ff-heading);
     font-size: 1.5rem;
     font-weight: 800;
@@ -583,8 +558,7 @@ const lineas = [
     background: #fff;
   }
 
-  /* ── Input numérico para plazo ── */
-  .plazo-input-wrap {
+    .plazo-input-wrap {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -634,8 +608,7 @@ const lineas = [
     font-weight: 500;
   }
 
-  /* ── Panel de resultado ── */
-  .sim-result-panel {
+    .sim-result-panel {
     position: sticky;
     top: 2rem;
     display: flex;
@@ -699,8 +672,7 @@ const lineas = [
     text-align: center;
   }
 
-  /* ── Responsive ── */
-  @media (max-width: 1023px) {
+    @media (max-width: 1023px) {
     .sim-section { padding: 6rem 0; }
     .sim-layout { grid-template-columns: 1fr; gap: 2rem; }
     .sim-result-panel { position: static; }
@@ -790,7 +762,7 @@ const lineas = [
 
     const el = (id: string) => document.getElementById(id);
 
-    // ── Formateo moneda colombiana ──
+    
     const fCOP = (n: number) =>
       new Intl.NumberFormat('es-CO', {
         style: 'currency', currency: 'COP', maximumFractionDigits: 0,
@@ -799,13 +771,13 @@ const lineas = [
     const fNum = (n: number) =>
       Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 
-    // ── Parsear valor de texto (quitar $, puntos) ──
+    
     function parseMonto(str: string): number {
       const clean = str.replace(/[^0-9]/g, '');
       return clean ? parseInt(clean) : 0;
     }
 
-    // ── Cuota mensual dado monto, tasa y plazo ──
+    
     // C = P × i / (1 − (1+i)^−n)
     function calcCuota(P: number, iPct: number, n: number): number {
       const i = iPct / 100;
@@ -813,7 +785,7 @@ const lineas = [
       return (P * i) / (1 - Math.pow(1 + i, -n));
     }
 
-    // ── Monto máximo dado cuota, tasa y plazo ──
+    
     // P = C × (1 − (1+i)^−n) / i
     function calcMonto(C: number, iPct: number, n: number): number {
       const i = iPct / 100;
@@ -821,7 +793,7 @@ const lineas = [
       return C * (1 - Math.pow(1 + i, -n)) / i;
     }
 
-    // ── Barra de progreso ──
+    
     const barFill = el('simBarFill');
     const barLabels = document.querySelectorAll<HTMLElement>('.sim-bar-lbl');
 
@@ -851,16 +823,16 @@ const lineas = [
       }
     }
 
-    // ── Paso 0 ──
+    
     el('btn-path-a')?.addEventListener('click', () => { currentPath = 'a'; showStep('step-1'); });
     el('btn-path-b')?.addEventListener('click', () => { currentPath = 'b'; showStep('step-1'); });
 
-    // ── Botones volver ──
+    
     el('back-1')?.addEventListener('click',  () => showStep('step-0'));
     el('back-2a')?.addEventListener('click', () => showStep('step-1'));
     el('back-2b')?.addEventListener('click', () => showStep('step-1'));
 
-    // ── Selección de línea ──
+    
     document.querySelectorAll<HTMLElement>('.linea-card').forEach(card => {
       card.addEventListener('click', () => {
         linea = {
@@ -872,7 +844,7 @@ const lineas = [
           nombre: card.dataset.nombre!,
         };
 
-        // ── Actualizar plazo máximo ruta A ──
+        
         const aPlazoRange = el('a-plazo-range') as HTMLInputElement | null;
         const aPlazoInput = el('a-plazo-input') as HTMLInputElement | null;
         const aHiddenPlazo = el('a-plazo') as HTMLInputElement | null;
@@ -888,7 +860,7 @@ const lineas = [
         const aMaxLbl = el('a-max-lbl');
         if (aMaxLbl && linea) aMaxLbl.textContent = linea.max + ' meses';
 
-        // ── Actualizar plazo máximo ruta B ──
+        
         const bPlazoRange = el('b-plazo-range') as HTMLInputElement | null;
         const bPlazoInput = el('b-plazo-input') as HTMLInputElement | null;
         const bHiddenPlazo = el('b-plazo') as HTMLInputElement | null;
@@ -904,7 +876,7 @@ const lineas = [
         const bMaxLbl = el('b-max-lbl');
         if (bMaxLbl && linea) bMaxLbl.textContent = linea.max + ' meses';
 
-        // ── Mostrar tasa y nota ──
+        
         const aTasa = el('a-tasa-disp'); if (aTasa && linea) aTasa.textContent = linea.display;
         const bTasa = el('b-tasa-disp'); if (bTasa && linea) bTasa.textContent = linea.display;
         const aNota = el('a-nota');      if (aNota && linea) aNota.textContent = linea.nota;

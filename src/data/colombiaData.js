@@ -72,6 +72,7 @@ export const MUNICIPIOS = {
     { codigo: '05659', nombre: 'SAN JUAN DE URABÁ' },
     { codigo: '05665', nombre: 'SAN PEDRO DE URABÁ' },
     { codigo: '05051', nombre: 'ARBOLETES' },
+    { codigo: '05854', nombre: 'VALDIVIA' },
   ],
   '08': [
     { codigo: '08001', nombre: 'BARRANQUILLA' },

@@ -41,7 +41,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content={description} />
   </head>
   <body>
-    <!-- ── Vigilada Supersolidaria — fixed left badge ── -->
     <div
       class="supersolidaria-badge is-hidden"
       role="note"
@@ -60,7 +59,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <slot />
 
-    <!-- ── Botón flotante: WhatsApp ── -->
     <div class="fab-stack">
       <a
         href="https://wa.me/573054070612?text=Hola%2C%20quisiera%20informaci%C3%B3n%20sobre%20cr%C3%A9dito%2Fcartera."
@@ -73,7 +71,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </a>
     </div>
 
-    <!-- ── Cookie Banner ── -->
     <div
       class="cookie-banner"
       id="cookieBanner"
@@ -125,7 +122,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
 
     <script>
-      // ── Scroll reveal ──
+      
       const reveals = document.querySelectorAll(".reveal");
       const observer = new IntersectionObserver(
         (entries) => {
@@ -140,7 +137,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       );
       reveals.forEach((el) => observer.observe(el));
 
-      // ── Cookie Banner ──
+      
       const banner = document.getElementById("cookieBanner");
       const accept = document.getElementById("cookieAccept");
       const decline = document.getElementById("cookieDecline");
@@ -175,7 +172,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         dismissBanner();
       });
 
-      // ── Badge color según sección ──
+      
       const badge = document.querySelector(
         ".supersolidaria-badge",
       ) as HTMLElement | null;

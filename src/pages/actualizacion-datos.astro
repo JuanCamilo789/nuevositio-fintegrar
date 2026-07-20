@@ -14,27 +14,25 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     <div class="max-w-7xl mx-auto px-6">
       <div class="ad-card">
 
-        <!-- ═══ Formulario de actualización ═══ -->
-        <div id="ad-step-form" class="ad-step">
+                <div id="ad-step-form" class="ad-step">
 
           <form id="ad-form-datos" novalidate>
+
+            <div class="ad-section-title">
+              <span><i class="ad-section-num">1</i> Información personal</span>
+            </div>
 
             <!-- Identificación -->
             <div class="ad-accordion-item open">
               <div id="acc-identificacion" class="ad-accordion-body" style="padding-top:0;">
-                <div class="form-row">
+                <div class="form-row form-row-3">
                   <FloatingSelect id="ad-tipo-identificacion" label="Tipo de identificación" required data-campo="tipo_identificacion">
                     <option value="CC">Cédula de ciudadanía</option>
                     <option value="CE">Cédula de extranjería</option>
+                    <option value="PA">Pasaporte</option>
+                    <option value="OT">Otro</option>
                   </FloatingSelect>
-                  <FloatingInput id="ad-cedula" label="Número de identificación" required maxlength="11" inputmode="numeric" pattern="[0-9]+" data-campo="cedula" />
-                </div>
-                <div class="form-row">
-                  <FloatingInput id="f-nombres" label="Nombres completos" required data-campo="nombres" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras y espacios" class="uppercase" oninput="this.value=this.value.toUpperCase()" />
-                  <FloatingInput id="f-apellidos" label="Apellidos completos" required data-campo="apellidos" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras y espacios" class="uppercase" oninput="this.value=this.value.toUpperCase()" />
-                </div>
-                <div class="form-row">
-                  <FloatingInput id="f-fecha_nacimiento" type="date" label="Fecha de nacimiento" required data-campo="fecha_nacimiento" />
+                  <FloatingInput id="ad-cedula" label="Número de identificación" required maxlength="10" inputmode="numeric" pattern="[0-9]+" data-campo="cedula" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)" />
                   <FloatingSelect id="f-estrato" label="Estrato" required data-campo="estrato">
                     <option value="">Seleccione</option>
                     <option value="1">1</option>
@@ -45,97 +43,168 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                     <option value="6">6</option>
                   </FloatingSelect>
                 </div>
-                <div class="form-row">
-                  <FloatingInput id="f-direccion_completa" label="Dirección con ciudad y barrio" required data-campo="direccion_completa" readonly class="cursor-pointer" placeholder="Haz clic para ingresar dirección" />
+                <div class="form-row form-row-3">
+                  <FloatingInput id="f-nombres" label="Nombres" required maxlength="30" data-campo="nombres" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$" title="Solo se permiten letras y espacios" class="uppercase" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÁÉÍÓÚÑ\\s]/g,'')" />
+                  <FloatingInput id="f-apellidos" label="Apellidos" required maxlength="30" data-campo="apellidos" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$" title="Solo se permiten letras y espacios" class="uppercase" oninput="this.value=this.value.toUpperCase().replace(/[^A-ZÁÉÍÓÚÑ\\s]/g,'')" />
+                  <FloatingInput id="f-fecha_nacimiento" type="date" label="Fecha de nacimiento" required data-campo="fecha_nacimiento" />
                 </div>
-                <div class="form-row">
-                  <FloatingInput id="f-contacto_principal" label="Contacto principal" type="tel" required data-campo="contacto_principal" inputmode="numeric" pattern="^[0-9]+$" title="Solo se permiten números" />
+                <div class="form-row form-row-3">
+                  <FloatingInput id="f-contacto_principal" label="Contacto telefónico" type="tel" required maxlength="14" data-campo="contacto_principal" inputmode="numeric" pattern="^[0-9]+$" title="Solo se permiten números" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,14)" />
                   <FloatingInput id="f-email" label="Correo electrónico" type="email" required data-campo="email" pattern="^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$" title="Ingrese un correo electrónico válido" />
+                  <FloatingInput id="f-direccion_completa" label="Dirección de residencia" required data-campo="direccion_completa" readonly class="cursor-pointer" placeholder="Haz clic para ingresar dirección" />
                 </div>
-                
+
+                <div class="ad-section-title" style="margin-top:2.5rem;">
+                  <span><i class="ad-section-num">2</i> Preferencias u otra información</span>
+                </div>
+
                 <div class="form-group mb-6 mt-2">
-                  <label id="lbl-preferencias" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">Preferencias de contacto</label>
+                  <label id="lbl-preferencias" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">Preferencias de contacto<span class="req">*</span></label>
                   <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-preferencias">
-                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="whatsapp" /> WhatsApp</label>
-                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="correo" /> Correo electrónico</label>
-                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="llamada" /> Llamada telefónica</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="whatsapp" /><span class="ad-toggle" aria-hidden="true"></span> WhatsApp</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="correo" /><span class="ad-toggle" aria-hidden="true"></span> Correo electrónico</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="llamada" /><span class="ad-toggle" aria-hidden="true"></span> Llamada telefónica</label>
                   </div>
                 </div>
 
-                <div class="form-row">
-                  <div class="form-group">
-                    <label id="lbl-horarios" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">Horario preferido de contacto</label>
-                    <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-horarios">
-                      <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="mañana" /> Mañana</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="tarde" /> Tarde</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="noche" /> Noche</label>
-                    </div>
+                <div class="form-group mb-6">
+                  <label id="lbl-horarios" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">Horario preferido de contacto<span class="req">*</span></label>
+                  <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-horarios">
+                    <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="mañana" /><span class="ad-toggle" aria-hidden="true"></span> Mañana</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="tarde" /><span class="ad-toggle" aria-hidden="true"></span> Tarde</label>
+                    <label class="ad-checkbox"><input type="checkbox" class="f-horarios" value="noche" /><span class="ad-toggle" aria-hidden="true"></span> Noche</label>
                   </div>
+                </div>
+
+                <div class="form-row form-row-3">
                   <FloatingSelect id="f-nivel_educativo" label="Nivel educativo" required data-campo="nivel_educativo">
                     <option value="">Seleccione</option>
                     <option value="Primaria">Primaria</option>
                     <option value="Bachillerato">Bachillerato</option>
-                    <option value="Tecnico">Técnico / Tecnólogo</option>
+                    <option value="Tecnico">Técnico/Tecnólogo</option>
                     <option value="Universitario">Universitario</option>
-                    <option value="Posgrado">Posgrado</option>
+                    <option value="Especializacion">Especialización</option>
+                    <option value="Maestria">Maestría</option>
+                    <option value="Doctorado">Doctorado</option>
+                    <option value="Otro">Otro</option>
                   </FloatingSelect>
-                </div>
-                
-                <div class="form-row">
-                  <FloatingInput id="f-ocupacion" label="Ocupación actual" required data-campo="ocupacion" pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$" title="Solo se permiten letras y espacios" class="uppercase" oninput="this.value=this.value.toUpperCase()" />
-                  <FloatingSelect id="f-tipo_vivienda" label="Tipo de vivienda" required data-campo="tipo_vivienda">
+                  <FloatingSelect id="f-ocupacion" label="Ocupación actual" required data-campo="ocupacion">
+                    <option value="">Seleccione</option>
+                    <option value="Empleado">Empleado</option>
+                    <option value="Independiente">Independiente</option>
+                    <option value="Pensionado">Pensionado</option>
+                    <option value="Estudiante">Estudiante</option>
+                    <option value="Cuidado del hogar">Cuidado del hogar</option>
+                  </FloatingSelect>
+                  <FloatingSelect id="f-tipo_vivienda" label="¿La vivienda donde vive actualmente es?" required data-campo="tipo_vivienda">
                     <option value="">Seleccione</option>
                     <option value="Familiar">Familiar</option>
                     <option value="Propia">Propia</option>
                     <option value="Arrendada">Arrendada</option>
                   </FloatingSelect>
-                </div>
 
-                <div class="form-row">
                   <FloatingSelect id="f-tiene_vehiculo" label="¿Tiene vehículo?" required data-campo="tiene_vehiculo">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
+                  <div id="wrapper_tipo_vehiculo" style="display:none;">
+                    <FloatingSelect id="f-tipo_vehiculo" label="Tipo de vehículo" required data-campo="tipo_vehiculo">
+                      <option value="">Seleccione</option>
+                      <option value="Moto">Moto</option>
+                      <option value="Carro">Carro</option>
+                      <option value="Bicicleta">Bicicleta</option>
+                    </FloatingSelect>
+                  </div>
                   <FloatingSelect id="f-tiene_vivienda_propia" label="¿Tiene vivienda propia?" required data-campo="tiene_vivienda_propia">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
-                </div>
+                  <FloatingSelect id="f-tiene_mascotas" label="¿Tiene mascotas?" data-campo="tiene_mascotas">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
 
-                <div class="form-row">
                   <FloatingSelect id="f-practica_deporte" label="¿Practica algún deporte?" data-campo="practica_deporte">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
+                  <div id="wrapper_cual_deporte" style="display:none;">
+                    <FloatingSelect id="f-cual_deporte" label="¿Cuál deporte practica?" required data-campo="cual_deporte">
+                      <option value="">Seleccione</option>
+                      <option value="Fútbol">Fútbol</option>
+                      <option value="Baloncesto">Baloncesto</option>
+                      <option value="Voleibol">Voleibol</option>
+                      <option value="Natación">Natación</option>
+                      <option value="Ciclismo">Ciclismo</option>
+                      <option value="Atletismo / Running">Atletismo / Running</option>
+                      <option value="Tenis">Tenis</option>
+                      <option value="Gimnasio / Fitness">Gimnasio / Fitness</option>
+                      <option value="Artes marciales">Artes marciales</option>
+                      <option value="Otro">Otro</option>
+                    </FloatingSelect>
+                  </div>
                   <FloatingSelect id="f-viaja_frecuencia" label="¿Viaja con frecuencia?" data-campo="viaja_frecuencia">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
-                </div>
-
-                <div class="form-row">
+                  <div id="wrapper_tipo_viaje" class="ad-checkbox-inline" style="display:none;">
+                    <label id="lbl-tipo-viaje" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">¿Nacional, internacional o ambas?</label>
+                    <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-tipo-viaje">
+                      <label class="ad-checkbox"><input type="checkbox" class="f-tipo_viaje" value="Nacional" /><span class="ad-toggle" aria-hidden="true"></span> Nacional</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-tipo_viaje" value="Internacional" /><span class="ad-toggle" aria-hidden="true"></span> Internacional</label>
+                    </div>
+                  </div>
                   <FloatingSelect id="f-compras_online" label="¿Hace compras online?" data-campo="compras_online">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
+
                   <FloatingSelect id="f-usa_tarjeta_credito" label="¿Usa tarjeta de crédito?" data-campo="usa_tarjeta_credito">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
-                </div>
-
-                <div class="form-row">
                   <FloatingSelect id="f-usa_billeteras_digitales" label="¿Usa billeteras digitales?" data-campo="usa_billeteras_digitales">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
+                  <FloatingSelect id="f-usa_redes_sociales" label="¿Usa redes sociales?" data-campo="usa_redes_sociales">
+                    <option value="">Seleccione</option>
+                    <option value="Si">Sí</option>
+                    <option value="No">No</option>
+                  </FloatingSelect>
+
+                  <div id="wrapper_cuales_billeteras" class="ad-checkbox-span" style="display:none;">
+                    <label id="lbl-cuales-billeteras" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">¿Cuáles billeteras digitales usa?</label>
+                    <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-cuales-billeteras">
+                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Nequi" /><span class="ad-toggle" aria-hidden="true"></span> Nequi</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Daviplata" /><span class="ad-toggle" aria-hidden="true"></span> Daviplata</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Nubank" /><span class="ad-toggle" aria-hidden="true"></span> Nubank</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Dale" /><span class="ad-toggle" aria-hidden="true"></span> Dale</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Lulobank" /><span class="ad-toggle" aria-hidden="true"></span> Lulobank</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Otro" /><span class="ad-toggle" aria-hidden="true"></span> Otro</label>
+                    </div>
+                  </div>
+
+                  <div id="wrapper_cuales_redes" class="ad-checkbox-span" style="display:none;">
+                    <label id="lbl-cuales-redes" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">¿Cuáles redes sociales usa?</label>
+                    <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-cuales-redes">
+                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Facebook" /><span class="ad-toggle" aria-hidden="true"></span> Facebook</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="WhatsApp" /><span class="ad-toggle" aria-hidden="true"></span> WhatsApp</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Instagram" /><span class="ad-toggle" aria-hidden="true"></span> Instagram</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="TikTok" /><span class="ad-toggle" aria-hidden="true"></span> TikTok</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="LinkedIn" /><span class="ad-toggle" aria-hidden="true"></span> LinkedIn</label>
+                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Otra" /><span class="ad-toggle" aria-hidden="true"></span> Otra</label>
+                    </div>
+                  </div>
+
                   <FloatingSelect id="f-interes_promociones" label="Nivel de interés en promociones" required data-campo="interes_promociones">
                     <option value="">Seleccione</option>
                     <option value="Alto">Alto</option>
@@ -144,74 +213,37 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                   </FloatingSelect>
                 </div>
 
-                <div class="form-row">
-                  <FloatingSelect id="f-usa_redes_sociales" label="¿Usa redes sociales?" data-campo="usa_redes_sociales">
-                    <option value="">Seleccione</option>
-                    <option value="Si">Sí</option>
-                    <option value="No">No</option>
-                  </FloatingSelect>
-                  <div id="wrapper_cuales_redes" style="display:none; flex:1;">
-                    <FloatingInput id="f-cuales_redes" label="¿Cuáles?" data-campo="cuales_redes" />
-                  </div>
-                </div>
-
               </div>
             </div>
 
             <div id="ad-form-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;margin-top:1.25rem;"></div>
 
             <!-- Autorización Legal -->
-            <div class="mt-8 mb-6 flex items-start gap-3">
-              <input type="checkbox" id="ad-autorizacion" class="mt-1 w-4 h-4 accent-[var(--color-link)] cursor-pointer shrink-0" required />
-              <label for="ad-autorizacion" class="text-[0.75rem] text-slate-500 leading-relaxed cursor-pointer text-justify">
-                Autorizo de manera previa, expresa, libre e informada a Cooperamigó para recolectar, almacenar, usar, actualizar, circular, transmitir, transferir y, en general, realizar el tratamiento de mis datos personales, de conformidad con la Ley 1581 de 2012 y la <a href="/politica-tratamiento-datos" class="text-[var(--color-link)] hover:underline font-semibold" target="_blank">Política de Tratamiento de Datos Personales</a> de la Cooperativa, disponible en sus oficinas y en su página web, con el fin de gestionar mi vinculación como asociado, mantener actualizada mi información, prestar los servicios de la Cooperativa, dar cumplimiento a obligaciones legales y estatutarias, y enviar información institucional, comercial, educativa, promocional y de bienestar. Declaro conocer mis derechos como titular de la información y los canales habilitados para ejercerlos.<span class="text-red-600 font-bold ml-1">*</span>
+            <div class="form-check" style="margin-top:2rem;margin-bottom:1.5rem;">
+              <input type="checkbox" id="ad-autorizacion" required />
+              <label for="ad-autorizacion" class="cursor-pointer">
+                Autorizo de manera previa, expresa, libre e informada a Cooperamigó para recolectar, almacenar, usar, actualizar, circular, transmitir, transferir y, en general, realizar el tratamiento de mis datos personales, de conformidad con la Ley 1581 de 2012 y la <a href="/politica-tratamiento-datos" target="_blank" rel="noopener noreferrer">Política de Tratamiento de Datos Personales</a> de la Cooperativa, disponible en sus oficinas y en su página web, con el fin de gestionar mi vinculación como asociado, mantener actualizada mi información, prestar los servicios de la Cooperativa, dar cumplimiento a obligaciones legales y estatutarias, y enviar información institucional, comercial, educativa, promocional y de bienestar. Declaro conocer mis derechos como titular de la información y los canales habilitados para ejercerlos.<span class="req">*</span>
               </label>
             </div>
 
             <div class="ad-btn-row" style="justify-content: flex-end;">
-              <button type="button" id="ad-btn-volver-form" class="btn btn-outline-sm">
-                Volver
-              </button>
-              <button type="submit" id="ad-btn-revisar" class="btn btn-primary" style="width:20%;justify-content:center;padding:0.875rem;" disabled>
-                Actualizar datos <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" aria-hidden="true" />
+              <button type="submit" id="ad-btn-revisar" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.875rem;" disabled>
+                Actualizar datos
+                <Icon name="tabler:send" class="w-4 h-4" aria-hidden="true" />
               </button>
             </div>
           </form>
         </div>
 
-        <!-- ═══ Paso 3: Confirmación ═══ -->
-        <div id="ad-step-confirm" class="ad-step" style="display:none;">
-          <h2 class="ad-step-title">Confirma los cambios</h2>
-          <p class="ad-step-desc">
-            Vas a enviar estos cambios para que nuestro equipo los revise y los aplique:
-          </p>
-
-          <div id="ad-resumen-cambios" class="ad-resumen"></div>
-
-          <div id="ad-confirm-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;"></div>
-
-          <div class="ad-btn-row">
-            <button type="button" id="ad-btn-volver-confirm" class="btn btn-outline-sm">
-              Volver a editar
-            </button>
-            <button type="button" id="ad-btn-guardar" class="btn btn-primary" style="flex:1;justify-content:center;padding:0.875rem;">
-              <Icon name="tabler:check" class="w-4 h-4" aria-hidden="true" />
-              Confirmar y enviar
-            </button>
-          </div>
-        </div>
-
-        <!-- ═══ Éxito ═══ -->
-        <div id="ad-step-success" class="ad-step ad-success" style="display:none;">
+                <div id="ad-step-success" class="ad-step ad-success" style="display:none;">
           <div class="success-icon">
             <Icon name="tabler:circle-check" class="w-12 h-12" aria-hidden="true" />
           </div>
           <h3 class="success-title">¡Información recibida!</h3>
           <p class="success-body">
-            Hemos recibido los cambios que enviaste. Nuestro equipo los revisará y los aplicará
-            una vez confirme la información contigo si es necesario.
+            Hemos recibido su actualización de datos. Nuestro equipo revisará en detalle y
+            actualizará la información correspondiente. ¡Gracias por actualizar sus datos con Cooperamigó!
           </p>
-          <div id="ad-resumen-final" class="ad-resumen" style="text-align:left;"></div>
           <button type="button" class="btn btn-outline-sm" id="ad-nueva" style="margin-top:1.25rem;">
             Actualizar otro registro
           </button>
@@ -221,7 +253,6 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     </div>
   </section>
 
-        <!-- Modal Dirección -->
         <div id="modal-direccion" class="modal-backdrop" style="display:none;">
           <div class="modal-dir-content">
             <div class="modal-dir-header">
@@ -231,7 +262,6 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                 </div>
                 <div>
                   <h3 class="font-extrabold text-[1.125rem] text-[#172B36] leading-tight">Ingresar dirección</h3>
-                  <p class="text-[0.875rem] text-slate-500 font-medium">Estructura la dirección de manera estándar</p>
                 </div>
               </div>
               <button type="button" id="btn-cerrar-modal" class="modal-dir-close">
@@ -241,11 +271,11 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
             <div class="modal-dir-body">
               <div class="grid-2">
                 <div class="ff-field">
-                  <label>Departamento <span class="ff-req">*</span></label>
+                  <label>Departamento<span class="req">*</span></label>
                   <select id="md-depto" class="md-input"><option value="">Seleccione</option></select>
                 </div>
                 <div class="ff-field">
-                  <label>Ciudad / Municipio <span class="ff-req">*</span></label>
+                  <label>Ciudad / Municipio<span class="req">*</span></label>
                   <select id="md-ciudad" class="md-input" disabled><option value="">Seleccione</option></select>
                 </div>
               </div>
@@ -253,11 +283,11 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
               <div class="md-box">
                 <div class="grid-via">
                   <div class="ff-field">
-                    <label>Vía principal <span class="ff-req">*</span></label>
+                    <label>Vía principal<span class="req">*</span></label>
                     <select id="md-via" class="md-input"><option value="">Sel.</option></select>
                   </div>
                   <div class="ff-field">
-                    <label>Número <span class="ff-req">*</span></label>
+                    <label>Número<span class="req">*</span></label>
                     <input type="text" id="md-num1" class="md-input uppercase" placeholder="45" />
                   </div>
                   <div class="ff-field">
@@ -288,7 +318,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                     <input type="text" id="md-letra2" class="md-input uppercase" placeholder="B" />
                   </div>
                   <div class="ff-field">
-                    <label>Placa <span class="ff-req">*</span></label>
+                    <label>Placa<span class="req">*</span></label>
                     <input type="text" id="md-placa" class="md-input uppercase" placeholder="18" />
                   </div>
                   <div class="ff-field">
@@ -306,15 +336,15 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                   <input type="text" id="md-comp" class="md-input uppercase" placeholder="Ej: APTO 301" />
                 </div>
                 <div class="ff-field">
-                  <label>Barrio</label>
-                  <input type="text" id="md-barrio" class="md-input uppercase" placeholder="Nombre del barrio" />
+                  <label>Barrio<span class="req">*</span></label>
+                  <input type="text" id="md-barrio" class="md-input uppercase" placeholder="Nombre del barrio" required />
                 </div>
               </div>
 
               <div id="md-preview-box" class="md-preview" style="display:none;">
-                <Icon name="tabler:check" class="w-5 h-5 text-[var(--color-accent-teal)]" />
+                <Icon name="tabler:check" class="w-5 h-5 text-[#172b36]" />
                 <div>
-                  <div class="text-[0.7rem] font-bold text-[var(--color-accent-teal)] uppercase tracking-wider">Dirección generada</div>
+                  <div class="text-[0.7rem] font-bold text-[#172b36] uppercase tracking-wider">Dirección generada</div>
                   <div id="md-preview-text" class="text-[0.875rem] font-bold text-[#172B36]"></div>
                 </div>
               </div>
@@ -336,15 +366,52 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     background: #ffffff;
     padding: 3.5rem 0 5rem;
   }
-  /* Tarjeta principal sin bordes ni sombras */
+  /* Tarjeta principal sin bordes ni sombras — alineada con el hero, sin padding horizontal extra */
   .ad-card {
     background: #fff;
     border-radius: var(--radius-lg);
-    padding: 2.5rem;
+    padding: 2.5rem 0;
   }
 
-  /* ── Stepper ────────────────────────────────────────────────────── */
-  .ad-stepper {
+  .ad-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    margin: 0 0 2.25rem;
+  }
+  .ad-section-title::before,
+  .ad-section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+  .ad-section-title span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #172b36;
+    white-space: nowrap;
+  }
+  .ad-section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #172b36;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    font-style: normal;
+    flex-shrink: 0;
+  }
+
+    .ad-stepper {
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -398,22 +465,6 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     border-radius: 1px;
   }
 
-  .ad-step-title {
-    font-family: var(--ff-heading, inherit);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #172b36;
-    margin-bottom: 0.375rem;
-    text-align: left;
-  }
-  .ad-step-desc {
-    font-size: 0.9375rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    text-align: left;
-    max-width: 100%;
-  }
   .ad-hint {
     font-size: 0.8125rem;
     color: var(--color-text-muted);
@@ -429,8 +480,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     margin: 0 auto;
   }
 
-  /* ── Acordeón plano (ahora completamente invisible) ────────────────── */
-  .ad-accordion-item {
+    .ad-accordion-item {
     background: transparent;
     border: none;
     margin-bottom: 0;
@@ -483,6 +533,9 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
+  .form-row-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   .form-group {
     display: flex;
     flex-direction: column;
@@ -496,24 +549,73 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
   .ad-checkbox-grupo {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.625rem 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.625rem;
+  }
+  .ad-checkbox-inline .ad-checkbox-grupo {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  #wrapper_tipo_viaje .ad-checkbox-grupo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ad-checkbox-inline label {
+    font-size: 0.8125rem !important;
+  }
+  .ad-checkbox-span {
+    grid-column: 1 / -1;
   }
   .ad-checkbox {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 500;
+    gap: 0.625rem;
+    padding: 0.375rem 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
     color: #172b36;
     cursor: pointer;
+    transition: color 0.15s;
+  }
+  .ad-checkbox:has(input:checked) {
+    color: var(--color-accent-teal);
   }
   .ad-checkbox input {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--color-accent-teal);
-    cursor: pointer;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ad-toggle {
+    position: relative;
+    width: 38px;
+    height: 22px;
+    border-radius: 999px;
+    background: #d1d5db;
     flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .ad-toggle::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s;
+  }
+  .ad-checkbox input:checked + .ad-toggle {
+    background: var(--color-accent-teal);
+  }
+  .ad-checkbox input:checked + .ad-toggle::after {
+    transform: translateX(16px);
+  }
+  .ad-checkbox input:focus-visible + .ad-toggle {
+    outline: 2px solid var(--color-accent-teal);
+    outline-offset: 2px;
   }
   .ad-grupo-condicional {
     display: none;
@@ -535,44 +637,6 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     display: flex;
     gap: 0.75rem;
     margin-top: 1.5rem;
-  }
-
-  /* ── Resumen de cambios: bloque suave sin bordes ────────────────── */
-  .ad-resumen {
-    background: #F8FAFA;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    margin-bottom: 1.25rem;
-    padding: 0.375rem 0;
-  }
-  .ad-resumen-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid rgba(23, 43, 54, 0.06);
-  }
-  .ad-resumen-row:last-child {
-    border-bottom: none;
-  }
-  .ad-resumen-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .ad-resumen-valores {
-    font-size: 0.875rem;
-  }
-  .ad-resumen-anterior {
-    color: var(--color-text-subtle);
-    text-decoration: line-through;
-    margin-right: 0.4rem;
-  }
-  .ad-resumen-nuevo {
-    color: var(--color-accent-teal);
-    font-weight: 700;
   }
 
   .ad-success {
@@ -616,12 +680,12 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     cursor: pointer;
     transition: background 0.15s, color 0.15s, opacity 0.15s;
   }
-  /* Botón Primario: Azul corporativo en lugar de amarillo */
+  /* Botón Primario: mismo estilo que .btn-primary global (pqrsf, etc.) */
   .btn-primary {
-    background: var(--color-accent-teal);
+    background: #172b36;
     color: #fff;
   }
-  .btn-primary:hover { background: #0f3e49; }
+  .btn-primary:hover { background: #172b36; }
   .btn-primary:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -638,7 +702,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
 
   @media (max-width: 639px) {
-    .ad-card { padding: 1.5rem 1.25rem; border-radius: var(--radius-md); }
+    .ad-card { padding: 1.5rem 0; border-radius: var(--radius-md); }
     .form-row { grid-template-columns: 1fr; }
     .ad-stepper-item span:last-child { display: none; }
     .ad-stepper-line { margin-top: 17px; }
@@ -664,33 +728,94 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     "tipo_identificacion", "cedula", "nombres", "apellidos", "fecha_nacimiento",
     "estrato", "direccion_completa", "contacto_principal", "email",
     "nivel_educativo", "ocupacion", "tipo_vivienda",
-    "tiene_vehiculo", "tiene_vivienda_propia", "practica_deporte",
-    "viaja_frecuencia", "compras_online", "usa_tarjeta_credito",
-    "usa_billeteras_digitales", "interes_promociones", "usa_redes_sociales",
-    "cuales_redes"
+    "tiene_vehiculo", "tipo_vehiculo", "tiene_vivienda_propia", "practica_deporte",
+    "viaja_frecuencia", "cual_deporte", "tiene_mascotas", "compras_online", "usa_tarjeta_credito",
+    "usa_billeteras_digitales", "interes_promociones", "usa_redes_sociales"
   ];
   const CAMPOS_NUMERICOS: string[] = [];
   const CAMPOS_DINERO: string[] = [];
-  const TODOS_LOS_CAMPOS = [...CAMPOS_TEXT, "preferencias_contacto", "horario_contacto"];
+  const TODOS_LOS_CAMPOS = [...CAMPOS_TEXT, "preferencias_contacto", "horario_contacto", "tipo_viaje", "billeteras_digitales", "redes_sociales"];
 
-  const ETIQUETAS_CANAL: Record<string, string> = {
-    whatsapp: "WhatsApp", correo: "Correo electrónico", llamada: "Llamada telefónica",
+  // Traduce nombres de campo del formulario a los nombres reales de columna
+  // en la tabla `asociados` cuando difieren (ver auditoría de datos).
+  const CAMPO_A_COLUMNA: Record<string, string> = {
+    contacto_principal: "celular",
+    preferencias_contacto: "canales_comunicacion",
+    interes_promociones: "nivel_interes_promociones",
+    cual_deporte: "tipo_deporte",
+    tipo_viaje: "alcance_viaje",
+    tiene_mascotas: "tiene_mascota",
+    // "Nivel educativo" del formulario pregunta el nivel ya completado
+    // (nunca condicionado a "¿eres estudiante?"), que es lo que en el resto
+    // del sistema (afiliación, crédito, ficha del asociado) se llama
+    // nivel_academico. La columna nivel_educativo real está reservada para
+    // el nivel que se cursa actualmente, solo cuando tipo_trabajador es
+    // "estudiante" — un campo distinto que este formulario no pide.
+    nivel_educativo: "nivel_academico",
   };
+  // Campos que en el formulario son un select "Sí"/"No" pero en la BD son boolean.
+  const CAMPOS_BOOLEANOS = new Set([
+    "tiene_vehiculo", "tiene_vivienda_propia", "practica_deporte", "viaja_frecuencia",
+    "tiene_mascotas", "compras_online", "usa_tarjeta_credito", "usa_billeteras_digitales",
+    "usa_redes_sociales",
+  ]);
+  // tipo_identificacion y cedula son solo parámetros de búsqueda del
+  // asociado, no "cambios" — nunca se envían como tal. nombres/apellidos sí
+  // se envían: el backend decide si los aplica (nunca, si el asociado ya
+  // existe) o los guarda (cuando la cédula no coincide con nadie, para que
+  // el asesor sepa quién dice ser esa persona).
+  const CAMPOS_NO_EDITABLES = new Set(["tipo_identificacion", "cedula"]);
 
-  const ETIQUETAS_CAMPO: Record<string, string> = {
-    tipo_identificacion: "Tipo de identificación", cedula: "Número de identificación",
-    nombres: "Nombres completos", apellidos: "Apellidos completos", fecha_nacimiento: "Fecha de nacimiento",
-    estrato: "Estrato", direccion_completa: "Dirección completa",
-    contacto_principal: "Contacto principal", email: "Correo electrónico",
-    preferencias_contacto: "Preferencias de contacto",
-    horario_contacto: "Horario preferido", nivel_educativo: "Nivel educativo",
-    ocupacion: "Ocupación actual", tipo_vivienda: "Tipo de vivienda",
-    tiene_vehiculo: "¿Tiene vehículo?", tiene_vivienda_propia: "¿Tiene vivienda propia?",
-    practica_deporte: "¿Practica algún deporte?", viaja_frecuencia: "¿Viaja con frecuencia?",
-    compras_online: "¿Hace compras online?", usa_tarjeta_credito: "¿Usa tarjeta de crédito?",
-    usa_billeteras_digitales: "¿Usa billeteras digitales?", interes_promociones: "Interés en promociones",
-    usa_redes_sociales: "¿Usa redes sociales?", cuales_redes: "¿Cuáles redes?"
-  };
+  function boolAOpcion(v: unknown): string {
+    if (v === true) return "Si";
+    if (v === false) return "No";
+    return "";
+  }
+
+  // Convierte lo que devuelve obtener_datos_actuales_asociado (nombres de
+  // columna reales, tipos boolean/array) al formato que usan los campos
+  // del formulario (nombres locales, "Si"/"No", valor único).
+  function normalizarOrigen(dataObj: Record<string, unknown>): Record<string, unknown> {
+    const out: Record<string, unknown> = { ...dataObj };
+    out.contacto_principal = dataObj.celular ?? dataObj.telefono ?? null;
+    out.preferencias_contacto = dataObj.canales_comunicacion ?? null;
+    out.interes_promociones = dataObj.nivel_interes_promociones ?? null;
+    out.tipo_viaje = dataObj.alcance_viaje ?? null;
+    const tiposDeporte = (dataObj.tipo_deporte as string[] | null) ?? null;
+    out.cual_deporte = tiposDeporte?.[0] ?? null;
+    // nivel_academico en la BD puede tener "Bachiller"/"Tecnico Tecnologo"
+    // (vocabulario del constraint); el select de este formulario usa
+    // "Bachillerato"/"Tecnico" como value de las opciones.
+    const academicoDb = dataObj.nivel_academico as string | null;
+    out.nivel_educativo =
+      academicoDb === "Bachiller" ? "Bachillerato" :
+      academicoDb === "Tecnico Tecnologo" ? "Tecnico" :
+      academicoDb ?? null;
+    for (const campo of CAMPOS_BOOLEANOS) {
+      const columna = CAMPO_A_COLUMNA[campo] ?? campo;
+      out[campo] = boolAOpcion(dataObj[columna]) || null;
+    }
+    const partesDireccion = [dataObj.direccion, dataObj.barrio, dataObj.ciudad].filter(Boolean);
+    out.direccion_completa = partesDireccion.length ? partesDireccion.join(", ") : null;
+    return out;
+  }
+
+  // Convierte los cambios calculados (nombres locales) al payload que
+  // espera el RPC actualizar_datos_asociado (nombres de columna reales).
+  function paraPayloadRpc(cambios: Record<string, unknown>): Record<string, unknown> {
+    const out: Record<string, unknown> = {};
+    for (const [campo, valor] of Object.entries(cambios)) {
+      if (campo === "direccion_completa") continue; // solo para el resumen visual
+      if (CAMPOS_NO_EDITABLES.has(campo)) continue;
+      const columna = CAMPO_A_COLUMNA[campo] ?? campo;
+      if (campo === "cual_deporte") {
+        out[columna] = valor ? [valor] : [];
+        continue;
+      }
+      out[columna] = valor;
+    }
+    return out;
+  }
 
   let cedulaActual = "";
   let tipoIdentificacionActual = "CC";
@@ -700,18 +825,27 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   const $ = (id: string) => document.getElementById(id);
 
   
-  // ── Validación de Correo ───────────────────────────────────────────────
+  
+  const REGEX_EMAIL = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   function validarCorreo() {
     const el = $("f-email") as HTMLInputElement;
-    if (el && el.value.trim().toLowerCase().endsWith("@amigo.edu.co")) {
+    if (!el) return;
+    const valor = el.value.trim();
+    if (valor && !REGEX_EMAIL.test(valor)) {
+      el.setCustomValidity("Ingresa un correo electrónico válido (ejemplo: nombre@dominio.com).");
+    } else if (valor.toLowerCase().endsWith("@amigo.edu.co")) {
       el.setCustomValidity("No se permiten correos corporativos (@amigo.edu.co). Ingresa un correo personal.");
-    } else if (el) {
+    } else {
       el.setCustomValidity("");
     }
   }
   $("f-email")?.addEventListener("input", validarCorreo);
+  $("f-email")?.addEventListener("blur", () => {
+    validarCorreo();
+    ($("f-email") as HTMLInputElement)?.reportValidity();
+  });
   
-  // ── Lógica Modal Dirección ───────────────────────────────────────────────
+  
   const inputDireccion = $("f-direccion_completa") as HTMLInputElement;
   const modalDir = $("modal-direccion");
   const mdDepto = $("md-depto") as HTMLSelectElement;
@@ -726,7 +860,6 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     $("btn-cerrar-modal")?.addEventListener("click", () => { modalDir.style.display = "none"; });
     $("btn-cancelar-modal")?.addEventListener("click", () => { modalDir.style.display = "none"; });
     
-    // Cargar listas
     VIAS_PRINCIPALES.forEach(v => {
       const opt = document.createElement("option"); opt.value = v; opt.textContent = v; mdVia.appendChild(opt);
     });
@@ -751,41 +884,52 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
       if (el) el.addEventListener("input", actualizarPreview);
     });
     
+    let calleActual = "";
+    let ciudadActual = "";
+    let barrioActual = "";
+
     function actualizarPreview() {
       const vals = dirInputs.reduce((acc, id) => { acc[id] = ($(id) as HTMLInputElement).value.toUpperCase().trim(); return acc; }, {} as any);
-      
+
       let deptoNom = mdDepto.options[mdDepto.selectedIndex]?.text || "";
       let ciudadNom = mdCiudad.options[mdCiudad.selectedIndex]?.text || "";
-      
-      if (!vals["md-via"] || !vals["md-num1"] || !vals["md-placa"] || !deptoNom || !ciudadNom || ciudadNom==="Seleccione") {
+
+      if (!vals["md-via"] || !vals["md-num1"] || !vals["md-placa"] || !vals["md-barrio"] || !deptoNom || !ciudadNom || ciudadNom==="Seleccione") {
         previewBox.style.display = "none";
         btnConf.disabled = true;
         return;
       }
-      
-      let s = `${vals["md-via"]} ${vals["md-num1"]}`;
-      if (vals["md-letra1"]) s += ` ${vals["md-letra1"]}`;
-      if (vals["md-cuad1"]) s += ` ${vals["md-cuad1"]}`;
-      s += ` # ${vals["md-num2"] || ""}`;
-      if (vals["md-letra2"]) s += ` ${vals["md-letra2"]}`;
-      s += ` - ${vals["md-placa"]}`;
-      if (vals["md-cuad2"]) s += ` ${vals["md-cuad2"]}`;
-      if (vals["md-comp"]) s += `, ${vals["md-comp"]}`;
-      if (vals["md-barrio"]) s += `, ${vals["md-barrio"]}`;
-      s += `, ${ciudadNom} (${deptoNom})`;
-      
+
+      let calle = `${vals["md-via"]} ${vals["md-num1"]}`;
+      if (vals["md-letra1"]) calle += ` ${vals["md-letra1"]}`;
+      if (vals["md-cuad1"]) calle += ` ${vals["md-cuad1"]}`;
+      calle += ` # ${vals["md-num2"] || ""}`;
+      if (vals["md-letra2"]) calle += ` ${vals["md-letra2"]}`;
+      calle += ` - ${vals["md-placa"]}`;
+      if (vals["md-cuad2"]) calle += ` ${vals["md-cuad2"]}`;
+      if (vals["md-comp"]) calle += `, ${vals["md-comp"]}`;
+
+      let s = `${calle}, ${vals["md-barrio"]}, ${ciudadNom} (${deptoNom})`;
+
+      calleActual = calle;
+      ciudadActual = ciudadNom;
+      barrioActual = vals["md-barrio"];
+
       previewText.textContent = s;
       previewBox.style.display = "flex";
       btnConf.disabled = false;
     }
-    
+
     btnConf.addEventListener("click", () => {
       inputDireccion.value = previewText.textContent || "";
+      inputDireccion.dataset.direccion = calleActual;
+      inputDireccion.dataset.ciudad = ciudadActual;
+      inputDireccion.dataset.barrio = barrioActual;
       modalDir.style.display = "none";
     });
   }
 
-  // ── Helpers de números con separador de miles ──────────────────────────
+  
   function limpiarNumero(v: string): string {
     return v.replace(/\D/g, "");
   }
@@ -801,10 +945,10 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     el.addEventListener("blur", () => { el.value = formatearMiles(el.value); });
   });
 
-  // ── Navegación entre pasos ───────────────────────────────────────────────
-  const ORDEN_PASOS = ["form", "confirm", "success"];
+  
+  const ORDEN_PASOS = ["form", "success"];
 
-  function mostrarPaso(paso: "form" | "confirm" | "success") {
+  function mostrarPaso(paso: "form" | "success") {
     for (const p of ORDEN_PASOS) {
       const el = $(`ad-step-${p}`);
       if (el) el.style.display = p === paso ? "block" : "none";
@@ -823,13 +967,24 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     if (el) el.style.display = "none";
   }
 
-  // ── Autorización Legal ───────────────────────────────────────────────────
+  
   const checkAutorizacion = document.getElementById("ad-autorizacion") as HTMLInputElement;
   const btnRevisar = document.getElementById("ad-btn-revisar") as HTMLButtonElement;
-  if (checkAutorizacion && btnRevisar) {
-    checkAutorizacion.addEventListener("change", (e) => {
-      btnRevisar.disabled = !(e.target as HTMLInputElement).checked;
-    });
+  const formDatos = document.getElementById("ad-form-datos") as HTMLFormElement;
+  if (checkAutorizacion && btnRevisar && formDatos) {
+    const actualizarEstadoBoton = () => {
+      const hayPreferencia = document.querySelectorAll<HTMLInputElement>(".f-preferencias:checked").length > 0;
+      const hayHorario = document.querySelectorAll<HTMLInputElement>(".f-horarios:checked").length > 0;
+      btnRevisar.disabled = !(
+        checkAutorizacion.checked &&
+        formDatos.checkValidity() &&
+        hayPreferencia &&
+        hayHorario
+      );
+    };
+    checkAutorizacion.addEventListener("change", actualizarEstadoBoton);
+    formDatos.addEventListener("input", actualizarEstadoBoton);
+    formDatos.addEventListener("change", actualizarEstadoBoton);
   }
 
   // Ejecuta una acción async mostrando un texto de carga en el botón y
@@ -846,14 +1001,14 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     }
   }
 
-  // ── Acordeón ─────────────────────────────────────────────────────────────
+  
   document.querySelectorAll(".ad-accordion-header").forEach((btn) => {
     btn.addEventListener("click", () => {
       btn.closest(".ad-accordion-item")?.classList.toggle("open");
     });
   });
 
-  // ── Autocompletar al digitar la cédula ───────────────────────────────────
+  
   $("ad-cedula")?.addEventListener("blur", async () => {
     const cedulaInput = $("ad-cedula") as HTMLInputElement;
     const cedula = (cedulaInput?.value ?? "").trim();
@@ -870,7 +1025,7 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     if (error || !data) return;
 
     const dataObj = data as Record<string, unknown>;
-    valoresOriginales = dataObj;
+    valoresOriginales = normalizarOrigen(dataObj);
 
     for (const campo of TODOS_LOS_CAMPOS) {
       let elId = `f-${campo}`;
@@ -878,20 +1033,38 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
       if (campo === "tipo_identificacion") elId = "ad-tipo-identificacion";
       const el = $(elId) as HTMLInputElement | HTMLSelectElement | null;
       if (!el) continue;
-      let valor = dataObj[campo];
-      
+      let valor = valoresOriginales[campo];
+
       if (valor != null && el.value === "") {
         el.value = String(valor);
       }
     }
 
-    const preferenciasActuales = (dataObj.preferencias_contacto as string[] | null) ?? [];
+    if (dataObj.direccion || dataObj.ciudad || dataObj.barrio) {
+      inputDireccion.dataset.direccion = String(dataObj.direccion ?? "");
+      inputDireccion.dataset.ciudad = String(dataObj.ciudad ?? "");
+      inputDireccion.dataset.barrio = String(dataObj.barrio ?? "");
+    }
+
+    const preferenciasActuales = (valoresOriginales.preferencias_contacto as string[] | null) ?? [];
     document.querySelectorAll<HTMLInputElement>(".f-preferencias").forEach((cb) => {
       if (!cb.checked && preferenciasActuales.includes(cb.value)) cb.checked = true;
     });
-    const horariosActuales = (dataObj.horario_contacto as string[] | null) ?? [];
+    const horariosActuales = (valoresOriginales.horario_contacto as string[] | null) ?? [];
     document.querySelectorAll<HTMLInputElement>(".f-horarios").forEach((cb) => {
       if (!cb.checked && horariosActuales.includes(cb.value)) cb.checked = true;
+    });
+    const tipoViajeActual = (valoresOriginales.tipo_viaje as string[] | null) ?? [];
+    document.querySelectorAll<HTMLInputElement>(".f-tipo_viaje").forEach((cb) => {
+      if (!cb.checked && tipoViajeActual.includes(cb.value)) cb.checked = true;
+    });
+    const billeterasActuales = (valoresOriginales.billeteras_digitales as string[] | null) ?? [];
+    document.querySelectorAll<HTMLInputElement>(".f-billeteras").forEach((cb) => {
+      if (!cb.checked && billeterasActuales.includes(cb.value)) cb.checked = true;
+    });
+    const redesActuales = (valoresOriginales.redes_sociales as string[] | null) ?? [];
+    document.querySelectorAll<HTMLInputElement>(".f-redes").forEach((cb) => {
+      if (!cb.checked && redesActuales.includes(cb.value)) cb.checked = true;
     });
 
     actualizarGruposCondicionales();
@@ -903,14 +1076,68 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     if (wrapper) {
       wrapper.style.display = usaRedes === "Si" ? "block" : "none";
     }
-  }
-  $("f-usa_redes_sociales")?.addEventListener("change", actualizarGruposCondicionales);
+    if (usaRedes !== "Si") {
+      document.querySelectorAll<HTMLInputElement>(".f-redes").forEach((cb) => { cb.checked = false; });
+    }
 
-  // ── Calcula qué campos cambiaron respecto a los valores originales ─────
+    const tieneVehiculo = ($("f-tiene_vehiculo") as HTMLSelectElement)?.value;
+    const wrapperVehiculo = $("wrapper_tipo_vehiculo");
+    if (wrapperVehiculo) {
+      wrapperVehiculo.style.display = tieneVehiculo === "Si" ? "block" : "none";
+    }
+    const tipoVehiculoEl = $("f-tipo_vehiculo") as HTMLSelectElement;
+    if (tipoVehiculoEl) {
+      // Un campo oculto con required sigue contando como inválido para
+      // checkValidity(), aunque no se vea — hay que quitarle required
+      // mientras no aplique, si no el botón de enviar queda bloqueado.
+      tipoVehiculoEl.required = tieneVehiculo === "Si";
+      if (tieneVehiculo !== "Si") tipoVehiculoEl.value = "";
+    }
+
+    const practicaDeporte = ($("f-practica_deporte") as HTMLSelectElement)?.value;
+    const wrapperDeporte = $("wrapper_cual_deporte");
+    if (wrapperDeporte) {
+      wrapperDeporte.style.display = practicaDeporte === "Si" ? "block" : "none";
+    }
+    const cualDeporteEl = $("f-cual_deporte") as HTMLSelectElement;
+    if (cualDeporteEl) {
+      cualDeporteEl.required = practicaDeporte === "Si";
+      if (practicaDeporte !== "Si") cualDeporteEl.value = "";
+    }
+
+    const viajaFrecuencia = ($("f-viaja_frecuencia") as HTMLSelectElement)?.value;
+    const wrapperViaje = $("wrapper_tipo_viaje");
+    if (wrapperViaje) {
+      wrapperViaje.style.display = viajaFrecuencia === "Si" ? "block" : "none";
+    }
+    if (viajaFrecuencia !== "Si") {
+      document.querySelectorAll<HTMLInputElement>(".f-tipo_viaje").forEach((cb) => { cb.checked = false; });
+    }
+
+    const usaBilleteras = ($("f-usa_billeteras_digitales") as HTMLSelectElement)?.value;
+    const wrapperBilleteras = $("wrapper_cuales_billeteras");
+    if (wrapperBilleteras) {
+      wrapperBilleteras.style.display = usaBilleteras === "Si" ? "block" : "none";
+    }
+    if (usaBilleteras !== "Si") {
+      document.querySelectorAll<HTMLInputElement>(".f-billeteras").forEach((cb) => { cb.checked = false; });
+    }
+  }
+  // Corrige el estado inicial (los selects condicionales traen required
+  // por defecto en el HTML aunque empiecen ocultos).
+  actualizarGruposCondicionales();
+  $("f-usa_redes_sociales")?.addEventListener("change", actualizarGruposCondicionales);
+  $("f-tiene_vehiculo")?.addEventListener("change", actualizarGruposCondicionales);
+  $("f-practica_deporte")?.addEventListener("change", actualizarGruposCondicionales);
+  $("f-viaja_frecuencia")?.addEventListener("change", actualizarGruposCondicionales);
+  $("f-usa_billeteras_digitales")?.addEventListener("change", actualizarGruposCondicionales);
+
+  
   function calcularCambios(): Record<string, unknown> {
     const cambios: Record<string, unknown> = {};
 
     for (const campo of [...CAMPOS_TEXT, ...CAMPOS_NUMERICOS]) {
+      if (campo === "direccion_completa") continue; // se calcula aparte, más abajo
       let elId = `f-${campo}`;
       if (campo === "cedula") elId = "ad-cedula";
       if (campo === "tipo_identificacion") elId = "ad-tipo-identificacion";
@@ -920,6 +1147,24 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
       const anterior = valoresOriginales[campo];
       const anteriorStr = anterior == null ? "" : String(anterior);
       if (nuevo !== anteriorStr) cambios[campo] = nuevo === "" ? null : nuevo;
+    }
+
+    // Dirección: se compone en el modal (direccion + ciudad + barrio) y se
+    // compara contra los 3 valores originales por separado.
+    const direccionNueva = inputDireccion?.dataset.direccion ?? "";
+    const ciudadNueva = inputDireccion?.dataset.ciudad ?? "";
+    const barrioNueva = inputDireccion?.dataset.barrio ?? "";
+    const direccionAnterior = String(valoresOriginales.direccion ?? "");
+    const ciudadAnterior = String(valoresOriginales.ciudad ?? "");
+    const barrioAnterior = String(valoresOriginales.barrio ?? "");
+    if (
+      direccionNueva &&
+      (direccionNueva !== direccionAnterior || ciudadNueva !== ciudadAnterior || barrioNueva !== barrioAnterior)
+    ) {
+      cambios.direccion = direccionNueva;
+      cambios.ciudad = ciudadNueva;
+      cambios.barrio = barrioNueva;
+      cambios.direccion_completa = inputDireccion.value; // solo para el resumen visual
     }
 
     // Canales de contacto preferidos (checkboxes, arreglo).
@@ -939,70 +1184,34 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
       cambios.horario_contacto = horNuevos;
     }
 
+    const viajeNuevos = Array.from(
+      document.querySelectorAll<HTMLInputElement>(".f-tipo_viaje:checked"),
+    ).map((cb) => cb.value).sort();
+    const viajeAnteriores = ((valoresOriginales.tipo_viaje as string[] | null) ?? []).slice().sort();
+    if (JSON.stringify(viajeNuevos) !== JSON.stringify(viajeAnteriores)) {
+      cambios.tipo_viaje = viajeNuevos;
+    }
+
+    const billeterasNuevas = Array.from(
+      document.querySelectorAll<HTMLInputElement>(".f-billeteras:checked"),
+    ).map((cb) => cb.value).sort();
+    const billeterasAnteriores = ((valoresOriginales.billeteras_digitales as string[] | null) ?? []).slice().sort();
+    if (JSON.stringify(billeterasNuevas) !== JSON.stringify(billeterasAnteriores)) {
+      cambios.billeteras_digitales = billeterasNuevas;
+    }
+
+    const redesNuevas = Array.from(
+      document.querySelectorAll<HTMLInputElement>(".f-redes:checked"),
+    ).map((cb) => cb.value).sort();
+    const redesAnteriores = ((valoresOriginales.redes_sociales as string[] | null) ?? []).slice().sort();
+    if (JSON.stringify(redesNuevas) !== JSON.stringify(redesAnteriores)) {
+      cambios.redes_sociales = redesNuevas;
+    }
+
     return cambios;
   }
 
-  // Formatea un valor para mostrarlo en el resumen: usa el texto de la
-  // opción seleccionada si es un <select>, o el monto con separador de
-  // miles si es un campo de dinero.
-  function formatoValorResumen(campo: string, el: Element | null, valorCrudo: unknown): string {
-    if (valorCrudo === null || valorCrudo === undefined || valorCrudo === "") return "(sin dato)";
-    if (Array.isArray(valorCrudo)) {
-      if (valorCrudo.length === 0) return "(sin dato)";
-      return valorCrudo.map((v) => ETIQUETAS_CANAL[String(v)] ?? String(v)).join(", ");
-    }
-    if (el && el.tagName === "SELECT") {
-      const opt = (el as HTMLSelectElement).querySelector(`option[value="${CSS.escape(String(valorCrudo))}"]`);
-      if (opt) return opt.textContent ?? String(valorCrudo);
-    }
-    if (CAMPOS_DINERO.includes(campo)) {
-      const n = Number(valorCrudo);
-      return Number.isNaN(n) ? String(valorCrudo) : `$ ${n.toLocaleString("es-CO")}`;
-    }
-    return String(valorCrudo);
-  }
-
-  function renderizarResumen(contenedorId: string, cambios: Record<string, unknown>) {
-    const cont = $(contenedorId);
-    if (!cont) return;
-    cont.innerHTML = "";
-    for (const campo of TODOS_LOS_CAMPOS) {
-      if (!(campo in cambios)) continue;
-      const el = $(`f-${campo}`);
-      let anterior = valoresOriginales[campo];
-      if (campo === "fuente_ingresos") anterior = valoresOriginales.fuente_ingresos ?? valoresOriginales.tipo_trabajador;
-      if (campo === "salario") anterior = valoresOriginales.salario ?? valoresOriginales.salario_ingresos_fijos;
-      if (campo === "obligaciones_financieras") anterior = valoresOriginales.obligaciones_financieras ?? valoresOriginales.cuotas_credito;
-      // Construido con createElement/textContent (no innerHTML) para que
-      // cualquier valor ingresado por el usuario (ej. en "Dirección" u
-      // "Otro correo") nunca pueda inyectar HTML/JS en la página — ni aquí
-      // ni en la vista de auditoría del ERP si algún día reutiliza este dato.
-      const row = document.createElement("div");
-      row.className = "ad-resumen-row";
-
-      const label = document.createElement("span");
-      label.className = "ad-resumen-label";
-      label.textContent = ETIQUETAS_CAMPO[campo] ?? campo;
-
-      const valores = document.createElement("span");
-      valores.className = "ad-resumen-valores";
-
-      const spanAnterior = document.createElement("span");
-      spanAnterior.className = "ad-resumen-anterior";
-      spanAnterior.textContent = formatoValorResumen(campo, el, anterior);
-
-      const spanNuevo = document.createElement("span");
-      spanNuevo.className = "ad-resumen-nuevo";
-      spanNuevo.textContent = formatoValorResumen(campo, el, cambios[campo]);
-
-      valores.append(spanAnterior, spanNuevo);
-      row.append(label, valores);
-      cont.appendChild(row);
-    }
-  }
-
-  // ── Revisar cambios ─────────────────────────────────────────
-  $("ad-form-datos")?.addEventListener("submit", (e) => {
+  $("ad-form-datos")?.addEventListener("submit", async (e) => {
     e.preventDefault();
     ocultarError("ad-form-error");
 
@@ -1023,6 +1232,27 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
       mostrarError("ad-form-error", "Debes seleccionar al menos un horario preferido.");
       return;
     }
+    if (($("f-viaja_frecuencia") as HTMLSelectElement)?.value === "Si") {
+      const viajeChecked = document.querySelectorAll<HTMLInputElement>(".f-tipo_viaje:checked").length;
+      if (viajeChecked === 0) {
+        mostrarError("ad-form-error", "Selecciona si viaja a nivel nacional, internacional o ambas.");
+        return;
+      }
+    }
+    if (($("f-usa_billeteras_digitales") as HTMLSelectElement)?.value === "Si") {
+      const billeterasChecked = document.querySelectorAll<HTMLInputElement>(".f-billeteras:checked").length;
+      if (billeterasChecked === 0) {
+        mostrarError("ad-form-error", "Selecciona al menos una billetera digital.");
+        return;
+      }
+    }
+    if (($("f-usa_redes_sociales") as HTMLSelectElement)?.value === "Si") {
+      const redesChecked = document.querySelectorAll<HTMLInputElement>(".f-redes:checked").length;
+      if (redesChecked === 0) {
+        mostrarError("ad-form-error", "Selecciona al menos una red social.");
+        return;
+      }
+    }
 
 
     cedulaActual = ($("ad-cedula") as HTMLInputElement).value.trim();
@@ -1040,30 +1270,20 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     }
 
     cambiosPendientes = cambios;
-    renderizarResumen("ad-resumen-cambios", cambios);
-    mostrarPaso("confirm");
-  });
-
-  $("ad-btn-volver-confirm")?.addEventListener("click", () => mostrarPaso("form"));
-
-  // ── Paso 3: confirmar y enviar ───────────────────────────────────────────
-  $("ad-btn-guardar")?.addEventListener("click", async () => {
-    ocultarError("ad-confirm-error");
-    const btn = $("ad-btn-guardar") as HTMLButtonElement;
+    const btn = $("ad-btn-revisar") as HTMLButtonElement;
 
     await conEstadoCarga(btn, "Enviando…", async () => {
       const { data, error } = await supabase.rpc("actualizar_datos_asociado", {
         p_cedula: cedulaActual,
         p_tipo_identificacion: tipoIdentificacionActual,
-        p_cambios: cambiosPendientes,
+        p_cambios: paraPayloadRpc(cambiosPendientes),
       });
 
       if (error || !data?.ok) {
-        mostrarError("ad-confirm-error", error?.message ?? "No se pudieron guardar los cambios. Intenta nuevamente.");
+        mostrarError("ad-form-error", error?.message ?? "No se pudieron guardar los cambios. Intenta nuevamente.");
         return;
       }
 
-      renderizarResumen("ad-resumen-final", cambiosPendientes);
       mostrarPaso("success");
     });
   });
@@ -1073,14 +1293,30 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     tipoIdentificacionActual = "CC";
     valoresOriginales = {};
     cambiosPendientes = {};
-    (document.getElementById("ad-cedula") as HTMLInputElement).value = "";
-    (document.getElementById("ad-tipo-identificacion") as HTMLSelectElement).value = "CC";
-    mostrarPaso("cedula");
+
+    formDatos?.reset();
+
+    // El modal de dirección vive fuera del <form>, así que reset() no lo toca.
+    delete inputDireccion.dataset.direccion;
+    delete inputDireccion.dataset.ciudad;
+    delete inputDireccion.dataset.barrio;
+    ["md-depto", "md-via", "md-num1", "md-letra1", "md-cuad1", "md-num2", "md-letra2", "md-placa", "md-cuad2", "md-comp", "md-barrio"].forEach((id) => {
+      const el = $(id) as HTMLInputElement | HTMLSelectElement | null;
+      if (el) el.value = "";
+    });
+    mdCiudad.innerHTML = '<option value="">Seleccione</option>';
+    mdCiudad.disabled = true;
+    if (previewBox) previewBox.style.display = "none";
+    btnConf.disabled = true;
+
+    actualizarGruposCondicionales();
+    if (btnRevisar) btnRevisar.disabled = true;
+
+    mostrarPaso("form");
   });
 </script>
 <style>
-  /* ── Modal Dirección ── */
-  .modal-backdrop {
+    .modal-backdrop {
     position: fixed; inset: 0; z-index: 75;
     display: flex; align-items: center; justify-content: center;
     padding: 1.5rem;
@@ -1101,7 +1337,7 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   .modal-dir-title-group { display: flex; align-items: center; gap: 1rem; }
   .modal-dir-icon {
     width: 36px; height: 36px; border-radius: 50%;
-    background: var(--color-accent-teal); display: flex; align-items: center; justify-content: center;
+    background: #172b36; display: flex; align-items: center; justify-content: center;
   }
   .modal-dir-close {
     background: none; border: none; cursor: pointer;
@@ -1128,19 +1364,63 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   }
   .md-sep { display: flex; align-items: center; gap: 1rem; }
   .md-line { flex: 1; height: 1px; background: var(--color-border); }
-  .md-hash { font-size: 1.25rem; font-weight: 800; color: var(--color-accent-teal); }
+  .md-hash { font-size: 1.25rem; font-weight: 800; color: #172b36; }
   
   .md-input {
     width: 100%; height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--color-border);
-    border-radius: 0.5rem; font-size: 0.875rem; color: var(--color-text-muted); background: transparent;
+    border-radius: var(--radius-md); font-size: 0.875rem; color: var(--color-text-muted); background: transparent;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); outline: none;
   }
   .md-input:focus { border-color: var(--color-border-strong); }
   .md-input.uppercase { text-transform: uppercase; }
+  select.md-input {
+    padding-right: 2.25rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234B5563' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  #modal-direccion label {
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: #172b36;
+  }
+
+  .form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+  }
+  .form-check input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: #172b36;
+  }
+  .form-check label {
+    font-size: 0.8125rem;
+    color: #172b36;
+    opacity: 0.6;
+    line-height: 1.5;
+  }
+  .form-check a {
+    color: #172b36;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .req {
+    color: #dc2626;
+    margin-left: 0;
+  }
   
   .md-preview {
-    background: #ffffff; border-radius: 8px; padding: 1.25rem;
-    border: 1px dashed var(--color-accent-teal); display: flex; align-items: center; gap: 1rem;
+    padding: 0.875rem 0.25rem 0;
+    border-top: 1px solid var(--color-border);
+    display: flex; align-items: center; gap: 1rem;
   }
   
   .modal-dir-footer {
@@ -1153,7 +1433,7 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   }
   .modal-dir-btn-pri {
     height: 44px; padding: 0 1.5rem; border-radius: 9999px; cursor: pointer;
-    background: var(--color-accent-teal); color: #ffffff; font-weight: 600; display: flex; align-items: center;
+    background: #172b36; color: #ffffff; font-weight: 600; display: flex; align-items: center;
   }
   .modal-dir-btn-pri:disabled { opacity: 0.55; cursor: not-allowed; }
 </style>

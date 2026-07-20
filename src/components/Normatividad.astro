@@ -24,9 +24,6 @@ function formatFecha(dateStr: string): string {
 }
 ---
 
-<!-- ════════════════════════════════════
-     NORMATIVIDAD — DOCUMENTOS
-════════════════════════════════════ -->
 <section class="norm-section" aria-labelledby="norm-title">
   <div class="max-w-7xl mx-auto px-6">
 
@@ -81,9 +78,6 @@ function formatFecha(dateStr: string): string {
   </div>
 </section>
 
-<!-- ════════════════════════════════════
-     MODAL
-════════════════════════════════════ -->
 <div class="norm-modal" id="normModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
   <div class="norm-modal-backdrop" id="normModalBackdrop"></div>
   <div class="norm-modal-box">
@@ -185,7 +179,7 @@ function formatFecha(dateStr: string): string {
 </style>
 
 <script>
-  // ── Filtros ──
+  
   const filterBtns = document.querySelectorAll<HTMLButtonElement>('.norm-filter-btn');
   const cards      = document.querySelectorAll<HTMLButtonElement>('.norm-card');
 
@@ -198,7 +192,7 @@ function formatFecha(dateStr: string): string {
     });
   });
 
-  // ── Hash tab ──
+  
   function activateHashFilter() {
     const hash = window.location.hash.slice(1).toLowerCase();
     if (!hash) return;
@@ -208,7 +202,7 @@ function formatFecha(dateStr: string): string {
   activateHashFilter();
   window.addEventListener('hashchange', activateHashFilter);
 
-  // ── Modal ──
+  
   const modal          = document.getElementById('normModal')!;
   const backdrop       = document.getElementById('normModalBackdrop')!;
   const closeBtn       = document.getElementById('normModalClose')!;

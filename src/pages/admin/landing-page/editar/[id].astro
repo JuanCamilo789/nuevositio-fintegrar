@@ -36,13 +36,13 @@ function verifySessionToken(token: string | undefined): boolean {
   return Number.isFinite(exp) && exp > Date.now();
 }
 
-// ── Verificar sesión ──
+
 const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 if (!isAuth) {
   return Astro.redirect('/admin/landing-page');
 }
 
-// ── Cargar documento ──
+
 const { id } = Astro.params;
 
 const docsMap: Record<string, string> = {

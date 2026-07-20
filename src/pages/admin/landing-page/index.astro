@@ -100,7 +100,7 @@ if (Astro.request.method === 'POST') {
   }
 }
 
-// ── Verificar sesión ──
+
 const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 ---
 
@@ -323,8 +323,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       min-height: 100vh;
     }
 
-    /* ── Sidebar ── */
-    .sidebar {
+        .sidebar {
       background: var(--dark);
       display: flex; flex-direction: column;
       position: sticky; top: 0;
@@ -395,8 +394,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     }
     .sidebar-logout:hover { background: rgba(220,38,38,0.1); color: #FCA5A5; }
 
-    /* ── Main ── */
-    .main-content { display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content { display: flex; flex-direction: column; min-height: 100vh; }
 
     .topbar {
       background: var(--surface);
@@ -435,8 +433,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     }
     .topbar-visit:hover { border-color: var(--border-2); color: var(--dark); background: var(--bg); }
 
-    /* ── Page header ── */
-    .page-header {
+        .page-header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       padding: 1.75rem 2rem;
@@ -460,8 +457,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 
     .page-content { flex: 1; padding: 1.75rem 2rem; max-width: 900px; width: 100%; }
 
-    /* ── Section headers ── */
-    .section-label {
+        .section-label {
       font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--muted);
       margin-bottom: 0.875rem; margin-top: 2rem;
@@ -472,8 +468,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       content: ''; flex: 1; height: 1px; background: var(--border);
     }
 
-    /* ── Section cards ── */
-    .section-cards {
+        .section-cards {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1rem;
@@ -519,8 +514,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     }
     .section-card-desc { font-size: 0.775rem; color: var(--muted); line-height: 1.55; }
 
-    /* ── Doc list ── */
-    .doc-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .doc-list { display: flex; flex-direction: column; gap: 0.5rem; }
     .doc-row {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -557,8 +551,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     }
     .doc-edit-btn:hover { background: var(--dark-2); transform: translateY(-1px); }
 
-    /* ── Info note ── */
-    .dash-note {
+        .dash-note {
       margin-top: 2rem;
       background: #FFFBEB;
       border: 1px solid rgba(255,200,1,0.25);
@@ -574,8 +567,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 <body>
 
 {!isAuth ? (
-  <!-- ══ LOGIN ══ -->
-  <div class="login-screen">
+    <div class="login-screen">
     <div class="login-card">
       <div class="login-left">
         <h1 class="login-title">Saludos, bienvenido(a)</h1>
@@ -632,8 +624,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 
   </div>
 ) : (
-  <!-- ══ DASHBOARD ══ -->
-  <div class="admin-layout">
+    <div class="admin-layout">
 
     <!-- Sidebar -->
     <aside class="sidebar">

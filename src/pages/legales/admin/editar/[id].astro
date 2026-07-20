@@ -7,7 +7,7 @@ import path from 'node:path';
 
 export const prerender = false;
 
-// ── Verificar sesión admin ──────────────────────────────────────────────
+
 const sessionCookie = Astro.cookies.get('admin_lp')?.value;
 if (sessionCookie !== 'coop-lp-admin-ok') {
   return Astro.redirect('/admin/landing-page');

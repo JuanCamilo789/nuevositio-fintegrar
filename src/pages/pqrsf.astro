@@ -814,7 +814,7 @@ const tipos = [
 
   function resetearBoton() {
     if (submitBtn) {
-      submitBtn.disabled   = false;
+      submitBtn.disabled = !((autorizoCheck?.checked ?? false) && (pqrsfForm?.checkValidity() ?? true));
       submitBtn.textContent = "Enviar solicitud";
     }
     enviando = false;
@@ -883,10 +883,15 @@ const tipos = [
     });
   }
 
+  const pqrsfForm = document.getElementById("pqrsf-form") as HTMLFormElement | null;
   function toggleSubmit() {
-    if (submitBtn) submitBtn.disabled = !(autorizoCheck?.checked ?? false);
+    if (submitBtn) {
+      submitBtn.disabled = !((autorizoCheck?.checked ?? false) && (pqrsfForm?.checkValidity() ?? true));
+    }
   }
   autorizoCheck?.addEventListener("change", toggleSubmit);
+  pqrsfForm?.addEventListener("input", toggleSubmit);
+  pqrsfForm?.addEventListener("change", toggleSubmit);
   toggleSubmit();
 
   fileInput?.addEventListener("change", () => {
