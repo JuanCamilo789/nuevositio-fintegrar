@@ -753,52 +753,12 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     // "estudiante" — un campo distinto que este formulario no pide.
     nivel_educativo: "nivel_academico",
   };
-  // Campos que en el formulario son un select "Sí"/"No" pero en la BD son boolean.
-  const CAMPOS_BOOLEANOS = new Set([
-    "tiene_vehiculo", "tiene_vivienda_propia", "practica_deporte", "viaja_frecuencia",
-    "tiene_mascotas", "compras_online", "usa_tarjeta_credito", "usa_billeteras_digitales",
-    "usa_redes_sociales",
-  ]);
   // tipo_identificacion y cedula son solo parámetros de búsqueda del
   // asociado, no "cambios" — nunca se envían como tal. nombres/apellidos sí
   // se envían: el backend decide si los aplica (nunca, si el asociado ya
   // existe) o los guarda (cuando la cédula no coincide con nadie, para que
   // el asesor sepa quién dice ser esa persona).
   const CAMPOS_NO_EDITABLES = new Set(["tipo_identificacion", "cedula"]);
-
-  function boolAOpcion(v: unknown): string {
-    if (v === true) return "Si";
-    if (v === false) return "No";
-    return "";
-  }
-
-  // Convierte lo que devuelve obtener_datos_actuales_asociado (nombres de
-  // columna reales, tipos boolean/array) al formato que usan los campos
-  // del formulario (nombres locales, "Si"/"No", valor único).
-  function normalizarOrigen(dataObj: Record<string, unknown>): Record<string, unknown> {
-    const out: Record<string, unknown> = { ...dataObj };
-    out.contacto_principal = dataObj.celular ?? dataObj.telefono ?? null;
-    out.preferencias_contacto = dataObj.canales_comunicacion ?? null;
-    out.interes_promociones = dataObj.nivel_interes_promociones ?? null;
-    out.tipo_viaje = dataObj.alcance_viaje ?? null;
-    const tiposDeporte = (dataObj.tipo_deporte as string[] | null) ?? null;
-    out.cual_deporte = tiposDeporte?.[0] ?? null;
-    // nivel_academico en la BD puede tener "Bachiller"/"Tecnico Tecnologo"
-    // (vocabulario del constraint); el select de este formulario usa
-    // "Bachillerato"/"Tecnico" como value de las opciones.
-    const academicoDb = dataObj.nivel_academico as string | null;
-    out.nivel_educativo =
-      academicoDb === "Bachiller" ? "Bachillerato" :
-      academicoDb === "Tecnico Tecnologo" ? "Tecnico" :
-      academicoDb ?? null;
-    for (const campo of CAMPOS_BOOLEANOS) {
-      const columna = CAMPO_A_COLUMNA[campo] ?? campo;
-      out[campo] = boolAOpcion(dataObj[columna]) || null;
-    }
-    const partesDireccion = [dataObj.direccion, dataObj.barrio, dataObj.ciudad].filter(Boolean);
-    out.direccion_completa = partesDireccion.length ? partesDireccion.join(", ") : null;
-    return out;
-  }
 
   // Convierte los cambios calculados (nombres locales) al payload que
   // espera el RPC actualizar_datos_asociado (nombres de columna reales).
@@ -819,7 +779,6 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
 
   let cedulaActual = "";
   let tipoIdentificacionActual = "CC";
-  let valoresOriginales: Record<string, unknown> = {};
   let cambiosPendientes: Record<string, unknown> = {};
 
   const $ = (id: string) => document.getElementById(id);
@@ -987,6 +946,22 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     formDatos.addEventListener("change", actualizarEstadoBoton);
   }
 
+  // Hash de la IP del solicitante para trazabilidad/auditoría (ver
+  // actualizaciones_datos.ip_hash). Se calcula en el servidor (Edge
+  // Function) y no en el navegador, porque el cliente podría reportar
+  // cualquier cosa si el hash se calculara en el front. Si la función falla
+  // por cualquier motivo, se envía null: no debe bloquear el envío del
+  // formulario.
+  async function obtenerIpHash(): Promise<string | null> {
+    try {
+      const { data, error } = await supabase.functions.invoke("ip-hash");
+      if (error) return null;
+      return (data as { ip_hash?: string })?.ip_hash ?? null;
+    } catch {
+      return null;
+    }
+  }
+
   // Ejecuta una acción async mostrando un texto de carga en el botón y
   // restaurando su contenido original al terminar.
   async function conEstadoCarga(btn: HTMLButtonElement, textoCargando: string, fn: () => Promise<void>) {
@@ -1008,67 +983,12 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     });
   });
 
-  
-  $("ad-cedula")?.addEventListener("blur", async () => {
-    const cedulaInput = $("ad-cedula") as HTMLInputElement;
-    const cedula = (cedulaInput?.value ?? "").trim();
-    if (!/^[0-9]{5,11}$/.test(cedula)) return;
-
-    cedulaActual = cedula;
-    tipoIdentificacionActual = ($("ad-tipo-identificacion") as HTMLSelectElement)?.value || "CC";
-
-    const { data, error } = await supabase.rpc("obtener_datos_actuales_asociado", {
-      p_cedula: cedulaActual,
-      p_tipo_identificacion: tipoIdentificacionActual,
-    });
-
-    if (error || !data) return;
-
-    const dataObj = data as Record<string, unknown>;
-    valoresOriginales = normalizarOrigen(dataObj);
-
-    for (const campo of TODOS_LOS_CAMPOS) {
-      let elId = `f-${campo}`;
-      if (campo === "cedula") elId = "ad-cedula";
-      if (campo === "tipo_identificacion") elId = "ad-tipo-identificacion";
-      const el = $(elId) as HTMLInputElement | HTMLSelectElement | null;
-      if (!el) continue;
-      let valor = valoresOriginales[campo];
-
-      if (valor != null && el.value === "") {
-        el.value = String(valor);
-      }
-    }
-
-    if (dataObj.direccion || dataObj.ciudad || dataObj.barrio) {
-      inputDireccion.dataset.direccion = String(dataObj.direccion ?? "");
-      inputDireccion.dataset.ciudad = String(dataObj.ciudad ?? "");
-      inputDireccion.dataset.barrio = String(dataObj.barrio ?? "");
-    }
-
-    const preferenciasActuales = (valoresOriginales.preferencias_contacto as string[] | null) ?? [];
-    document.querySelectorAll<HTMLInputElement>(".f-preferencias").forEach((cb) => {
-      if (!cb.checked && preferenciasActuales.includes(cb.value)) cb.checked = true;
-    });
-    const horariosActuales = (valoresOriginales.horario_contacto as string[] | null) ?? [];
-    document.querySelectorAll<HTMLInputElement>(".f-horarios").forEach((cb) => {
-      if (!cb.checked && horariosActuales.includes(cb.value)) cb.checked = true;
-    });
-    const tipoViajeActual = (valoresOriginales.tipo_viaje as string[] | null) ?? [];
-    document.querySelectorAll<HTMLInputElement>(".f-tipo_viaje").forEach((cb) => {
-      if (!cb.checked && tipoViajeActual.includes(cb.value)) cb.checked = true;
-    });
-    const billeterasActuales = (valoresOriginales.billeteras_digitales as string[] | null) ?? [];
-    document.querySelectorAll<HTMLInputElement>(".f-billeteras").forEach((cb) => {
-      if (!cb.checked && billeterasActuales.includes(cb.value)) cb.checked = true;
-    });
-    const redesActuales = (valoresOriginales.redes_sociales as string[] | null) ?? [];
-    document.querySelectorAll<HTMLInputElement>(".f-redes").forEach((cb) => {
-      if (!cb.checked && redesActuales.includes(cb.value)) cb.checked = true;
-    });
-
-    actualizarGruposCondicionales();
-  });
+  // A propósito el formulario NO consulta ni prellena los datos actuales del
+  // asociado a partir de la cédula: el titular debe diligenciar todo de
+  // nuevo. El backend (RPC actualizar_datos_asociado, que sí conoce el
+  // registro real) es quien compara contra el valor actual y arma el
+  // pendiente de revisión — así el navegador nunca recibe datos personales
+  // o financieros de alguien que no sea quien está llenando el formulario.
 
   function actualizarGruposCondicionales() {
     const usaRedes = ($("f-usa_redes_sociales") as HTMLSelectElement)?.value;
@@ -1133,6 +1053,10 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   $("f-usa_billeteras_digitales")?.addEventListener("change", actualizarGruposCondicionales);
 
   
+  // Ya no hay "valores originales" del lado del cliente contra qué comparar
+  // (no se consultan): se recoge tal cual lo que el asociado diligenció y se
+  // envía completo. El RPC actualizar_datos_asociado es quien compara contra
+  // el registro real y decide qué quedó como pendiente de revisión.
   function calcularCambios(): Record<string, unknown> {
     const cambios: Record<string, unknown> = {};
 
@@ -1144,23 +1068,14 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
       const el = $(elId) as HTMLInputElement | HTMLSelectElement | null;
       if (!el) continue;
       const nuevo = el.value.trim();
-      const anterior = valoresOriginales[campo];
-      const anteriorStr = anterior == null ? "" : String(anterior);
-      if (nuevo !== anteriorStr) cambios[campo] = nuevo === "" ? null : nuevo;
+      cambios[campo] = nuevo === "" ? null : nuevo;
     }
 
-    // Dirección: se compone en el modal (direccion + ciudad + barrio) y se
-    // compara contra los 3 valores originales por separado.
+    // Dirección: se compone en el modal (direccion + ciudad + barrio).
     const direccionNueva = inputDireccion?.dataset.direccion ?? "";
     const ciudadNueva = inputDireccion?.dataset.ciudad ?? "";
     const barrioNueva = inputDireccion?.dataset.barrio ?? "";
-    const direccionAnterior = String(valoresOriginales.direccion ?? "");
-    const ciudadAnterior = String(valoresOriginales.ciudad ?? "");
-    const barrioAnterior = String(valoresOriginales.barrio ?? "");
-    if (
-      direccionNueva &&
-      (direccionNueva !== direccionAnterior || ciudadNueva !== ciudadAnterior || barrioNueva !== barrioAnterior)
-    ) {
+    if (direccionNueva) {
       cambios.direccion = direccionNueva;
       cambios.ciudad = ciudadNueva;
       cambios.barrio = barrioNueva;
@@ -1168,45 +1083,25 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     }
 
     // Canales de contacto preferidos (checkboxes, arreglo).
-    const prefNuevos = Array.from(
+    cambios.preferencias_contacto = Array.from(
       document.querySelectorAll<HTMLInputElement>(".f-preferencias:checked"),
     ).map((cb) => cb.value).sort();
-    const prefAnteriores = ((valoresOriginales.preferencias_contacto as string[] | null) ?? []).slice().sort();
-    if (JSON.stringify(prefNuevos) !== JSON.stringify(prefAnteriores)) {
-      cambios.preferencias_contacto = prefNuevos;
-    }
 
-    const horNuevos = Array.from(
+    cambios.horario_contacto = Array.from(
       document.querySelectorAll<HTMLInputElement>(".f-horarios:checked"),
     ).map((cb) => cb.value).sort();
-    const horAnteriores = ((valoresOriginales.horario_contacto as string[] | null) ?? []).slice().sort();
-    if (JSON.stringify(horNuevos) !== JSON.stringify(horAnteriores)) {
-      cambios.horario_contacto = horNuevos;
-    }
 
-    const viajeNuevos = Array.from(
+    cambios.tipo_viaje = Array.from(
       document.querySelectorAll<HTMLInputElement>(".f-tipo_viaje:checked"),
     ).map((cb) => cb.value).sort();
-    const viajeAnteriores = ((valoresOriginales.tipo_viaje as string[] | null) ?? []).slice().sort();
-    if (JSON.stringify(viajeNuevos) !== JSON.stringify(viajeAnteriores)) {
-      cambios.tipo_viaje = viajeNuevos;
-    }
 
-    const billeterasNuevas = Array.from(
+    cambios.billeteras_digitales = Array.from(
       document.querySelectorAll<HTMLInputElement>(".f-billeteras:checked"),
     ).map((cb) => cb.value).sort();
-    const billeterasAnteriores = ((valoresOriginales.billeteras_digitales as string[] | null) ?? []).slice().sort();
-    if (JSON.stringify(billeterasNuevas) !== JSON.stringify(billeterasAnteriores)) {
-      cambios.billeteras_digitales = billeterasNuevas;
-    }
 
-    const redesNuevas = Array.from(
+    cambios.redes_sociales = Array.from(
       document.querySelectorAll<HTMLInputElement>(".f-redes:checked"),
     ).map((cb) => cb.value).sort();
-    const redesAnteriores = ((valoresOriginales.redes_sociales as string[] | null) ?? []).slice().sort();
-    if (JSON.stringify(redesNuevas) !== JSON.stringify(redesAnteriores)) {
-      cambios.redes_sociales = redesNuevas;
-    }
 
     return cambios;
   }
@@ -1273,10 +1168,13 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     const btn = $("ad-btn-revisar") as HTMLButtonElement;
 
     await conEstadoCarga(btn, "Enviando…", async () => {
+      const ipHash = await obtenerIpHash();
+
       const { data, error } = await supabase.rpc("actualizar_datos_asociado", {
         p_cedula: cedulaActual,
         p_tipo_identificacion: tipoIdentificacionActual,
         p_cambios: paraPayloadRpc(cambiosPendientes),
+        p_ip_hash: ipHash,
       });
 
       if (error || !data?.ok) {
@@ -1291,7 +1189,6 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   $("ad-nueva")?.addEventListener("click", () => {
     cedulaActual = "";
     tipoIdentificacionActual = "CC";
-    valoresOriginales = {};
     cambiosPendientes = {};
 
     formDatos?.reset();

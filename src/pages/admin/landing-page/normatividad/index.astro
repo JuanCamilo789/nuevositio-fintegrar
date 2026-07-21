@@ -762,30 +762,24 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
     btnSave.disabled = true; btnSave.textContent = 'Guardando…';
     try {
       const isEdit = !!fId.value;
-      const docId  = isEdit ? fId.value : crypto.randomUUID();
-      let url = null;
       const file = fFile.files[0];
-      if (file) {
-        progressBar.classList.add('show');
-        const { error: upErr } = await sb.storage.from('normatividad')
-          .upload(`${docId}.pdf`, file, { upsert: true, contentType: 'application/pdf' });
-        if (upErr) throw new Error('Error al subir PDF: ' + upErr.message);
-        const { data: urlData } = sb.storage.from('normatividad').getPublicUrl(`${docId}.pdf`);
-        url = urlData.publicUrl;
-        progressFill.style.width = '100%';
-      }
-      const payload = {
-        titulo, categoria: fCategoria.value, fecha: fFecha.value,
-        descripcion: fDesc.value.trim(), activo: true, ...(url ? { url } : {}),
-      };
-      let dbErr;
-      if (isEdit) {
-        ({ error: dbErr } = await sb.from('normatividad_docs').update(payload).eq('id', fId.value));
-      } else {
-        ({ error: dbErr } = await sb.from('normatividad_docs')
-          .insert({ id: docId, ...payload, orden: 99, activo: true }));
-      }
-      if (dbErr) throw new Error('Error al guardar: ' + dbErr.message);
+      if (file) progressBar.classList.add('show');
+
+      const body = new FormData();
+      body.set('action', 'save');
+      body.set('isEdit', String(isEdit));
+      if (isEdit) body.set('id', fId.value);
+      body.set('titulo', titulo);
+      body.set('categoria', fCategoria.value);
+      body.set('fecha', fFecha.value);
+      body.set('descripcion', fDesc.value.trim());
+      if (file) body.set('file', file);
+
+      const res = await fetch('/api/admin-normatividad', { method: 'POST', body, credentials: 'include' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Error al guardar');
+      if (file) progressFill.style.width = '100%';
+
       showToast(isEdit ? '✓ Documento actualizado' : '✓ Documento creado');
       closeDrawer(); loadDocs();
     } catch (err) {
@@ -797,9 +791,12 @@ if (!isAuth) return Astro.redirect('/admin/landing-page');
 
   async function confirmDelete(id, titulo) {
     if (!confirm(`¿Eliminar "${titulo}"?\n\nEsta acción no se puede deshacer.`)) return;
-    const { error } = await sb.from('normatividad_docs').delete().eq('id', id);
-    if (error) { showToast('Error al eliminar: ' + error.message, true); return; }
-    await sb.storage.from('normatividad').remove([`${id}.pdf`]);
+    const body = new FormData();
+    body.set('action', 'delete');
+    body.set('id', id);
+    const res = await fetch('/api/admin-normatividad', { method: 'POST', body, credentials: 'include' });
+    const data = await res.json();
+    if (!res.ok) { showToast('Error al eliminar: ' + data.error, true); return; }
     showToast('Documento eliminado');
     loadDocs();
   }

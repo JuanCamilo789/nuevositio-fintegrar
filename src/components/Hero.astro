@@ -64,11 +64,9 @@ const slides = [
       <div class="absolute inset-0 bg-gradient-to-r from-[#FFC801] via-[#FFC801]/85 to-transparent"></div>
 
       <!-- Slide Content Container -->
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pb-14 sm:pb-0 h-full flex flex-col items-center sm:items-start justify-center min-w-0">
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pb-14 sm:pb-16 h-full flex flex-col items-center sm:items-start justify-center min-w-0">
 
         <div class="max-w-2xl w-full min-w-0 text-center sm:text-left flex flex-col items-center sm:items-start">
-
-          <span class="slide-accent block w-12 h-1 rounded-full bg-[#FFC801] mb-5 animate-fade-in-up" style="animation-delay: 0.15s; animation-fill-mode: both;" aria-hidden="true"></span>
 
           <h1 class="slide-title text-4xl md:text-5xl lg:text-[4rem] font-extrabold text-[#172B36] leading-[1.1] mb-6 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: both;" set:html={s.heading} />
 
@@ -79,13 +77,13 @@ const slides = [
           {(s.cta1 || s.cta2) && (
             <div class="slide-ctas flex flex-wrap items-center justify-center sm:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
               {s.cta1 && (
-                <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold transition-colors ${s.cta1.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-colors ${s.cta1.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                   {s.cta1.icon && <Icon name={s.cta1.icon} class="w-5 h-5" />}
                   {s.cta1.label}
                 </a>
               )}
               {s.cta2 && (
-                <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold transition-colors ${s.cta2.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-colors ${s.cta2.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                   {s.cta2.label}
                   {s.cta2.icon && <Icon name={s.cta2.icon} class="w-5 h-5" />}
                 </a>
@@ -106,7 +104,7 @@ const slides = [
   </button>
 
   <!-- Dots -->
-  <div class="slider-dots absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2.5 z-20">
+  <div class="slider-dots hidden sm:flex absolute bottom-24 left-1/2 -translate-x-1/2 gap-2.5 z-20">
     {slides.map((_, i) => (
       <button class={`slider-dot w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-[#FFC801] w-8' : 'bg-black/10 hover:bg-black/30 shadow-sm'}`} data-index={i} aria-label={`Slide ${i + 1}`} />
     ))}
@@ -159,12 +157,12 @@ const slides = [
 
 <style>
   .hero-slider {
-    height: 700px;
-    min-height: 85vh;
+    height: 560px;
+    min-height: 65vh;
   }
   @media (max-width: 768px) {
     .hero-slider {
-      height: 650px;
+      height: 520px;
       min-height: auto;
     }
   }

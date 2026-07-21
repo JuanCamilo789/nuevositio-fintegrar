@@ -108,35 +108,42 @@ const requisitos = [
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    background: #fff;
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid transparent;
     border-radius: var(--radius-md);
-    padding: 1.25rem 1.5rem;
-    box-shadow: 0 2px 14px rgba(23, 43, 54, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .req-card:hover {
+    background: #fff;
+    border-color: var(--color-surface);
   }
 
   .req-icon {
-    width: 44px;
-    height: 44px;
-    background: #172B36;
+    width: 40px;
+    height: 40px;
+    background: #fff;
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #FFC801;
+    color: #172B36;
+    box-shadow: var(--shadow-sm);
   }
 
   .req-body { flex: 1; }
 
   .req-titulo {
     font-weight: 700;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     color: #172B36;
     margin-bottom: 0.25rem;
   }
 
   .req-desc {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     color: #172B36;
     opacity: 0.6;
     line-height: 1.6;
