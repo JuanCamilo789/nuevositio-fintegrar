@@ -3,6 +3,11 @@ import { Icon } from 'astro-icon/components';
 
 const slides = [
   {
+    id: 'slide-5',
+    bgImage: '/assets/img/banner5.png',
+    imageOnly: true,
+  },
+  {
     id: 'slide-0',
     subtitle: 'BIENESTAR PARA USTED Y SU FAMILIA',
     heading: 'Cuidamos a su familia<br>en los momentos <span class="text-accent">que importan</span>',
@@ -51,47 +56,63 @@ const slides = [
       aria-hidden={i !== 0 ? 'true' : 'false'}
     >
       <!-- Background Image -->
-      <img
-        src={s.bgImage}
-        alt=""
-        class="absolute inset-0 w-full h-full object-cover object-center"
-        loading={i === 0 ? 'eager' : 'lazy'}
-        fetchpriority={i === 0 ? 'high' : undefined}
-      />
+      {s.imageOnly ? (
+        <a href="/actualizacion-datos/" aria-label="Ir a actualización de datos" class="absolute inset-0 w-full h-full block">
+          <img
+            src={s.bgImage}
+            alt=""
+            class="absolute inset-0 w-full h-full object-cover object-center"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : undefined}
+          />
+        </a>
+      ) : (
+        <img
+          src={s.bgImage}
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : undefined}
+        />
+      )}
       
-      <!-- Tinted + Gradient Overlay for Text Readability and Brand Consistency -->
-      <div class="absolute inset-0 bg-[#172B36]/10 mix-blend-multiply"></div>
-      <div class="absolute inset-0 bg-gradient-to-r from-[#FFC801] via-[#FFC801]/85 to-transparent"></div>
+      {!s.imageOnly && (
+        <>
+          <!-- Tinted + Gradient Overlay for Text Readability and Brand Consistency -->
+          <div class="absolute inset-0 bg-[#172B36]/10 mix-blend-multiply"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#FFC801] via-[#FFC801]/85 to-transparent"></div>
 
-      <!-- Slide Content Container -->
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pb-14 sm:pb-16 h-full flex flex-col items-center sm:items-start justify-center min-w-0">
+          <!-- Slide Content Container -->
+          <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pb-14 sm:pb-16 h-full flex flex-col items-center sm:items-start justify-center min-w-0">
 
-        <div class="max-w-2xl w-full min-w-0 text-center sm:text-left flex flex-col items-center sm:items-start">
+            <div class="max-w-2xl w-full min-w-0 text-center sm:text-left flex flex-col items-center sm:items-start">
 
-          <h1 class="slide-title text-4xl md:text-5xl lg:text-[4rem] font-extrabold text-[#172B36] leading-[1.1] mb-6 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: both;" set:html={s.heading} />
+              <h1 class="slide-title text-4xl md:text-5xl lg:text-[4rem] font-extrabold text-[#172B36] leading-[1.1] mb-6 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: both;" set:html={s.heading} />
 
-          <p class="slide-lead text-lg md:text-xl text-slate-600 mb-8 max-w-xl animate-fade-in-up" style="animation-delay: 0.4s; animation-fill-mode: both;">
-            {s.lead}
-          </p>
+              <p class="slide-lead text-lg md:text-xl text-slate-600 mb-8 max-w-xl animate-fade-in-up" style="animation-delay: 0.4s; animation-fill-mode: both;">
+                {s.lead}
+              </p>
 
-          {(s.cta1 || s.cta2) && (
-            <div class="slide-ctas flex flex-wrap items-center justify-center sm:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
-              {s.cta1 && (
-                <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-colors ${s.cta1.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
-                  {s.cta1.icon && <Icon name={s.cta1.icon} class="w-5 h-5" />}
-                  {s.cta1.label}
-                </a>
-              )}
-              {s.cta2 && (
-                <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-colors ${s.cta2.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
-                  {s.cta2.label}
-                  {s.cta2.icon && <Icon name={s.cta2.icon} class="w-5 h-5" />}
-                </a>
+              {(s.cta1 || s.cta2) && (
+                <div class="slide-ctas flex flex-wrap items-center justify-center sm:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
+                  {s.cta1 && (
+                    <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-colors ${s.cta1.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                      {s.cta1.icon && <Icon name={s.cta1.icon} class="w-5 h-5" />}
+                      {s.cta1.label}
+                    </a>
+                  )}
+                  {s.cta2 && (
+                    <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-colors ${s.cta2.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                      {s.cta2.label}
+                      {s.cta2.icon && <Icon name={s.cta2.icon} class="w-5 h-5" />}
+                    </a>
+                  )}
+                </div>
               )}
             </div>
-          )}
-        </div>
-      </div>
+          </div>
+        </>
+      )}
     </div>
   ))}
 

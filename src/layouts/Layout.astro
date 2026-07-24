@@ -72,6 +72,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
 
     <div
+      class="promo-popup-overlay"
+      id="promoPopupOverlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Promoción"
+    >
+      <div class="promo-popup">
+        <button
+          class="promo-popup-close"
+          id="promoPopupClose"
+          aria-label="Cerrar"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <a href="/actualizacion-datos/" aria-label="Ir a actualización de datos">
+          <img
+            src="/assets/img/popup.png"
+            alt="Promoción Cooperamigó"
+            class="promo-popup-img"
+          />
+        </a>
+      </div>
+    </div>
+
+    <div
       class="cookie-banner"
       id="cookieBanner"
       role="dialog"
@@ -201,12 +229,35 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           if (b.top < r.bottom && b.bottom > r.top) hideBadge = true;
         }
         badge.classList.toggle("is-hidden", hideBadge);
-        badge.style.setProperty("--badge-color", onDark ? "#ffffff" : "#191919");
+        badge.style.setProperty("--badge-color", onDark ? "#ffffff" : "#172B36");
       }
 
       updateBadgeColor();
       window.addEventListener("scroll", updateBadgeColor, { passive: true });
       window.addEventListener("resize", updateBadgeColor, { passive: true });
+
+
+      const popupOverlay = document.getElementById("promoPopupOverlay");
+      const popupClose = document.getElementById("promoPopupClose");
+
+      function closePopup() {
+        popupOverlay?.classList.remove("is-visible");
+        sessionStorage.setItem("promoPopupSeen", "1");
+      }
+
+      if (!sessionStorage.getItem("promoPopupSeen")) {
+        window.addEventListener("load", () => {
+          setTimeout(() => popupOverlay?.classList.add("is-visible"), 600);
+        });
+      }
+
+      popupClose?.addEventListener("click", closePopup);
+      popupOverlay?.addEventListener("click", (e) => {
+        if (e.target === popupOverlay) closePopup();
+      });
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closePopup();
+      });
     </script>
   </body>
 </html>
