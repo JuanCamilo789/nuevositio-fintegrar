@@ -5,6 +5,7 @@ const slides = [
   {
     id: 'slide-5',
     bgImage: '/assets/img/banner5.png',
+    bgImageMobile: '/assets/img/popup.png',
     imageOnly: true,
   },
   {
@@ -58,13 +59,32 @@ const slides = [
       <!-- Background Image -->
       {s.imageOnly ? (
         <a href="/actualizacion-datos/" aria-label="Ir a actualización de datos" class="absolute inset-0 w-full h-full block">
-          <img
-            src={s.bgImage}
-            alt=""
-            class="absolute inset-0 w-full h-full object-cover object-center"
-            loading={i === 0 ? 'eager' : 'lazy'}
-            fetchpriority={i === 0 ? 'high' : undefined}
-          />
+          {s.bgImageMobile ? (
+            <>
+              <img
+                src={s.bgImageMobile}
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover object-center sm:hidden"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
+              />
+              <img
+                src={s.bgImage}
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover object-center hidden sm:block"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
+              />
+            </>
+          ) : (
+            <img
+              src={s.bgImage}
+              alt=""
+              class="absolute inset-0 w-full h-full object-cover object-center"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              fetchpriority={i === 0 ? 'high' : undefined}
+            />
+          )}
         </a>
       ) : (
         <img
