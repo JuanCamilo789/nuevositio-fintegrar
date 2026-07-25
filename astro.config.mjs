@@ -35,7 +35,7 @@ export default defineConfig({
           'id-badge', 'layout-dashboard', 'mail',
           'map-pin', 'menu-2', 'message-x', 'mood-happy', 'phone',
           'plane', 'receipt', 'scale',
-          'school', 'send', 'shield-check', 'stethoscope', 'target', 'trending-up',
+          'school', 'send', 'share', 'shield-check', 'stethoscope', 'target', 'trending-up',
           'upload', 'user', 'user-plus', 'users', 'users-group', 'wallet', 'x', 'refresh'
         ],
       },

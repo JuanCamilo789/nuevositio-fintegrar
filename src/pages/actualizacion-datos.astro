@@ -179,35 +179,12 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
+
                   <FloatingSelect id="f-usa_redes_sociales" label="¿Usa redes sociales?" data-campo="usa_redes_sociales">
                     <option value="">Seleccione</option>
                     <option value="Si">Sí</option>
                     <option value="No">No</option>
                   </FloatingSelect>
-
-                  <div id="wrapper_cuales_billeteras" class="ad-checkbox-span" style="display:none;">
-                    <label id="lbl-cuales-billeteras" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">¿Cuáles billeteras digitales usa?</label>
-                    <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-cuales-billeteras">
-                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Nequi" /><span class="ad-toggle" aria-hidden="true"></span> Nequi</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Daviplata" /><span class="ad-toggle" aria-hidden="true"></span> Daviplata</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Nubank" /><span class="ad-toggle" aria-hidden="true"></span> Nubank</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Dale" /><span class="ad-toggle" aria-hidden="true"></span> Dale</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Lulobank" /><span class="ad-toggle" aria-hidden="true"></span> Lulobank</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Otro" /><span class="ad-toggle" aria-hidden="true"></span> Otro</label>
-                    </div>
-                  </div>
-
-                  <div id="wrapper_cuales_redes" class="ad-checkbox-span" style="display:none;">
-                    <label id="lbl-cuales-redes" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">¿Cuáles redes sociales usa?</label>
-                    <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-cuales-redes">
-                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Facebook" /><span class="ad-toggle" aria-hidden="true"></span> Facebook</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="WhatsApp" /><span class="ad-toggle" aria-hidden="true"></span> WhatsApp</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Instagram" /><span class="ad-toggle" aria-hidden="true"></span> Instagram</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="TikTok" /><span class="ad-toggle" aria-hidden="true"></span> TikTok</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="LinkedIn" /><span class="ad-toggle" aria-hidden="true"></span> LinkedIn</label>
-                      <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Otra" /><span class="ad-toggle" aria-hidden="true"></span> Otra</label>
-                    </div>
-                  </div>
 
                   <FloatingSelect id="f-interes_promociones" label="Nivel de interés en promociones" required data-campo="interes_promociones">
                     <option value="">Seleccione</option>
@@ -223,7 +200,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
             <div id="ad-form-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;margin-top:1.25rem;"></div>
 
             <!-- Autorización Legal -->
-            <div class="form-check" style="margin-top:2rem;margin-bottom:1.5rem;">
+            <div class="form-check" style="margin-top:0.5rem;margin-bottom:1.5rem;">
               <input type="checkbox" id="ad-autorizacion" required />
               <label for="ad-autorizacion" class="cursor-pointer">
                 Autorizo de manera previa, expresa, libre e informada a Cooperamigó para recolectar, almacenar, usar, actualizar, circular, transmitir, transferir y, en general, realizar el tratamiento de mis datos personales, de conformidad con la Ley 1581 de 2012 y la <a href="/politica-tratamiento-datos" target="_blank" rel="noopener noreferrer">Política de Tratamiento de Datos Personales</a> de la Cooperativa, disponible en sus oficinas y en su página web, con el fin de gestionar mi vinculación como asociado, mantener actualizada mi información, prestar los servicios de la Cooperativa, dar cumplimiento a obligaciones legales y estatutarias, y enviar información institucional, comercial, educativa, promocional y de bienestar. Declaro conocer mis derechos como titular de la información y los canales habilitados para ejercerlos, así como los <a href="/TerminosCondicionesActualizayGANA.pdf" target="_blank" rel="noopener noreferrer">Términos y condiciones</a> de la campaña "Actualiza y GANA".<span class="req">*</span>
@@ -357,6 +334,74 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
             <div class="modal-dir-footer">
               <button type="button" id="btn-cancelar-modal" class="modal-dir-btn-sec">Cancelar</button>
               <button type="button" id="btn-confirmar-modal" class="modal-dir-btn-pri" disabled>
+                Confirmar <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal-billeteras" class="modal-backdrop" style="display:none;">
+          <div class="modal-dir-content" style="max-width:520px;">
+            <div class="modal-dir-header">
+              <div class="modal-dir-title-group">
+                <div class="modal-dir-icon">
+                  <Icon name="tabler:wallet" class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 class="font-extrabold text-[1.125rem] text-[#172B36] leading-tight">¿Cuáles billeteras digitales usa?</h3>
+                </div>
+              </div>
+              <button type="button" id="btn-cerrar-billeteras" class="modal-dir-close">
+                <Icon name="tabler:x" class="w-5 h-5" />
+              </button>
+            </div>
+            <div class="modal-dir-body">
+              <div class="ad-checkbox-grupo" role="group" aria-label="Billeteras digitales">
+                <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Nequi" /><span class="ad-toggle" aria-hidden="true"></span> Nequi</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Daviplata" /><span class="ad-toggle" aria-hidden="true"></span> Daviplata</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Nubank" /><span class="ad-toggle" aria-hidden="true"></span> Nubank</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Dale" /><span class="ad-toggle" aria-hidden="true"></span> Dale</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Lulobank" /><span class="ad-toggle" aria-hidden="true"></span> Lulobank</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-billeteras" value="Otro" /><span class="ad-toggle" aria-hidden="true"></span> Otro</label>
+              </div>
+            </div>
+            <div class="modal-dir-footer">
+              <button type="button" id="btn-cancelar-billeteras" class="modal-dir-btn-sec">Cancelar</button>
+              <button type="button" id="btn-confirmar-billeteras" class="modal-dir-btn-pri">
+                Confirmar <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal-redes" class="modal-backdrop" style="display:none;">
+          <div class="modal-dir-content" style="max-width:520px;">
+            <div class="modal-dir-header">
+              <div class="modal-dir-title-group">
+                <div class="modal-dir-icon">
+                  <Icon name="tabler:share" class="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 class="font-extrabold text-[1.125rem] text-[#172B36] leading-tight">¿Cuáles redes sociales usa?</h3>
+                </div>
+              </div>
+              <button type="button" id="btn-cerrar-redes" class="modal-dir-close">
+                <Icon name="tabler:x" class="w-5 h-5" />
+              </button>
+            </div>
+            <div class="modal-dir-body">
+              <div class="ad-checkbox-grupo" role="group" aria-label="Redes sociales">
+                <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Facebook" /><span class="ad-toggle" aria-hidden="true"></span> Facebook</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="WhatsApp" /><span class="ad-toggle" aria-hidden="true"></span> WhatsApp</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Instagram" /><span class="ad-toggle" aria-hidden="true"></span> Instagram</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="TikTok" /><span class="ad-toggle" aria-hidden="true"></span> TikTok</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="LinkedIn" /><span class="ad-toggle" aria-hidden="true"></span> LinkedIn</label>
+                <label class="ad-checkbox"><input type="checkbox" class="f-redes" value="Otra" /><span class="ad-toggle" aria-hidden="true"></span> Otra</label>
+              </div>
+            </div>
+            <div class="modal-dir-footer">
+              <button type="button" id="btn-cancelar-redes" class="modal-dir-btn-sec">Cancelar</button>
+              <button type="button" id="btn-confirmar-redes" class="modal-dir-btn-pri">
                 Confirmar <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" />
               </button>
             </div>
@@ -549,7 +594,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
   .ad-accordion-item.open .ad-accordion-body {
     max-height: 3000px;
-    padding: 0.5rem 0 1.5rem;
+    padding: 0.5rem 0 0.25rem;
   }
 
   .form-row {
@@ -912,7 +957,85 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     });
   }
 
-  
+
+  // Modales de selección múltiple (billeteras digitales / redes sociales):
+  // el resumen se escribe dentro de la propia opción "Sí" del select
+  // (ej. "Sí (Daviplata, Nubank)"), así no queda un bloque aparte.
+  // Con "Sí" ya elegido, un clic en el select reabre el modal en vez del
+  // desplegable nativo — "Cancelar" descarta y vuelve el select a "No".
+  function setupModalSeleccion(cfg: {
+    modal: string; select: string; cerrar: string; cancelar: string; confirmar: string;
+    checkboxClass: string;
+  }): { abrir: () => void; resetOpcion: () => void } | null {
+    const modalEl = $(cfg.modal);
+    const selectEl = $(cfg.select) as HTMLSelectElement;
+    if (!modalEl || !selectEl) return null;
+    const opcionSi = selectEl.querySelector('option[value="Si"]') as HTMLOptionElement | null;
+
+    let snapshot: string[] = [];
+
+    function checkboxesMarcados(): HTMLInputElement[] {
+      return Array.from(document.querySelectorAll<HTMLInputElement>(`.${cfg.checkboxClass}`));
+    }
+
+    function actualizarOpcion() {
+      const valores = checkboxesMarcados().filter((cb) => cb.checked).map((cb) => cb.value);
+      if (opcionSi) opcionSi.textContent = valores.length ? `Sí (${valores.join(", ")})` : "Sí";
+    }
+
+    function resetOpcion() {
+      if (opcionSi) opcionSi.textContent = "Sí";
+    }
+
+    function abrir() {
+      snapshot = checkboxesMarcados().filter((cb) => cb.checked).map((cb) => cb.value);
+      modalEl.style.display = "flex";
+    }
+
+    // Ya elegido "Sí": interceptamos el mousedown para abrir el modal de
+    // edición en vez de dejar que se despliegue el <select> nativo.
+    selectEl.addEventListener("mousedown", (e) => {
+      if (selectEl.value === "Si") {
+        e.preventDefault();
+        abrir();
+      }
+    });
+
+    function cerrarSinGuardar() {
+      checkboxesMarcados().forEach((cb) => { cb.checked = snapshot.includes(cb.value); });
+      modalEl.style.display = "none";
+    }
+
+    // "Cancelar" descarta la selección y vuelve a "No" — para reabrir el
+    // modal la persona debe elegir "Sí" de nuevo en el select.
+    function cancelarYVolverANo() {
+      selectEl.value = "No";
+      selectEl.dispatchEvent(new Event("change", { bubbles: true }));
+      modalEl.style.display = "none";
+    }
+
+    $(cfg.cerrar)?.addEventListener("click", cerrarSinGuardar);
+    $(cfg.cancelar)?.addEventListener("click", cancelarYVolverANo);
+    $(cfg.confirmar)?.addEventListener("click", () => {
+      actualizarOpcion();
+      modalEl.style.display = "none";
+    });
+
+    return { abrir, resetOpcion };
+  }
+
+  const modalBilleteras = setupModalSeleccion({
+    modal: "modal-billeteras", select: "f-usa_billeteras_digitales", cerrar: "btn-cerrar-billeteras",
+    cancelar: "btn-cancelar-billeteras", confirmar: "btn-confirmar-billeteras",
+    checkboxClass: "f-billeteras",
+  });
+  const modalRedes = setupModalSeleccion({
+    modal: "modal-redes", select: "f-usa_redes_sociales", cerrar: "btn-cerrar-redes",
+    cancelar: "btn-cancelar-redes", confirmar: "btn-confirmar-redes",
+    checkboxClass: "f-redes",
+  });
+
+
   function limpiarNumero(v: string): string {
     return v.replace(/\D/g, "");
   }
@@ -1016,12 +1139,9 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
 
   function actualizarGruposCondicionales() {
     const usaRedes = ($("f-usa_redes_sociales") as HTMLSelectElement)?.value;
-    const wrapper = $("wrapper_cuales_redes");
-    if (wrapper) {
-      wrapper.style.display = usaRedes === "Si" ? "block" : "none";
-    }
     if (usaRedes !== "Si") {
       document.querySelectorAll<HTMLInputElement>(".f-redes").forEach((cb) => { cb.checked = false; });
+      modalRedes?.resetOpcion();
     }
 
     const tieneVehiculo = ($("f-tiene_vehiculo") as HTMLSelectElement)?.value;
@@ -1059,22 +1179,25 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     }
 
     const usaBilleteras = ($("f-usa_billeteras_digitales") as HTMLSelectElement)?.value;
-    const wrapperBilleteras = $("wrapper_cuales_billeteras");
-    if (wrapperBilleteras) {
-      wrapperBilleteras.style.display = usaBilleteras === "Si" ? "block" : "none";
-    }
     if (usaBilleteras !== "Si") {
       document.querySelectorAll<HTMLInputElement>(".f-billeteras").forEach((cb) => { cb.checked = false; });
+      modalBilleteras?.resetOpcion();
     }
   }
   // Corrige el estado inicial (los selects condicionales traen required
   // por defecto en el HTML aunque empiecen ocultos).
   actualizarGruposCondicionales();
-  $("f-usa_redes_sociales")?.addEventListener("change", actualizarGruposCondicionales);
+  $("f-usa_redes_sociales")?.addEventListener("change", (e) => {
+    actualizarGruposCondicionales();
+    if ((e.target as HTMLSelectElement).value === "Si") modalRedes?.abrir();
+  });
   $("f-tiene_vehiculo")?.addEventListener("change", actualizarGruposCondicionales);
   $("f-practica_deporte")?.addEventListener("change", actualizarGruposCondicionales);
   $("f-viaja_frecuencia")?.addEventListener("change", actualizarGruposCondicionales);
-  $("f-usa_billeteras_digitales")?.addEventListener("change", actualizarGruposCondicionales);
+  $("f-usa_billeteras_digitales")?.addEventListener("change", (e) => {
+    actualizarGruposCondicionales();
+    if ((e.target as HTMLSelectElement).value === "Si") modalBilleteras?.abrir();
+  });
 
   
   // Ya no hay "valores originales" del lado del cliente contra qué comparar
@@ -1238,7 +1361,7 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
 </script>
 <style>
     .modal-backdrop {
-    position: fixed; inset: 0; z-index: 75;
+    position: fixed; inset: 0; z-index: 400;
     display: flex; align-items: center; justify-content: center;
     padding: 1.5rem;
     background: rgba(23,43,54,0.55);
@@ -1255,10 +1378,13 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     padding: 1.25rem 1.5rem; border-bottom: 1px solid #E4E8ED;
     border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
-  .modal-dir-title-group { display: flex; align-items: center; gap: 1rem; }
+  .modal-dir-title-group { display: flex; align-items: center; gap: 1rem; min-width: 0; flex: 1; }
+  .modal-dir-title-group > div:last-child { min-width: 0; }
+  .modal-dir-title-group h3 { overflow-wrap: break-word; }
   .modal-dir-icon {
     width: 36px; height: 36px; border-radius: 50%;
     background: #172b36; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
   }
   .modal-dir-close {
     background: none; border: none; cursor: pointer;
@@ -1345,7 +1471,7 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   }
   
   .modal-dir-footer {
-    display: flex; gap: 1rem; justify-content: flex-end;
+    display: flex; gap: 0.75rem; justify-content: flex-end; flex-wrap: wrap;
     padding: 1.25rem 1.5rem; border-top: 1px solid #E4E8ED;
   }
   .modal-dir-btn-sec {
