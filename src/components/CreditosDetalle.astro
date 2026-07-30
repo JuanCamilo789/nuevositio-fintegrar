@@ -1,0 +1,716 @@
+---
+import { Icon } from "astro-icon/components";
+
+const modalidades = [
+  {
+    id: "ordinario",
+    bold: "Crédito",
+    regular: "Ordinario",
+    tagline: "Un crédito pensado para acompañarlo, sin complicaciones.",
+    desc: "Se encuentran en esta clasificación todos aquellos préstamos que serán cancelados con deducciones quincenales antes del 30 de noviembre del año en que se apruebe el crédito.",
+    stats: [
+      { value: "1.53% M.V.", label: "Tasa de interés" },
+      { value: "30 de noviembre", label: "Fecha límite de pago" },
+    ],
+  },
+  {
+    id: "ahorro-navideno-anticipo",
+    bold: "Anticipo",
+    regular: "Ahorro Navideño",
+    tagline: "Adelante su Ahorro Navideño cuando más lo necesite.",
+    desc: "El asociado puede hacer un anticipo de su Ahorro Navideño, solo se le cobra quincenalmente el valor del interés y en el mes de diciembre, cuando se efectúe la liquidación, se descuenta el valor del crédito.",
+    stats: [
+      { value: "1.53% M.V.", label: "Tasa de interés" },
+      { value: "Diciembre", label: "Liquidación del crédito" },
+    ],
+  },
+  {
+    id: "eventos-especiales",
+    bold: "Eventos",
+    regular: "Especiales",
+    tagline: "Para celebrar en grande las fechas que más importan.",
+    desc: "El asociado puede hacer uso de este crédito por eventos que se realizan en fechas especiales programados por FINTEGRAR: Día de la Madre, Día del Padre, Navidad, paseos, Fiesta del Fondo, entre otros.",
+    stats: [
+      { value: "0%", label: "Tasa de interés" },
+      { value: "Fechas Fintegrar", label: "Aplica en" },
+    ],
+  },
+  {
+    id: "cuota-especial",
+    bold: "Cuota",
+    regular: "Especial",
+    small: "(Prima de junio y diciembre)",
+    tagline: "Un respiro para su bolsillo antes de la prima.",
+    desc: "El asociado puede hacer un adelanto de la prima de servicios y solo se le cobra quincenalmente el valor del interés; en el momento que se liquide se descontará por nómina el valor del crédito.",
+    stats: [
+      { value: "Según estudio", label: "Tasa de interés" },
+      { value: "Abril y octubre", label: "Aplica después de" },
+    ],
+  },
+  {
+    id: "calamidad",
+    bold: "Calamidad",
+    regular: "Doméstica",
+    tagline: "Estamos con usted en los momentos difíciles.",
+    desc: "Cuando un asociado de FINTEGRAR se encuentre en una dificultad económica producto de desastres naturales, atenciones en salud no cubiertas por el POS, o pérdidas de bienes muebles e inmuebles de primera necesidad debidamente comprobados, podrá solicitar un crédito al Fondo aportando las pruebas correspondientes.",
+    stats: [
+      { value: "0.5% M.V.", label: "Tasa de interés" },
+      { value: "12 meses", label: "Plazo máximo" },
+    ],
+  },
+  {
+    id: "vacacional",
+    bold: "Plan",
+    regular: "Vacacional",
+    tagline: "Sus vacaciones soñadas, más cerca de lo que cree.",
+    desc: "El asociado puede solicitar crédito para sus vacaciones eligiendo el plan y la forma de pago, ya sea con su Ahorro Navideño, prima de servicios o deducciones de nómina. El Fondo tiene convenios para descuentos especiales con diferentes entidades.",
+    stats: [
+      { value: "1.53% M.V.", label: "Si lo programa el asociado" },
+      { value: "Tasa especial", label: "Si lo programa Fintegrar" },
+    ],
+  },
+  {
+    id: "largo-plazo",
+    bold: "Largo",
+    regular: "Plazo",
+    tagline: "Más tiempo para hacer realidad sus proyectos.",
+    desc: "El plazo máximo de este préstamo es de 3 años. Las garantías para este tipo de crédito serán exigidas de acuerdo con el monto solicitado.",
+    stats: [
+      { value: "1.53% M.V.", label: "Tasa de interés" },
+      { value: "36 meses", label: "Plazo máximo" },
+    ],
+  },
+  {
+    id: "educacion",
+    bold: "Crédito",
+    regular: "Educación",
+    tagline: "Invierta en su formación y en su futuro.",
+    desc: "Aplica solo para educación del asociado; la institución educativa debe estar certificada por el Ministerio de Educación. Posterior al desembolso se debe presentar el comprobante de pago de la institución educativa.",
+    stats: [
+      { value: "1% M.V.", label: "Tasa de interés" },
+      { value: "5 días hábiles", label: "Plazo para comprobante" },
+    ],
+  },
+  {
+    id: "mejoras-vivienda",
+    bold: "Mejoras",
+    regular: "de Vivienda",
+    tagline: "Para que su hogar crezca con usted.",
+    desc: "Para vivienda propia del asociado. El plazo y las garantías para este tipo de crédito serán exigidas de acuerdo con el monto solicitado.",
+    stats: [
+      { value: "1% M.V.", label: "Tasa de interés" },
+      { value: "Tradición y libertad", label: "Documento requerido" },
+    ],
+  },
+  {
+    id: "compra-cartera",
+    bold: "Compra",
+    regular: "de Cartera",
+    tagline: "Simplifique sus deudas en una sola cuota.",
+    desc: "El asociado podrá solicitar un crédito para recoger sus obligaciones en otras entidades. Para tal efecto deberá presentar el estado de cuenta vigente de cada una de las obligaciones en los demás establecimientos de crédito.",
+    stats: [
+      { value: "Según estudio", label: "Tasa de interés" },
+      { value: "Estado de cuenta", label: "Documento requerido" },
+    ],
+  },
+];
+---
+
+<section id="modalidades-credito" class="section-white" aria-labelledby="modalidades-credito-title">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="section-header reveal">
+      <h2
+        id="creditos-title"
+        class="font-display"
+        style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);"
+      >
+        Haga realidad sus proyectos con el respaldo de FINTEGRAR
+      </h2>
+      <p class="section-header-aside">
+        Encuentre soluciones de crédito diseñadas para acompañarlo en cada etapa de su vida. Ya sea para atender una necesidad, invertir en su bienestar o cumplir una meta importante, contamos con opciones que se adaptan a sus necesidades, con condiciones favorables y el respaldo de un Fondo que trabaja por usted.
+      </p>
+      <p class="section-header-aside">
+        <strong>Fintegrar</strong> entrega oportunamente a sus asociados los recursos económicos para atender sus necesidades, de acuerdo con las modalidades previstas en el actual reglamento.
+      </p>
+    </div>
+
+    <div class="credito-quicknav reveal">
+      {
+        modalidades.map((m, i) => (
+          <a href={`#${m.id}`} class="credito-quicknav-card">
+            <span class="credito-quicknav-number">{i + 1}</span>
+            <span class="credito-quicknav-inner">
+              <span class="credito-quicknav-title">
+                {m.bold} {m.regular}
+                <br />
+                <span class="credito-quicknav-title-small">({m.stats[0].value})</span>
+              </span>
+              <span class="credito-quicknav-sub">{m.tagline}</span>
+              <span class="credito-quicknav-cta">
+                Conocer más <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" />
+              </span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    {
+      modalidades.map((m, i) => (
+        <section
+          id={m.id}
+          class={`credito-feature${i % 2 === 1 ? " credito-feature--reverse" : ""}`}
+          aria-labelledby={`${m.id}-feature-title`}
+        >
+          {i % 2 === 1 && (
+            <div class="credito-feature-content">
+              <span class="credito-feature-tag">Modalidades de crédito</span>
+              <p class="credito-feature-desc">
+                <strong>{m.tagline}</strong>
+              </p>
+              <p class="credito-feature-desc">{m.desc}</p>
+              <div class="credito-feature-stats">
+                {m.stats.map((s) => (
+                  <div class="credito-feature-stat">
+                    <span class="credito-feature-stat-value">{s.value}</span>
+                    <span class="credito-feature-stat-label">{s.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          <div class="credito-feature-sticky">
+            <h3 id={`${m.id}-feature-title`} class="credito-feature-title">
+              <span class="fw-word fw-word--bold">{m.bold}</span>
+              <span class="fw-word fw-word--regular">{m.regular}</span>
+              {m.small && (
+                <span class="fw-word fw-word--regular fw-word--small">{m.small}</span>
+              )}
+            </h3>
+          </div>
+          {i % 2 === 0 && (
+          <div class="credito-feature-content">
+            <span class="credito-feature-tag">Modalidades de crédito</span>
+            <p class="credito-feature-desc">
+              <strong>{m.tagline}</strong>
+            </p>
+            <p class="credito-feature-desc">{m.desc}</p>
+            <div class="credito-feature-stats">
+              {m.stats.map((s) => (
+                <div class="credito-feature-stat">
+                  <span class="credito-feature-stat-value">{s.value}</span>
+                  <span class="credito-feature-stat-label">{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          )}
+        </section>
+      ))
+    }
+
+    <div class="ahorros-grid">
+      <div id="a-tener-en-cuenta" class="ahorro-card ahorro-card--wide ahorro-card--rifa reveal reveal-delay-1">
+        <div class="rifa-top">
+          <div class="rifa-title-col">
+            <h3 class="rifa-info-title">
+              <span class="fw-word fw-word--white fw-word--bold">A tener</span>
+              <span class="fw-word fw-word--white fw-word--regular">en cuenta</span>
+            </h3>
+          </div>
+          <div class="rifa-info-content">
+            <p class="ahorro-desc ahorro-desc--light">
+              Una vez el asociado haya pagado su primera cuota mensual de aportes
+              sociales, tiene derecho a solicitar los servicios de crédito (el
+              primer crédito es por el 50% del valor del salario actual del
+              asociado).
+            </p>
+            <p class="ahorro-desc ahorro-desc--light rifa-info-requisitos-title">
+              Los requisitos para solicitarlo son los siguientes:
+            </p>
+            <ul class="rifa-info-list">
+              <li>
+                Diligenciar completamente el formato de solicitud de crédito y
+                enviarlo al correo gerencia@fintegrar.com con los siguientes
+                documentos: copia de la cédula de ciudadanía y el último
+                comprobante de pago. Para independientes prestadores de
+                servicio, además el certificado laboral.
+              </li>
+              <li>
+                Las solicitudes se reciben de lunes a jueves hasta las 12:00
+                m., se estudian los días viernes y se desembolsa directamente
+                a la cuenta del asociado.
+              </li>
+            </ul>
+            <p class="ahorro-desc ahorro-desc--light rifa-info-requisitos-title rifa-info-nota">
+              Nota:
+            </p>
+            <ul class="rifa-info-list">
+              <li>
+                Todas las solicitudes están sujetas a estudio, a la capacidad
+                de endeudamiento del asociado y al tipo de contrato del
+                asociado.
+              </li>
+              <li>
+                Créditos mayores a $13.000.000 se solicita codeudor con
+                capacidad de endeudamiento, sin reportes negativos y/o
+                garantías.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-white {
+    background: var(--color-navbar-bg);
+    padding: 8rem 0;
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-header-aside {
+    font-size: 1rem;
+    color: var(--color-ink);
+    opacity: 0.6;
+    line-height: var(--lh-180);
+    max-width: 100%;
+  }
+
+  .credito-quicknav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 6rem;
+  }
+
+  .credito-quicknav-card {
+    position: relative;
+    display: block;
+    background: var(--color-white);
+    border: 1px solid var(--color-surface);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    height: 160px;
+    transition: height 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .credito-quicknav-card:hover {
+      height: 220px;
+      box-shadow: var(--shadow-md);
+      border-color: transparent;
+    }
+  }
+
+  .credito-quicknav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 1.75rem 1.5rem 1.5rem;
+    overflow: hidden;
+    border-radius: inherit;
+    transition: justify-content 0.3s ease;
+  }
+
+  .credito-quicknav-number {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-full);
+    background: var(--color-ink);
+    color: var(--color-white);
+    font-size: 0.8125rem;
+    font-weight: var(--fw-extrabold);
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    z-index: 1;
+  }
+
+  .credito-quicknav-title {
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    font-size: 1.0625rem;
+    line-height: var(--lh-130);
+  }
+
+  .credito-quicknav-title-small {
+    font-size: 0.75rem;
+    font-weight: var(--fw-regular);
+  }
+
+  .credito-quicknav-sub {
+    margin-top: 0;
+    max-height: 0;
+    font-size: 0.8125rem;
+    color: var(--color-ink);
+    opacity: 0;
+    line-height: var(--lh-130);
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.2s ease 0.05s;
+  }
+
+  .credito-quicknav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0;
+    max-height: 0;
+    font-size: 0.8125rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-brand-sky-blue);
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.2s ease 0.05s;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .credito-quicknav-card:hover .credito-quicknav-cta {
+      margin-top: 0.75rem;
+      max-height: 24px;
+      opacity: 1;
+    }
+
+    .credito-quicknav-card:hover .credito-quicknav-sub {
+      margin-top: 0.5rem;
+      max-height: 100px;
+      opacity: 0.6;
+    }
+  }
+
+  .credito-feature {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 2.75rem;
+    margin-bottom: 2.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .credito-feature:first-of-type {
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+  .credito-feature + .credito-feature {
+    border-top: 1px solid var(--color-surface);
+  }
+
+  .credito-feature--reverse {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .credito-feature--reverse .credito-feature-title {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .credito-feature-sticky {
+    position: sticky;
+    top: calc(var(--header-h) + 2.5rem);
+    align-self: start;
+  }
+
+  .credito-feature-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    line-height: 0.98;
+  }
+
+  .fw-word {
+    display: block;
+    font-size: clamp(2.5rem, 4vw, 3.75rem);
+    color: var(--color-brand-sky-blue);
+    letter-spacing: -0.02em;
+  }
+
+  .fw-word--bold {
+    font-weight: var(--fw-extrabold);
+  }
+
+  .fw-word--regular {
+    font-weight: var(--fw-regular);
+  }
+
+  .fw-word--small {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: var(--lh-120);
+  }
+
+  .credito-feature-content {
+    padding-top: 0;
+    padding-left: 2.75rem;
+  }
+
+  .credito-feature--reverse .credito-feature-content {
+    padding-left: 0;
+    padding-right: 2.75rem;
+    text-align: right;
+  }
+
+  .credito-feature--reverse .credito-feature-desc {
+    margin-left: auto;
+  }
+
+  .credito-feature--reverse .credito-feature-stats {
+    justify-content: end;
+  }
+
+  .credito-feature-desc + .credito-feature-desc {
+    margin-top: -1.25rem;
+  }
+
+  .credito-feature-tag {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: var(--fw-extrabold);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .credito-feature-desc {
+    font-size: 1.0625rem;
+    color: var(--color-ink);
+    opacity: 0.75;
+    line-height: var(--lh-180);
+    max-width: 46rem;
+    margin-bottom: 2rem;
+  }
+
+  .credito-feature-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 14rem));
+    gap: 1rem;
+  }
+
+  .credito-feature-stat {
+    background: var(--color-white);
+    border: 1px solid var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.375rem;
+  }
+
+  .credito-feature-stat-value {
+    font-size: 1.375rem;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-brand-sky-blue);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .credito-feature-stat-label {
+    font-size: 0.75rem;
+    font-weight: var(--fw-medium);
+    color: var(--color-ink);
+    opacity: 0.6;
+  }
+
+  .ahorros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .ahorro-card {
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .ahorro-card--wide {
+    grid-column: 1 / -1;
+  }
+
+  .ahorro-desc {
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    opacity: 0.65;
+    line-height: var(--lh-160);
+  }
+  .ahorro-desc--light {
+    color: var(--color-white);
+    opacity: 1;
+    margin-top: 0.375rem;
+  }
+
+  .ahorro-card--rifa {
+    background: var(--color-brand-sky-blue);
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+  .rifa-top {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: start;
+    gap: 4.5rem;
+  }
+  .rifa-title-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    line-height: 0.98;
+  }
+  .fw-word--white {
+    color: var(--color-white);
+  }
+
+  .rifa-info-title .fw-word {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+  }
+
+  .rifa-info-content {
+    text-align: left;
+  }
+
+  .rifa-info-requisitos-title {
+    font-weight: var(--fw-bold);
+  }
+
+  .rifa-info-nota {
+    margin-top: 1.25rem;
+  }
+
+  .rifa-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .rifa-info-list li {
+    font-size: 0.9375rem;
+    color: var(--color-white);
+    line-height: var(--lh-160);
+  }
+
+
+  @media (max-width: 1023px) {
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+    .credito-quicknav {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .credito-feature {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .credito-feature-sticky {
+      position: static;
+      order: -1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .credito-feature-content,
+    .credito-feature--reverse .credito-feature-content {
+      padding-left: 0;
+      padding-right: 0;
+      text-align: left;
+    }
+    .credito-feature-title,
+    .credito-feature--reverse .credito-feature-title {
+      align-items: center;
+      text-align: center;
+    }
+    .credito-feature-tag,
+    .credito-feature-content .credito-feature-desc:first-of-type {
+      text-align: center;
+    }
+    .credito-feature-desc,
+    .credito-feature--reverse .credito-feature-desc {
+      margin-left: 0;
+    }
+    .credito-feature--reverse .credito-feature-stats {
+      justify-content: start;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .section-white {
+      padding: 3.5rem 0;
+    }
+    .credito-quicknav {
+      grid-template-columns: 1fr;
+      margin-bottom: 3.5rem;
+    }
+    .credito-quicknav-card {
+      height: auto;
+    }
+    .credito-quicknav-number {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .credito-quicknav-inner {
+      height: auto;
+      padding-top: 2.75rem;
+    }
+    .credito-quicknav-sub {
+      margin-top: 0.5rem;
+      max-height: none;
+      opacity: 0.6;
+      transition: none;
+    }
+    .credito-quicknav-cta {
+      margin-top: 0.75rem;
+      max-height: none;
+      opacity: 1;
+      transition: none;
+    }
+    .credito-feature-tag {
+      margin-bottom: 0.25rem;
+    }
+    .credito-feature-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ahorros-grid {
+      grid-template-columns: 1fr;
+    }
+    .ahorro-card {
+      padding: 1.5rem;
+    }
+    .ahorro-card--rifa {
+      padding: 1.75rem;
+    }
+    .rifa-top {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .rifa-title-col {
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>

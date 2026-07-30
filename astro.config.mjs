@@ -42,6 +42,10 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      cssMinify: 'esbuild',
+      target: ['safari14', 'chrome100', 'firefox100', 'edge100'],
+    },
     preview: {
       allowedHosts: ['fintegrar.com', 'www.fintegrar.com', 'coop-landing-page-production.up.railway.app'],
     },

@@ -27,7 +27,7 @@ const tramosAportes = [
       <a href="#aportes-sociales" class="quicknav-card">
         <span class="quicknav-number">1</span>
         <span class="quicknav-inner">
-          <span class="quicknav-title">Aportes Sociales y<br />Ahorro Permanente</span>
+          <span class="quicknav-title">Aportes Sociales<br class="quicknav-title-break-mobile" /> y<br class="quicknav-title-break-desktop" /> Ahorro Permanente</span>
           <span class="quicknav-sub">Los aportes sociales se descuentan quincenalmente por nómina y se devuelven al retirarse del Fondo.</span>
           <span class="quicknav-cta">Conocer más <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" /></span>
         </span>
@@ -51,7 +51,7 @@ const tramosAportes = [
       <a href="#cdat" class="quicknav-card">
         <span class="quicknav-number">4</span>
         <span class="quicknav-inner">
-          <span class="quicknav-title">CDAT<br /><span class="quicknav-title-small">(Certificado depósito de ahorro<br />a término)</span></span>
+          <span class="quicknav-title">CDAT<br /><span class="quicknav-title-small">(Certificado depósito de ahorro <br class="quicknav-title-small-break" /> a término)</span></span>
           <span class="quicknav-sub">Invierta su dinero de forma segura, eligiendo el plazo y la forma de entrega.</span>
           <span class="quicknav-cta">Conocer más <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" /></span>
         </span>
@@ -70,10 +70,12 @@ const tramosAportes = [
       <div class="ahorro-feature-sticky">
         <div class="reveal">
           <h3 id="aportes-feature-title" class="ahorro-feature-title">
-            <span class="fw-word fw-word--bold">Aportes</span>
-            <span class="fw-word fw-word--bold">Sociales</span>
-            <span class="fw-word fw-word--regular">y Ahorro</span>
-            <span class="fw-word fw-word--regular">Permanente</span>
+            <span class="fw-word fw-word--bold fw-line-desktop">Aportes</span>
+            <span class="fw-word fw-word--bold fw-line-desktop">Sociales</span>
+            <span class="fw-word fw-word--regular fw-line-desktop">y Ahorro</span>
+            <span class="fw-word fw-word--regular fw-line-desktop">Permanente</span>
+            <span class="fw-word fw-word--bold fw-line-mobile">Aportes Sociales</span>
+            <span class="fw-word fw-word--regular fw-line-mobile">y Ahorro Permanente</span>
           </h3>
         </div>
       </div>
@@ -98,6 +100,7 @@ const tramosAportes = [
             {tramosAportes.map((t) => (
               <div class="aportes-table-row">
                 <div class="aportes-col aportes-col-range">
+                  <span class="aportes-col-label">Rango de ingresos</span>
                   {t.ingresos.includes('+') ? (
                     <Fragment>
                       {t.ingresos.replace('+', '')}<span class="plus-symbol"> o más</span>
@@ -106,7 +109,10 @@ const tramosAportes = [
                     t.ingresos
                   )}
                 </div>
-                <div class="aportes-col aportes-col-amount">{t.cuota}</div>
+                <div class="aportes-col aportes-col-amount">
+                  <span class="aportes-col-label">Cuota quincenal</span>
+                  {t.cuota}
+                </div>
               </div>
             ))}
           </div>
@@ -235,7 +241,8 @@ const tramosAportes = [
             </h3>
           </div>
           <p class="ahorro-desc ahorro-desc--light">
-            Con su boleta de $194.550, deducible en cuotas quincenales
+            Con su boleta de&nbsp;<span class="price-inline">$194.550</span>,
+            deducible en cuotas quincenales
             de&nbsp;<span class="price-inline">$8.106</span>, tiene 3
             oportunidades de ganar cada semana, participando con las 3
             últimas cifras de la lotería de Medellín.
@@ -300,10 +307,12 @@ const tramosAportes = [
     transition: height 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
-  .quicknav-card:hover {
-    height: 220px;
-    box-shadow: var(--shadow-md);
-    border-color: transparent;
+  @media (hover: hover) and (pointer: fine) {
+    .quicknav-card:hover {
+      height: 220px;
+      box-shadow: var(--shadow-md);
+      border-color: transparent;
+    }
   }
 
   .quicknav-inner {
@@ -319,8 +328,10 @@ const tramosAportes = [
     transition: justify-content 0.3s ease;
   }
 
-  .quicknav-card:hover .quicknav-inner {
-    justify-content: center;
+  @media (hover: hover) and (pointer: fine) {
+    .quicknav-card:hover .quicknav-inner {
+      justify-content: center;
+    }
   }
 
   .quicknav-number {
@@ -347,6 +358,10 @@ const tramosAportes = [
     color: var(--color-ink);
     font-size: 1.0625rem;
     line-height: var(--lh-130);
+  }
+
+  .quicknav-title-break-mobile {
+    display: none;
   }
 
   .quicknav-card--wide {
@@ -388,16 +403,18 @@ const tramosAportes = [
     transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.2s ease 0.05s;
   }
 
-  .quicknav-card:hover .quicknav-cta {
-    margin-top: 0.75rem;
-    max-height: 24px;
-    opacity: 1;
-  }
+  @media (hover: hover) and (pointer: fine) {
+    .quicknav-card:hover .quicknav-cta {
+      margin-top: 0.75rem;
+      max-height: 24px;
+      opacity: 1;
+    }
 
-  .quicknav-card:hover .quicknav-sub {
-    margin-top: 0.5rem;
-    max-height: 100px;
-    opacity: 0.6;
+    .quicknav-card:hover .quicknav-sub {
+      margin-top: 0.5rem;
+      max-height: 100px;
+      opacity: 0.6;
+    }
   }
 
   .ahorro-feature {
@@ -466,17 +483,18 @@ const tramosAportes = [
     color: var(--color-white);
   }
 
+  .fw-line-mobile {
+    display: none;
+  }
+
   .ahorro-feature-content {
     padding-top: 0;
     padding-left: 2.75rem;
-    border-left: 1px solid var(--color-border-mid);
   }
 
   .ahorro-feature--reverse .ahorro-feature-content {
     padding-left: 0;
     padding-right: 2.75rem;
-    border-left: none;
-    border-right: 1px solid var(--color-border-mid);
     text-align: right;
   }
 
@@ -486,10 +504,6 @@ const tramosAportes = [
 
   .ahorro-feature--reverse .ahorro-feature-stats {
     justify-content: end;
-  }
-
-  .ahorro-feature--reverse .ahorro-feature-stat {
-    align-items: flex-end;
   }
 
   .ahorro-feature--reverse .ahorro-nota-text {
@@ -524,6 +538,9 @@ const tramosAportes = [
     padding: 1.25rem 1.5rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     gap: 0.375rem;
   }
 
@@ -550,12 +567,18 @@ const tramosAportes = [
       grid-template-columns: 1fr;
       gap: 2rem;
     }
+    .fw-line-desktop {
+      display: none;
+    }
+    .fw-line-mobile {
+      display: block;
+    }
     .ahorro-feature-sticky {
       position: static;
       order: -1;
       flex-direction: row;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
     }
     .ahorro-feature-content,
     .ahorro-feature--reverse .ahorro-feature-content {
@@ -563,6 +586,22 @@ const tramosAportes = [
       padding-right: 0;
       border-left: none;
       border-right: none;
+      text-align: left;
+    }
+    .ahorro-feature-title,
+    .ahorro-feature--reverse .ahorro-feature-title {
+      align-items: center;
+      text-align: center;
+    }
+    .ahorro-feature-tag,
+    .ahorro-feature-content .ahorro-feature-desc:first-of-type {
+      text-align: center;
+    }
+    .ahorro-feature-desc,
+    .ahorro-feature--reverse .ahorro-feature-desc,
+    .ahorro-nota-text,
+    .ahorro-feature--reverse .ahorro-nota-text {
+      margin-left: 0;
     }
   }
 
@@ -630,7 +669,7 @@ const tramosAportes = [
     font-weight: var(--fw-extrabold);
     text-transform: uppercase;
     color: var(--color-text-muted);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .aportes-table {
@@ -704,6 +743,10 @@ const tramosAportes = [
     color: var(--color-brand-purple);
     font-variant-numeric: tabular-nums;
     text-align: right;
+  }
+
+  .aportes-col-label {
+    display: none;
   }
 
 
@@ -791,16 +834,32 @@ const tramosAportes = [
     .ahorros-grid {
       grid-template-columns: 1fr;
     }
+    .aportes-table {
+      padding: 1.75rem 1.5rem;
+    }
     .aportes-table-header {
       display: none;
     }
     .aportes-table-row {
       grid-template-columns: 1fr;
-      gap: 0.25rem;
+      gap: 0.375rem;
       padding: 1.25rem 0;
+      text-align: center;
     }
     .aportes-col-amount {
       font-size: 1.5rem;
+      text-align: center;
+    }
+    .aportes-col-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: var(--fw-semibold);
+      color: var(--color-ink);
+      opacity: 0.6;
+      margin-bottom: 0.25rem;
+    }
+    .ahorro-feature-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .ahorro-quicknav {
       grid-template-columns: 1fr;
@@ -808,8 +867,25 @@ const tramosAportes = [
     .quicknav-card {
       height: auto;
     }
+    .quicknav-number {
+      left: 50%;
+      transform: translateX(-50%);
+    }
     .quicknav-inner {
       height: auto;
+      padding-top: 2.75rem;
+    }
+    .quicknav-title-small-break {
+      display: none;
+    }
+    .quicknav-title-break-mobile {
+      display: inline;
+    }
+    .quicknav-title-break-desktop {
+      display: none;
+    }
+    .ahorro-feature-tag {
+      margin-bottom: 0.25rem;
     }
     .quicknav-sub {
       margin-top: 0.5rem;
@@ -832,10 +908,11 @@ const tramosAportes = [
     .rifa-top {
       grid-template-columns: 1fr;
       gap: 1.25rem;
+      text-align: center;
     }
     .rifa-title-col {
-      align-items: flex-start;
-      text-align: left;
+      align-items: center;
+      text-align: center;
     }
     .rifa-premios {
       grid-template-columns: 1fr;

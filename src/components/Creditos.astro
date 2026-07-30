@@ -86,23 +86,25 @@ const lineas = full ? todasLineas : todasLineas.filter((l) => destacadas.has(l.i
 <section id="creditos" class="section-white" aria-labelledby="creditos-title">
   <div class="max-w-7xl mx-auto px-6">
     <div class="section-header reveal">
-      <div>
-        <h2
-          id="creditos-title"
-          class="font-display"
-          style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);"
-        >
-          Soluciones financieras para cada necesidad
-        </h2>
-      </div>
-      <p class="section-header-aside"></p>
+      <h2
+        id="creditos-title"
+        class="font-display"
+        style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);"
+      >
+        Haga realidad sus proyectos con el respaldo de FINTEGRAR
+      </h2>
+      <p class="section-header-aside">
+        Encuentre soluciones de crédito diseñadas para acompañarlo en cada etapa de su vida. Ya sea para atender una necesidad, invertir en su bienestar o cumplir una meta importante, contamos con opciones que se adaptan a sus necesidades, con condiciones favorables y el respaldo de un Fondo que trabaja por usted.
+      </p>
+      <p class="section-header-aside">
+        <strong>Fintegrar</strong> entrega oportunamente a sus asociados los recursos económicos para atender sus necesidades, de acuerdo con las modalidades previstas en el actual reglamento.
+      </p>
     </div>
 
     <div class="creditos-grid">
       {
         lineas.map((l, i) => (
           <div
-            id={l.id}
             class={`credito-card card-base reveal${i > 0 ? ` reveal-delay-${Math.min(i, 4)}` : ""}`}
           >
             <div class="credito-card-top">
@@ -183,18 +185,17 @@ const lineas = full ? todasLineas : todasLineas.filter((l) => destacadas.has(l.i
 
   .section-header {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 4rem;
-    margin-bottom: 5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 3rem;
   }
   .section-header-aside {
     font-size: 1rem;
     color: var(--color-ink);
     opacity: 0.6;
     line-height: var(--lh-180);
-    max-width: 420px;
-    flex-shrink: 0;
+    max-width: 100%;
   }
 
   .creditos-grid {
@@ -351,10 +352,7 @@ const lineas = full ? todasLineas : todasLineas.filter((l) => destacadas.has(l.i
       grid-template-columns: repeat(2, 1fr);
     }
     .section-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
   }
   @media (max-width: 639px) {
