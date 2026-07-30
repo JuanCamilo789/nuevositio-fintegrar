@@ -3,37 +3,28 @@ import { Icon } from 'astro-icon/components';
 
 const slides = [
   {
-    id: 'slide-5',
-    bgImage: '/assets/img/banner5.png',
-    bgImageMobile: '/assets/img/popup.png',
-    imageOnly: true,
-  },
-  {
     id: 'slide-0',
     subtitle: 'BIENESTAR PARA USTED Y SU FAMILIA',
     heading: 'Cuidamos a su familia<br>en los momentos <span class="text-accent">que importan</span>',
     lead: 'Convenios exclusivos en salud, educación, turismo y más. Beneficios diseñados para mejorar su calidad de vida.',
     cta1: { label: 'Explorar beneficios', icon: 'tabler:heart', href: '/nosotros#auxilios', primary: true },
-    cta2: { label: 'Ver convenios', icon: 'tabler:building-store', href: '/nosotros#convenios', primary: false },
-    bgImage: '/assets/img/banner1.png',
+    cta2: { label: 'Ver convenios', icon: 'tabler:building-store', href: '/convenios', primary: false },
   },
   {
     id: 'slide-alivio',
     subtitle: 'ALIVIO FINANCIERO',
     heading: '¿Se atrasó con sus cuotas?<br><span class="text-accent">Pongámonos al día</span>',
     lead: 'Comuníquese con nosotros para evaluar su caso y diseñar un plan de pagos personalizado que se ajuste a su capacidad financiera actual, con total confidencialidad.',
-    cta1: { label: 'Hablemos ahora', icon: 'tabler:phone', href: 'tel:+573054070612', primary: true },
-    cta2: { label: 'Escribir por correo', icon: 'tabler:mail', href: 'mailto:creditos@cooperamigo.coop', primary: false },
-    bgImage: '/assets/img/banner3.png',
+    cta1: { label: 'Hablemos ahora', icon: 'tabler:phone', href: 'tel:+573174879669', primary: true },
+    cta2: { label: 'Escribir por correo', icon: 'tabler:mail', href: 'mailto:gerencia@fintegrar.com', primary: false },
   },
   {
     id: 'slide-1',
     subtitle: 'SOLUCIONES FINANCIERAS',
     heading: 'Donde su esfuerzo<br>se convierte en <span class="text-accent">bienestar</span>',
-    lead: 'Más de 30 años brindando soluciones financieras confiables a nuestros asociados.',
-    cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: 'https://serviciosdigitales.cooperamigo.coop/', primary: true },
+    lead: 'Brindamos soluciones financieras confiables a nuestros asociados.',
+    cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: 'https://tramitesvirtuales.fintegrar.com/', primary: true },
     cta2: { label: 'Conózcanos', icon: 'tabler:arrow-right', href: '/nosotros', primary: false },
-    bgImage: '/assets/img/banner2.png',
   },
   {
     id: 'slide-2',
@@ -42,87 +33,67 @@ const slides = [
     lead: 'Soluciones de crédito para cada etapa de su vida. Crédito ordinario, educativo y nuevas opciones diseñadas para acompañar sus proyectos.',
     cta1: { label: 'Líneas de crédito', icon: 'tabler:credit-card', href: '/creditos', primary: true },
     cta2: { label: 'Simular crédito', icon: 'tabler:calculator', href: '/creditos#simulador', primary: false },
-    bgImage: '/assets/img/banner4.png',
   },
 ];
 ---
 
-<section id="heroSlider" class="hero-slider relative w-full bg-slate-100 overflow-hidden" aria-label="Presentación Cooperamigó" data-hide-badge>
+<section id="heroSlider" class="hero-slider relative w-full bg-slate-100 overflow-hidden" aria-label="Presentación FINTEGRAR">
 
-  <!-- Slides -->
   {slides.map((s, i) => (
     <div
-      class={`slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-1000 ${i === 0 ? 'is-active' : ''}`}
+      class={`slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-1000 ${i === 0 ? 'is-active' : ''} ${s.image ? 'has-photo' : ''}`}
       id={s.id}
       aria-hidden={i !== 0 ? 'true' : 'false'}
+      style={s.image ? undefined : 'background: var(--color-navbar-bg);'}
     >
-      <!-- Background Image -->
-      {s.imageOnly ? (
-        <a href="/actualizacion-datos/" aria-label="Ir a actualización de datos" class="absolute inset-0 w-full h-full block">
-          {s.bgImageMobile ? (
-            <>
-              <img
-                src={s.bgImageMobile}
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover object-center sm:hidden"
-                loading={i === 0 ? 'eager' : 'lazy'}
-                fetchpriority={i === 0 ? 'high' : undefined}
-              />
-              <img
-                src={s.bgImage}
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover object-center hidden sm:block"
-                loading={i === 0 ? 'eager' : 'lazy'}
-                fetchpriority={i === 0 ? 'high' : undefined}
-              />
-            </>
-          ) : (
-            <img
-              src={s.bgImage}
-              alt=""
-              class="absolute inset-0 w-full h-full object-cover object-center"
-              loading={i === 0 ? 'eager' : 'lazy'}
-              fetchpriority={i === 0 ? 'high' : undefined}
-            />
-          )}
-        </a>
-      ) : (
-        <img
-          src={s.bgImage}
-          alt=""
-          class="absolute inset-0 w-full h-full object-cover object-center"
-          loading={i === 0 ? 'eager' : 'lazy'}
-          fetchpriority={i === 0 ? 'high' : undefined}
+      <svg class="slide-brand-shape absolute" viewBox="70 -5 135 163" aria-hidden="true">
+        <defs>
+          <linearGradient id={`slideGrad-${s.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0" stop-color="#00132b" />
+            <stop offset=".2" stop-color="#5c458f" />
+            <stop offset=".4" stop-color="#81c1d6" />
+            <stop offset=".6" stop-color="#7abf72" />
+            <stop offset=".8" stop-color="#efc747" />
+            <stop offset="1" stop-color="#d58b3b" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M116.33,46.53c-15.94,10.24-28.73,29.56-29.34,48.05-.32,8.32,2.23,19.12,11.82,20.57,9.57,1.09,17.09-8.34,21-16.14,5.52-12.43,6.96-27.35,15.26-38.85,8.48-11.85,19.69-23.74,35.5-23.79,19.15-.37,28.32,17.42,26.12,34.62-1.59,15.05-7.81,28.61-15.51,41.33-8.17,13.26-18.06,24.33-30.43,34.33-5.02,4.61-12.96,4.14-17.25-1.19-5.71-6.67-1.55-17.67,7.03-19.04,9.13-1.66,17.71-7.05,24.54-13.48,11.65-11.11,19.66-27.12,20.81-42.84.41-6.21-.3-12.36-2.84-16.98-5.51-10.07-21.53-12.47-31.06-5.51-5.51,3.95-10.47,8.72-14.15,14.39-8.03,11.65-8.5,25.88-14.26,38.78-4.81,9.79-13.07,20.8-25.29,20.48-13.59-.74-19.74-14.23-20.37-26.26-1.56-15.14,3.85-30.25,10.98-43.26,3.49-6.6,7.21-12.99,10.28-20.07,2.62-6.03,9.64-8.79,15.67-6.16,8.74,3.59,9.57,16.3,1.51,21.04h0Z"
+          fill={`url(#slideGrad-${s.id})`}
         />
+      </svg>
+
+      {s.image && (
+        <>
+          <img src={s.image} alt="" class="slide-photo absolute inset-0 w-full h-full object-cover" />
+          <div class="slide-scrim absolute inset-0" aria-hidden="true"></div>
+          <svg class="slide-wave absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,120 L0,70 C 280,-10 1160,-10 1440,70 L1440,120 Z" fill="var(--color-white)" />
+          </svg>
+        </>
       )}
-      
       {!s.imageOnly && (
         <>
-          <!-- Tinted + Gradient Overlay for Text Readability and Brand Consistency -->
-          <div class="absolute inset-0 bg-[#172B36]/10 mix-blend-multiply"></div>
-          <div class="absolute inset-0 bg-gradient-to-r from-[#FFC801] via-[#FFC801]/85 to-transparent"></div>
-
-          <!-- Slide Content Container -->
           <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pb-14 sm:pb-16 h-full flex flex-col items-center sm:items-start justify-center min-w-0">
 
             <div class="max-w-2xl w-full min-w-0 text-center sm:text-left flex flex-col items-center sm:items-start">
 
-              <h1 class="slide-title text-4xl md:text-5xl lg:text-[4rem] font-extrabold text-[#172B36] leading-[1.1] mb-6 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: both;" set:html={s.heading} />
+              <h1 class="slide-title text-4xl md:text-5xl lg:text-[4rem] font-extrabold leading-[1.1] mb-6 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: both;" set:html={s.heading} />
 
-              <p class="slide-lead text-lg md:text-xl text-slate-600 mb-8 max-w-xl animate-fade-in-up" style="animation-delay: 0.4s; animation-fill-mode: both;">
+              <p class="slide-lead text-lg md:text-xl mb-8 max-w-xl animate-fade-in-up" style="animation-delay: 0.4s; animation-fill-mode: both;">
                 {s.lead}
               </p>
 
               {(s.cta1 || s.cta2) && (
                 <div class="slide-ctas flex flex-wrap items-center justify-center sm:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
                   {s.cta1 && (
-                    <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-colors ${s.cta1.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                    <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta1.primary ? 'btn-gradient shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                       {s.cta1.icon && <Icon name={s.cta1.icon} class="w-5 h-5" />}
                       {s.cta1.label}
                     </a>
                   )}
                   {s.cta2 && (
-                    <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-colors ${s.cta2.primary ? 'bg-[#172B36] text-white hover:bg-[#1a3341] shadow-lg hover:shadow-xl' : 'bg-white text-[#172B36] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                    <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta2.primary ? 'btn-gradient shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                       {s.cta2.label}
                       {s.cta2.icon && <Icon name={s.cta2.icon} class="w-5 h-5" />}
                     </a>
@@ -136,75 +107,188 @@ const slides = [
     </div>
   ))}
 
-  <!-- Arrows -->
-  <button class="slider-arrow slider-arrow--prev absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 hover:bg-white hidden lg:flex items-center justify-center text-[#172B36] shadow-lg transition-all z-20 backdrop-blur-sm" aria-label="Slide anterior">
-    <Icon name="tabler:chevron-left" class="w-6 h-6" />
-  </button>
-  <button class="slider-arrow slider-arrow--next absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 hover:bg-white hidden lg:flex items-center justify-center text-[#172B36] shadow-lg transition-all z-20 backdrop-blur-sm" aria-label="Slide siguiente">
-    <Icon name="tabler:chevron-right" class="w-6 h-6" />
-  </button>
-
-  <!-- Dots -->
-  <div class="slider-dots hidden sm:flex absolute bottom-24 left-1/2 -translate-x-1/2 gap-2.5 z-20">
-    {slides.map((_, i) => (
-      <button class={`slider-dot w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-[#FFC801] w-8' : 'bg-black/10 hover:bg-black/30 shadow-sm'}`} data-index={i} aria-label={`Slide ${i + 1}`} />
-    ))}
-  </div>
 </section>
 
-<!-- Stats Bar -->
-<div class="relative z-30 max-w-[85rem] mx-auto px-4 sm:px-6 md:px-10 -mt-14 sm:-mt-16 mb-12">
-  <div class="bg-white rounded-lg shadow-2xl shadow-slate-200/50 overflow-hidden border border-slate-100">
-    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-slate-100">
-      <div class="p-3 sm:p-6 md:p-8 flex items-center justify-center gap-2 sm:gap-4 hover:bg-slate-50 transition-colors">
-        <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
-          <Icon name="tabler:users" class="w-4 h-4 sm:w-6 sm:h-6" />
+<div class="relative z-30 -mt-14 sm:-mt-20 -mb-20 sm:-mb-28">
+  <div class="absolute inset-x-0 top-14 sm:top-20 bottom-0 bg-[var(--color-navbar-bg)]" aria-hidden="true"></div>
+  <div class="relative max-w-[85rem] mx-auto px-4 sm:px-6 md:px-10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+    <div class="relative bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(var(--color-black-rgb), 0.08)] h-[240px] overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+      <svg class="absolute bottom-0 left-0 w-full h-[65%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="gradOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00132B" />
+            <stop offset="20%" stop-color="#722CCE" />
+            <stop offset="40%" stop-color="#81C1D6" />
+            <stop offset="60%" stop-color="#7ABF72" />
+            <stop offset="80%" stop-color="#EFC747" />
+            <stop offset="100%" stop-color="#D58B3B" />
+          </linearGradient>
+        </defs>
+        <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="url(#gradOrange)" />
+      </svg>
+      <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <h3 class="text-base font-extrabold text-gray-800 tracking-tight leading-snug">Tienda en Línea</h3>
+          <p class="text-gray-600 text-xs mt-1 font-medium leading-snug">Aproveche ofertas exclusivas.</p>
         </div>
-        <div class="text-left">
-          <div class="stat-num text-lg sm:text-2xl md:text-3xl font-extrabold text-[#172B36]">+420</div>
-          <div class="text-[0.65rem] sm:text-xs font-normal text-slate-500">Asociados activos</div>
-        </div>
-      </div>
-      <div class="p-3 sm:p-6 md:p-8 flex items-center justify-center gap-2 sm:gap-4 hover:bg-slate-50 transition-colors">
-        <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
-          <Icon name="tabler:heart-handshake" class="w-4 h-4 sm:w-6 sm:h-6" />
-        </div>
-        <div class="text-left">
-          <div class="stat-num text-lg sm:text-2xl md:text-3xl font-extrabold text-[#172B36]">+12</div>
-          <div class="text-[0.65rem] sm:text-xs font-normal text-slate-500">Convenios activos</div>
-        </div>
-      </div>
-      <div class="p-3 sm:p-6 md:p-8 flex items-center justify-center gap-2 sm:gap-4 hover:bg-slate-50 transition-colors">
-        <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
-          <Icon name="tabler:mood-happy" class="w-4 h-4 sm:w-6 sm:h-6" />
-        </div>
-        <div class="text-left">
-          <div class="stat-num text-lg sm:text-2xl md:text-3xl font-extrabold text-[#172B36]">98.2%</div>
-          <div class="text-[0.65rem] sm:text-xs font-normal text-slate-500">Tasa de satisfacción</div>
+        <div class="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0 text-gray-800">
+          <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
         </div>
       </div>
-      <div class="p-3 sm:p-6 md:p-8 flex items-center justify-center gap-2 sm:gap-4 hover:bg-slate-50 transition-colors">
-        <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
-          <Icon name="tabler:trending-up" class="w-4 h-4 sm:w-6 sm:h-6" />
-        </div>
-        <div class="text-left">
-          <div class="stat-num text-lg sm:text-2xl md:text-3xl font-extrabold text-[#172B36]">+33</div>
-          <div class="text-[0.65rem] sm:text-xs font-normal text-slate-500">Años de trayectoria</div>
-        </div>
-      </div>
+      <a href="#" class="absolute bottom-6 left-6 right-6 bg-white text-gray-900 text-center py-2.5 px-2 rounded-full font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all z-20">
+        Ir a tienda en línea
+      </a>
     </div>
+
+    <div class="relative bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(var(--color-black-rgb), 0.08)] h-[240px] overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+      <svg class="absolute bottom-0 left-0 w-full h-[65%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="gradPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00132B" />
+            <stop offset="20%" stop-color="#722CCE" />
+            <stop offset="40%" stop-color="#81C1D6" />
+            <stop offset="60%" stop-color="#7ABF72" />
+            <stop offset="80%" stop-color="#EFC747" />
+            <stop offset="100%" stop-color="#D58B3B" />
+          </linearGradient>
+        </defs>
+        <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="url(#gradPurple)" />
+      </svg>
+      <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <h3 class="text-base font-extrabold text-gray-800 tracking-tight leading-snug">Mi Casa</h3>
+          <p class="text-gray-600 text-xs mt-1 font-medium leading-snug">Compre, venda y arriende inmuebles.</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0 text-gray-800">
+          <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
+        </div>
+      </div>
+      <a href="#" class="absolute bottom-6 left-6 right-6 bg-white text-gray-900 text-center py-2.5 px-2 rounded-full font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all z-20">
+        Conocer Mi Casa
+      </a>
+    </div>
+
+    <div class="relative bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(var(--color-black-rgb), 0.08)] h-[240px] overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+      <svg class="absolute bottom-0 left-0 w-full h-[65%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="gradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00132B" />
+            <stop offset="20%" stop-color="#722CCE" />
+            <stop offset="40%" stop-color="#81C1D6" />
+            <stop offset="60%" stop-color="#7ABF72" />
+            <stop offset="80%" stop-color="#EFC747" />
+            <stop offset="100%" stop-color="#D58B3B" />
+          </linearGradient>
+        </defs>
+        <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="url(#gradBlue)" />
+      </svg>
+      <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <h3 class="text-base font-extrabold text-gray-800 tracking-tight leading-snug">Vehículo</h3>
+          <p class="text-gray-600 text-xs mt-1 font-medium leading-snug">Estrene auto con tasas preferenciales.</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0 text-gray-800">
+          <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
+        </div>
+      </div>
+      <a href="#" class="absolute bottom-6 left-6 right-6 bg-white text-gray-900 text-center py-2.5 px-2 rounded-full font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all z-20">
+        Cotizar vehículo
+      </a>
+    </div>
+
+    <div class="relative bg-white rounded-[2rem] shadow-[0_8px_30px_rgba(var(--color-black-rgb), 0.08)] h-[240px] overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+      <svg class="absolute bottom-0 left-0 w-full h-[65%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00132B" />
+            <stop offset="20%" stop-color="#722CCE" />
+            <stop offset="40%" stop-color="#81C1D6" />
+            <stop offset="60%" stop-color="#7ABF72" />
+            <stop offset="80%" stop-color="#EFC747" />
+            <stop offset="100%" stop-color="#D58B3B" />
+          </linearGradient>
+        </defs>
+        <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="url(#gradGreen)" />
+      </svg>
+      <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <h3 class="text-base font-extrabold text-gray-800 tracking-tight leading-snug">Educación</h3>
+          <p class="text-gray-600 text-xs mt-1 font-medium leading-snug">Invierta en su futuro hoy mismo.</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0 text-gray-800">
+          <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
+        </div>
+      </div>
+      <a href="#" class="absolute bottom-6 left-6 right-6 bg-white text-gray-900 text-center py-2.5 px-2 rounded-full font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all z-20">
+        Ver convenios
+      </a>
+    </div>
+
+  </div>
   </div>
 </div>
 
 <style>
   .hero-slider {
-    height: 560px;
-    min-height: 65vh;
+    height: calc(650px + var(--header-h));
+    min-height: calc(72vh + var(--header-h));
+    padding-top: var(--header-h);
   }
   @media (max-width: 768px) {
     .hero-slider {
-      height: 520px;
+      height: calc(580px + var(--header-h));
       min-height: auto;
+    }
+  }
+
+  .slide {
+    padding-top: var(--header-h);
+  }
+
+  .slide-photo {
+    z-index: 0;
+    object-position: center 30%;
+  }
+
+  .slide-brand-shape {
+    top: -15%;
+    bottom: -15%;
+    right: -4%;
+    height: 130%;
+    width: auto;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 639px) {
+    .slide-brand-shape {
+      display: none;
+    }
+  }
+
+  .slide-scrim {
+    z-index: 2;
+    background: linear-gradient(
+      90deg,
+      rgba(var(--color-ink-rgb), 0.82) 0%,
+      rgba(var(--color-ink-rgb), 0.55) 40%,
+      rgba(var(--color-ink-rgb), 0.15) 70%,
+      rgba(var(--color-ink-rgb), 0) 90%
+    );
+  }
+
+  .slide-wave {
+    z-index: 3;
+    height: 70px;
+    pointer-events: none;
+  }
+
+  @media (min-width: 640px) {
+    .slide-wave {
+      height: 100px;
     }
   }
 
@@ -214,29 +298,41 @@ const slides = [
     z-index: 10;
   }
 
-  .stat-num {
-    font-family: var(--ff-sans);
-  }
-
   .slide-title,
   .slide-lead {
     font-family: var(--ff-heading);
+    position: relative;
+    z-index: 10;
   }
 
   .slide-title {
     font-size: clamp(2rem, 4.5vw, 3.25rem);
+    color: var(--color-ink);
   }
 
   .slide-lead {
     font-size: clamp(1rem, 1.5vw, 1.125rem);
-    line-height: 1.6;
+    line-height: var(--lh-160);
+    color: var(--color-text-muted);
   }
 
-  /* Custom utility classes */
-  .text-accent {
-    color: #FFC801;
+  .slide.has-photo .slide-title {
+    color: var(--color-white);
+    text-shadow: 0 2px 16px rgba(var(--color-ink-rgb), 0.35);
   }
-  
+
+  .slide.has-photo .slide-lead {
+    color: rgba(var(--color-white-rgb), 0.7);
+    text-shadow: 0 1px 10px rgba(var(--color-ink-rgb), 0.3);
+  }
+
+  .text-accent {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -245,19 +341,19 @@ const slides = [
     from { opacity: 0; transform: translateX(30px); }
     to { opacity: 1; transform: translateX(0); }
   }
-  
+
   .animate-fade-in-up {
     animation-name: fadeInUp;
     animation-duration: 0.8s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
-  
+
   .animate-fade-in-left {
     animation-name: fadeInLeft;
     animation-duration: 0.8s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
-  
+
   /* Retrigger animations when slide becomes active */
   .slide:not(.is-active) .animate-fade-in-up,
   .slide:not(.is-active) .animate-fade-in-left {
@@ -271,7 +367,7 @@ const slides = [
     const slides = document.querySelectorAll<HTMLElement>('.slide');
     const dots = document.querySelectorAll<HTMLElement>('.slider-dot');
     const slider = document.getElementById('heroSlider');
-    
+
     if (!slides.length) return;
 
     let current = 0;
@@ -282,7 +378,7 @@ const slides = [
       slides[current].classList.remove('is-active');
       slides[current].setAttribute('aria-hidden', 'true');
       if (dots.length) {
-        dots[current].classList.remove('bg-[#FFC801]', 'w-8');
+        dots[current].classList.remove('bg-[var(--color-brand-yellow)]', 'w-8');
         dots[current].classList.add('bg-white/50');
       }
 
@@ -292,7 +388,7 @@ const slides = [
       slides[current].setAttribute('aria-hidden', 'false');
       if (dots.length) {
         dots[current].classList.remove('bg-white/50');
-        dots[current].classList.add('bg-[#FFC801]', 'w-8');
+        dots[current].classList.add('bg-[var(--color-brand-yellow)]', 'w-8');
       }
 
       resetTimer();
@@ -312,9 +408,6 @@ const slides = [
       dot.addEventListener('click', () => activateSlide(i));
     });
 
-    document.querySelector('.slider-arrow--prev')?.addEventListener('click', prev);
-    document.querySelector('.slider-arrow--next')?.addEventListener('click', next);
-
     if (window.innerWidth > 1023 && slider) {
       slider.addEventListener('mouseenter', () => paused = true);
       slider.addEventListener('mouseleave', () => paused = false);
@@ -324,7 +417,7 @@ const slides = [
     slider?.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
-    
+
     slider?.addEventListener('touchend', (e) => {
       const diff = touchStartX - e.changedTouches[0].screenX;
       if (Math.abs(diff) > 50) {

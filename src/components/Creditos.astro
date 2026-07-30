@@ -1,39 +1,96 @@
 ---
 import { Icon } from "astro-icon/components";
 
-const lineas = [
+interface Props {
+  full?: boolean;
+}
+const { full = false } = Astro.props;
+
+const todasLineas = [
   {
+    id: "ordinario",
     icon: "tabler:credit-card",
-    nombre: "Crédito Libre Inversión",
-    tasa: "Tasa según perfil de riesgo",
-    desc: "Financiamiento ágil para sus necesidades personales, del hogar, viajes y más, con cuotas ajustadas a su realidad.",
+    nombre: "Crédito Ordinario",
+    tasa: "1.53% M.V.",
+    desc: "Créditos cancelados con deducciones quincenales antes del 30 de noviembre del año en que se apruebe.",
   },
   {
-    icon: "tabler:refresh",
-    nombre: "Crédito Rotativo",
-    tasa: "Próximamente",
-    desc: "Línea de crédito exclusiva para asociados con buen comportamiento de pago. ¡Muy pronto se habilitará!",
-    badge: { texto: "Próximamente", clase: "badge-secondary" },
+    id: "ahorro-navideno-anticipo",
+    icon: "tabler:wallet",
+    nombre: "Anticipo Ahorro Navideño",
+    tasa: "1.53% M.V.",
+    desc: "Adelante su Ahorro Navideño y solo pague el interés quincenal; el valor se liquida en diciembre.",
   },
   {
+    id: "eventos-especiales",
+    icon: "tabler:calendar-event",
+    nombre: "Crédito Eventos Especiales",
+    tasa: "0%",
+    desc: "Para fechas especiales programadas por Fintegrar: Día de la Madre, Día del Padre, Navidad, paseos, Fiesta del Fondo y más.",
+  },
+  {
+    id: "cuota-especial",
+    icon: "tabler:receipt",
+    nombre: "Cuota Especial (Prima)",
+    tasa: "Según estudio",
+    desc: "Anticipo de la prima de servicios de junio y diciembre; aplica después de los meses de abril y octubre.",
+  },
+  {
+    id: "calamidad",
+    icon: "tabler:home-heart",
+    nombre: "Crédito Calamidad Doméstica",
+    tasa: "0.5% M.V.",
+    desc: "Para desastres naturales, salud no cubierta por el POS o pérdida de bienes de primera necesidad. Plazo máximo 12 meses.",
+  },
+  {
+    id: "vacacional",
+    icon: "tabler:plane",
+    nombre: "Plan Vacacional",
+    tasa: "1.53% M.V.",
+    desc: "Financie sus vacaciones con descuentos en convenios aliados; pago con Ahorro Navideño, prima o nómina.",
+  },
+  {
+    id: "largo-plazo",
+    icon: "tabler:calendar-check",
+    nombre: "Crédito Largo Plazo",
+    tasa: "1.53% M.V.",
+    desc: "Plazo máximo de 36 meses. Las garantías se exigen de acuerdo con el monto solicitado.",
+  },
+  {
+    id: "educacion",
     icon: "tabler:school",
-    nombre: "Crédito Educativo",
-    tasa: "1.35% M.V. (Tasa preferencial)",
-    desc: "Crédito exclusivo con la Universidad Católica Luis Amigó. Apoye su formación académica con condiciones especiales para asociados.",
+    nombre: "Crédito para Educación",
+    tasa: "1% M.V.",
+    desc: "Para estudios del asociado en instituciones certificadas por el Ministerio de Educación.",
+  },
+  {
+    id: "mejoras-vivienda",
+    icon: "tabler:home",
+    nombre: "Mejoras de Vivienda",
+    tasa: "1% M.V.",
+    desc: "Para vivienda propia del asociado, presentando el certificado de tradición y libertad.",
+  },
+  {
+    id: "compra-cartera",
+    icon: "tabler:building-bank",
+    nombre: "Compra de Cartera",
+    tasa: "Tasa inferior, según estudio",
+    desc: "Consolide sus obligaciones con otras entidades de crédito en una sola cuota con Fintegrar.",
   },
 ];
+
+const destacadas = new Set(["ordinario", "educacion", "calamidad", "vacacional"]);
+const lineas = full ? todasLineas : todasLineas.filter((l) => destacadas.has(l.id));
 ---
 
 <section id="creditos" class="section-white" aria-labelledby="creditos-title">
   <div class="max-w-7xl mx-auto px-6">
-    <!-- Cabecera -->
     <div class="section-header reveal">
       <div>
-        <div class="section-eyebrow">Líneas de crédito</div>
         <h2
           id="creditos-title"
           class="font-display"
-          style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;"
+          style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);"
         >
           Soluciones financieras para cada necesidad
         </h2>
@@ -41,11 +98,11 @@ const lineas = [
       <p class="section-header-aside"></p>
     </div>
 
-    <!-- Grid de tarjetas -->
     <div class="creditos-grid">
       {
         lineas.map((l, i) => (
           <div
+            id={l.id}
             class={`credito-card card-base reveal${i > 0 ? ` reveal-delay-${Math.min(i, 4)}` : ""}`}
           >
             <div class="credito-card-top">
@@ -62,7 +119,7 @@ const lineas = [
               <p class="credito-desc">{l.desc}</p>
             </div>
             <a
-              href="https://serviciosdigitales.cooperamigo.coop"
+              href="https://tramitesvirtuales.fintegrar.com"
               class="credito-link"
               target="_blank"
               rel="noopener noreferrer"
@@ -78,7 +135,6 @@ const lineas = [
         ))
       }
 
-      <!-- CTA card -->
       <div
         class="credito-card card-base credito-card--dark reveal reveal-delay-2"
       >
@@ -94,24 +150,24 @@ const lineas = [
         </div>
         <div class="credito-cta-acciones">
           <a
-            href="https://maps.google.com/?q=Calle+50+65+-+42"
+            href="https://maps.google.com/?q=Carrera+43A+%2325-69+Medellin"
             class="credito-contact-link"
             target="_blank"
             rel="noopener noreferrer"
           >
             <Icon name="tabler:map-pin" class="w-4 h-4" aria-hidden="true" />
-            Calle 50 65 - 42, Of. 120
+            Prosalco IPS Poblado, Cra 43A # 25-69
           </a>
           <a
-            href="mailto:creditos@cooperamigo.coop"
+            href="mailto:gerencia@fintegrar.com"
             class="credito-contact-link"
           >
             <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
-            creditos@cooperamigo.coop
+            gerencia@fintegrar.com
           </a>
-          <a href="tel:+573054070612" class="credito-contact-link">
+          <a href="tel:+573174879669" class="credito-contact-link">
             <Icon name="tabler:phone" class="w-4 h-4" aria-hidden="true" />
-            (+57) 305 407 0612
+            (+57) 317 487 9669
           </a>
         </div>
       </div>
@@ -121,11 +177,10 @@ const lineas = [
 
 <style>
   .section-white {
-    background: #fff;
+    background: var(--color-navbar-bg);
     padding: 8rem 0;
   }
 
-  /* Cabecera con descripción al lado */
   .section-header {
     display: flex;
     align-items: flex-end;
@@ -135,21 +190,19 @@ const lineas = [
   }
   .section-header-aside {
     font-size: 1rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.8;
+    line-height: var(--lh-180);
     max-width: 420px;
     flex-shrink: 0;
   }
 
-  /* Grid de créditos */
   .creditos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
 
-  /* Tarjeta base */
   .credito-card {
     padding: 2.25rem;
     display: flex;
@@ -157,12 +210,12 @@ const lineas = [
     gap: 1.25rem;
   }
   .credito-card--dark {
-    background: #172b36;
+    background: var(--color-ink);
     border-color: transparent;
     grid-column: 1 / -1;
   }
   .credito-card--dark:hover {
-    box-shadow: 0 12px 40px rgba(23, 43, 54, 0.25);
+    box-shadow: 0 12px 40px rgba(var(--color-navy-rgb), 0.25);
   }
   @media (min-width: 1024px) {
     .credito-card--dark {
@@ -181,67 +234,63 @@ const lineas = [
     }
   }
 
-  /* Top: icono + badge */
   .credito-card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  /* Icono */
   .credito-icon {
     width: 44px;
     height: 44px;
     border-radius: var(--radius-sm);
     background: var(--color-surface);
-    color: #172b36;
+    color: var(--color-ink);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
   .credito-icon--light {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffc801;
+    background: rgba(var(--color-white-rgb), 0.1);
+    color: var(--color-brand-yellow);
   }
 
-  /* Texto de tarjeta */
   .credito-nombre {
-    font-weight: 700;
+    font-weight: var(--fw-bold);
     font-size: 1.125rem;
-    color: #172b36;
+    color: var(--color-ink);
     margin-bottom: 0.25rem;
   }
   .credito-card--dark .credito-nombre {
-    color: #fff;
+    color: var(--color-white);
   }
   .credito-tasa {
     font-size: 0.875rem;
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     margin-bottom: 0.75rem;
   }
   .credito-card--dark .credito-tasa {
-    color: #ffc801;
+    color: var(--color-brand-yellow);
   }
   .credito-desc {
     font-size: 0.9375rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.6;
+    line-height: var(--lh-160);
   }
   .credito-card--dark .credito-desc {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(var(--color-white-rgb), 0.7);
   }
 
-  /* Link */
   .credito-link {
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 0.875rem;
-    font-weight: 600;
-    color: #172b36;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
     text-decoration: none;
     margin-top: auto;
     transition: gap 0.2s;
@@ -250,26 +299,24 @@ const lineas = [
     gap: 10px;
   }
 
-  /* CTA dark specific */
   .credito-cta-eyebrow {
     font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-weight: var(--fw-bold);
     text-transform: uppercase;
-    color: #ffc801;
+    color: var(--color-brand-yellow);
     margin-bottom: 0.5rem;
   }
   .credito-cta-titulo {
     font-size: 1.125rem;
-    font-weight: 700;
-    color: #fff;
+    font-weight: var(--fw-bold);
+    color: var(--color-white);
     margin-bottom: 0.5rem;
-    line-height: 1.35;
+    line-height: var(--lh-135);
   }
   .credito-cta-desc {
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.6;
+    color: rgba(var(--color-white-rgb), 0.6);
+    line-height: var(--lh-160);
     margin-top: 0.25rem;
   }
   .credito-cta-acciones {
@@ -283,16 +330,16 @@ const lineas = [
     align-items: center;
     gap: 0.625rem;
     font-size: 0.875rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.85);
+    font-weight: var(--fw-semibold);
+    color: rgba(var(--color-white-rgb), 0.85);
     text-decoration: none;
     transition: color 0.15s;
   }
   .credito-contact-link:hover {
-    color: #ffc801;
+    color: var(--color-brand-yellow);
   }
   .credito-contact-link svg {
-    color: #ffc801;
+    color: var(--color-brand-yellow);
     flex-shrink: 0;
   }
 

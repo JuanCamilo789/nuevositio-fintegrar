@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = "Cooperamigó — Cooperativa Multiactiva Luis Amigó",
-  description = "Cooperamigó es una organización cooperativa que contribuye al mejoramiento económico y social de sus asociados con atención oportuna, segura y transparente.",
+  title = "Inicio — Fintegrar",
+  description = "Fintegrar es un fondo de empleados que contribuye al mejoramiento económico y social de sus asociados con atención oportuna, segura y transparente.",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,19 +21,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#172B36" />
+    <meta name="theme-color" content="#00132B" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <title>{title}</title>
     <link rel="canonical" href={canonicalURL.href} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="Cooperamigó" />
+    <meta property="og:site_name" content="Fintegrar" />
     <meta property="og:locale" content="es_CO" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
@@ -41,6 +41,40 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content={description} />
   </head>
   <body>
+    <div id="siteIntro" class="site-intro" aria-hidden="true">
+      <div class="site-intro-content">
+        <img
+          src="/assets/logos/favicon.png"
+          alt=""
+          class="site-intro-mark"
+          fetchpriority="high"
+        />
+        <div class="site-intro-text">
+          <span class="site-intro-welcome">Bienvenidos a Fintegrar</span>
+          <span class="site-intro-copyright">© 2026 Fondo de Empleados - Fintegrar. Todos los derechos reservados.</span>
+          <span class="site-intro-url">www.fintegrar.com</span>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <style>.site-intro { display: none; }</style>
+    </noscript>
+    <script is:inline>
+      (function () {
+        var intro = document.getElementById("siteIntro");
+        if (!intro) return;
+        if (sessionStorage.getItem("introSeen")) {
+          intro.remove();
+          return;
+        }
+        sessionStorage.setItem("introSeen", "1");
+        window.setTimeout(function () {
+          intro.classList.add("is-leaving");
+          window.setTimeout(function () { intro.remove(); }, 400);
+        }, 2700);
+      })();
+    </script>
+
     <div
       class="supersolidaria-badge is-hidden"
       role="note"
@@ -61,7 +95,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <div class="fab-stack">
       <a
-        href="https://wa.me/573054070612?text=Hola%2C%20quisiera%20informaci%C3%B3n%20sobre%20cr%C3%A9dito%2Fcartera."
+        href="https://wa.me/573174879669?text=Hola%2C%20quisiera%20informaci%C3%B3n%20sobre%20cr%C3%A9dito%2Fcartera."
         class="whatsapp-fab"
         target="_blank"
         rel="noopener noreferrer"
@@ -89,13 +123,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
-        <a href="/actualizacion-datos/" aria-label="Ir a actualización de datos">
+        <div class="promo-popup-media">
           <img
-            src="/assets/img/popup.png"
-            alt="Promoción Cooperamigó"
+            src="/assets/img/popup-produtos.webp"
+            alt="Tablet, olla multifuncional y bonos en efectivo"
             class="promo-popup-img"
           />
-        </a>
+        </div>
+        <div class="promo-popup-content">
+          <span class="promo-popup-eyebrow">Novedad:</span>
+          <h3 class="promo-popup-title">
+            Actualiza tus datos y participa por grandes premios
+          </h3>
+          <p class="promo-popup-text">
+            Solo te toma 3 minutos. Participa por 1 tablet, 1 olla multifuncional y 10 bonos de $100.000 c/u. Tienes hasta el miércoles, 15 de septiembre de 2026.
+          </p>
+          <a href="/actualizacion-datos/" class="promo-popup-link">
+            Actualizar mis datos
+          </a>
+        </div>
       </div>
     </div>
 
@@ -229,7 +275,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           if (b.top < r.bottom && b.bottom > r.top) hideBadge = true;
         }
         badge.classList.toggle("is-hidden", hideBadge);
-        badge.style.setProperty("--badge-color", onDark ? "#ffffff" : "#172B36");
+        badge.style.setProperty("--badge-color", onDark ? "var(--color-white)" : "var(--color-ink)");
       }
 
       updateBadgeColor();

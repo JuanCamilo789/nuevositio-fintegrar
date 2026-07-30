@@ -1,0 +1,844 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const tramosAportes = [
+  { ingresos: '$1.750.905 – $2.000.000', cuota: '$28.747' },
+  { ingresos: '$2.000.001 – $4.000.000', cuota: '$33.170' },
+  { ingresos: '$4.000.001+', cuota: '$44.226' },
+];
+---
+
+<section id="ahorros" class="section-white" aria-labelledby="ahorros-title">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="section-header reveal">
+      <h2
+        id="ahorros-title"
+        class="font-display"
+        style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);"
+      >
+        Cultive el hábito del ahorro con nosotros
+      </h2>
+      <p class="section-header-aside">
+        Aquí encontrará distintas formas de ahorrar, cada una pensada para un momento diferente de su vida: desde el día a día hasta esos proyectos que quiere ver hechos realidad. Elija la que mejor se ajuste a usted y a su familia, y empiece a construir su tranquilidad financiera.
+      </p>
+    </div>
+
+    <div class="ahorro-quicknav reveal">
+      <a href="#aportes-sociales" class="quicknav-card">
+        <span class="quicknav-number">1</span>
+        <span class="quicknav-inner">
+          <span class="quicknav-title">Aportes Sociales y<br />Ahorro Permanente</span>
+          <span class="quicknav-sub">Los aportes sociales se descuentan quincenalmente por nómina y se devuelven al retirarse del Fondo.</span>
+          <span class="quicknav-cta">Conocer más <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" /></span>
+        </span>
+      </a>
+      <a href="#ahorro-navideno" class="quicknav-card">
+        <span class="quicknav-number">2</span>
+        <span class="quicknav-inner">
+          <span class="quicknav-title">Ahorro<br />Navideño</span>
+          <span class="quicknav-sub">Ahorro voluntario con descuentos quincenales por nómina, desde $35.000 o hasta el 20% del salario quincenal.</span>
+          <span class="quicknav-cta">Conocer más <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" /></span>
+        </span>
+      </a>
+      <a href="#pequenos-ahorradores" class="quicknav-card">
+        <span class="quicknav-number">3</span>
+        <span class="quicknav-inner">
+          <span class="quicknav-title">Pequeños<br />Ahorradores</span>
+          <span class="quicknav-sub">Ahorro infantil con descuentos quincenales para promover el ahorro en los hijos de los asociados.</span>
+          <span class="quicknav-cta">Conocer más <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" /></span>
+        </span>
+      </a>
+      <a href="#cdat" class="quicknav-card">
+        <span class="quicknav-number">4</span>
+        <span class="quicknav-inner">
+          <span class="quicknav-title">CDAT<br /><span class="quicknav-title-small">(Certificado depósito de ahorro<br />a término)</span></span>
+          <span class="quicknav-sub">Invierta su dinero de forma segura, eligiendo el plazo y la forma de entrega.</span>
+          <span class="quicknav-cta">Conocer más <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" /></span>
+        </span>
+      </a>
+      <a href="#rifa-semanal" class="quicknav-card quicknav-card--wide">
+        <span class="quicknav-number">5</span>
+        <span class="quicknav-inner quicknav-inner--wide">
+          <span class="quicknav-title quicknav-title--wide"><span class="fw-word--bold">Rifa</span> <span class="fw-word--regular">Semanal</span></span>
+          <span class="quicknav-sub">Participe cada semana con su boleta y gane premios en efectivo, con un premio especial en diciembre.</span>
+          <span class="quicknav-cta">Conocer más <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" /></span>
+        </span>
+      </a>
+    </div>
+
+    <section id="aportes-sociales" class="ahorro-feature" aria-labelledby="aportes-feature-title">
+      <div class="ahorro-feature-sticky">
+        <div class="reveal">
+          <h3 id="aportes-feature-title" class="ahorro-feature-title">
+            <span class="fw-word fw-word--bold">Aportes</span>
+            <span class="fw-word fw-word--bold">Sociales</span>
+            <span class="fw-word fw-word--regular">y Ahorro</span>
+            <span class="fw-word fw-word--regular">Permanente</span>
+          </h3>
+        </div>
+      </div>
+      <div class="ahorro-feature-content reveal">
+        <span class="ahorro-feature-tag">Modalidades de ahorro</span>
+        <p class="ahorro-feature-desc">
+          <strong>Aportes que construyen futuro.</strong>
+        </p>
+        <p class="ahorro-feature-desc">
+          De acuerdo con sus ingresos, el Fondo realiza la deducción
+          quincenal a través de descuento de nómina de una cuota fija
+          correspondiente a los aportes sociales. Este valor se retorna al
+          asociado en el momento de su retiro del Fondo.
+        </p>
+
+        <div class="aportes-table">
+          <div class="aportes-table-header">
+            <div class="aportes-col">Rango de ingresos</div>
+            <div class="aportes-col">Cuota quincenal</div>
+          </div>
+          <div class="aportes-table-body">
+            {tramosAportes.map((t) => (
+              <div class="aportes-table-row">
+                <div class="aportes-col aportes-col-range">
+                  {t.ingresos.includes('+') ? (
+                    <Fragment>
+                      {t.ingresos.replace('+', '')}<span class="plus-symbol"> o más</span>
+                    </Fragment>
+                  ) : (
+                    t.ingresos
+                  )}
+                </div>
+                <div class="aportes-col aportes-col-amount">{t.cuota}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ahorro-navideno" class="ahorro-feature ahorro-feature--reverse" aria-labelledby="navideno-feature-title">
+      <div class="ahorro-feature-content reveal">
+        <span class="ahorro-feature-tag">Modalidades de ahorro</span>
+        <p class="ahorro-feature-desc">
+          <strong>Cada quincena, un paso más cerca de su Navidad.</strong>
+        </p>
+        <p class="ahorro-feature-desc">
+          Esta línea de ahorro se realiza con una cuota mínima quincenal de
+          $35.000 o máximo el equivalente al 20% de su salario quincenal. Las
+          cuotas se deducen entre el 15 de diciembre del año anterior y el 30
+          de noviembre del presente año.
+        </p>
+
+        <div class="ahorro-feature-stats">
+          <div class="ahorro-feature-stat">
+            <span class="ahorro-feature-stat-value ahorro-feature-stat-value--match-amount">$35.000</span>
+            <span class="ahorro-feature-stat-label">Cuota mínima quincenal (o máximo el 20% del salario)</span>
+          </div>
+          <div class="ahorro-feature-stat">
+            <span class="ahorro-feature-stat-value">15 dic – 30 nov</span>
+            <span class="ahorro-feature-stat-label">Periodo de ahorro</span>
+          </div>
+        </div>
+
+        <p class="ahorro-feature-desc ahorro-nota-text">
+          <span class="ahorro-nota-title">Observación:</span>
+          <span class="ahorro-nota-body">
+            &nbsp;Si el asociado no desea que su Ahorro Navideño le sea entregado en
+            diciembre, deberá enviar una carta al Fondo en el mes de noviembre
+            informando que desea dejarlo y en el momento que lo vaya a
+            retirar, se le reconocerá un interés equivalente al DTF a la
+            fecha, más puntos adicionales en el momento de su liquidación.
+          </span>
+        </p>
+      </div>
+      <div class="ahorro-feature-sticky">
+        <div class="reveal">
+          <h3 id="navideno-feature-title" class="ahorro-feature-title">
+            <span class="fw-word fw-word--bold">Ahorro</span>
+            <span class="fw-word fw-word--regular">Navideño</span>
+          </h3>
+        </div>
+      </div>
+    </section>
+
+    <section id="pequenos-ahorradores" class="ahorro-feature" aria-labelledby="pequenos-feature-title">
+      <div class="ahorro-feature-sticky">
+        <div class="reveal">
+          <h3 id="pequenos-feature-title" class="ahorro-feature-title">
+            <span class="fw-word fw-word--bold">Pequeños</span>
+            <span class="fw-word fw-word--regular">Ahorradores</span>
+          </h3>
+        </div>
+      </div>
+      <div class="ahorro-feature-content reveal">
+        <span class="ahorro-feature-tag">Modalidades de ahorro</span>
+        <p class="ahorro-feature-desc">
+          <strong>Construye el futuro de los más pequeños.</strong>
+        </p>
+        <p class="ahorro-feature-desc">
+          Enséñeles a ahorrar desde pequeños. Este ahorro pensado para los
+          hijos de nuestros asociados se construye quincena a quincena, con
+          una cuota fija que siembra el hábito del ahorro desde temprano.
+        </p>
+
+        <div class="ahorro-feature-stats">
+          <div class="ahorro-feature-stat">
+            <span class="ahorro-feature-stat-value ahorro-feature-stat-value--match-amount">$18.000</span>
+            <span class="ahorro-feature-stat-label">Cuota mínima mensual</span>
+          </div>
+          <div class="ahorro-feature-stat">
+            <span class="ahorro-feature-stat-value">Quincenal</span>
+            <span class="ahorro-feature-stat-label">Frecuencia del ahorro</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cdat" class="ahorro-feature ahorro-feature--reverse" aria-labelledby="cdat-feature-title">
+      <div class="ahorro-feature-content reveal">
+        <span class="ahorro-feature-tag">Modalidades de ahorro</span>
+        <p class="ahorro-feature-desc">
+          <strong>Una inversión que genera seguridad.</strong>
+        </p>
+        <p class="ahorro-feature-desc">
+          El Certificado Depósito de Ahorro a Término es la opción perfecta
+          para que invierta su dinero de forma segura con una excelente
+          rentabilidad. Usted elige el plazo, la periodicidad de pago de los
+          intereses y la forma de entrega.
+        </p>
+
+        <div class="ahorro-feature-stats">
+          <div class="ahorro-feature-stat">
+            <span class="ahorro-feature-stat-value ahorro-feature-stat-value--match-amount">$875.000</span>
+            <span class="ahorro-feature-stat-label">Monto mínimo</span>
+          </div>
+          <div class="ahorro-feature-stat">
+            <span class="ahorro-feature-stat-value">90–720 días</span>
+            <span class="ahorro-feature-stat-label">Plazo entre:</span>
+          </div>
+        </div>
+      </div>
+      <div class="ahorro-feature-sticky">
+        <div class="reveal">
+          <h3 id="cdat-feature-title" class="ahorro-feature-title">
+            <span class="fw-word fw-word--bold">CDAT</span>
+            <span class="fw-word fw-word--regular fw-word--small">Certificado Depósito<br />de Ahorro a Término</span>
+          </h3>
+        </div>
+      </div>
+    </section>
+
+    <div class="ahorros-grid">
+      <div id="rifa-semanal" class="ahorro-card ahorro-card--wide ahorro-card--rifa reveal reveal-delay-1">
+        <div class="rifa-top">
+          <div class="rifa-title-col">
+            <h3 class="fw-word fw-word--white">
+              <span class="fw-word--bold">Rifa</span> <span class="fw-word--regular">Semanal</span>
+            </h3>
+          </div>
+          <p class="ahorro-desc ahorro-desc--light">
+            Con su boleta de $194.550, deducible en cuotas quincenales
+            de&nbsp;<span class="price-inline">$8.106</span>, tiene 3
+            oportunidades de ganar cada semana, participando con las 3
+            últimas cifras de la lotería de Medellín.
+          </p>
+        </div>
+        <div class="rifa-premios">
+          <div class="rifa-premio">
+            <div class="rifa-premio-valor">$300.000</div>
+            <div class="rifa-premio-label">Premio Mayor</div>
+          </div>
+          <div class="rifa-premio">
+            <div class="rifa-premio-valor">$250.000</div>
+            <div class="rifa-premio-label">Premio Seco</div>
+          </div>
+          <div class="rifa-premio rifa-premio--dic">
+            <div class="rifa-premio-valor">$800.000</div>
+            <div class="rifa-premio-label">En diciembre el premio semanal aumenta a:</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .section-white {
+    background: var(--color-navbar-bg);
+    padding: 8rem 0;
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-header-aside {
+    font-size: 1rem;
+    color: var(--color-ink);
+    opacity: 0.6;
+    line-height: var(--lh-180);
+    max-width: 100%;
+  }
+
+  .ahorro-quicknav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 6rem;
+  }
+
+  .quicknav-card {
+    position: relative;
+    display: block;
+    background: var(--color-white);
+    border: 1px solid var(--color-surface);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    height: 160px;
+    transition: height 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .quicknav-card:hover {
+    height: 220px;
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+  }
+
+  .quicknav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: 1.75rem 1.5rem 1.5rem;
+    overflow: hidden;
+    border-radius: inherit;
+    transition: justify-content 0.3s ease;
+  }
+
+  .quicknav-card:hover .quicknav-inner {
+    justify-content: center;
+  }
+
+  .quicknav-number {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-full);
+    background: var(--color-ink);
+    color: var(--color-white);
+    font-size: 0.8125rem;
+    font-weight: var(--fw-extrabold);
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    z-index: 1;
+  }
+
+  .quicknav-title {
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    font-size: 1.0625rem;
+    line-height: var(--lh-130);
+  }
+
+  .quicknav-card--wide {
+    grid-column: 1 / -1;
+  }
+
+  .quicknav-title--wide {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-ink);
+  }
+
+  .quicknav-title-small {
+    font-size: 0.75rem;
+    font-weight: var(--fw-regular);
+  }
+
+  .quicknav-sub {
+    margin-top: 0;
+    max-height: 0;
+    font-size: 0.8125rem;
+    color: var(--color-ink);
+    opacity: 0;
+    line-height: var(--lh-130);
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.2s ease 0.05s;
+  }
+
+  .quicknav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0;
+    max-height: 0;
+    font-size: 0.8125rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-brand-purple);
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.2s ease 0.05s;
+  }
+
+  .quicknav-card:hover .quicknav-cta {
+    margin-top: 0.75rem;
+    max-height: 24px;
+    opacity: 1;
+  }
+
+  .quicknav-card:hover .quicknav-sub {
+    margin-top: 0.5rem;
+    max-height: 100px;
+    opacity: 0.6;
+  }
+
+  .ahorro-feature {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 2.75rem;
+    margin-bottom: 2.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .ahorro-feature:first-of-type {
+    padding-top: 2.5rem;
+  }
+
+  .ahorro-feature + .ahorro-feature {
+    border-top: 1px solid var(--color-surface);
+  }
+
+  .ahorro-feature--reverse {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .ahorro-feature--reverse .ahorro-feature-title {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .ahorro-feature-sticky {
+    position: sticky;
+    top: calc(var(--header-h) + 2.5rem);
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .ahorro-feature-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    line-height: 0.98;
+  }
+
+  .fw-word {
+    display: block;
+    font-size: clamp(2.75rem, 4.5vw, 4.25rem);
+    color: var(--color-brand-purple);
+    letter-spacing: -0.02em;
+  }
+
+  .fw-word--bold {
+    font-weight: var(--fw-extrabold);
+  }
+
+  .fw-word--regular {
+    font-weight: var(--fw-regular);
+  }
+
+  .fw-word--small {
+    font-size: clamp(1.85rem, 3vw, 2.75rem);
+    line-height: var(--lh-120);
+  }
+
+  .fw-word--white {
+    color: var(--color-white);
+  }
+
+  .ahorro-feature-content {
+    padding-top: 0;
+    padding-left: 2.75rem;
+    border-left: 1px solid var(--color-border-mid);
+  }
+
+  .ahorro-feature--reverse .ahorro-feature-content {
+    padding-left: 0;
+    padding-right: 2.75rem;
+    border-left: none;
+    border-right: 1px solid var(--color-border-mid);
+    text-align: right;
+  }
+
+  .ahorro-feature--reverse .ahorro-feature-desc {
+    margin-left: auto;
+  }
+
+  .ahorro-feature--reverse .ahorro-feature-stats {
+    justify-content: end;
+  }
+
+  .ahorro-feature--reverse .ahorro-feature-stat {
+    align-items: flex-end;
+  }
+
+  .ahorro-feature--reverse .ahorro-nota-text {
+    margin-left: auto;
+  }
+
+  .ahorro-feature-desc {
+    font-size: 1.0625rem;
+    color: var(--color-ink);
+    opacity: 0.75;
+    line-height: var(--lh-180);
+    max-width: 46rem;
+    margin-bottom: 2rem;
+  }
+
+  .ahorro-feature-desc + .ahorro-feature-desc {
+    margin-top: -1.25rem;
+  }
+
+  .ahorro-feature-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 14rem));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .ahorro-feature-stat {
+    background: var(--color-white);
+    border: 1px solid var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .ahorro-feature-stat-value {
+    font-size: 1.375rem;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-brand-purple);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ahorro-feature-stat-value--match-amount {
+    font-size: 1.5rem;
+  }
+
+  .ahorro-feature-stat-label {
+    font-size: 0.75rem;
+    font-weight: var(--fw-medium);
+    color: var(--color-ink);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 1023px) {
+    .ahorro-feature {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .ahorro-feature-sticky {
+      position: static;
+      order: -1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ahorro-feature-content,
+    .ahorro-feature--reverse .ahorro-feature-content {
+      padding-left: 0;
+      padding-right: 0;
+      border-left: none;
+      border-right: none;
+    }
+  }
+
+  .ahorros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .ahorro-card {
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .ahorro-card--wide {
+    grid-column: 1 / -1;
+  }
+
+  .ahorro-card-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .ahorro-desc {
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    opacity: 0.65;
+    line-height: var(--lh-160);
+  }
+  .ahorro-desc--light {
+    color: var(--color-white);
+    opacity: 1;
+    margin-top: 0.375rem;
+  }
+
+  .ahorro-nota-text {
+    opacity: 1;
+  }
+
+  .ahorro-nota-title {
+    font-weight: var(--fw-extrabold);
+    color: var(--color-brand-purple);
+  }
+
+  .ahorro-nota-body {
+    opacity: 0.75;
+  }
+
+
+  .ahorro-destacado {
+    font-size: 0.875rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    background: var(--color-surface);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    margin-top: auto;
+  }
+
+  .ahorro-feature-tag {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: var(--fw-extrabold);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .aportes-table {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-white);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .aportes-table-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .aportes-table-header .aportes-col {
+    font-size: 0.8125rem;
+    font-weight: var(--fw-semibold);
+    text-transform: none;
+    color: var(--color-ink);
+    opacity: 0.6;
+  }
+
+  .aportes-table-header .aportes-col:last-child {
+    text-align: right;
+  }
+
+  .aportes-table-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .aportes-table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1.25rem 0;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border-light);
+    transition: opacity 0.2s ease;
+  }
+
+  .aportes-table-row:last-child {
+    border-bottom: none;
+  }
+
+  .aportes-table-row:hover {
+    opacity: 0.8;
+  }
+
+  .aportes-col-range {
+    font-size: 0.9375rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
+    opacity: 0.85;
+  }
+
+  .plus-symbol {
+    font-weight: var(--fw-bold);
+    color: var(--color-brand-purple);
+    margin-left: 0.15rem;
+  }
+
+  .aportes-col-amount {
+    font-size: 1.5rem;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-brand-purple);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+
+
+
+  .ahorro-card--rifa {
+    background: var(--color-brand-purple);
+    border-radius: 12px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+  .rifa-top {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: start;
+    gap: 2.75rem;
+  }
+  .rifa-title-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    line-height: 0.98;
+  }
+  .price-inline {
+    font-size: 1.5rem;
+    font-weight: var(--fw-extrabold);
+    color: inherit;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .rifa-premios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .rifa-premio {
+    background: rgba(var(--color-white-rgb), 0.12);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    text-align: center;
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .rifa-premio:hover {
+    transform: translateY(-6px) scale(1.03);
+    background: rgba(var(--color-white-rgb), 0.2);
+    box-shadow: var(--shadow-md);
+  }
+  .rifa-premio-valor {
+    font-size: 1.5rem;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-white);
+    font-variant-numeric: tabular-nums;
+  }
+  .rifa-premio-label {
+    font-size: 0.75rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-white);
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 1023px) {
+    .section-white {
+      padding: 6rem 0;
+    }
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+    .ahorros-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .rifa-premios {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .ahorro-quicknav {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 639px) {
+    .section-white {
+      padding: 3.5rem 0;
+    }
+    .ahorros-grid {
+      grid-template-columns: 1fr;
+    }
+    .aportes-table-header {
+      display: none;
+    }
+    .aportes-table-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+      padding: 1.25rem 0;
+    }
+    .aportes-col-amount {
+      font-size: 1.5rem;
+    }
+    .ahorro-quicknav {
+      grid-template-columns: 1fr;
+    }
+    .quicknav-card {
+      height: auto;
+    }
+    .quicknav-inner {
+      height: auto;
+    }
+    .quicknav-sub {
+      margin-top: 0.5rem;
+      max-height: none;
+      opacity: 0.6;
+      transition: none;
+    }
+    .quicknav-cta {
+      margin-top: 0.75rem;
+      max-height: none;
+      opacity: 1;
+      transition: none;
+    }
+    .ahorro-card {
+      padding: 1.5rem;
+    }
+    .ahorro-card--rifa {
+      padding: 1.75rem;
+    }
+    .rifa-top {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .rifa-title-col {
+      align-items: flex-start;
+      text-align: left;
+    }
+    .rifa-premios {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

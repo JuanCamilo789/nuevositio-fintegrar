@@ -1,15 +1,13 @@
 ---
 import InnerLayout from '../layouts/InnerLayout.astro';
-import AccesoRapido from '../components/AccesoRapido.astro';
 import Creditos from '../components/Creditos.astro';
-import CTABanner from '../components/CTABanner.astro';
 import { Icon } from 'astro-icon/components';
 
 const requisitos = [
   {
     icon: 'tabler:id-badge',
     titulo: 'Ser asociado activo',
-    desc: 'Estar vinculado a la Cooperativa y tener aportes al día.',
+    desc: 'Estar vinculado al Fondo y tener aportes al día.',
   },
   {
     icon: 'tabler:calendar-check',
@@ -40,22 +38,20 @@ const requisitos = [
 ---
 
 <InnerLayout pageTitle="Líneas de Crédito" pageSubtitle="Soluciones financieras diseñadas a la medida de sus necesidades y posibilidades">
-  <AccesoRapido />
-  <Creditos />
+  <Creditos full />
 
     <section id="requisitos" class="req-section" aria-labelledby="req-title">
     <div class="max-w-7xl mx-auto px-6">
 
       <div class="text-center max-w-4xl mx-auto mb-12 reveal">
-        <div class="section-eyebrow" style="justify-content:center;">Para solicitar su crédito</div>
         <h2
           id="req-title"
           class="font-display"
-          style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;margin-bottom:1rem;"
+          style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);margin-bottom:1rem;"
         >
           Requisitos generales
         </h2>
-        <p style="font-size:1rem;color:#172B36;opacity:0.6;line-height:1.7;">
+        <p style="font-size:1rem;color:var(--color-ink);opacity:0.6;line-height: var(--lh-170);">
           Estos son los documentos y condiciones básicas para acceder a cualquiera de nuestras líneas de crédito.
         </p>
       </div>
@@ -79,7 +75,7 @@ const requisitos = [
           Los requisitos pueden variar según la línea de crédito y el monto solicitado.
           Nuestro equipo le orientará en el proceso.
         </p>
-        <a href="mailto:creditos@cooperamigo.coop" class="btn btn-dark btn-sm">
+        <a href="mailto:gerencia@fintegrar.com" class="btn btn-dark btn-sm">
           <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
           Consultar requisitos específicos
         </a>
@@ -88,12 +84,11 @@ const requisitos = [
     </div>
   </section>
 
-  <CTABanner />
 </InnerLayout>
 
 <style>
   .req-section {
-    background: #fff;
+    background: var(--color-navbar-bg);
     padding: 8rem 0;
   }
 
@@ -116,37 +111,37 @@ const requisitos = [
   }
 
   .req-card:hover {
-    background: #fff;
+    background: var(--color-white);
     border-color: var(--color-surface);
   }
 
   .req-icon {
     width: 40px;
     height: 40px;
-    background: #fff;
+    background: var(--color-white);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #172B36;
+    color: var(--color-ink);
     box-shadow: var(--shadow-sm);
   }
 
   .req-body { flex: 1; }
 
   .req-titulo {
-    font-weight: 700;
+    font-weight: var(--fw-bold);
     font-size: 1rem;
-    color: #172B36;
+    color: var(--color-ink);
     margin-bottom: 0.25rem;
   }
 
   .req-desc {
     font-size: 0.875rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.6;
+    line-height: var(--lh-160);
   }
 
   .req-footer {
@@ -155,17 +150,17 @@ const requisitos = [
     justify-content: space-between;
     gap: 2rem;
     flex-wrap: wrap;
-    background: #fff;
+    background: var(--color-white);
     border-radius: var(--radius-md);
     padding: 1.5rem 2rem;
-    box-shadow: 0 2px 14px rgba(23, 43, 54, 0.08);
+    box-shadow: 0 2px 14px rgba(var(--color-navy-rgb), 0.08);
   }
 
   .req-nota {
     font-size: 0.9375rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.6;
+    line-height: var(--lh-160);
     max-width: 540px;
   }
 

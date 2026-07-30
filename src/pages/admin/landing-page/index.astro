@@ -1,11 +1,19 @@
 ---
-import { createHmac, timingSafeEqual } from 'node:crypto';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/600.css';
+import '@fontsource/dm-sans/700.css';
+import '@fontsource/dm-sans/800.css';
+import {
+  ADMIN_COOKIE_NAME as COOKIE_NAME,
+  ADMIN_COOKIE_PATH as COOKIE_PATH,
+  ADMIN_SESSION_MAX_AGE_SECONDS as SESSION_MAX_AGE_SECONDS,
+  safeEqual,
+  createSessionToken,
+  verifySessionToken,
+} from '../../../lib/adminSession';
 
 export const prerender = false;
-
-const COOKIE_NAME = 'admin_lp';
-const COOKIE_PATH = '/admin/landing-page';
-const SESSION_MAX_AGE_SECONDS = 60 * 60 * 8;
 
 const ADMIN_USERNAME =
   import.meta.env.ADMIN_USERNAME ?? process.env.ADMIN_USERNAME ?? '';
@@ -22,57 +30,6 @@ const legalDocs = [
   { id: 'sarlaft',        title: 'SARLAFT',                           desc: 'Sistema de Administración de Riesgo' },
 ];
 
-function base64UrlEncode(text: string): string {
-  return Buffer.from(text, 'utf8')
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/g, '');
-}
-
-function base64UrlDecodeToString(text: string): string {
-  const padded = text.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(text.length / 4) * 4, '=');
-  return Buffer.from(padded, 'base64').toString('utf8');
-}
-
-function sign(payload: string): string {
-  const digest = createHmac('sha256', ADMIN_SESSION_SECRET).update(payload).digest('base64');
-  return digest.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
-}
-
-// Comparación en tiempo constante. Se hashea cada lado a un digest de longitud
-// fija (SHA-256) antes de comparar, para que ni la longitud del valor filtre
-// información por diferencias de tiempo (timing attack).
-function safeEqual(a: string, b: string): boolean {
-  const ha = createHmac('sha256', ADMIN_SESSION_SECRET).update(a).digest();
-  const hb = createHmac('sha256', ADMIN_SESSION_SECRET).update(b).digest();
-  return timingSafeEqual(ha, hb);
-}
-
-function createSessionToken(username: string): string {
-  const exp = Date.now() + SESSION_MAX_AGE_SECONDS * 1000;
-  const payload = `${username}:${exp}`;
-  const sig = sign(payload);
-  return `${base64UrlEncode(payload)}.${sig}`;
-}
-
-function verifySessionToken(token: string | undefined): boolean {
-  if (!token || !ADMIN_SESSION_SECRET) return false;
-  const parts = token.split('.');
-  if (parts.length !== 2) return false;
-  const [payloadB64, sig] = parts;
-  const payload = base64UrlDecodeToString(payloadB64);
-  const expected = sign(payload);
-  const a = Buffer.from(sig);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length) return false;
-  if (!timingSafeEqual(a, b)) return false;
-  const idx = payload.lastIndexOf(':');
-  if (idx === -1) return false;
-  const exp = Number(payload.slice(idx + 1));
-  return Number.isFinite(exp) && exp > Date.now();
-}
-
 let loginError = '';
 if (Astro.request.method === 'POST') {
   const form   = await Astro.request.formData();
@@ -81,13 +38,13 @@ if (Astro.request.method === 'POST') {
 
   // Se evalúan ambas comparaciones siempre (sin corto-circuito con &&) para
   // no filtrar por tiempo si fue el usuario o la contraseña lo que falló.
-  const userOk = safeEqual(username, ADMIN_USERNAME);
-  const passOk = safeEqual(password, ADMIN_PASSWORD);
+  const userOk = safeEqual(username, ADMIN_USERNAME, ADMIN_SESSION_SECRET);
+  const passOk = safeEqual(password, ADMIN_PASSWORD, ADMIN_SESSION_SECRET);
 
   if (!ADMIN_USERNAME || !ADMIN_PASSWORD || !ADMIN_SESSION_SECRET) {
     loginError = 'Configuración incompleta. Faltan credenciales del panel.';
   } else if (userOk && passOk) {
-    Astro.cookies.set(COOKIE_NAME, createSessionToken(username), {
+    Astro.cookies.set(COOKIE_NAME, createSessionToken(username, ADMIN_SESSION_SECRET), {
       path:     COOKIE_PATH,
       maxAge:   SESSION_MAX_AGE_SECONDS,
       httpOnly: true,
@@ -101,7 +58,7 @@ if (Astro.request.method === 'POST') {
 }
 
 
-const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
+const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value, ADMIN_SESSION_SECRET);
 ---
 
 <!doctype html>
@@ -109,72 +66,34 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel Administrativo — Cooperamigó</title>
-  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <title>Panel Administrativo — FINTEGRAR</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <style>
-    @font-face {
-      font-family: 'Bilmond';
-      src: url('/assets/fonts/Bilmond-Regular.ttf') format('truetype');
-      font-weight: 400;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Bilmond';
-      src: url('/assets/fonts/Bilmond-Medium.ttf') format('truetype');
-      font-weight: 500;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Bilmond';
-      src: url('/assets/fonts/Bilmond-SemiBold.ttf') format('truetype');
-      font-weight: 600;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Bilmond';
-      src: url('/assets/fonts/Bilmond-Bold.ttf') format('truetype');
-      font-weight: 700;
-      font-display: swap;
-    }
-
-    @font-face {
-      font-family: 'Bilmond';
-      src: url('/assets/fonts/Bilmond-ExtraBold.ttf') format('truetype');
-      font-weight: 800;
-      font-display: swap;
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --dark:      #172B36;
-      --dark-2:    #1E3A47;
-      --gold:      #FFC801;
-      --bg:        #F0F2F5;
-      --surface:   #ffffff;
-      --border:    #E4E8ED;
-      --border-2:  #D1D9E0;
-      --muted:     #6B7E8A;
-      --danger:    #DC2626;
+      --dark:      var(--color-navy);
+      --dark-2:    var(--color-accent-teal-deep);
+      --gold:      var(--color-brand-yellow);
+      --bg:        var(--color-admin-surface-alt);
+      --surface:   var(--color-white);
+      --border:    var(--color-border-light);
+      --border-2:  var(--color-admin-border-hover);
+      --muted:     var(--color-admin-text-soft);
+      --danger:    var(--color-danger);
       --sidebar-w: 256px;
     }
 
     body {
-      font-family: 'Bilmond', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: var(--ff-sans);
       background: var(--bg);
       color: var(--dark);
       min-height: 100vh;
       font-size: 14px;
-      line-height: 1.5;
+      line-height: var(--lh-150);
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ══════════════════════════════
-       LOGIN
-    ══════════════════════════════ */
     .login-screen {
       min-height: 100vh;
       display: flex;
@@ -182,9 +101,9 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       justify-content: center;
       padding: 2.5rem 1.5rem;
       background:
-        radial-gradient(900px 520px at 18% 20%, rgba(255, 200, 1, 0.18) 0%, rgba(255, 200, 1, 0) 60%),
-        radial-gradient(720px 480px at 85% 70%, rgba(23, 43, 54, 0.10) 0%, rgba(23, 43, 54, 0) 60%),
-        #EAF4EE;
+        radial-gradient(900px 520px at 18% 20%, rgba(var(--color-brand-yellow-rgb), 0.18) 0%, rgba(var(--color-brand-yellow-rgb), 0) 60%),
+        radial-gradient(720px 480px at 85% 70%, rgba(var(--color-navy-rgb), 0.10) 0%, rgba(var(--color-navy-rgb), 0) 60%),
+        var(--color-admin-bg-green-tint);
     }
 
     .login-card {
@@ -194,8 +113,8 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       background: var(--surface);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 28px 80px rgba(23, 43, 54, 0.18);
-      border: 1px solid rgba(23, 43, 54, 0.06);
+      box-shadow: 0 28px 80px rgba(var(--color-navy-rgb), 0.18);
+      border: 1px solid rgba(var(--color-navy-rgb), 0.06);
     }
 
     .login-left {
@@ -207,18 +126,18 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 
     .login-title {
       font-size: clamp(1.15rem, 1.8vw, 1.5rem);
-      line-height: 1.1;
+      line-height: var(--lh-110);
       letter-spacing: -0.02em;
       color: var(--dark);
-      font-weight: 800;
+      font-weight: var(--fw-extrabold);
       margin-bottom: 0.5rem;
       text-align: center;
     }
 
     .login-subtitle {
       font-size: 0.95rem;
-      color: rgba(23, 43, 54, 0.62);
-      line-height: 1.45;
+      color: rgba(var(--color-navy-rgb), 0.62);
+      line-height: var(--lh-145);
       max-width: 420px;
       margin-bottom: 1.35rem;
       text-align: center;
@@ -229,62 +148,59 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     .form-label {
       display: block;
       font-size: 0.82rem;
-      font-weight: 800;
-      color: rgba(23, 43, 54, 0.85);
+      font-weight: var(--fw-extrabold);
+      color: rgba(var(--color-navy-rgb), 0.85);
       margin-bottom: 0.4rem;
-      letter-spacing: 0.01em;
     }
     .form-input {
       width: 100%;
       padding: 0.9rem 1rem;
       font-size: 0.98rem;
-      font-weight: 600;
-      letter-spacing: 0.01em; text-align: left;
+      font-weight: var(--fw-semibold);
+ text-align: left;
       color: var(--dark);
-      background: #fff;
-      border: 1.5px solid rgba(23, 43, 54, 0.12);
+      background: var(--color-white);
+      border: 1.5px solid rgba(var(--color-navy-rgb), 0.12);
       border-radius: var(--radius-md);
       outline: none;
-      box-shadow: 0 1px 0 rgba(23, 43, 54, 0.02);
+      box-shadow: 0 1px 0 rgba(var(--color-navy-rgb), 0.02);
       transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
     }
-    .form-input::placeholder { color: rgba(23, 43, 54, 0.35); }
-    .form-input:hover { border-color: rgba(23, 43, 54, 0.2); }
+    .form-input::placeholder { color: rgba(var(--color-navy-rgb), 0.35); }
+    .form-input:hover { border-color: rgba(var(--color-navy-rgb), 0.2); }
     .form-input:focus {
-      border-color: rgba(255, 200, 1, 0.9);
-      box-shadow: 0 0 0 4px rgba(255, 200, 1, 0.18), 0 10px 26px rgba(23, 43, 54, 0.08);
+      border-color: rgba(var(--color-brand-yellow-rgb), 0.9);
+      box-shadow: 0 0 0 4px rgba(var(--color-brand-yellow-rgb), 0.18), 0 10px 26px rgba(var(--color-navy-rgb), 0.08);
     }
 
     .login-footer {
       margin-top: 1.5rem;
       font-size: 0.75rem;
-      color: rgba(23, 43, 54, 0.45);
-      letter-spacing: 0.01em;
+      color: rgba(var(--color-navy-rgb), 0.45);
       text-align: center;
     }
     .form-error {
       margin-top: 0.625rem;
       display: flex; align-items: center; gap: 0.375rem;
-      font-size: 0.8125rem; color: var(--danger); font-weight: 600;
+      font-size: 0.8125rem; color: var(--danger); font-weight: var(--fw-semibold);
     }
     .login-submit {
       width: 100%; margin-top: 1.5rem;
       padding: 0.875rem;
-      background: var(--dark); color: #fff;
-      font-size: 0.9375rem; font-weight: 700;
+      background: var(--dark); color: var(--color-white);
+      font-size: 0.9375rem; font-weight: var(--fw-bold);
       border: none; border-radius: var(--radius-sm);
       cursor: pointer;
       transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
-      letter-spacing: 0.01em;
     }
     .login-submit:hover {
       background: var(--dark-2);
-      box-shadow: 0 4px 16px rgba(23,43,54,0.25);
+      box-shadow: 0 4px 16px rgba(var(--color-navy-rgb), 0.25);
       transform: translateY(-1px);
     }
     .login-right {
       position: relative;
-      background: #DCE3E7;
+      background: var(--color-admin-border-soft);
       min-height: 560px;
       overflow: hidden;
     }
@@ -303,8 +219,8 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(420px 260px at 25% 20%, rgba(255, 200, 1, 0.22) 0%, rgba(255, 200, 1, 0) 70%),
-        linear-gradient(180deg, rgba(23, 43, 54, 0.10) 0%, rgba(23, 43, 54, 0.26) 100%);
+        radial-gradient(420px 260px at 25% 20%, rgba(var(--color-brand-yellow-rgb), 0.22) 0%, rgba(var(--color-brand-yellow-rgb), 0) 70%),
+        linear-gradient(180deg, rgba(var(--color-navy-rgb), 0.10) 0%, rgba(var(--color-navy-rgb), 0.26) 100%);
       pointer-events: none;
     }
 
@@ -314,9 +230,6 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       .login-left { padding: 2.5rem 1.75rem 2.25rem; }
     }
 
-    /* ══════════════════════════════
-       DASHBOARD LAYOUT
-    ══════════════════════════════ */
     .admin-layout {
       display: grid;
       grid-template-columns: var(--sidebar-w) 1fr;
@@ -328,12 +241,12 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       display: flex; flex-direction: column;
       position: sticky; top: 0;
       height: 100vh; overflow-y: auto;
-      border-right: 1px solid rgba(255,255,255,0.04);
+      border-right: 1px solid rgba(var(--color-white-rgb), 0.04);
     }
     .sidebar-brand {
       display: flex; align-items: center; gap: 0.75rem;
       padding: 1.375rem 1.25rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(var(--color-white-rgb), 0.06);
     }
     .sidebar-brand-icon {
       width: 34px; height: 34px;
@@ -344,17 +257,15 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     }
     .sidebar-brand-icon svg { color: var(--dark); }
     .sidebar-brand-text strong {
-      display: block; font-size: 0.875rem; font-weight: 800; color: #fff;
+      display: block; font-size: 0.875rem; font-weight: var(--fw-extrabold); color: var(--color-white);
     }
     .sidebar-brand-text span {
-      font-size: 0.68rem; color: rgba(255,255,255,0.3); font-weight: 500;
-      letter-spacing: 0.01em;
+      font-size: 0.68rem; color: rgba(var(--color-white-rgb), 0.3); font-weight: var(--fw-medium);
     }
 
     .sidebar-nav { flex: 1; padding: 1.25rem 0.875rem; }
     .sidebar-nav-label {
-      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em;
-      text-transform: uppercase; color: rgba(255,255,255,0.2);
+      font-size: 0.6rem; font-weight: var(--fw-extrabold);      text-transform: uppercase; color: rgba(var(--color-white-rgb), 0.2);
       padding: 0 0.625rem; margin-bottom: 0.375rem; margin-top: 1.5rem;
     }
     .sidebar-nav-label:first-child { margin-top: 0; }
@@ -363,36 +274,36 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       display: flex; align-items: center; gap: 0.625rem;
       padding: 0.55rem 0.625rem;
       border-radius: var(--radius-sm);
-      font-size: 0.8125rem; font-weight: 500;
-      color: rgba(255,255,255,0.5);
+      font-size: 0.8125rem; font-weight: var(--fw-medium);
+      color: rgba(var(--color-white-rgb), 0.5);
       text-decoration: none;
       transition: background 0.15s, color 0.15s;
       margin-bottom: 0.125rem;
     }
     .sidebar-link svg { flex-shrink: 0; }
-    .sidebar-link:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
+    .sidebar-link:hover { background: rgba(var(--color-white-rgb), 0.06); color: rgba(var(--color-white-rgb), 0.9); }
     .sidebar-link.is-active {
-      background: rgba(255,200,1,0.1);
+      background: rgba(var(--color-brand-yellow-rgb), 0.1);
       color: var(--gold);
-      font-weight: 600;
+      font-weight: var(--fw-semibold);
     }
 
     .sidebar-footer {
       padding: 1rem 0.875rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(var(--color-white-rgb), 0.06);
     }
     .sidebar-logout {
       display: flex; align-items: center; gap: 0.625rem;
       padding: 0.55rem 0.625rem;
       border-radius: var(--radius-sm);
-      font-size: 0.8rem; font-weight: 500;
-      color: rgba(255,255,255,0.3);
+      font-size: 0.8rem; font-weight: var(--fw-medium);
+      color: rgba(var(--color-white-rgb), 0.3);
       cursor: pointer;
       border: none; background: transparent;
       width: 100%; text-align: left;
       transition: background 0.15s, color 0.15s;
     }
-    .sidebar-logout:hover { background: rgba(220,38,38,0.1); color: #FCA5A5; }
+    .sidebar-logout:hover { background: rgba(var(--color-danger-rgb), 0.1); color: var(--color-danger-light); }
 
         .main-content { display: flex; flex-direction: column; min-height: 100vh; }
 
@@ -411,20 +322,19 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       display: flex; align-items: center; gap: 0.375rem;
     }
     .topbar-breadcrumb-sep { opacity: 0.4; }
-    .topbar-breadcrumb strong { color: var(--dark); font-weight: 700; }
+    .topbar-breadcrumb strong { color: var(--dark); font-weight: var(--fw-bold); }
     .topbar-right { display: flex; align-items: center; gap: 0.875rem; }
     .topbar-badge {
       display: inline-flex; align-items: center; gap: 0.375rem;
-      background: #DCFCE7; color: #15803D;
+      background: var(--color-success-bg); color: var(--color-success-text);
       border-radius: var(--radius-sm); padding: 0.3rem 0.625rem;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em;
-    }
+      font-size: 0.7rem; font-weight: var(--fw-bold);    }
     .topbar-badge-dot {
-      width: 5px; height: 5px; background: #22C55E; border-radius: 50%;
+      width: 5px; height: 5px; background: var(--color-success-dot); border-radius: 50%;
     }
     .topbar-visit {
       display: inline-flex; align-items: center; gap: 0.375rem;
-      font-size: 0.8rem; font-weight: 600;
+      font-size: 0.8rem; font-weight: var(--fw-semibold);
       color: var(--muted); text-decoration: none;
       padding: 0.4rem 0.75rem;
       border: 1px solid var(--border);
@@ -443,10 +353,10 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem;
     }
     .page-header h1 {
-      font-size: 1.25rem; font-weight: 800; color: var(--dark);
+      font-size: 1.25rem; font-weight: var(--fw-extrabold); color: var(--dark);
       letter-spacing: -0.02em; margin-bottom: 0.25rem;
     }
-    .page-header p { font-size: 0.8375rem; color: var(--muted); line-height: 1.5; }
+    .page-header p { font-size: 0.8375rem; color: var(--muted); line-height: var(--lh-150); }
     .page-header-date {
       font-size: 0.75rem; color: var(--muted);
       background: var(--bg); border: 1px solid var(--border);
@@ -458,8 +368,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     .page-content { flex: 1; padding: 1.75rem 2rem; max-width: 900px; width: 100%; }
 
         .section-label {
-      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--muted);
+      font-size: 0.68rem; font-weight: var(--fw-extrabold);      text-transform: uppercase; color: var(--muted);
       margin-bottom: 0.875rem; margin-top: 2rem;
       display: flex; align-items: center; gap: 0.625rem;
     }
@@ -492,7 +401,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     }
     .section-card:hover {
       border-color: var(--border-2);
-      box-shadow: 0 4px 20px rgba(23,43,54,0.09);
+      box-shadow: 0 4px 20px rgba(var(--color-navy-rgb), 0.09);
       transform: translateY(-2px);
     }
     .section-card:hover::before { opacity: 1; }
@@ -509,10 +418,10 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     .section-card-arrow { color: var(--border-2); transition: color 0.15s, transform 0.15s; }
     .section-card:hover .section-card-arrow { color: var(--dark); transform: translate(2px,-2px); }
     .section-card-title {
-      font-size: 0.9375rem; font-weight: 800; color: var(--dark);
+      font-size: 0.9375rem; font-weight: var(--fw-extrabold); color: var(--dark);
       margin-bottom: 0.3rem; letter-spacing: -0.01em;
     }
-    .section-card-desc { font-size: 0.775rem; color: var(--muted); line-height: 1.55; }
+    .section-card-desc { font-size: 0.775rem; color: var(--muted); line-height: var(--lh-155); }
 
         .doc-list { display: flex; flex-direction: column; gap: 0.5rem; }
     .doc-row {
@@ -525,7 +434,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     }
     .doc-row:hover {
       border-color: var(--border-2);
-      box-shadow: 0 2px 10px rgba(23,43,54,0.06);
+      box-shadow: 0 2px 10px rgba(var(--color-navy-rgb), 0.06);
     }
     .doc-row-icon {
       width: 36px; height: 36px;
@@ -537,14 +446,14 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
     }
     .doc-row-body { flex: 1; min-width: 0; }
     .doc-row-title {
-      font-size: 0.875rem; font-weight: 700; color: var(--dark); margin-bottom: 0.125rem;
+      font-size: 0.875rem; font-weight: var(--fw-bold); color: var(--dark); margin-bottom: 0.125rem;
     }
     .doc-row-meta { font-size: 0.7rem; color: var(--muted); }
     .doc-edit-btn {
       display: inline-flex; align-items: center; gap: 0.375rem;
       padding: 0.45rem 0.875rem;
-      background: var(--dark); color: #fff;
-      font-size: 0.775rem; font-weight: 700;
+      background: var(--dark); color: var(--color-white);
+      font-size: 0.775rem; font-weight: var(--fw-bold);
       border-radius: var(--radius-sm); text-decoration: none;
       white-space: nowrap; flex-shrink: 0;
       transition: background 0.15s, transform 0.1s;
@@ -553,15 +462,15 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 
         .dash-note {
       margin-top: 2rem;
-      background: #FFFBEB;
-      border: 1px solid rgba(255,200,1,0.25);
+      background: var(--color-warning-bg);
+      border: 1px solid rgba(var(--color-brand-yellow-rgb), 0.25);
       border-radius: var(--radius-sm);
       padding: 1rem 1.25rem;
       display: flex; align-items: flex-start; gap: 0.75rem;
-      font-size: 0.8125rem; color: #92400E; line-height: 1.6;
+      font-size: 0.8125rem; color: var(--color-warning-text); line-height: var(--lh-160);
     }
-    .dash-note svg { flex-shrink: 0; margin-top: 1px; color: #D97706; }
-    .dash-note strong { color: #78350F; }
+    .dash-note svg { flex-shrink: 0; margin-top: 1px; color: var(--color-warning); }
+    .dash-note strong { color: var(--color-warning-text-deep); }
   </style>
 </head>
 <body>
@@ -608,7 +517,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
           <button type="submit" class="login-submit">Ingresar al panel</button>
         </form>
 
-        <footer class="login-footer">Cooperativa Multiactiva Luis Amigó - 2026 (C) All righst reserved.</footer>
+        <footer class="login-footer">Fintegrar - 2026 (C) All rights reserved.</footer>
       </div>
 
       <div class="login-right" aria-hidden="true">
@@ -626,14 +535,13 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 ) : (
     <div class="admin-layout">
 
-    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-brand">
         <div class="sidebar-brand-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         </div>
         <div class="sidebar-brand-text">
-          <strong>Cooperamigó</strong>
+          <strong>FINTEGRAR</strong>
           <span>Panel administrativo</span>
         </div>
       </div>
@@ -668,7 +576,6 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
       </div>
     </aside>
 
-    <!-- Main -->
     <div class="main-content">
       <header class="topbar">
         <div class="topbar-left">
@@ -694,7 +601,7 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
         <div class="page-header-inner">
           <div>
             <h1>Panel de administración</h1>
-            <p>Gestione los contenidos dinámicos del sitio web institucional de Cooperamigó.</p>
+            <p>Gestione los contenidos dinámicos del sitio web institucional de FINTEGRAR.</p>
           </div>
           <div class="page-header-date">
             <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -705,7 +612,6 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
 
       <main class="page-content">
 
-        <!-- Sección: contenidos del sitio -->
         <p class="section-label">Secciones del sitio</p>
 
         <div class="section-cards">
@@ -723,7 +629,6 @@ const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
           </a>
         </div>
 
-        <!-- Sección: documentos legales -->
         <p class="section-label">Documentos legales</p>
 
         <div class="doc-list">

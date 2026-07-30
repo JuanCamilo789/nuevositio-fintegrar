@@ -3,21 +3,21 @@ import { Icon } from 'astro-icon/components';
 
 const noticias = [
   {
-    imagen: 'https://placehold.co/800x460/172B36/F1F6F4?font=lato&text=Asamblea%0AGeneral+2026',
+    imagen: 'https://placehold.co/800x460/0D1425/F1F6F4?font=lato&text=Asamblea%0AGeneral+2026',
     categoria: 'Institucional',
     fecha: '24 de marzo, 2026',
     titulo: 'Asamblea General Ordinaria 2026: resultados y compromisos',
-    resumen: 'Cooperamigó avanza en su proceso de recuperación, modernización y compromiso con cada uno de sus asociados.',
+    resumen: 'FINTEGRAR avanza en su proceso de recuperación, modernización y compromiso con cada uno de sus asociados.',
   },
   {
-    imagen: 'https://placehold.co/800x460/172B36/F1F6F4?font=lato&text=Credito%0AEducativo+2026',
+    imagen: 'https://placehold.co/800x460/0D1425/F1F6F4?font=lato&text=Credito%0AEducativo+2026',
     categoria: 'Créditos',
     fecha: 'Enero, 2026',
-    titulo: 'Reapertura línea de crédito educativo: tasa especial 2026',
-    resumen: 'La Cooperativa Multiactiva Luis Amigó reapertura su línea de crédito educativo con la Universidad Católica Luis Amigó.',
+    titulo: 'Crédito para Educación: tasa especial 2026',
+    resumen: 'FINTEGRAR ofrece su línea de Crédito para Educación con tasa preferencial del 1% M.V. para instituciones certificadas por el Ministerio de Educación.',
   },
   {
-    imagen: 'https://placehold.co/800x460/172B36/F1F6F4?font=lato&text=Convenios%0ABienestar+2026',
+    imagen: 'https://placehold.co/800x460/0D1425/F1F6F4?font=lato&text=Convenios%0ABienestar+2026',
     categoria: 'Bienestar',
     fecha: '01 de marzo, 2026',
     titulo: 'Convenios y oportunidades',
@@ -29,13 +29,12 @@ const noticias = [
 <section id="novedades" class="section-white" aria-labelledby="novedades-title">
   <div class="max-w-7xl mx-auto px-6">
 
-    <div class="flex flex-col items-center text-center sm:items-end sm:text-left sm:flex-row justify-between gap-4 mb-10 reveal">
+    <div class="flex flex-col items-start sm:items-end sm:flex-row justify-between gap-4 mb-10 reveal">
       <div>
-        <div class="section-eyebrow justify-center sm:justify-start">Novedades</div>
         <h2
           id="novedades-title"
           class="font-display"
-          style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;"
+          style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);"
         >
           Últimas noticias
         </h2>
@@ -76,11 +75,10 @@ const noticias = [
 
 <style>
   .section-white {
-    background: #fff;
+    background: var(--color-navbar-bg);
     padding: 8rem 0;
   }
 
-  /* Cuerpo de noticia */
   .news-card {
     overflow: hidden;
   }
@@ -98,7 +96,7 @@ const noticias = [
     height: 36px;
     border-radius: var(--radius-sm);
     background: var(--color-surface);
-    color: #172B36;
+    color: var(--color-ink);
     flex-shrink: 0;
   }
   .news-body {
@@ -106,36 +104,35 @@ const noticias = [
   }
   .news-category {
     font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-weight: var(--fw-bold);
     text-transform: uppercase;
-    color: #172B36;
+    color: var(--color-ink);
     background: var(--color-surface);
     padding: 0.3rem 0.75rem;
-    border-radius: 100px;
+    border-radius: var(--radius-full);
   }
   .news-meta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     font-size: 0.75rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.6;
-    font-weight: 500;
+    font-weight: var(--fw-medium);
     margin-bottom: 0.75rem;
   }
   .news-titulo {
-    font-weight: 700;
+    font-weight: var(--fw-bold);
     font-size: 1.125rem;
-    color: #172B36;
-    line-height: 1.4;
+    color: var(--color-ink);
+    line-height: var(--lh-140);
     margin-bottom: 0.5rem;
   }
   .news-resumen {
     font-size: 0.9375rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.6;
+    line-height: var(--lh-160);
     margin-bottom: 1.5rem;
   }
   .news-link {
@@ -143,8 +140,8 @@ const noticias = [
     align-items: center;
     gap: 6px;
     font-size: 0.875rem;
-    font-weight: 600;
-    color: #172B36;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
     text-decoration: none;
     transition: gap 0.2s;
   }

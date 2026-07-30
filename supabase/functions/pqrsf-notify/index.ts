@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════════
-//  COOPERAMIGÓ — Edge Function: pqrsf-notify
+//  FINTEGRAR — Edge Function: pqrsf-notify
 //  Envía correos de confirmación cuando llega una PQRSF
 //
 //  Despliegue:
@@ -7,7 +7,7 @@
 //
 //  Secretos necesarios (supabase secrets set):
 //    RESEND_API_KEY   → tu API key de https://resend.com
-//    SITE_URL         → URL base (default: https://cooperamigo.coop)
+//    SITE_URL         → URL base (default: https://fintegrar.com)
 //
 //  Webhook en Supabase:
 //    Database → Webhooks → New webhook
@@ -40,8 +40,9 @@ function safeUrl(url: string | null | undefined): string | null {
 }
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")!;
-const FROM_EMAIL     = "Cooperativa Multiactiva Luis Amigó <no-reply@cooperamigo.coop>";
-const ADMIN_EMAIL    = "juridica@cooperamigo.coop";
+// NOTA: no-reply@fintegrar.com debe estar verificado como dominio en Resend antes de desplegar.
+const FROM_EMAIL     = "Fondo de Empleados Fintegrar <no-reply@fintegrar.com>";
+const ADMIN_EMAIL    = "gerencia@fintegrar.com";
 
 const TIPO_LABEL: Record<string, string> = {
   peticion:     "Petición",
@@ -129,7 +130,7 @@ Deno.serve(async (req) => {
       </table>
 
       <p style="font-size:11px;color:#9CA3AF;line-height:1.6;margin:0;font-family:Arial,Helvetica,sans-serif;">
-        Dudas: <a href="mailto:info@cooperamigo.coop" style="color:#172B36;font-weight:600;text-decoration:none;">info@cooperamigo.coop</a>
+        Dudas: <a href="mailto:gerencia@fintegrar.com" style="color:#172B36;font-weight:600;text-decoration:none;">gerencia@fintegrar.com</a>
         — cite su número de radicado.
       </p>
     `;
@@ -194,7 +195,7 @@ Deno.serve(async (req) => {
     // ── Enviar correos ──────────────────────────────
     await sendEmail(
       r.email,
-      `Cooperamigó — Radicado ${r.radicado} recibido`,
+      `FINTEGRAR — Radicado ${r.radicado} recibido`,
       buildEmail({ label: "Radicación Pqrsf", bodyHtml: ciudadanoBody }),
     );
 

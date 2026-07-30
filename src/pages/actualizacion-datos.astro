@@ -15,7 +15,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
       <div class="ad-card">
 
         <div class="ad-promo-banner">
-          <img src="/assets/img/banner5.png" alt="Actualiza tus datos y participa por 1 tablet, 1 olla multifuncional y 10 bonos de $100.000. Tienes hasta el 15 de septiembre." loading="eager" />
+          <img src="/assets/img/banner5.webp" alt="Actualiza tus datos y participa por 1 tablet, 1 olla multifuncional y 10 bonos de $100.000. Tienes hasta el 15 de septiembre." loading="eager" />
         </div>
 
                 <div id="ad-step-form" class="ad-step">
@@ -26,7 +26,6 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
               <span><i class="ad-section-num">1</i> Información personal</span>
             </div>
 
-            <!-- Identificación -->
             <div class="ad-accordion-item open">
               <div id="acc-identificacion" class="ad-accordion-body" style="padding-top:0;">
                 <div class="form-row form-row-3">
@@ -199,11 +198,10 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
 
             <div id="ad-form-error" class="ad-error" role="alert" aria-live="assertive" style="display:none;margin-top:1.25rem;"></div>
 
-            <!-- Autorización Legal -->
             <div class="form-check" style="margin-top:0.5rem;margin-bottom:1.5rem;">
               <input type="checkbox" id="ad-autorizacion" required />
               <label for="ad-autorizacion" class="cursor-pointer">
-                Autorizo de manera previa, expresa, libre e informada a Cooperamigó para recolectar, almacenar, usar, actualizar, circular, transmitir, transferir y, en general, realizar el tratamiento de mis datos personales, de conformidad con la Ley 1581 de 2012 y la <a href="/politica-tratamiento-datos" target="_blank" rel="noopener noreferrer">Política de Tratamiento de Datos Personales</a> de la Cooperativa, disponible en sus oficinas y en su página web, con el fin de gestionar mi vinculación como asociado, mantener actualizada mi información, prestar los servicios de la Cooperativa, dar cumplimiento a obligaciones legales y estatutarias, y enviar información institucional, comercial, educativa, promocional y de bienestar. Declaro conocer mis derechos como titular de la información y los canales habilitados para ejercerlos, así como los <a href="/TerminosCondicionesActualizayGANA.pdf" target="_blank" rel="noopener noreferrer">Términos y condiciones</a> de la campaña "Actualiza y GANA".<span class="req">*</span>
+                Autorizo de manera previa, expresa, libre e informada a FINTEGRAR para recolectar, almacenar, usar, actualizar, circular, transmitir, transferir y, en general, realizar el tratamiento de mis datos personales, de conformidad con la Ley 1581 de 2012 y la <a href="/politica-tratamiento-datos" target="_blank" rel="noopener noreferrer">Política de Tratamiento de Datos Personales</a> del Fondo, disponible en sus oficinas y en su página web, con el fin de gestionar mi vinculación como asociado, mantener actualizada mi información, prestar los servicios del Fondo, dar cumplimiento a obligaciones legales y estatutarias, y enviar información institucional, comercial, educativa, promocional y de bienestar. Declaro conocer mis derechos como titular de la información y los canales habilitados para ejercerlos, así como los <a href="/TerminosCondicionesActualizayGANA.pdf" target="_blank" rel="noopener noreferrer">Términos y condiciones</a> de la campaña "Actualiza y GANA".<span class="req">*</span>
               </label>
             </div>
 
@@ -223,7 +221,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
           <h3 class="success-title">¡Información recibida!</h3>
           <p class="success-body">
             Hemos recibido su actualización de datos. Nuestro equipo revisará en detalle y
-            actualizará la información correspondiente. ¡Gracias por actualizar sus datos con Cooperamigó!
+            actualizará la información correspondiente. ¡Gracias por actualizar sus datos con FINTEGRAR!
           </p>
           <button type="button" class="btn btn-outline-sm" id="ad-nueva" style="margin-top:1.25rem;">
             Actualizar otro registro
@@ -242,7 +240,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                   <Icon name="tabler:map-pin" class="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 class="font-extrabold text-[1.125rem] text-[#172B36] leading-tight">Ingresar dirección</h3>
+                  <h3 class="font-extrabold text-[1.125rem] text-[var(--color-ink)] leading-tight">Ingresar dirección</h3>
                 </div>
               </div>
               <button type="button" id="btn-cerrar-modal" class="modal-dir-close">
@@ -323,10 +321,10 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
               </div>
 
               <div id="md-preview-box" class="md-preview" style="display:none;">
-                <Icon name="tabler:check" class="w-5 h-5 text-[#172b36]" />
+                <Icon name="tabler:check" class="w-5 h-5 text-[var(--color-ink)]" />
                 <div>
-                  <div class="text-[0.7rem] font-bold text-[#172b36] uppercase tracking-wider">Dirección generada</div>
-                  <div id="md-preview-text" class="text-[0.875rem] font-bold text-[#172B36]"></div>
+                  <div class="text-[0.7rem] font-bold text-[var(--color-ink)] uppercase tracking-wider">Dirección generada</div>
+                  <div id="md-preview-text" class="text-[0.875rem] font-bold text-[var(--color-ink)]"></div>
                 </div>
               </div>
             </div>
@@ -348,7 +346,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                   <Icon name="tabler:wallet" class="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 class="font-extrabold text-[1.125rem] text-[#172B36] leading-tight">¿Cuáles billeteras digitales usa?</h3>
+                  <h3 class="font-extrabold text-[1.125rem] text-[var(--color-ink)] leading-tight">¿Cuáles billeteras digitales usa?</h3>
                 </div>
               </div>
               <button type="button" id="btn-cerrar-billeteras" class="modal-dir-close">
@@ -382,7 +380,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                   <Icon name="tabler:share" class="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 class="font-extrabold text-[1.125rem] text-[#172B36] leading-tight">¿Cuáles redes sociales usa?</h3>
+                  <h3 class="font-extrabold text-[1.125rem] text-[var(--color-ink)] leading-tight">¿Cuáles redes sociales usa?</h3>
                 </div>
               </div>
               <button type="button" id="btn-cerrar-redes" class="modal-dir-close">
@@ -412,12 +410,12 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
 
 <style>
   .ad-section {
-    background: #ffffff;
+    background: var(--color-navbar-bg);
     padding: 3.5rem 0 5rem;
   }
   /* Tarjeta principal sin bordes ni sombras — alineada con el hero, sin padding horizontal extra */
   .ad-card {
-    background: #fff;
+    background: var(--color-white);
     border-radius: var(--radius-lg);
     padding: 2.5rem 0;
   }
@@ -426,7 +424,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     border-radius: var(--radius-md);
     overflow: hidden;
     margin-bottom: 2.5rem;
-    line-height: 0;
+    line-height: var(--lh-0);
     aspect-ratio: 3 / 1;
   }
   .ad-promo-banner img {
@@ -461,8 +459,8 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     align-items: center;
     gap: 0.625rem;
     font-size: 0.9375rem;
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     white-space: nowrap;
   }
   .ad-section-num {
@@ -472,10 +470,10 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    background: #172b36;
-    color: #fff;
+    background: var(--color-ink);
+    color: var(--color-white);
     font-size: 0.75rem;
-    font-weight: 800;
+    font-weight: var(--fw-extrabold);
     font-style: normal;
     flex-shrink: 0;
   }
@@ -505,26 +503,26 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     height: 36px;
     border-radius: 50%;
     background: var(--color-surface);
-    color: #172b36;
+    color: var(--color-ink);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.875rem;
-    font-weight: 800;
+    font-weight: var(--fw-extrabold);
     transition: background 0.2s, color 0.2s;
   }
   .ad-stepper-item.activo .ad-stepper-num {
-    background: #FFC801;
-    color: #172b36;
+    background: var(--color-brand-yellow);
+    color: var(--color-ink);
   }
   .ad-stepper-item.completado .ad-stepper-num {
-    background: #172b36;
-    color: #fff;
+    background: var(--color-ink);
+    color: var(--color-white);
   }
   .ad-stepper-item span:last-child {
     font-size: 0.72rem;
     color: var(--color-label);
-    font-weight: 700;
+    font-weight: var(--fw-bold);
   }
   .ad-stepper-line {
     flex: 1;
@@ -538,8 +536,8 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     font-size: 0.8125rem;
     color: var(--color-text-muted);
     text-align: center;
-    background: #F8FAFA;
-    border-radius: 9999px;
+    background: var(--color-surface-soft);
+    border-radius: var(--radius-full);
     padding: 0.5rem 1.25rem;
     width: fit-content;
     margin: -0.5rem auto 1.5rem;
@@ -571,10 +569,9 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     border: none;
     cursor: pointer;
     font-size: 0.8125rem;
-    font-weight: 800;
-    color: #172b36;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-ink);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
     font-family: inherit;
   }
   .ad-accordion-header .chevron {
@@ -613,8 +610,8 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
   .form-group label {
     font-size: 0.875rem;
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
   }
   .ad-checkbox-grupo {
     display: grid;
@@ -640,8 +637,8 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     gap: 0.625rem;
     padding: 0.375rem 0;
     font-size: 0.8125rem;
-    font-weight: 600;
-    color: #172b36;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
     cursor: pointer;
     transition: color 0.15s;
   }
@@ -659,8 +656,8 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     position: relative;
     width: 38px;
     height: 22px;
-    border-radius: 999px;
-    background: #d1d5db;
+    border-radius: var(--radius-full);
+    background: var(--color-border-mid);
     flex-shrink: 0;
     transition: background 0.2s;
   }
@@ -672,8 +669,8 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background: var(--color-white);
+    box-shadow: 0 1px 2px rgba(var(--color-black-rgb), 0.25);
     transition: transform 0.2s;
   }
   .ad-checkbox input:checked + .ad-toggle {
@@ -694,11 +691,11 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
   .ad-error {
     padding: 0.625rem 0.875rem;
-    background: #fef2f2;
+    background: var(--color-danger-bg);
     border-radius: var(--radius-sm);
     font-size: 0.8125rem;
-    color: #dc2626;
-    font-weight: 600;
+    color: var(--color-danger);
+    font-weight: var(--fw-semibold);
     margin-bottom: 1rem;
   }
 
@@ -713,26 +710,26 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     padding: 1rem 0;
   }
   .success-icon {
-    color: #16a34a;
+    color: var(--color-success);
     display: flex;
     align-items: center;
     justify-content: center;
     width: 88px;
     height: 88px;
     border-radius: 50%;
-    background: rgba(22, 163, 74, 0.09);
+    background: rgba(var(--color-success-rgb), 0.09);
     margin: 0 auto 1.25rem;
   }
   .success-title {
     font-size: 1.25rem;
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     margin-bottom: 0.5rem;
   }
   .success-body {
     font-size: 0.875rem;
     color: var(--color-label);
-    line-height: 1.6;
+    line-height: var(--lh-160);
     margin-bottom: 1.5rem;
     max-width: 440px;
     margin-left: auto;
@@ -742,32 +739,32 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    border-radius: 999px;
+    border-radius: var(--radius-full);
     font-size: 0.875rem;
-    font-weight: 700;
+    font-weight: var(--fw-bold);
     border: none;
     cursor: pointer;
     transition: background 0.15s, color 0.15s, opacity 0.15s;
   }
   /* Botón Primario: mismo estilo que .btn-primary global (pqrsf, etc.) */
   .btn-primary {
-    background: #172b36;
-    color: #fff;
+    background: var(--color-ink);
+    color: var(--color-white);
   }
-  .btn-primary:hover { background: #172b36; }
+  .btn-primary:hover { background: var(--color-ink); }
   .btn-primary:disabled {
     opacity: 0.6;
     cursor: not-allowed;
   }
   .btn-outline-sm {
     background: transparent;
-    border: 1px solid #d9e8e2;
-    color: #172b36;
+    border: 1px solid var(--color-success-bg-tint);
+    color: var(--color-ink);
     padding: 0.625rem 1rem;
   }
   .btn-outline-sm:hover {
-    background: #172b36;
-    color: #fff;
+    background: var(--color-ink);
+    color: var(--color-white);
   }
 
   @media (max-width: 639px) {
@@ -1364,18 +1361,18 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     position: fixed; inset: 0; z-index: 400;
     display: flex; align-items: center; justify-content: center;
     padding: 1.5rem;
-    background: rgba(23,43,54,0.55);
+    background: rgba(var(--color-navy-rgb), 0.55);
     backdrop-filter: blur(3px);
   }
   .modal-dir-content {
     position: relative; width: 100%; max-width: 640px;
-    background: #ffffff; border-radius: var(--radius-md);
-    box-shadow: 0 10px 32px rgba(23,43,54,0.12);
+    background: var(--color-white); border-radius: var(--radius-md);
+    box-shadow: 0 10px 32px rgba(var(--color-navy-rgb), 0.12);
     max-height: 95vh; display: flex; flex-direction: column;
   }
   .modal-dir-header {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1.25rem 1.5rem; border-bottom: 1px solid #E4E8ED;
+    padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--color-border-light);
     border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
   .modal-dir-title-group { display: flex; align-items: center; gap: 1rem; min-width: 0; flex: 1; }
@@ -1383,12 +1380,12 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   .modal-dir-title-group h3 { overflow-wrap: break-word; }
   .modal-dir-icon {
     width: 36px; height: 36px; border-radius: 50%;
-    background: #172b36; display: flex; align-items: center; justify-content: center;
+    background: var(--color-ink); display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
   .modal-dir-close {
     background: none; border: none; cursor: pointer;
-    padding: 0.5rem; color: var(--color-text-muted); border-radius: 8px;
+    padding: 0.5rem; color: var(--color-text-muted); border-radius: var(--radius-sm);
   }
   .modal-dir-body {
     padding: 1.5rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 1.25rem;
@@ -1406,17 +1403,17 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   }
 
   .md-box {
-    background: #ffffff; padding: 1.25rem; border-radius: 8px;
+    background: var(--color-white); padding: 1.25rem; border-radius: var(--radius-sm);
     border: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 1.25rem;
   }
   .md-sep { display: flex; align-items: center; gap: 1rem; }
   .md-line { flex: 1; height: 1px; background: var(--color-border); }
-  .md-hash { font-size: 1.25rem; font-weight: 800; color: #172b36; }
+  .md-hash { font-size: 1.25rem; font-weight: var(--fw-extrabold); color: var(--color-ink); }
   
   .md-input {
     width: 100%; height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--color-border);
     border-radius: var(--radius-md); font-size: 0.875rem; color: var(--color-text-muted); background: transparent;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); outline: none;
+    box-shadow: 0 1px 2px 0 rgba(var(--color-black-rgb), 0.05); outline: none;
   }
   .md-input:focus { border-color: var(--color-border-strong); }
   .md-input.uppercase { text-transform: uppercase; }
@@ -1431,9 +1428,9 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   }
 
   #modal-direccion label {
-    font-weight: 700;
+    font-weight: var(--fw-bold);
     font-size: 0.8125rem;
-    color: #172b36;
+    color: var(--color-ink);
   }
 
   .form-check {
@@ -1446,21 +1443,21 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     height: 16px;
     flex-shrink: 0;
     margin-top: 2px;
-    accent-color: #172b36;
+    accent-color: var(--color-ink);
   }
   .form-check label {
     font-size: 0.8125rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.5;
+    line-height: var(--lh-150);
   }
   .form-check a {
-    color: #172b36;
+    color: var(--color-ink);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
   .req {
-    color: #dc2626;
+    color: var(--color-danger);
     margin-left: 0;
   }
   
@@ -1472,15 +1469,15 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
   
   .modal-dir-footer {
     display: flex; gap: 0.75rem; justify-content: flex-end; flex-wrap: wrap;
-    padding: 1.25rem 1.5rem; border-top: 1px solid #E4E8ED;
+    padding: 1.25rem 1.5rem; border-top: 1px solid var(--color-border-light);
   }
   .modal-dir-btn-sec {
-    height: 44px; padding: 0 1.5rem; border-radius: 9999px; cursor: pointer;
-    background: transparent; color: var(--color-border-strong); border: 1px solid var(--color-border); font-weight: 600;
+    height: 44px; padding: 0 1.5rem; border-radius: var(--radius-full); cursor: pointer;
+    background: transparent; color: var(--color-border-strong); border: 1px solid var(--color-border); font-weight: var(--fw-semibold);
   }
   .modal-dir-btn-pri {
-    height: 44px; padding: 0 1.5rem; border-radius: 9999px; cursor: pointer;
-    background: #172b36; color: #ffffff; font-weight: 600; display: flex; align-items: center;
+    height: 44px; padding: 0 1.5rem; border-radius: var(--radius-full); cursor: pointer;
+    background: var(--color-ink); color: var(--color-white); font-weight: var(--fw-semibold); display: flex; align-items: center;
   }
   .modal-dir-btn-pri:disabled { opacity: 0.55; cursor: not-allowed; }
 </style>

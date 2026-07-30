@@ -1,197 +1,281 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
-import developerLogo from "../assets/img/developers/logo-completo-negro.png";
+import developerLogo from "../assets/img/developers/logo-completo-blanco.png";
 ---
 
-<footer class="bg-white pt-20 pb-8 relative overflow-hidden" role="contentinfo">
+<footer class="footer-dark relative overflow-hidden" role="contentinfo" data-dark-bg>
 
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-12 gap-10 pb-16 border-b border-slate-200">
-      
-      <!-- Columna 1: Marca y Contacto (span-4) -->
+  <svg class="footer-brand-shape absolute" viewBox="70 -5 135 163" aria-hidden="true">
+    <defs>
+      <linearGradient id="footerBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0" stop-color="#00132b" />
+        <stop offset=".2" stop-color="#5c458f" />
+        <stop offset=".4" stop-color="#81c1d6" />
+        <stop offset=".6" stop-color="#7abf72" />
+        <stop offset=".8" stop-color="#efc747" />
+        <stop offset="1" stop-color="#d58b3b" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M116.33,46.53c-15.94,10.24-28.73,29.56-29.34,48.05-.32,8.32,2.23,19.12,11.82,20.57,9.57,1.09,17.09-8.34,21-16.14,5.52-12.43,6.96-27.35,15.26-38.85,8.48-11.85,19.69-23.74,35.5-23.79,19.15-.37,28.32,17.42,26.12,34.62-1.59,15.05-7.81,28.61-15.51,41.33-8.17,13.26-18.06,24.33-30.43,34.33-5.02,4.61-12.96,4.14-17.25-1.19-5.71-6.67-1.55-17.67,7.03-19.04,9.13-1.66,17.71-7.05,24.54-13.48,11.65-11.11,19.66-27.12,20.81-42.84.41-6.21-.3-12.36-2.84-16.98-5.51-10.07-21.53-12.47-31.06-5.51-5.51,3.95-10.47,8.72-14.15,14.39-8.03,11.65-8.5,25.88-14.26,38.78-4.81,9.79-13.07,20.8-25.29,20.48-13.59-.74-19.74-14.23-20.37-26.26-1.56-15.14,3.85-30.25,10.98-43.26,3.49-6.6,7.21-12.99,10.28-20.07,2.62-6.03,9.64-8.79,15.67-6.16,8.74,3.59,9.57,16.3,1.51,21.04h0Z"
+      fill="url(#footerBrandGrad)"
+    />
+  </svg>
+
+  <div class="max-w-7xl mx-auto px-6 pt-16 pb-8 relative z-10">
+
+    <div class="grid lg:grid-cols-12 gap-x-10 gap-y-12 pb-12 border-b footer-divider">
+
       <div class="lg:col-span-4">
-        <a href="/" class="inline-block mb-6" aria-label="Inicio">
-          <img
-            src="/assets/img/logo-menu.svg"
-            alt="Cooperamigó Logo"
-            class="h-9 w-auto"
-          />
+        <a href="/" class="inline-block mb-5" aria-label="Inicio">
+          <img src="/assets/logos/logo1.png" alt="FINTEGRAR" class="footer-brand-logo h-10 w-auto" />
         </a>
-        <p class="text-[0.9rem] text-slate-600 leading-relaxed mb-8 max-w-xs pr-4">
-          Desde 1993 trabajamos día a día por el bienestar de nuestros asociados y sus familias, ofreciendo soluciones financieras responsables y cercanas.
+        <p class="footer-tagline max-w-xs mb-6">
+          36 años promoviendo el bienestar de nuestros asociados. Somos un Fondo de Empleados sin ánimo de lucro, legalmente constituido y vigilado por la Superintendencia de la Economía Solidaria.
         </p>
-        
-        <div class="flex flex-col gap-4 mb-8">
-          <div class="flex items-center gap-3 text-[0.9rem] text-slate-600">
-            <Icon name="tabler:map-pin" class="w-5 h-5 text-slate-600 shrink-0" aria-hidden="true" />
-            <span>Calle 50 # 45 - 42 Oficina 120</span>
-          </div>
-          <a href="tel:+573054070612" class="flex items-center gap-3 text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-            <Icon name="tabler:phone" class="w-5 h-5 text-slate-600 shrink-0" aria-hidden="true" />
-            <span>(604) 305 407 0612</span>
+        <div class="flex items-center gap-3">
+          <a href="https://www.facebook.com/p/Fintegrar-Fondo-de-Empleados-61579258882412/" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="Facebook">
+            <Icon name="tabler:brand-facebook" class="w-4.5 h-4.5" />
           </a>
-          <a href="mailto:info@cooperamigo.coop" class="flex items-center gap-3 text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-            <Icon name="tabler:mail" class="w-5 h-5 text-slate-600 shrink-0" aria-hidden="true" />
-            <span>info@cooperamigo.coop</span>
+          <a href="https://www.instagram.com/fintegrar_/" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="Instagram">
+            <Icon name="tabler:brand-instagram" class="w-4.5 h-4.5" />
+          </a>
+          <a href="https://api.whatsapp.com/send/?phone=573174879669&text=Hola%2C+quisiera+informaci%C3%B3n+sobre+cr%C3%A9dito%2Fcartera.&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="footer-social" aria-label="WhatsApp">
+            <Icon name="tabler:brand-whatsapp" class="w-4.5 h-4.5" />
           </a>
         </div>
       </div>
 
-      <!-- Columna 2: Institución (span-2) -->
       <div class="lg:col-span-2">
-        <h3 class="text-[0.8rem] font-bold tracking-[0.15em] text-[#172B36] mb-6 uppercase flex flex-col items-start gap-3">
-          Institución
-        </h3>
-        <ul class="flex flex-col gap-4">
+        <h3 class="footer-heading">Contacto</h3>
+        <ul class="flex flex-col gap-2.5">
           <li>
-            <a href="/nosotros" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Quiénes somos
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
+            <a href="mailto:gerencia@fintegrar.com" class="footer-link inline-flex items-center gap-1.5">
+              gerencia@fintegrar.com
+              <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
             </a>
           </li>
           <li>
-            <a href="/cuerpos-colegiados" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              C. de Administración
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
+            <a href="tel:+573174879669" class="footer-link">317 487 9669</a>
           </li>
           <li>
-            <a href="/cuerpos-colegiados#junta" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Junta de Vigilancia
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
-          </li>
-          <li>
-            <a href="/normatividad#informes" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Informe de Gestión
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
-          </li>
-          <li>
-            <a href="/normatividad" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Normatividad
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
-          </li>
-          <li>
-            <a href="/normatividad#sarlaft" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              SARLAFT
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
+            <span class="footer-link footer-link--static">Oficinas de Prosalco IPS Poblado, Cra 43 A # 25-69</span>
           </li>
         </ul>
       </div>
 
-      <!-- Columna 3: Servicios (span-2) -->
       <div class="lg:col-span-2">
-        <h3 class="text-[0.8rem] font-bold tracking-[0.15em] text-[#172B36] mb-6 uppercase flex flex-col items-start gap-3">
-          Servicios
-        </h3>
-        <ul class="flex flex-col gap-4">
-          <li>
-            <a href="/creditos" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Líneas de crédito
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
-          </li>
-          <li>
-            <a href="/nosotros#auxilios" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Beneficios sociales
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
-          </li>
-          <li>
-            <a href="/nosotros#convenios" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Convenios
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
-          </li>
-          <li>
-            <a href="/directorio" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Directorio
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
-          </li>
-          <li>
-            <a href="/pqrsf" class="group flex items-center justify-between text-[0.9rem] text-slate-600 hover:text-[#172B36] transition-colors">
-              Radicar PQRSF
-              <Icon name="tabler:chevron-right" class="w-4 h-4 text-slate-300 group-hover:text-[#172B36] transition-colors" />
-            </a>
-          </li>
+        <h3 class="footer-heading">Institución</h3>
+        <ul class="flex flex-col gap-2.5">
+          <li><a href="/nosotros" class="footer-link">Quiénes somos</a></li>
+          <li><a href="/cuerpos-colegiados" class="footer-link">C. de Administración</a></li>
+          <li><a href="/cuerpos-colegiados#junta" class="footer-link">Junta de Vigilancia</a></li>
+          <li><a href="/normatividad#informes" class="footer-link">Informe de Gestión</a></li>
+          <li><a href="/normatividad" class="footer-link">Normatividad</a></li>
+          <li><a href="/normatividad#sarlaft" class="footer-link">SARLAFT</a></li>
         </ul>
       </div>
 
-      <!-- Columna 4: Accesos Directos (span-4) -->
-      <div class="lg:col-span-4">
-        <h3 class="text-[0.8rem] font-bold tracking-[0.15em] text-[#172B36] mb-6 uppercase flex flex-col items-start gap-3">
-          Accesos Directos
-        </h3>
-        
-        <div class="flex flex-col gap-4">
-          <!-- Card Portal Asociados -->
-          <a href="https://serviciosdigitales.cooperamigo.coop/" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 p-5 rounded-md bg-slate-50 hover:bg-slate-100 transition-colors">
-            <div class="w-12 h-12 rounded-sm bg-white border border-slate-100 flex items-center justify-center shrink-0">
-              <Icon name="tabler:user" class="w-6 h-6 text-slate-600" />
-            </div>
-            <div class="flex-grow">
-              <h4 class="text-[0.95rem] font-bold text-[#172B36] mb-1">Portal Asociados</h4>
-              <p class="text-[0.8rem] text-slate-500 leading-tight">Gestione su información, consultas y solicitudes.</p>
-            </div>
-            <Icon name="tabler:arrow-right" class="w-5 h-5 text-slate-300 group-hover:text-[#172B36] transition-colors shrink-0" />
-          </a>
+      <div class="lg:col-span-2">
+        <h3 class="footer-heading">Servicios</h3>
+        <ul class="flex flex-col gap-2.5">
+          <li><a href="/ahorros" class="footer-link">Modalidades de ahorro</a></li>
+          <li><a href="/creditos" class="footer-link">Líneas de crédito</a></li>
+          <li><a href="/ahorros#rifa-semanal" class="footer-link">Rifa Semanal</a></li>
+          <li><a href="/convenios" class="footer-link">Convenios</a></li>
+        </ul>
+      </div>
 
-          <!-- Card PSE -->
-          <a href="https://www.zonapagos.net/formulariosNV/?cod=BTK3a53qAPJK5dFzuUb9xoOMEi6GjxTVEz6jgj8WOG4kf7Z7mmbU2N6iG2sClbz5isF7xpuvz4ec%2FstAKWghYq2ihH6ea5Ab%2BfJXSgfBIPShwQxb9hHbzgY1XqGlsllif2sqgYeyszPfE%2Fq5SNonDhF9ZhqXm7OyDm%2Ba4lfdMItrvmOCQ5Py2gAq%2BvwFtoRMoNDPxeZKzglBDlEyqykoMK2kz6zyhc7dmjJO23oOZfDrWY5p5hfLu%2BH0xUIIx2%2F2zJLthSgc28WEY9rneC44s4DORf3zdoMntL1Bmxpscus%3D" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-4 p-5 rounded-md bg-slate-50 hover:bg-slate-100 transition-colors">
-            <div class="w-12 h-12 rounded-sm bg-white border border-slate-100 flex items-center justify-center shrink-0">
-              <Icon name="tabler:credit-card" class="w-6 h-6 text-slate-600" />
-            </div>
-            <div class="flex-grow">
-              <h4 class="text-[0.95rem] font-bold text-[#172B36] mb-1">Pague en línea (PSE)</h4>
-              <p class="text-[0.8rem] text-slate-500 leading-tight">Realice sus pagos de forma segura y rápida.</p>
-            </div>
-            <Icon name="tabler:arrow-right" class="w-5 h-5 text-slate-300 group-hover:text-[#172B36] transition-colors shrink-0" />
-          </a>
+      <div class="lg:col-span-2">
+        <h3 class="footer-heading">Accesos Directos</h3>
+        <ul class="flex flex-col gap-2.5">
+          <li>
+            <a href="https://tramitesvirtuales.fintegrar.com/" target="_blank" rel="noopener noreferrer" class="footer-link inline-flex items-center gap-1.5">
+              Trámites Virtuales
+              <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.zonapagos.net/formulariosNV/?cod=BTK3a53qAPJK5dFzuUb9xoOMEi6GjxTVEz6jgj8WOG4kf7Z7mmbU2N6iG2sClbz5isF7xpuvz4ec%2FstAKWghYq2ihH6ea5Ab%2BfJXSgfBIPShwQxb9hHbzgY1XqGlsllif2sqgYeyszPfE%2Fq5SNonDhF9ZhqXm7OyDm%2Ba4lfdMItrvmOCQ5Py2gAq%2BvwFtoRMoNDPxeZKzglBDlEyqykoMK2kz6zyhc7dmjJO23oOZfDrWY5p5hfLu%2BH0xUIIx2%2F2zJLthSgc28WEY9rneC44s4DORf3zdoMntL1Bmxpscus%3D" target="_blank" rel="noopener noreferrer" class="footer-link inline-flex items-center gap-1.5">
+              Pague en línea (PSE)
+              <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
+            </a>
+          </li>
+          <li><a href="/directorio" class="footer-link">Directorio</a></li>
+        </ul>
+
+        <h3 class="footer-heading mt-8">Legales</h3>
+        <ul class="flex flex-col gap-2.5">
+          <li><a href="/aviso-privacidad" class="footer-link">Privacidad</a></li>
+          <li><a href="/politica-tratamiento-datos" class="footer-link">Políticas de Tratamiento</a></li>
+          <li><a href="/terminos-condiciones" class="footer-link">Términos y Condiciones</a></li>
+          <li><a href="/pqrsf" class="footer-link">Radicar PQRSF</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="py-8 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-6 border-b footer-divider">
+      <div class="footer-vigilada flex items-center gap-3 sm:gap-4 flex-shrink-0" role="note" aria-label="Vigilada por la Superintendencia de la Economía Solidaria">
+        <div class="flex flex-col items-stretch gap-[3px] w-fit flex-shrink-0">
+          <span class="footer-vigilada-line"></span>
+          <span class="footer-vigilada-text text-center">VIGILADA</span>
+          <span class="footer-vigilada-line"></span>
+        </div>
+        <div class="footer-vigilada-sub flex flex-col text-left leading-tight">
+          <span>SUPERINTENDENCIA DE LA</span>
+          <span>ECONOMÍA SOLIDARIA</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-start gap-4">
+        <h3 class="footer-heading footer-heading--plain whitespace-nowrap">Entidades aliadas</h3>
+        <div class="flex flex-wrap items-center justify-start gap-x-8 gap-y-4">
+          <img src="/assets/logos/aliadoprosalco.png" alt="Prosalco" class="footer-ally-logo" />
+          <img src="/assets/logos/aliadopoliclinico.png" alt="Policlínico Sur" class="footer-ally-logo" />
+          <img src="/assets/logos/alieadosumemoscoop.png" alt="Sumemos Coop" class="footer-ally-logo" />
         </div>
       </div>
     </div>
 
-    <!-- Bottom Bar -->
-    <div class="py-8 flex flex-col lg:flex-row lg:flex-nowrap items-center justify-between gap-1 lg:gap-8">
-      <!-- Copyright -->
-      <div class="text-[0.7rem] text-slate-500 text-center lg:text-left order-1 lg:order-1 lg:whitespace-nowrap">
-        © 2026 Cooperativa Multiactiva Luis Amigó. All rights reserved.
+    <div class="pt-6 flex flex-col lg:flex-row lg:flex-nowrap items-center justify-between gap-3 lg:gap-8 leading-tight">
+      <div class="footer-fineprint text-center lg:text-left order-1 lg:order-1 lg:whitespace-nowrap">
+        © 2026 Fondo de Empleados - Fintegrar. Todos los derechos reservados.
       </div>
 
-      <!-- Links -->
-      <div class="flex flex-wrap lg:flex-nowrap justify-center items-center gap-2 text-[0.7rem] text-slate-500 whitespace-nowrap order-2 lg:order-2">
-        <a href="/aviso-privacidad" class="hover:text-[#172B36] transition-colors">Privacidad</a>
-        <span class="text-slate-300">|</span>
-        <a href="/politica-tratamiento-datos" class="hover:text-[#172B36] transition-colors">Políticas de Tratamiento</a>
-        <span class="text-slate-300">|</span>
-        <a href="/terminos-condiciones" class="hover:text-[#172B36] transition-colors">Términos y Condiciones</a>
-      </div>
-
-      <!-- Dev -->
-      <div class="flex items-center gap-1.5 text-[0.7rem] text-slate-500 whitespace-nowrap order-2 lg:order-3">
+      <div class="flex items-center gap-1.5 footer-fineprint whitespace-nowrap order-2 lg:order-2">
         Desarrollado por
-        <a href="https://centratechnologiesdc.com/" target="_blank" rel="noopener noreferrer" class="opacity-70 hover:opacity-100 transition-opacity">
+        <a href="https://centratechnologiesdc.com/" target="_blank" rel="noopener noreferrer" class="opacity-80 hover:opacity-100 transition-opacity">
           <Image src={developerLogo} alt="Centra Technologies DC" class="h-4 w-auto" />
         </a>
       </div>
     </div>
-
-    <!-- Vigilada Supersolidaria (solo móviles) -->
-    <div class="flex md:hidden justify-center items-center gap-3 pt-6 mt-2 border-t border-slate-200" role="note" aria-label="Vigilada por la Superintendencia de la Economía Solidaria">
-      <div class="flex flex-col items-stretch gap-[3px]">
-        <span class="w-full h-[1.5px] bg-[#172B36] rounded-full"></span>
-        <span class="text-[0.7rem] font-extrabold tracking-[0.18em] text-[#172B36] text-center">VIGILADA</span>
-        <span class="w-full h-[1.5px] bg-[#172B36] rounded-full"></span>
-      </div>
-      <div class="flex flex-col text-[0.6rem] font-semibold tracking-[0.04em] text-[#172B36] leading-tight">
-        <span>SUPERINTENDENCIA DE LA</span>
-        <span>ECONOMÍA SOLIDARIA</span>
-      </div>
-    </div>
   </div>
 </footer>
+
+<style>
+  .footer-dark {
+    background: var(--color-ink);
+  }
+
+  .footer-brand-shape {
+    top: -25%;
+    bottom: -25%;
+    right: -8%;
+    height: 150%;
+    width: auto;
+    opacity: 0.14;
+    pointer-events: none;
+  }
+
+  @media (max-width: 639px) {
+    .footer-brand-shape {
+      display: none;
+    }
+  }
+
+  .footer-divider {
+    border-color: rgba(var(--color-white-rgb), 0.1);
+  }
+
+  .footer-brand-logo {
+    filter: brightness(0) invert(1);
+    opacity: 0.92;
+  }
+
+  .footer-tagline {
+    font-size: 0.875rem;
+    color: rgba(var(--color-white-rgb), 0.6);
+  }
+
+  .footer-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    background: rgba(var(--color-white-rgb), 0.08);
+    color: rgba(var(--color-white-rgb), 0.75);
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .footer-social:hover {
+    background: var(--color-brand-yellow);
+    color: var(--color-ink);
+  }
+
+  .footer-heading {
+    font-size: 0.8rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-white);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(var(--color-white-rgb), 0.12);
+  }
+
+  .footer-heading--plain {
+    font-size: 0.6875rem;
+    font-weight: var(--fw-regular);
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    color: rgba(var(--color-white-rgb), 0.55);
+  }
+
+  .footer-link {
+    font-size: 0.875rem;
+    font-weight: var(--fw-regular);
+    color: rgba(var(--color-white-rgb), 0.7);
+    text-decoration: none;
+    transition: color 0.15s;
+    width: fit-content;
+  }
+
+  .footer-link:hover {
+    color: var(--color-white);
+  }
+
+  .footer-link--static {
+    color: rgba(var(--color-white-rgb), 0.7);
+  }
+
+  .footer-ally-logo {
+    height: 32px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+  }
+
+  .footer-ally-logo:hover {
+    opacity: 1;
+  }
+
+  .footer-vigilada-line {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: rgba(var(--color-white-rgb), 0.7);
+    border-radius: var(--radius-full);
+  }
+
+  .footer-vigilada-text {
+    font-size: 0.7rem;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-white);
+    white-space: nowrap;
+  }
+
+  .footer-vigilada-sub {
+    font-size: 0.6875rem;
+    font-weight: var(--fw-semibold);
+    color: rgba(var(--color-white-rgb), 0.55);
+  }
+
+  .footer-fineprint {
+    font-size: 0.7rem;
+    color: rgba(var(--color-white-rgb), 0.5);
+  }
+</style>

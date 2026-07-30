@@ -31,36 +31,36 @@ const requerido = "required" in rest && rest.required !== false;
     display: block;
     margin-bottom: 0.375rem;
     font-size: 0.8125rem;
-    font-weight: 600;
-    color: #172b36;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
   }
   .ff-req {
-    color: #dc2626;
+    color: var(--color-danger);
     margin-left: 0;
   }
   .ff-field input {
     width: 100%;
     box-sizing: border-box;
     padding: 0.75rem 1rem;
-    border: 1px solid rgba(23, 43, 54, 0.1);
+    border: 1px solid rgba(var(--color-navy-rgb), 0.1);
     border-radius: var(--radius-md, 0.5rem);
     font-size: 0.875rem;
-    color: #172b36;
+    color: var(--color-ink);
     background: transparent;
     font-family: inherit;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   }
   .ff-field input:focus {
     outline: none;
-    background: #fff;
-    border-color: var(--color-accent-teal, #0d9488);
+    background: var(--color-white);
+    border-color: var(--color-accent-teal, var(--color-brand-teal));
   }
 
   /* Neutraliza el fondo amarillo/azul que el navegador aplica al autocompletar */
   .ff-field input:-webkit-autofill,
   .ff-field input:-webkit-autofill:hover,
   .ff-field input:-webkit-autofill:focus {
-    -webkit-text-fill-color: #172b36;
+    -webkit-text-fill-color: var(--color-ink);
     -webkit-box-shadow: 0 0 0px 1000px transparent inset;
     box-shadow: 0 0 0px 1000px transparent inset;
     transition: background-color 9999s ease-in-out 0s;

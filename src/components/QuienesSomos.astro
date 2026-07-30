@@ -1,89 +1,29 @@
 ---
-import { Icon } from 'astro-icon/components';
 ---
 
 <section id="nosotros" class="section-white" aria-labelledby="nosotros-title">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-      <div class="reveal">
-        <div class="nosotros-img-wrap">
-          <img
-            src="/assets/img/promos/publicidad1.webp"
-            alt="Equipo Cooperamigó"
-            class="nosotros-img img-unified"
-            width="800"
-            height="533"
-          />
-          <!-- Tarjeta superpuesta -->
-          <div class="nosotros-overlay-card text-center">
-            <div class="font-display" style="font-size:2rem;color:#fff;line-height:1;font-weight:600">1993</div>
-            <div style="font-size:0.8rem;color:#fff;margin-top:4px;font-weight:500;">
-              Año de fundación
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="nosotros-content">
 
       <div class="reveal reveal-delay-2">
-        <div class="section-eyebrow">Nuestra institución</div>
         <h2
           id="nosotros-title"
           class="font-display"
-          style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;margin-bottom:1.25rem;"
+          style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);margin-bottom:1.25rem;"
         >
-          Una cooperativa construida<br />sobre valores sólidos
+          Somos Fintegrar
         </h2>
-        <p style="font-size:1rem;color:#172B36;opacity:0.8;line-height:1.75;margin-bottom:1.25rem;">
-          Somos la Cooperativa Multiactiva Luis Amigó, una organización de economía solidaria
-          fundamentada en los principios cooperativos de solidaridad, equidad, responsabilidad
-          y transparencia.
+        <p style="font-size:1rem;color:var(--color-ink);opacity:0.8;line-height: var(--lh-175);margin-bottom:1.25rem;">
+          Con más de 36 años de trayectoria, somos un Fondo de Empleados legalmente constituido
+          y vigilado por la Superintendencia de la Economía Solidaria.
         </p>
-        <p style="font-size:1rem;color:#172B36;opacity:0.8;line-height:1.75;margin-bottom:2rem;">
-          Trabajamos cada día para que nuestros asociados accedan a soluciones financieras y
-          sociales que mejoren su calidad de vida y la de sus familias.
+        <p style="font-size:1rem;color:var(--color-ink);opacity:0.8;line-height: var(--lh-175);margin-bottom:2rem;">
+          Somos una organización de economía solidaria, de derecho privado y sin ánimo de lucro,
+          integrada por trabajadores que unen esfuerzos para fortalecer una comunidad basada en
+          la solidaridad, el ahorro y el acceso a soluciones financieras responsables. Nuestro
+          propósito es generar bienestar económico, social y cultural, contribuyendo al
+          desarrollo integral de nuestros asociados y sus familias.
         </p>
-
-        <!-- Valores -->
-        <div class="valores-grid">
-          <div class="valor-item card-base">
-            <div class="valor-icon">
-              <Icon name="tabler:users-group" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <div>
-              <div class="valor-title">Solidaridad</div>
-              <div class="valor-desc">Nos apoyamos en cada etapa de la vida.</div>
-            </div>
-          </div>
-          <div class="valor-item card-base">
-            <div class="valor-icon">
-              <Icon name="tabler:shield-check" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <div>
-              <div class="valor-title">Transparencia</div>
-              <div class="valor-desc">Gestión clara en cada decisión.</div>
-            </div>
-          </div>
-          <div class="valor-item card-base">
-            <div class="valor-icon">
-              <Icon name="tabler:heart-handshake" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <div>
-              <div class="valor-title">Equidad</div>
-              <div class="valor-desc">Condiciones justas para todos.</div>
-            </div>
-          </div>
-          <div class="valor-item card-base">
-            <div class="valor-icon">
-              <Icon name="tabler:award" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <div>
-              <div class="valor-title">Responsabilidad</div>
-              <div class="valor-desc">Comprometidos con nuestros asociados.</div>
-            </div>
-          </div>
-        </div>
-
 
       </div>
 
@@ -93,87 +33,18 @@ import { Icon } from 'astro-icon/components';
 
 <style>
   .section-white {
-    background: #fff;
+    background: var(--color-navbar-bg);
     padding: 8rem 0;
   }
 
-  /* Imagen con card superpuesta */
-  .nosotros-img-wrap {
-    position: relative;
-    padding-right: 3rem;
-    padding-bottom: 3rem;
-  }
-  .nosotros-img {
-    width: 100%;
-    height: 460px;
-    object-fit: cover;
-    border-radius: var(--radius-lg);
-    display: block;
-    box-shadow: var(--shadow-xl);
-  }
-  .nosotros-overlay-card {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: #172B36;
-    border-radius: 12px;
-    padding: 1.5rem 2rem;
-    box-shadow: 0 20px 48px rgba(23, 43, 54, 0.3);
-  }
-
-  /* Grid de valores */
-  .valores-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-  .valor-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: var(--color-surface);
-    border-color: transparent;
-  }
-  .valor-item:hover {
-    background: #fff;
-    border-color: var(--color-surface);
-  }
-  .valor-icon {
-    width: 40px;
-    height: 40px;
-    background: #fff;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    color: #172B36;
-    box-shadow: var(--shadow-sm);
-  }
-  .valor-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #172B36;
-    margin-bottom: 0.25rem;
-  }
-  .valor-desc {
-    font-size: 0.875rem;
-    color: #172B36;
-    opacity: 0.6;
-    line-height: 1.6;
+  .nosotros-content {
+    max-width: 720px;
   }
 
   @media (max-width: 1023px) {
     .section-white { padding: 6rem 0; }
-    .nosotros-img { height: 380px; }
-    .nosotros-img-wrap { padding-right: 2.5rem; padding-bottom: 2.5rem; }
   }
   @media (max-width: 767px) {
     .section-white { padding: 4rem 0; }
-    .nosotros-img { height: auto; object-fit: contain; }
-    .nosotros-img-wrap { padding-right: 2rem; padding-bottom: 2rem; }
-    .nosotros-overlay-card { padding: 1rem 1.25rem; }
-    .valores-grid { grid-template-columns: 1fr; }
   }
 </style>

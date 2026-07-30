@@ -2,6 +2,7 @@
 import Layout from './Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   pageTitle: string;
@@ -17,8 +18,8 @@ const {
   breadcrumbs = [],
 } = Astro.props;
 
-const metaTitle = `${pageTitle} — Cooperamigó`;
-const metaDesc  = description ?? `${pageTitle} — Cooperativa Multiactiva Luis Amigó, Medellín.`;
+const metaTitle = `${pageTitle} — Fintegrar`;
+const metaDesc  = description ?? `${pageTitle} — Fondo de Empleados Fintegrar.`;
 ---
 
 <Layout title={metaTitle} description={metaDesc}>
@@ -27,14 +28,17 @@ const metaDesc  = description ?? `${pageTitle} — Cooperativa Multiactiva Luis 
   <div class="page-hero">
     <div class="max-w-7xl mx-auto px-6">
       <nav class="pg-breadcrumb" aria-label="Rutas">
-        <a href="/" class="pg-breadcrumb-link">Inicio</a>
+        <a href="/" class="pg-breadcrumb-link pg-breadcrumb-home">
+          <Icon name="tabler:home" class="w-3.5 h-3.5" aria-hidden="true" />
+          Inicio
+        </a>
         {breadcrumbs.map((crumb) =>
           crumb.href
-            ? <><span class="pg-breadcrumb-sep">/</span><a href={crumb.href} class="pg-breadcrumb-link">{crumb.label}</a></>
-            : <><span class="pg-breadcrumb-sep">/</span><span class="pg-breadcrumb-current">{crumb.label}</span></>
+            ? <><Icon name="tabler:chevron-right" class="pg-breadcrumb-sep w-3.5 h-3.5" aria-hidden="true" /><a href={crumb.href} class="pg-breadcrumb-link">{crumb.label}</a></>
+            : <><Icon name="tabler:chevron-right" class="pg-breadcrumb-sep w-3.5 h-3.5" aria-hidden="true" /><span class="pg-breadcrumb-current">{crumb.label}</span></>
         )}
         {breadcrumbs.length === 0 &&
-          <><span class="pg-breadcrumb-sep">/</span><span class="pg-breadcrumb-current">{pageTitle}</span></>
+          <><Icon name="tabler:chevron-right" class="pg-breadcrumb-sep w-3.5 h-3.5" aria-hidden="true" /><span class="pg-breadcrumb-current">{pageTitle}</span></>
         }
       </nav>
 
@@ -52,63 +56,66 @@ const metaDesc  = description ?? `${pageTitle} — Cooperativa Multiactiva Luis 
 
 <style>
   .page-hero {
-    background: #172B36;
-    padding: 3.5rem 0 3rem;
+    background: var(--gradient-brand);
+    padding: calc(var(--header-h) + 4.5rem) 0 4rem;
     position: relative;
     overflow: hidden;
   }
-  .page-hero::after {
-    content: '';
-    position: absolute;
-    right: 0; top: 0; bottom: 0;
-    width: 40%;
-    background: rgba(17, 76, 90, 0.25);
-    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-    pointer-events: none;
-  }
 
   .pg-breadcrumb {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     font-size: 0.78rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
   }
   .pg-breadcrumb-link {
-    color: rgba(241, 246, 244, 0.55);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: rgba(var(--color-mint-white-rgb), 0.65);
     text-decoration: none;
+    font-weight: var(--fw-medium);
     transition: color 0.15s;
   }
-  .pg-breadcrumb-link:hover { color: #FFC801; }
+  .pg-breadcrumb-link:hover { color: var(--color-brand-yellow); }
+  .pg-breadcrumb-home svg {
+    opacity: 0.8;
+  }
   .pg-breadcrumb-sep {
-    color: rgba(241, 246, 244, 0.25);
+    width: 13px;
+    height: 13px;
+    color: rgba(var(--color-mint-white-rgb), 0.35);
+    flex-shrink: 0;
   }
   .pg-breadcrumb-current {
-    color: rgba(241, 246, 244, 0.85);
-    font-weight: 500;
+    color: var(--color-white);
+    font-weight: var(--fw-semibold);
   }
 
   .pg-title {
     font-family: var(--ff-heading);
     font-size: clamp(1.875rem, 4vw, 3rem);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.15;
+    font-weight: var(--fw-bold);
+    color: var(--color-white);
+    line-height: var(--lh-115);
     letter-spacing: -0.015em;
     position: relative;
     z-index: 1;
   }
   .pg-subtitle {
     font-size: 0.9375rem;
-    color: rgba(241, 246, 244, 0.68);
+    color: rgba(var(--color-mint-white-rgb), 0.68);
     margin-top: 0.625rem;
     position: relative;
     z-index: 1;
-    line-height: 1.6;
+    line-height: var(--lh-160);
     max-width: 640px;
   }
   @media (min-width: 1024px) {
-    /* En desktop el subtítulo cabe en una sola línea */
     .pg-subtitle { max-width: none; }
+  }
+  @media (max-width: 639px) {
+    .page-hero { padding: calc(var(--header-h) + 3rem) 0 2.5rem; }
   }
 </style>

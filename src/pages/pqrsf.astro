@@ -9,7 +9,7 @@ const tipos = [
   {
     icon: "tabler:file-text",
     label: "Petición",
-    desc: "Solicitud de información, documentos o actuación de la Cooperativa.",
+    desc: "Solicitud de información, documentos o actuación del Fondo.",
   },
   {
     icon: "tabler:alert-circle",
@@ -68,7 +68,7 @@ const tipos = [
               <Icon
                 name="tabler:clock"
                 class="w-3.5 h-3.5"
-                style="color:#172B36;"
+                style="color:var(--color-ink);"
                 aria-hidden="true"
               />
               Tiempos de respuesta
@@ -112,7 +112,7 @@ const tipos = [
                 style="text-transform:uppercase;"
                 required
               >
-                <div slot="error" id="pq-nombre-error" style="display:none; color:#dc2626; font-size:0.75rem; font-weight: 500; margin-top: 0.25rem;">
+                <div slot="error" id="pq-nombre-error" style="display:none; color:var(--color-danger); font-size:0.75rem; font-weight: var(--fw-medium); margin-top: 0.25rem;">
                   Por favor ingrese su nombre completo (mínimo 10 caracteres).
                 </div>
               </FloatingInput>
@@ -199,7 +199,7 @@ const tipos = [
                     <Icon
                       name="tabler:upload"
                       class="w-5 h-5"
-                      style="color:#172B36;"
+                      style="color:var(--color-ink);"
                       aria-hidden="true"
                     />
                     <span class="file-text">
@@ -213,19 +213,19 @@ const tipos = [
                       <Icon
                         name="tabler:circle-check"
                         class="w-7 h-7"
-                        style="color:#16a34a;flex-shrink:0;"
+                        style="color:var(--color-success);flex-shrink:0;"
                         aria-hidden="true"
                       />
                       <div style="display: flex; flex-direction: column; overflow: hidden;">
                         <span id="pq-file-display-name" class="file-name-selected" style="background: none; padding: 0; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></span>
-                        <span class="file-hint" style="color:#16a34a;opacity:1;font-weight:600; text-align: left;">
+                        <span class="file-hint" style="color:var(--color-success);opacity:1;font-weight: var(--fw-semibold); text-align: left;">
                           ✓ Listo para enviar
                         </span>
                       </div>
                     </div>
                     <div style="display: flex; align-items: center; gap: 1rem; flex-shrink: 0; margin-left: 1rem;">
-                      <span style="font-size: 0.75rem; text-decoration: underline; color: #172b36; font-weight: 600;">Cambiar</span>
-                      <button type="button" id="pq-remove-file" aria-label="Eliminar archivo" style="color: #dc2626; display: flex; align-items: center; justify-content: center; padding: 0.25rem; border-radius: 9999px; transition: background 0.2s;" onmouseover="this.style.background='rgba(220, 38, 38, 0.1)'" onmouseout="this.style.background='transparent'">
+                      <span style="font-size: 0.75rem; text-decoration: underline; color: var(--color-ink); font-weight: var(--fw-semibold);">Cambiar</span>
+                      <button type="button" id="pq-remove-file" aria-label="Eliminar archivo" style="color: var(--color-danger); display: flex; align-items: center; justify-content: center; padding: 0.25rem; border-radius: 9999px; transition: background 0.2s;" onmouseover="this.style.background='rgba(var(--color-danger-rgb), 0.1)'" onmouseout="this.style.background='transparent'">
                         <Icon name="tabler:x" class="w-5 h-5" aria-hidden="true" />
                       </button>
                     </div>
@@ -248,17 +248,17 @@ const tipos = [
                   required
                 />
                 <label for="pq-autorizo">
-                  Al radicar, autorizo a la Cooperativa Multiactiva Luis Amigó el tratamiento de mis datos personales conforme a la
+                  Al radicar, autorizo al Fondo de Empleados Fintegrar el tratamiento de mis datos personales conforme a la
                   <a href="/politica-tratamiento-datos" target="_blank" rel="noopener noreferrer"
                     >Política de Tratamiento de Datos</a
-                  > publicada en el sitio web www.cooperamigo.coop<span class="req">*</span>
+                  > publicada en el sitio web www.fintegrar.com<span class="req">*</span>
                 </label>
               </div>
 
               <div
                 id="pqrsf-error"
                 role="alert"
-                style="display:none;padding:0.625rem 0.875rem;background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-sm);font-size:0.8125rem;color:#dc2626;font-weight:600;"
+                style="display:none;padding:0.625rem 0.875rem;background:var(--color-danger-bg);border:1px solid var(--color-danger-border);border-radius:var(--radius-sm);font-size:0.8125rem;color:var(--color-danger);font-weight: var(--fw-semibold);"
               ></div>
 
               <button
@@ -306,7 +306,7 @@ const tipos = [
 
 <style>
   .pqrsf-section {
-    background: #fff;
+    background: var(--color-navbar-bg);
     padding: 4rem 0 5rem;
   }
   .pqrsf-grid {
@@ -330,7 +330,7 @@ const tipos = [
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
-    background: #fff;
+    background: var(--color-white);
     border-radius: var(--radius-sm);
     padding: 0.625rem 0.875rem;
   }
@@ -338,8 +338,8 @@ const tipos = [
     width: 28px;
     height: 28px;
     border-radius: var(--radius-sm);
-    background: rgba(23, 43, 54, 0.08);
-    color: #172b36;
+    background: rgba(var(--color-navy-rgb), 0.08);
+    color: var(--color-ink);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -347,21 +347,21 @@ const tipos = [
   }
   .tipo-label {
     font-size: 0.8125rem;
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     margin-bottom: 1px;
-    line-height: 1.3;
+    line-height: var(--lh-130);
   }
   .tipo-desc {
     font-size: 0.72rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.45;
+    line-height: var(--lh-145);
   }
 
   .pqrsf-tiempos,
   .pqrsf-canales {
-    background: #fff;
+    background: var(--color-white);
     border-radius: var(--radius-md);
     padding: 1rem 1.125rem;
     margin-bottom: 0.875rem;
@@ -371,10 +371,9 @@ const tipos = [
     align-items: center;
     gap: 0.5rem;
     font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    font-weight: var(--fw-bold);
     text-transform: uppercase;
-    color: #172b36;
+    color: var(--color-ink);
     margin-bottom: 0.75rem;
   }
   .tiempos-row {
@@ -383,7 +382,7 @@ const tipos = [
     align-items: center;
     gap: 1rem;
     font-size: 0.8125rem;
-    color: #172b36;
+    color: var(--color-ink);
     padding: 0.75rem 0;
     border-bottom: 1px solid var(--color-surface);
   }
@@ -392,12 +391,12 @@ const tipos = [
   }
   .tiempos-tipo {
     font-size: 0.72rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
   }
   .tiempos-plazo {
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     white-space: nowrap;
   }
   .canal-item {
@@ -405,7 +404,7 @@ const tipos = [
     align-items: center;
     gap: 0.5rem;
     font-size: 0.78rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.8;
     text-decoration: none;
     padding: 0.3rem 0;
@@ -418,28 +417,28 @@ const tipos = [
     border-bottom: none;
   }
   a.canal-item:hover {
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 1;
   }
 
   .pqrsf-form-wrap {
-    background: #fff;
+    background: var(--color-white);
     border-radius: var(--radius-lg);
     padding: 2.5rem;
   }
   .form-titulo {
     font-family: var(--ff-heading);
     font-size: 1.375rem;
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     margin-bottom: 0.375rem;
   }
   .form-subtitulo {
     font-size: 0.875rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
     margin-bottom: 2rem;
-    line-height: 1.6;
+    line-height: var(--lh-160);
   }
   .pqrsf-form {
     display: flex;
@@ -461,16 +460,16 @@ const tipos = [
   }
   .form-group label {
     font-size: 0.8125rem;
-    font-weight: 600;
-    color: #172b36;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
   }
   .req {
-    color: #dc2626;
+    color: var(--color-danger);
     margin-left: 0;
   }
   .opt {
-    font-weight: 400;
-    color: #172b36;
+    font-weight: var(--fw-regular);
+    color: var(--color-ink);
     opacity: 0.6;
     font-size: 0.75rem;
   }
@@ -479,7 +478,7 @@ const tipos = [
   .form-group textarea {
     font-family: var(--ff-sans);
     font-size: 0.875rem;
-    color: #172b36;
+    color: var(--color-ink);
     background: var(--color-surface);
     border: 1px solid var(--color-surface);
     border-radius: var(--radius-sm);
@@ -493,7 +492,7 @@ const tipos = [
   .form-group select {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23172b36' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230d1425' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     padding-right: 2.25rem;
@@ -501,9 +500,9 @@ const tipos = [
   .form-group input:focus,
   .form-group select:focus,
   .form-group textarea:focus {
-    border-color: #172b36;
-    box-shadow: 0 0 0 3px rgba(23, 43, 54, 0.05);
-    background: #fff;
+    border-color: var(--color-ink);
+    box-shadow: 0 0 0 3px rgba(var(--color-navy-rgb), 0.05);
+    background: var(--color-white);
   }
   .form-group textarea {
     resize: vertical;
@@ -518,7 +517,7 @@ const tipos = [
     align-items: center;
     gap: 0.25rem;
     background: var(--color-surface);
-    border: 1.5px dashed rgba(23, 43, 54, 0.2);
+    border: 1.5px dashed rgba(var(--color-navy-rgb), 0.2);
     border-radius: var(--radius-sm);
     padding: 1.25rem 1rem;
     text-align: center;
@@ -529,24 +528,24 @@ const tipos = [
   }
   .file-drop:hover,
   .file-drop.drag-over {
-    border-color: #172b36;
-    background: #fff;
+    border-color: var(--color-ink);
+    background: var(--color-white);
   }
   .file-text {
     font-size: 0.8125rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.8;
   }
   .file-browse {
-    color: #172b36;
-    font-weight: 600;
+    color: var(--color-ink);
+    font-weight: var(--fw-semibold);
     cursor: pointer;
     text-decoration: underline;
     text-underline-offset: 2px;
   }
   .file-hint {
     font-size: 0.72rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
   }
   .file-drop-state {
@@ -561,7 +560,7 @@ const tipos = [
   }
   .file-drop.has-file {
     border-style: solid;
-    border-color: rgba(23, 43, 54, 0.1);
+    border-color: rgba(var(--color-navy-rgb), 0.1);
     border-width: 1px 0;
     border-radius: 0;
     background: transparent;
@@ -569,20 +568,20 @@ const tipos = [
   }
   .file-name-selected {
     font-size: 0.875rem;
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     word-break: break-all;
     text-align: center;
     max-width: 100%;
-    line-height: 1.4;
-    background: rgba(22, 163, 74, 0.1);
+    line-height: var(--lh-140);
+    background: rgba(var(--color-success-rgb), 0.1);
     border-radius: var(--radius-sm);
     padding: 0.25rem 0.75rem;
   }
   .file-selected {
     font-size: 0.78rem;
-    color: #172b36;
-    font-weight: 600;
+    color: var(--color-ink);
+    font-weight: var(--fw-semibold);
     display: flex;
     align-items: center;
     gap: 0.375rem;
@@ -591,22 +590,22 @@ const tipos = [
 
   .char-counter {
     font-size: 0.72rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.4;
     text-align: right;
     align-self: flex-end;
-    line-height: 1;
+    line-height: var(--lh-100);
     transition: color 0.15s, opacity 0.15s;
   }
   .char-counter.near-limit {
-    color: #d97706;
+    color: var(--color-warning);
     opacity: 1;
-    font-weight: 600;
+    font-weight: var(--fw-semibold);
   }
   .char-counter.at-limit {
-    color: #dc2626;
+    color: var(--color-danger);
     opacity: 1;
-    font-weight: 700;
+    font-weight: var(--fw-bold);
   }
 
   button.btn-primary:disabled {
@@ -625,16 +624,16 @@ const tipos = [
     height: 16px;
     flex-shrink: 0;
     margin-top: 2px;
-    accent-color: #172b36;
+    accent-color: var(--color-ink);
   }
   .form-check label {
     font-size: 0.8125rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.5;
+    line-height: var(--lh-150);
   }
   .form-check a {
-    color: #172b36;
+    color: var(--color-ink);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -651,8 +650,8 @@ const tipos = [
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background: rgba(23, 43, 54, 0.08);
-    color: #172b36;
+    background: rgba(var(--color-navy-rgb), 0.08);
+    color: var(--color-ink);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -661,19 +660,19 @@ const tipos = [
   .success-title {
     font-family: var(--ff-heading);
     font-size: 1.375rem;
-    font-weight: 700;
-    color: #172b36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
   }
   .success-body {
     font-size: 0.9rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.65;
+    line-height: var(--lh-165);
     max-width: 380px;
   }
   .success-radicado {
     font-size: 0.8125rem;
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 0.8;
     background: var(--color-surface);
     border: 1px solid var(--color-surface);
@@ -681,17 +680,17 @@ const tipos = [
     padding: 0.625rem 1.25rem;
   }
   .success-radicado strong {
-    color: #172b36;
+    color: var(--color-ink);
     opacity: 1;
   }
   .btn-outline-sm {
     margin-top: 0.5rem;
     font-size: 0.8125rem;
-    font-weight: 600;
-    color: #172b36;
-    border: 1.5px solid #172b36;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
+    border: 1.5px solid var(--color-ink);
     background: transparent;
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
     padding: 0.5rem 1.5rem;
     cursor: pointer;
     transition:
@@ -699,8 +698,8 @@ const tipos = [
       color 0.15s;
   }
   .btn-outline-sm:hover {
-    background: #172b36;
-    color: #fff;
+    background: var(--color-ink);
+    color: var(--color-white);
   }
 
   @media (max-width: 1023px) {

@@ -3,23 +3,24 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <section class="cta-section" aria-label="Llamado a la acción" data-dark-bg>
+  <div class="cta-gradient-bar"></div>
   <div class="max-w-7xl mx-auto px-6">
     <div class="cta-inner reveal">
 
       <div class="cta-texto">
-        <h2 class="cta-titulo">Construye tu futuro con Cooperamigó</h2>
+        <h2 class="cta-titulo">Construye tu futuro con FINTEGRAR</h2>
         <p class="cta-desc">
           Únase a una comunidad sólida que trabaja por el bienestar de sus asociados.
-          Descubra todos los beneficios de ser parte de nuestra cooperativa de aporte y crédito.
+          Descubra todos los beneficios de ser parte de nuestro fondo de empleados.
         </p>
       </div>
 
       <div class="cta-acciones">
-        <a href="https://serviciosdigitales.cooperamigo.coop/" class="btn btn-accent btn-lg" target="_blank" rel="noopener noreferrer">
+        <a href="https://tramitesvirtuales.fintegrar.com/" class="btn btn-accent btn-lg" target="_blank" rel="noopener noreferrer">
           <Icon name="tabler:user-plus" class="w-5 h-5" aria-hidden="true" />
           Quiero ser asociado
         </a>
-        <a href="https://serviciosdigitales.cooperamigo.coop/" class="btn btn-ghost-light" target="_blank" rel="noopener noreferrer">
+        <a href="https://tramitesvirtuales.fintegrar.com/" class="btn btn-ghost-light" target="_blank" rel="noopener noreferrer">
           <Icon name="tabler:credit-card" class="w-5 h-5" aria-hidden="true" />
           Solicitar crédito
         </a>
@@ -35,17 +36,30 @@ import { Icon } from 'astro-icon/components';
 
 <style>
   .cta-section {
-    /* Mismo color de fondo que el footer para que se fundan en un solo bloque */
-    background: #172b36;
-    padding: 8rem 0;
+    background: var(--color-ink);
+    max-width: 70%;
+    margin: 0 auto -6rem;
+    padding: 5rem 4rem;
+    border-radius: 40px;
     position: relative;
     z-index: 10;
+    box-shadow: var(--shadow-xl);
     /* overflow hidden recorta los círculos decorativos para que no se
        asomen fuera del banner */
     overflow: hidden;
   }
 
-  /* Círculo decorativo de fondo */
+  .cta-gradient-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-brand);
+    border-radius: 40px 40px 0 0;
+    z-index: 2;
+  }
+
   .cta-section::before {
     content: '';
     position: absolute;
@@ -54,7 +68,7 @@ import { Icon } from 'astro-icon/components';
     z-index: 0;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(17, 76, 90, 0.25) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(var(--color-accent-teal-rgb), 0.25) 0%, transparent 70%);
     top: -150px;
     right: -100px;
   }
@@ -83,16 +97,16 @@ import { Icon } from 'astro-icon/components';
 
   .cta-titulo {
     font-size: clamp(2rem, 2.6vw, 2.5rem);
-    color: #fff;
-    line-height: 1.15;
+    color: var(--color-white);
+    line-height: var(--lh-115);
     margin-bottom: 1rem;
-    font-weight: 800;
+    font-weight: var(--fw-extrabold);
   }
 
   .cta-desc {
     font-size: 1.0625rem;
-    color: rgba(241, 246, 244, 0.7);
-    line-height: 1.7;
+    color: rgba(var(--color-mint-white-rgb), 0.7);
+    line-height: var(--lh-170);
   }
 
   .cta-acciones {
@@ -108,20 +122,19 @@ import { Icon } from 'astro-icon/components';
     justify-content: center;
   }
 
-  /* Acción terciaria: enlace de texto */
   .cta-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
     font-size: 0.9375rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
+    font-weight: var(--fw-semibold);
+    color: rgba(var(--color-white-rgb), 0.7);
     padding: 0.5rem 0;
     transition: color 0.2s;
   }
   .cta-link:hover {
-    color: #FFC801;
+    color: var(--color-brand-yellow);
   }
   .cta-link:hover :global(svg) {
     transform: translateX(4px);
@@ -131,10 +144,22 @@ import { Icon } from 'astro-icon/components';
   }
 
   @media (max-width: 1023px) {
-    .cta-section { padding: 6rem 0; }
+    .cta-section {
+      max-width: 85%;
+      padding: 4rem 3rem;
+      margin-bottom: -4.5rem;
+      border-radius: var(--radius-xl);
+    }
+    .cta-gradient-bar { border-radius: 32px 32px 0 0; }
   }
   @media (max-width: 767px) {
-    .cta-section { padding: 3.5rem 0; }
+    .cta-section {
+      max-width: calc(100% - 2rem);
+      padding: 2.5rem 1.75rem;
+      margin-bottom: -3rem;
+      border-radius: 24px;
+    }
+    .cta-gradient-bar { border-radius: 24px 24px 0 0; }
     .cta-titulo { font-size: clamp(1.75rem, 6vw, 2.25rem); }
     .cta-desc { font-size: 0.9375rem; }
     .cta-acciones { min-width: 0; width: 100%; }

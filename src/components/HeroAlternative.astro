@@ -1,0 +1,102 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="w-full overflow-hidden hero-alternative">
+
+  <div class="w-full bg-[var(--color-navbar-bg)] py-16 md:py-24 lg:py-32 px-6 sm:px-12 lg:px-16 relative">
+    
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center relative z-10">
+      
+      <div class="flex flex-col space-y-8">
+
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-gray-900 font-extrabold" style="font-family: var(--ff-heading);">
+          Fintegrar
+        </h1>
+
+        <p class="text-xl md:text-2xl text-gray-800 max-w-lg leading-snug font-medium mt-4">
+          Impulsamos su bienestar financiero con créditos ágiles, convenios exclusivos y beneficios pensados para usted y su familia.
+        </p>
+
+        <div class="w-full max-w-md h-px bg-gray-400 my-2"></div>
+
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-3">
+             <div class="w-12 h-12 rounded-full bg-white shadow-md border-2 border-white flex items-center justify-center text-gray-900">
+               <Icon name="tabler:mood-happy" class="w-6 h-6" />
+             </div>
+             <div>
+                <p class="text-sm font-bold text-gray-900">Excelente atención y respaldo</p>
+                <p class="text-sm text-gray-600 font-medium">Asociado desde 2015</p>
+             </div>
+          </div>
+          <div class="text-gray-400 font-light text-xl">/</div>
+          <div class="flex items-center gap-1 font-bold text-gray-900 text-lg">
+             <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+             4.9
+          </div>
+        </div>
+
+        <div class="w-full max-w-md h-px bg-gray-400 my-2"></div>
+
+        <div class="flex flex-wrap items-center gap-6 pt-2">
+          <a href="/nosotros" class="bg-black text-white px-8 py-4 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-gray-800 transition shadow-lg">
+            Hazte Asociado
+          </a>
+          <a href="/nosotros#auxilios" class="text-gray-900 font-bold text-sm flex items-center gap-1 hover:underline group">
+            Ver beneficios
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="relative w-full h-[500px] lg:h-[700px] flex justify-center items-center">
+         
+         <div class="absolute right-0 lg:right-10 w-[85%] sm:w-[320px] lg:w-[380px] h-[90%] lg:h-[600px] bg-[var(--color-brand-purple)] rounded-[3rem] overflow-hidden shadow-2xl">
+            <img src="/assets/img/orbit-familia.webp" alt="Familia asociada disfrutando de los servicios digitales de Fintegrar" class="w-full h-full object-cover" />
+         </div>
+
+         <div class="absolute left-0 md:left-[10%] lg:left-[5%] top-[25%] flex flex-col gap-3 z-20">
+            <div class="bg-white rounded-full px-5 py-3 flex items-center gap-3 shadow-[0_10px_30px_rgba(var(--color-black-rgb), 0.1)]">
+               <div class="bg-[var(--color-brand-gold)] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">✓</div>
+               <span class="text-sm font-bold text-gray-800">¿Necesita un crédito rápido?</span>
+            </div>
+            <div class="bg-white rounded-full px-5 py-3 flex items-center gap-3 shadow-[0_10px_30px_rgba(var(--color-black-rgb), 0.1)] ml-4 sm:-ml-6">
+               <div class="bg-[var(--color-brand-teal-bright)] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">✓</div>
+               <span class="text-sm font-bold text-gray-800">¿Ya conoce nuestros convenios?</span>
+            </div>
+         </div>
+
+         <div class="absolute top-10 right-0 lg:-right-10 bg-white/30 backdrop-blur-xl border border-white/40 rounded-3xl p-6 shadow-[0_20px_40px_rgba(var(--color-black-rgb), 0.1)] w-[210px] z-20">
+            <p class="text-xs font-bold text-gray-700 mb-2 tracking-wider">— TASA DESDE</p>
+            <h3 class="text-4xl font-extrabold text-gray-900 mb-1 whitespace-nowrap">1.35%</h3>
+            <p class="text-sm font-medium text-gray-800 leading-tight">M.V. en libre inversión</p>
+         </div>
+
+         <div class="absolute bottom-10 -right-4 md:right-0 lg:right-[-2rem] bg-white/40 backdrop-blur-xl border border-white/50 rounded-3xl p-4 shadow-[0_20px_40px_rgba(var(--color-black-rgb), 0.1)] flex items-center gap-4 w-[280px] z-20">
+            <div class="w-20 h-20 bg-[var(--color-brand-purple)] rounded-2xl flex items-center justify-center shrink-0 text-white">
+                <Icon name="tabler:school" class="w-9 h-9" />
+            </div>
+            <div>
+               <h4 class="font-bold text-gray-900 text-[15px] leading-tight">Crédito Educativo</h4>
+               <p class="text-sm font-medium text-gray-700 mt-1">Tasas preferenciales</p>
+               <div class="inline-flex items-center gap-1 bg-white rounded-full px-2.5 py-1 mt-2 shadow-sm">
+                  <svg class="w-3.5 h-3.5 text-[var(--color-brand-gold)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  <span class="text-xs font-bold text-gray-900">4.9</span>
+               </div>
+            </div>
+         </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  .hero-alternative {
+    padding: 0;
+  }
+</style>

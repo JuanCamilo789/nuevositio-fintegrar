@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import fs from 'node:fs';
 import path from 'node:path';
+import sanitizeHtml from 'sanitize-html';
+import { ADMIN_COOKIE_NAME, verifySessionToken } from '../../lib/adminSession';
 
 export const prerender = false;
 
@@ -8,36 +10,33 @@ const ALLOWED_IDS = new Set([
   'politica-datos', 'privacidad', 'terminos', 'manual', 'sarlaft',
 ]);
 
+// Allowlist calibrada al toolbar real del editor Quill (ver editar/[id].astro):
+// encabezados h2/h3, negrita/itálica/subrayado/tachado, link, blockquote,
+// bloque de código, listas ordenadas/con viñetas/alfabéticas.
+const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
+  allowedTags: [
+    'h2', 'h3', 'p', 'br', 'strong', 'em', 'u', 's',
+    'a', 'blockquote', 'pre', 'code', 'ol', 'ul', 'li', 'span',
+  ],
+  allowedAttributes: {
+    a: ['href', 'target', 'rel'],
+    li: ['data-list'],
+    span: ['class'],
+    ol: ['class'],
+  },
+  allowedSchemes: ['http', 'https', 'mailto'],
+  transformTags: {
+    a: sanitizeHtml.simpleTransform('a', { rel: 'noopener noreferrer', target: '_blank' }),
+  },
+};
+
 const ALLOWED_DIR = path.resolve('./src/data/legales');
 
 export const POST: APIRoute = async ({ request, cookies }) => {
-  const sessionCookie = cookies.get('admin_lp')?.value;
+  const sessionCookie = cookies.get(ADMIN_COOKIE_NAME)?.value;
   const ADMIN_SESSION_SECRET = process.env.ADMIN_SESSION_SECRET ?? '';
 
-  function base64UrlDecodeToString(text: string): string {
-    const padded = text.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(text.length / 4) * 4, '=');
-    return Buffer.from(padded, 'base64').toString('utf8');
-  }
-
-  async function sign(payload: string): Promise<string> {
-    const { createHmac } = await import('node:crypto');
-    const digest = createHmac('sha256', ADMIN_SESSION_SECRET).update(payload).digest('base64');
-    return digest.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
-  }
-
-  async function verifySessionToken(token: string | undefined): Promise<boolean> {
-    if (!token || !ADMIN_SESSION_SECRET) return false;
-    const parts = token.split('.');
-    if (parts.length !== 2) return false;
-    const [payloadB64, sig] = parts;
-    try {
-      const payload = base64UrlDecodeToString(payloadB64);
-      const expected = await sign(payload);
-      return sig === expected;
-    } catch { return false; }
-  }
-
-  if (!(await verifySessionToken(sessionCookie))) {
+  if (!verifySessionToken(sessionCookie, ADMIN_SESSION_SECRET)) {
     return new Response(JSON.stringify({ message: 'No autorizado' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
@@ -70,7 +69,8 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       });
     }
 
-    fs.writeFileSync(filePath, content, 'utf-8');
+    const clean = sanitizeHtml(String(content), SANITIZE_OPTIONS);
+    fs.writeFileSync(filePath, clean, 'utf-8');
 
     return new Response(JSON.stringify({ message: 'Guardado correctamente' }), {
       status: 200,

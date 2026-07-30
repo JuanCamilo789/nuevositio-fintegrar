@@ -21,9 +21,8 @@ const campanas = [
 
 <section class="campanas-section reveal">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="section-header text-center mb-12">
-      <div class="section-eyebrow campanas-eyebrow">Campañas Vigentes</div>
-      <h2 class="font-display" style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;">
+    <div class="section-header mb-12">
+      <h2 class="font-display" style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);">
         Oportunidades para su progreso
       </h2>
     </div>
@@ -61,7 +60,7 @@ const campanas = [
 <style>
   .campanas-section {
     padding: 8rem 0;
-    background: #fff;
+    background: var(--color-navbar-bg);
     overflow: hidden;
   }
   .campanas-eyebrow {
@@ -79,7 +78,7 @@ const campanas = [
   .campana-card {
     position: relative;
     border-radius: var(--radius-md);
-    background: #fff;
+    background: var(--color-white);
     overflow: hidden;
   }
 
@@ -116,8 +115,8 @@ const campanas = [
       display: block;
       width: 100%;
       overflow: hidden;
-      mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(to right, transparent, var(--color-black) 6%, var(--color-black) 94%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, var(--color-black) 6%, var(--color-black) 94%, transparent);
     }
     .campanas-track {
       display: flex;

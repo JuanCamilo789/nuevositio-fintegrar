@@ -5,24 +5,57 @@ const lineas = [
   {
     id: 'ordinario',
     icon: 'tabler:credit-card',
-    nombre: 'Crédito Libre Inversión',
-    subtitulo: 'Libre Inversión',
-    tasa: 1.9,
-    displayTasa: '1.5% – 1.9% M.V.',
-    maxMeses: 60,
+    nombre: 'Crédito Ordinario',
+    subtitulo: 'Para cualquier necesidad',
+    tasa: 1.53,
+    displayTasa: '1.53% M.V.',
+    maxMeses: 12,
     badge: null,
-    nota: 'La tasa final depende de su perfil de riesgo. Este cálculo usa la tasa máxima (1.9%).',
+    nota: 'Se cancela con deducciones quincenales antes del 30 de noviembre del año en que se apruebe.',
   },
   {
-    id: 'educativo',
+    id: 'educacion',
     icon: 'tabler:school',
-    nombre: 'Crédito Educativo',
-    subtitulo: 'Universidad Católica Luis Amigó',
-    tasa: 1.35,
-    displayTasa: '1.35% M.V.',
-    maxMeses: 6,
+    nombre: 'Crédito para Educación',
+    subtitulo: 'Instituciones certificadas',
+    tasa: 1,
+    displayTasa: '1% M.V.',
+    maxMeses: 12,
     badge: null,
     nota: '',
+  },
+  {
+    id: 'calamidad',
+    icon: 'tabler:home-heart',
+    nombre: 'Calamidad Doméstica',
+    subtitulo: 'Emergencias y salud',
+    tasa: 0.5,
+    displayTasa: '0.5% M.V.',
+    maxMeses: 12,
+    badge: null,
+    nota: 'Plazo máximo de 12 meses.',
+  },
+  {
+    id: 'vacacional',
+    icon: 'tabler:plane',
+    nombre: 'Plan Vacacional',
+    subtitulo: 'Con convenios aliados',
+    tasa: 1.53,
+    displayTasa: '1.53% M.V.',
+    maxMeses: 12,
+    badge: null,
+    nota: '',
+  },
+  {
+    id: 'largo-plazo',
+    icon: 'tabler:calendar-check',
+    nombre: 'Crédito Largo Plazo',
+    subtitulo: 'Hasta 36 meses',
+    tasa: 1.53,
+    displayTasa: '1.53% M.V.',
+    maxMeses: 36,
+    badge: null,
+    nota: 'Las garantías se exigen de acuerdo con el monto solicitado.',
   },
 ];
 ---
@@ -30,8 +63,7 @@ const lineas = [
 <section id="simulador" class="sim-section">
   <div class="max-w-7xl mx-auto px-6">
 
-    <div class="text-center mb-16 reveal">
-      <div class="section-eyebrow" style="justify-content:center;">Herramienta financiera</div>
+    <div class="mb-16 reveal">
       <h2 class="font-display sim-heading">Simulador de Crédito</h2>
     </div>
 
@@ -173,7 +205,7 @@ const lineas = [
                   </div>
                 </div>
                 <div class="rp-nota" id="a-nota"></div>
-                <a href="https://serviciosdigitales.cooperamigo.coop" class="btn btn-accent btn-rp"
+                <a href="https://tramitesvirtuales.fintegrar.com" class="btn btn-accent btn-rp"
                   target="_blank" rel="noopener noreferrer">
                   Solicitar crédito
                   <Icon name="tabler:arrow-right" class="w-4 h-4" aria-hidden="true" />
@@ -244,7 +276,7 @@ const lineas = [
                   </div>
                 </div>
                 <div class="rp-nota" id="b-nota"></div>
-                <a href="https://serviciosdigitales.cooperamigo.coop" class="btn btn-accent btn-rp"
+                <a href="https://tramitesvirtuales.fintegrar.com" class="btn btn-accent btn-rp"
                   target="_blank" rel="noopener noreferrer">
                   Solicitar crédito
                   <Icon name="tabler:arrow-right" class="w-4 h-4" aria-hidden="true" />
@@ -261,13 +293,13 @@ const lineas = [
 
 <style>
     .sim-section {
-    background: #fff;
+    background: var(--color-navbar-bg);
     padding: 8rem 0;
   }
   .sim-heading {
     font-size: clamp(1.75rem, 3vw, 2.5rem);
-    color: #172B36;
-    line-height: 1.2;
+    color: var(--color-ink);
+    line-height: var(--lh-120);
     margin-bottom: 0.75rem;
   }
 
@@ -275,7 +307,7 @@ const lineas = [
     max-width: 940px;
     margin: 0 auto;
     border-radius: var(--radius-lg);
-    box-shadow: 0 4px 48px rgba(23, 43, 54, 0.10);
+    box-shadow: 0 4px 48px rgba(var(--color-navy-rgb), 0.10);
     overflow: hidden;
   }
 
@@ -285,15 +317,15 @@ const lineas = [
   }
   .sim-bar-track {
     height: 3px;
-    background: rgba(23, 43, 54, 0.12);
-    border-radius: 9999px;
+    background: rgba(var(--color-navy-rgb), 0.12);
+    border-radius: var(--radius-full);
     margin-bottom: 0.75rem;
     overflow: hidden;
   }
   .sim-bar-fill {
     height: 100%;
-    background: #172B36;
-    border-radius: 9999px;
+    background: var(--color-ink);
+    border-radius: var(--radius-full);
     width: 33%;
     transition: width 0.4s ease;
   }
@@ -303,13 +335,12 @@ const lineas = [
   }
   .sim-bar-lbl {
     font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-weight: var(--fw-bold);
     text-transform: uppercase;
-    color: rgba(23, 43, 54, 0.35);
+    color: rgba(var(--color-navy-rgb), 0.35);
     transition: color 0.3s;
   }
-  .sim-bar-lbl.active { color: #172B36; }
+  .sim-bar-lbl.active { color: var(--color-ink); }
 
     .sim-step {
     display: none;
@@ -328,8 +359,8 @@ const lineas = [
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
-    font-weight: 600;
-    color: #172B36;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
     opacity: 0.45;
     background: none;
     border: none;
@@ -348,7 +379,7 @@ const lineas = [
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #172B36;
+    color: var(--color-ink);
     flex-shrink: 0;
   }
   .step-header {
@@ -366,17 +397,17 @@ const lineas = [
   .step-title {
     font-family: var(--ff-heading);
     font-size: clamp(1.375rem, 2.5vw, 1.75rem);
-    font-weight: 700;
-    color: #172B36;
-    line-height: 1.2;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    line-height: var(--lh-120);
     margin-bottom: 0.625rem;
     text-align: center;
   }
   .step-desc {
     font-size: 0.9375rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.65;
-    line-height: 1.65;
+    line-height: var(--lh-165);
     max-width: 540px;
     text-align: center;
     margin-left: auto;
@@ -404,8 +435,8 @@ const lineas = [
     transition: border-color 0.2s, background 0.2s, transform 0.15s;
   }
   .choice-btn:hover {
-    border-color: #172B36;
-    background: #fff;
+    border-color: var(--color-ink);
+    background: var(--color-white);
     transform: translateX(5px);
   }
   .choice-icon-wrap {
@@ -417,22 +448,22 @@ const lineas = [
     justify-content: center;
     flex-shrink: 0;
   }
-  .choice--yes  { background: #172B36; color: #FFC801; }
-  .choice--help { background: rgba(23, 43, 54, 0.1); color: #172B36; }
+  .choice--yes  { background: var(--color-ink); color: var(--color-brand-yellow); }
+  .choice--help { background: rgba(var(--color-navy-rgb), 0.1); color: var(--color-ink); }
   .choice-text  { flex: 1; }
   .choice-title {
     font-size: 1rem;
-    font-weight: 700;
-    color: #172B36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     margin-bottom: 2px;
   }
   .choice-sub {
     font-size: 0.8125rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.55;
   }
   .choice-arrow {
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.25;
     flex-shrink: 0;
     transition: transform 0.2s, opacity 0.2s;
@@ -460,9 +491,9 @@ const lineas = [
     transition: border-color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.2s;
   }
   .linea-card:hover {
-    border-color: #172B36;
-    background: #fff;
-    box-shadow: 0 4px 24px rgba(23, 43, 54, 0.10);
+    border-color: var(--color-ink);
+    background: var(--color-white);
+    box-shadow: 0 4px 24px rgba(var(--color-navy-rgb), 0.10);
     transform: translateY(-3px);
   }
   .linea-badge {
@@ -470,44 +501,43 @@ const lineas = [
     top: 1rem;
     right: 1rem;
     font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-weight: var(--fw-bold);
     text-transform: uppercase;
-    background: #FFC801;
-    color: #172B36;
+    background: var(--color-brand-yellow);
+    color: var(--color-ink);
     padding: 0.2rem 0.6rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
   }
   .linea-icon-box {
     width: 44px;
     height: 44px;
-    background: #172B36;
+    background: var(--color-ink);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFC801;
+    color: var(--color-brand-yellow);
     margin-bottom: 0.5rem;
   }
   .linea-nombre {
     font-size: 1rem;
-    font-weight: 700;
-    color: #172B36;
-    line-height: 1.2;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    line-height: var(--lh-120);
   }
   .linea-sub {
     font-size: 0.8125rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.5;
   }
   .linea-tasa-pill {
     margin-top: 0.375rem;
     font-size: 0.8125rem;
-    font-weight: 700;
-    color: #172B36;
-    background: rgba(23, 43, 54, 0.07);
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    background: rgba(var(--color-navy-rgb), 0.07);
     padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
   }
 
     .sim-layout {
@@ -533,8 +563,8 @@ const lineas = [
   .input-blk { }
   .input-lbl {
     font-size: 0.875rem;
-    font-weight: 700;
-    color: #172B36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     display: block;
     margin-bottom: 0.625rem;
   }
@@ -542,8 +572,8 @@ const lineas = [
     .monto-input {
     font-family: var(--ff-heading);
     font-size: 1.5rem;
-    font-weight: 800;
-    color: #172B36;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-ink);
     background: var(--color-surface);
     border: 2px solid transparent;
     border-radius: var(--radius-sm);
@@ -554,8 +584,8 @@ const lineas = [
     outline: none;
   }
   .monto-input:focus {
-    border-color: #172B36;
-    background: #fff;
+    border-color: var(--color-ink);
+    background: var(--color-white);
   }
 
     .plazo-input-wrap {
@@ -567,8 +597,8 @@ const lineas = [
   .plazo-input {
     font-family: var(--ff-heading);
     font-size: 1.5rem;
-    font-weight: 800;
-    color: #172B36;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-ink);
     background: var(--color-surface);
     border: 2px solid transparent;
     border-radius: var(--radius-sm);
@@ -582,19 +612,19 @@ const lineas = [
   .plazo-input::-webkit-outer-spin-button,
   .plazo-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
   .plazo-input:focus {
-    border-color: #172B36;
-    background: #fff;
+    border-color: var(--color-ink);
+    background: var(--color-white);
   }
   .plazo-unit {
     font-size: 0.9375rem;
-    font-weight: 600;
-    color: #172B36;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
     opacity: 0.45;
   }
 
   .sim-range {
     width: 100%;
-    accent-color: #172B36;
+    accent-color: var(--color-ink);
     cursor: pointer;
     height: 4px;
   }
@@ -602,10 +632,10 @@ const lineas = [
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.4;
     margin-top: 0.375rem;
-    font-weight: 500;
+    font-weight: var(--fw-medium);
   }
 
     .sim-result-panel {
@@ -616,7 +646,7 @@ const lineas = [
     gap: 0.75rem;
   }
   .result-panel {
-    background: #172B36;
+    background: var(--color-ink);
     border-radius: var(--radius-lg);
     padding: 2rem;
     display: flex;
@@ -624,25 +654,24 @@ const lineas = [
   }
   .rp-eyebrow {
     font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-weight: var(--fw-bold);
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(var(--color-white-rgb), 0.5);
     margin-bottom: 0.5rem;
   }
   .rp-big {
     font-family: var(--ff-heading);
     font-size: 2.25rem;
-    font-weight: 800;
-    color: #FFC801;
-    line-height: 1;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-brand-yellow);
+    line-height: var(--lh-100);
     margin-bottom: 1.75rem;
   }
   .rp-rows {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(var(--color-white-rgb), 0.08);
     padding-top: 1.25rem;
     margin-bottom: 1.25rem;
   }
@@ -652,12 +681,12 @@ const lineas = [
     align-items: center;
     font-size: 0.875rem;
   }
-  .rp-row span   { color: rgba(255, 255, 255, 0.5); }
-  .rp-row strong { color: #fff; font-weight: 600; }
+  .rp-row span   { color: rgba(var(--color-white-rgb), 0.5); }
+  .rp-row strong { color: var(--color-white); font-weight: var(--fw-semibold); }
   .rp-nota {
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.35);
-    line-height: 1.5;
+    color: rgba(var(--color-white-rgb), 0.35);
+    line-height: var(--lh-150);
     margin-bottom: 1.25rem;
   }
   .btn-rp {
@@ -666,9 +695,9 @@ const lineas = [
   }
   .sim-disclaimer {
     font-size: 0.7rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.4;
-    line-height: 1.5;
+    line-height: var(--lh-150);
     text-align: center;
   }
 

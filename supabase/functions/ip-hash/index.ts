@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════════
-//  COOPERAMIGÓ — Edge Function: ip-hash
+//  FINTEGRAR — Edge Function: ip-hash
 //  Devuelve un hash SHA-256 de la IP real del cliente, para dejar rastro de
 //  auditoría en solicitudes públicas (actualización de datos, etc.) sin
 //  guardar la IP en claro. Se calcula server-side porque el navegador no

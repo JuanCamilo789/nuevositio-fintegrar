@@ -14,16 +14,15 @@ const convenios = [
 <section id="convenios" class="convenios-section" aria-labelledby="convenios-title">
   <div class="max-w-7xl mx-auto px-6">
 
-    <div class="text-center max-w-3xl mx-auto mb-12 reveal">
-      <div class="section-eyebrow" style="justify-content:center;">Red de aliados</div>
+    <div class="max-w-3xl mb-12 reveal">
       <h2
         id="convenios-title"
         class="font-display"
-        style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;margin-bottom:1rem;"
+        style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);margin-bottom:1rem;"
       >
         Convenios para nuestros asociados
       </h2>
-      <p style="font-size:1rem;color:#172B36;opacity:0.6;line-height:1.7;">
+      <p style="font-size:1rem;color:var(--color-ink);opacity:0.6;line-height: var(--lh-170);">
         Una red de aliados estratégicos con descuentos y beneficios exclusivos
         para asociados y sus familias.
       </p>
@@ -43,13 +42,19 @@ const convenios = [
       ))}
     </div>
 
+    <div class="convenios-cta reveal">
+      <a href="/convenios" class="btn btn-outline">
+        Ver todos los convenios
+        <Icon name="tabler:arrow-right" class="w-4 h-4" aria-hidden="true" />
+      </a>
+    </div>
 
   </div>
 </section>
 
 <style>
   .convenios-section {
-    background: #fff;
+    background: var(--color-navbar-bg);
     padding: 8rem 0;
   }
 
@@ -60,6 +65,12 @@ const convenios = [
   }
   @media (min-width: 640px) {
     .convenios-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .convenios-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
   }
 
   .convenio-item {
@@ -74,26 +85,26 @@ const convenios = [
   .convenio-icon {
     width: 44px;
     height: 44px;
-    background: rgba(23, 43, 54, 0.08);
+    background: rgba(var(--color-navy-rgb), 0.08);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #172B36;
+    color: var(--color-ink);
   }
 
   .convenio-body {
     flex: 1;
   }
   .convenio-titulo {
-    font-weight: 600;
+    font-weight: var(--fw-semibold);
     font-size: 1rem;
-    color: #172B36;
+    color: var(--color-ink);
   }
   .convenio-sub {
     font-size: 0.875rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.6;
     margin-top: 2px;
   }

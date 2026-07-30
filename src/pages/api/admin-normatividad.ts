@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { createClient } from '@supabase/supabase-js';
-import { createHmac, timingSafeEqual } from 'node:crypto';
+import { ADMIN_COOKIE_NAME, verifySessionToken } from '../../lib/adminSession';
 
 export const prerender = false;
 
@@ -16,44 +16,12 @@ const SERVICE_ROLE_KEY =
   (import.meta.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? '').trim();
 const ADMIN_SESSION_SECRET = import.meta.env.ADMIN_SESSION_SECRET ?? process.env.ADMIN_SESSION_SECRET ?? '';
 
-function base64UrlDecodeToString(text: string): string {
-  const padded = text.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(text.length / 4) * 4, '=');
-  return Buffer.from(padded, 'base64').toString('utf8');
-}
-
-function sign(payload: string): string {
-  const digest = createHmac('sha256', ADMIN_SESSION_SECRET).update(payload).digest('base64');
-  return digest.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
-}
-
-function verifySessionToken(token: string | undefined): boolean {
-  if (!token || !ADMIN_SESSION_SECRET) return false;
-  const parts = token.split('.');
-  if (parts.length !== 2) return false;
-  const [payloadB64, sig] = parts;
-  let payload: string;
-  try {
-    payload = base64UrlDecodeToString(payloadB64);
-  } catch {
-    return false;
-  }
-  const expected = sign(payload);
-  const a = Buffer.from(sig);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length) return false;
-  if (!timingSafeEqual(a, b)) return false;
-  const idx = payload.lastIndexOf(':');
-  if (idx === -1) return false;
-  const exp = Number(payload.slice(idx + 1));
-  return Number.isFinite(exp) && exp > Date.now();
-}
-
 function jsonResponse(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
 }
 
 export const POST: APIRoute = async ({ request, cookies }) => {
-  if (!(await verifySessionToken(cookies.get('admin_lp')?.value))) {
+  if (!verifySessionToken(cookies.get(ADMIN_COOKIE_NAME)?.value, ADMIN_SESSION_SECRET)) {
     return jsonResponse({ error: 'No autorizado' }, 401);
   }
 

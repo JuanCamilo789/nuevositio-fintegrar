@@ -1,4 +1,4 @@
-const SITE_URL = Deno.env.get("SITE_URL") ?? "https://cooperamigo.coop";
+const SITE_URL = Deno.env.get("SITE_URL") ?? "https://fintegrar.com";
 
 export interface BuildEmailOptions {
   label: string;
@@ -11,7 +11,7 @@ export function buildEmail({ label, bodyHtml }: BuildEmailOptions): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cooperamigó</title>
+  <title>FINTEGRAR</title>
   <style type="text/css">
     body,table,td { margin:0; padding:0; }
     img { border:0; display:block; }
@@ -33,7 +33,7 @@ export function buildEmail({ label, bodyHtml }: BuildEmailOptions): string {
     <td class="pad" style="background:#ffffff;padding:20px 28px 0;border-radius:10px 10px 0 0;border:1px solid #E4E8ED;border-bottom:none;">
       <img
         src="${SITE_URL}/assets/img/logo-menu.svg"
-        alt="Cooperamigó"
+        alt="FINTEGRAR"
         height="26"
         style="height:26px;width:auto;"
       />
@@ -77,10 +77,10 @@ export function buildEmail({ label, bodyHtml }: BuildEmailOptions): string {
           </td>
 
           <td class="ft-pad" style="padding:20px 24px 20px 16px;vertical-align:middle;">
-            <p style="color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;margin:0 0 2px;font-family:Arial,Helvetica,sans-serif;">Cooperamigó</p>
-            <p style="color:rgba(255,255,255,0.35);font-size:10px;margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;">Cooperativa Multiactiva Luis Amigó</p>
+            <p style="color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;margin:0 0 2px;font-family:Arial,Helvetica,sans-serif;">FINTEGRAR</p>
+            <p style="color:rgba(255,255,255,0.35);font-size:10px;margin:0 0 10px;font-family:Arial,Helvetica,sans-serif;">Fondo de Empleados Fintegrar</p>
             <p style="color:rgba(255,255,255,0.4);font-size:10px;line-height:1.6;margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;">Este mensaje ha sido generado automáticamente. Por favor, no responda a este correo. Si requiere asistencia, puede contactarnos a través de nuestros canales oficiales de atención.</p>
-            <p style="color:rgba(255,255,255,0.25);font-size:9px;margin:0;font-family:Arial,Helvetica,sans-serif;">© 2026 Cooperamigó. Todos los derechos reservados.</p>
+            <p style="color:rgba(255,255,255,0.25);font-size:9px;margin:0;font-family:Arial,Helvetica,sans-serif;">© 2026 FINTEGRAR. Todos los derechos reservados.</p>
           </td>
 
         </tr>

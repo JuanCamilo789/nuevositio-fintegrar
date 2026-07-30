@@ -1,0 +1,157 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="relative w-full py-20 overflow-hidden bg-[var(--color-surface-cool)]">
+
+  <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[50%] bg-pink-200/40 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[50%] bg-blue-200/40 rounded-full blur-[100px] pointer-events-none"></div>
+  <div class="absolute top-[20%] right-[10%] w-[30%] h-[40%] bg-orange-100/40 rounded-full blur-[80px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div class="flex flex-col space-y-8">
+        <h2 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[var(--color-ink)] leading-[1.1] tracking-tight">
+          Sus trámites, <br class="hidden lg:block"/> a un clic de distancia.
+        </h2>
+
+        <p class="text-lg text-gray-600 max-w-lg leading-relaxed">
+          Desde el portal de Trámites Virtuales puede consultar su estado de cuenta, solicitar créditos, generar certificados y realizar pagos, todo desde su celular o computador.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="https://tramitesvirtuales.fintegrar.com/" target="_blank" rel="noopener noreferrer" class="bg-[var(--color-navy-deep)] text-white px-8 py-3.5 rounded-lg font-semibold shadow-lg hover:bg-[var(--color-navy-darkest)] transition-colors">
+            Ir al portal
+          </a>
+          <a href="#digital-como-funciona" class="bg-transparent text-[var(--color-navy-deep)] border-2 border-[var(--color-navy-deep)] px-8 py-3.5 rounded-lg font-semibold flex items-center gap-2 hover:bg-gray-50 transition-colors">
+            <Icon name="tabler:shield-check" class="w-4 h-4" />
+            Cómo funciona
+          </a>
+        </div>
+
+        <div class="flex items-center gap-10 pt-6">
+          <div class="w-14 h-14 bg-[var(--color-navy-deep)] text-white rounded-2xl flex items-center justify-center transform -rotate-12 shadow-lg">
+             <Icon name="tabler:shield-check" class="w-7 h-7 transform rotate-12" />
+          </div>
+          <div class="flex gap-8">
+            <div>
+              <div class="text-3xl font-extrabold text-[var(--color-ink)]">+420</div>
+              <div class="text-sm text-gray-500 font-medium">Asociados activos</div>
+            </div>
+            <div>
+              <div class="text-3xl font-extrabold text-[var(--color-ink)]">24/7</div>
+              <div class="text-sm text-gray-500 font-medium">Acceso al portal</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="relative w-full h-[500px] flex justify-center items-center">
+
+        <div class="db-card db-card--1 absolute w-72 h-44 rounded-2xl shadow-xl p-5 text-white flex flex-col justify-between bg-gradient-to-br from-[var(--color-brand-purple)] to-[var(--color-purple-deep)] border border-white/20">
+          <div class="flex justify-between items-start w-full">
+             <div class="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
+               <Icon name="tabler:credit-card" class="w-5 h-5" />
+             </div>
+          </div>
+          <div>
+            <div class="text-base font-bold tracking-wide mb-1 drop-shadow-sm">Créditos</div>
+            <div class="text-[10px] uppercase tracking-wider text-white/80">Solicite en línea</div>
+          </div>
+        </div>
+
+        <div class="db-card db-card--2 absolute w-72 h-44 rounded-2xl shadow-2xl p-5 text-gray-800 flex flex-col justify-between bg-gradient-to-br from-[var(--color-teal-tint)] via-[var(--color-purple-tint)] to-[var(--color-indigo-tint)] border border-white/50">
+          <div class="flex justify-between items-start w-full">
+             <div class="w-10 h-10 rounded-xl bg-white/60 flex items-center justify-center text-blue-900">
+               <Icon name="tabler:file-text" class="w-5 h-5" />
+             </div>
+          </div>
+          <div>
+            <div class="text-base font-bold tracking-wide mb-1 text-gray-700">Certificados</div>
+            <div class="text-[10px] uppercase tracking-wider text-gray-500">Descarga inmediata</div>
+          </div>
+        </div>
+
+        <div class="db-card db-card--3 absolute w-72 h-44 rounded-2xl shadow-2xl p-5 text-white flex flex-col justify-between bg-gradient-to-br from-[var(--color-brand-gold)] to-[var(--color-gold-dark)]">
+          <div class="flex justify-between items-start w-full">
+             <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+               <Icon name="tabler:device-mobile-dollar" class="w-5 h-5" />
+             </div>
+          </div>
+          <div>
+            <div class="text-base font-bold tracking-wide mb-1 drop-shadow-sm">Pagos PSE</div>
+            <div class="text-[10px] uppercase tracking-wider text-white/80">Pague sus cuotas</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="digital-como-funciona" class="mt-32 w-full max-w-4xl mx-auto flex flex-col items-center scroll-mt-24">
+      <div class="text-sm font-bold text-gray-500 tracking-widest uppercase mb-2">Proceso</div>
+      <h3 class="text-4xl font-extrabold text-[var(--color-ink)] mb-16">Cómo funciona</h3>
+
+      <div class="relative w-full flex justify-between items-start">
+
+        <div class="absolute top-6 left-[10%] right-[10%] h-0.5 border-t-2 border-dashed border-gray-300 -z-10"></div>
+
+        <div class="flex flex-col items-center w-1/3 text-center px-4">
+           <div class="w-12 h-12 bg-[var(--color-navy-deep)] text-white rounded-full flex items-center justify-center font-bold text-lg mb-6 shadow-md z-10">1</div>
+           <h4 class="text-xl font-bold text-[var(--color-ink)] mb-3">Regístrese</h4>
+           <p class="text-sm text-gray-500 leading-relaxed">Cree su usuario en el<br/>portal Trámites Virtuales</p>
+        </div>
+
+        <div class="flex flex-col items-center w-1/3 text-center px-4">
+           <div class="w-12 h-12 bg-[var(--color-navy-deep)] text-white rounded-full flex items-center justify-center font-bold text-lg mb-6 shadow-md z-10">2</div>
+           <h4 class="text-xl font-bold text-[var(--color-ink)] mb-3">Consulte y gestione</h4>
+           <p class="text-sm text-gray-500 leading-relaxed">Revise su estado de cuenta,<br/>créditos y certificados</p>
+        </div>
+
+        <div class="flex flex-col items-center w-1/3 text-center px-4">
+           <div class="w-12 h-12 bg-[var(--color-navy-deep)] text-white rounded-full flex items-center justify-center font-bold text-lg mb-6 shadow-md z-10">3</div>
+           <h4 class="text-xl font-bold text-[var(--color-ink)] mb-3">Listo</h4>
+           <p class="text-sm text-gray-500 leading-relaxed">Realice sus trámites en línea,<br/>sin filas ni papeleo</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .db-card {
+    transform: var(--base);
+    animation: dbFloat 6s ease-in-out infinite;
+    will-change: transform;
+  }
+  .db-card--1 {
+    z-index: 10;
+    --base: translate(-50px, 50px) rotateX(30deg) rotateZ(-30deg);
+    animation-delay: 0s;
+  }
+  .db-card--2 {
+    z-index: 20;
+    --base: translate(-10px, 0px) rotateX(30deg) rotateZ(-30deg);
+    animation-delay: 0.7s;
+  }
+  .db-card--3 {
+    z-index: 30;
+    --base: translate(30px, -50px) rotateX(30deg) rotateZ(-30deg);
+    animation-delay: 1.4s;
+  }
+
+  @keyframes dbFloat {
+    0%, 100% { transform: var(--base) translateY(0) translateZ(0); }
+    50% { transform: var(--base) translateY(-18px) translateZ(30px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .db-card {
+      animation: none;
+    }
+  }
+</style>

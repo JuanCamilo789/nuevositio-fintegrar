@@ -1,0 +1,861 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Convenio {
+  nombre: string;
+  categoria: string;
+  icon: string;
+  resumen: string;
+  descripcion: string;
+  comoUsar: string;
+  destacado?: boolean;
+}
+
+const convenios: Convenio[] = [
+  {
+    nombre: 'Aviatur',
+    categoria: 'Turismo y viajes',
+    icon: 'tabler:plane',
+    resumen: 'Tarifas preferenciales en planes turísticos nacionales e internacionales.',
+    descripcion:
+      'Convenio con Aviatur para que los asociados y su familia accedan a condiciones especiales en la planeación de viajes, tiquetes aéreos y planes turísticos.',
+    comoUsar:
+      'Comuníquese con Bienestar Social de FINTEGRAR para conocer el código o carta de presentación vigente antes de realizar su reserva con Aviatur.',
+  },
+  {
+    nombre: 'Emermédica',
+    categoria: 'Salud y emergencias',
+    icon: 'tabler:stethoscope',
+    resumen: 'Atención médica prepagada y ambulancia de emergencia con tarifas especiales.',
+    descripcion:
+      'Servicio de medicina prepagada y atención de emergencias médicas a domicilio, con planes preferenciales para los asociados de FINTEGRAR y su núcleo familiar.',
+    comoUsar:
+      'Solicite información sobre el plan y el proceso de afiliación directamente en Bienestar Social.',
+    destacado: true,
+  },
+  {
+    nombre: 'Campos de Paz',
+    categoria: 'Servicios funerarios',
+    icon: 'tabler:shield-check',
+    resumen: 'Plan exequial con cobertura funeraria completa para el asociado y su familia.',
+    descripcion:
+      'Plan de previsión exequial que cubre servicios funerarios completos para el asociado y su núcleo familiar, en condiciones preferenciales por el convenio con FINTEGRAR.',
+    comoUsar:
+      'Consulte los requisitos de vinculación al plan con Bienestar Social de FINTEGRAR.',
+  },
+  {
+    nombre: 'Los Olivos',
+    categoria: 'Servicios funerarios',
+    icon: 'tabler:shield-check',
+    resumen: 'Servicios funerarios y de previsión exequial con condiciones preferenciales.',
+    descripcion:
+      'Alianza para el acceso a servicios de previsión exequial y funerarios con beneficios exclusivos para los asociados de FINTEGRAR.',
+    comoUsar:
+      'Consulte los requisitos de vinculación al plan con Bienestar Social de FINTEGRAR.',
+  },
+  {
+    nombre: 'Cotrafa Social',
+    categoria: 'Protección exequial',
+    icon: 'tabler:users',
+    resumen: 'Protección exequial complementaria para asociados.',
+    descripcion:
+      'Convenio de protección exequial complementaria, pensado como respaldo adicional para los asociados de FINTEGRAR y su grupo familiar.',
+    comoUsar:
+      'Solicite el procedimiento de afiliación en Bienestar Social de FINTEGRAR.',
+  },
+  {
+    nombre: 'Confiar',
+    categoria: 'Servicios financieros',
+    icon: 'tabler:building-bank',
+    resumen: 'Productos y servicios financieros cooperativos con beneficios cruzados.',
+    descripcion:
+      'Alianza entre cooperativas que permite a los asociados de FINTEGRAR acceder a productos y servicios financieros de Confiar en condiciones preferenciales.',
+    comoUsar:
+      'Consulte con Bienestar Social de FINTEGRAR qué productos aplican y el procedimiento para acceder al beneficio.',
+    destacado: true,
+  },
+];
+
+// Paleta cíclica alineada al degradado de marca: violeta, verde azulado, celeste, dorado.
+const paleta = ['var(--color-brand-purple)', 'var(--color-brand-teal-bright)', 'var(--color-brand-blue)', 'var(--color-gold-deep)'];
+const categorias = [...new Set(convenios.map((c) => c.categoria))];
+const colorPorCategoria = new Map(categorias.map((cat, i) => [cat, paleta[i % paleta.length]]));
+const iconoPorCategoria = new Map(
+  categorias.map((cat) => [cat, convenios.find((c) => c.categoria === cat)!.icon]),
+);
+const slug = (s: string) => s.replace(/\s+/g, '-').toLowerCase();
+
+const pasos = [
+  {
+    icon: 'tabler:search',
+    titulo: 'Explore la red de aliados',
+    texto: 'Filtre por categoría o busque el convenio que necesita.',
+  },
+  {
+    icon: 'tabler:file-text',
+    titulo: 'Revise las condiciones',
+    texto: 'Abra el detalle del convenio para conocer el beneficio y los requisitos.',
+  },
+  {
+    icon: 'tabler:heart-handshake',
+    titulo: 'Actívelo con Bienestar Social',
+    texto: 'Confirme el procedimiento vigente antes de usar el beneficio.',
+  },
+];
+---
+
+<section class="cv-section" aria-labelledby="cv-title">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="cv-stats reveal">
+      <div class="cv-stat">
+        <div class="cv-stat-icon"><Icon name="tabler:building-store" class="w-5 h-5" aria-hidden="true" /></div>
+        <div>
+          <div class="cv-stat-num">{convenios.length}</div>
+          <div class="cv-stat-label">Convenios activos</div>
+        </div>
+      </div>
+      <div class="cv-stat">
+        <div class="cv-stat-icon"><Icon name="tabler:layout-dashboard" class="w-5 h-5" aria-hidden="true" /></div>
+        <div>
+          <div class="cv-stat-num">{categorias.length}</div>
+          <div class="cv-stat-label">Categorías de beneficios</div>
+        </div>
+      </div>
+      <div class="cv-stat">
+        <div class="cv-stat-icon"><Icon name="tabler:users" class="w-5 h-5" aria-hidden="true" /></div>
+        <div>
+          <div class="cv-stat-num">100%</div>
+          <div class="cv-stat-label">Exclusivo asociados</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-steps reveal">
+      {pasos.map((p, i) => (
+        <div class="cv-step">
+          <div class="cv-step-num">{`0${i + 1}`}</div>
+          <div class="cv-step-icon"><Icon name={p.icon} class="w-4 h-4" aria-hidden="true" /></div>
+          <div class="cv-step-titulo">{p.titulo}</div>
+          <div class="cv-step-texto">{p.texto}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="cv-toolbar reveal">
+      <div class="cv-search">
+        <Icon name="tabler:search" class="w-4 h-4 cv-search-icon" aria-hidden="true" />
+        <input
+          type="text"
+          id="cvSearch"
+          class="cv-search-input"
+          placeholder="Buscar convenio por nombre o beneficio..."
+          aria-label="Buscar convenio"
+          autocomplete="off"
+        />
+        <button type="button" class="cv-search-clear" id="cvSearchClear" aria-label="Limpiar búsqueda" hidden>
+          <Icon name="tabler:x" class="w-3.5 h-3.5" aria-hidden="true" />
+        </button>
+      </div>
+
+      <div class="cv-filters" id="cvFilters" role="group" aria-label="Filtrar por categoría">
+        <button type="button" class="cv-filter-pill is-active" data-category="todos">
+          <span class="cv-filter-dot" style="background:var(--gradient-brand);"></span>
+          Todos
+          <span class="cv-filter-count">{convenios.length}</span>
+        </button>
+        {categorias.map((cat) => (
+          <button type="button" class="cv-filter-pill" data-category={cat}>
+            <span class="cv-filter-dot" style={`background:${colorPorCategoria.get(cat)};`}></span>
+            {cat}
+            <span class="cv-filter-count">{convenios.filter((c) => c.categoria === cat).length}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <p class="cv-results-count" id="cvResultsCount" aria-live="polite">
+      Mostrando {convenios.length} de {convenios.length} convenios
+    </p>
+
+    <div class="cv-grid" id="cvGrid">
+      {convenios.map((c) => (
+        <button
+          type="button"
+          class="cv-card"
+          style={`--cv-accent:${colorPorCategoria.get(c.categoria)};`}
+          data-name={c.nombre.toLowerCase()}
+          data-category={c.categoria}
+          data-search={`${c.nombre} ${c.categoria} ${c.resumen}`.toLowerCase()}
+          data-drawer-target={`drawer-${slug(c.nombre)}`}
+        >
+          <span class="cv-card-bar" aria-hidden="true"></span>
+          {c.destacado && (
+            <span class="cv-card-featured">
+              <Icon name="tabler:star-filled" class="w-3 h-3" aria-hidden="true" />
+              Destacado
+            </span>
+          )}
+          <div class="cv-card-icon">
+            <Icon name={c.icon} class="w-6 h-6" aria-hidden="true" />
+          </div>
+          <span class="cv-card-categoria">{c.categoria}</span>
+          <div class="cv-card-titulo">{c.nombre}</div>
+          <p class="cv-card-resumen">{c.resumen}</p>
+          <span class="cv-card-cta">
+            Ver detalles
+            <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" aria-hidden="true" />
+          </span>
+        </button>
+      ))}
+    </div>
+
+    <div class="cv-empty" id="cvEmpty" hidden>
+      <Icon name="tabler:mood-empty" class="w-10 h-10" aria-hidden="true" />
+      <p>No encontramos convenios que coincidan con su búsqueda.</p>
+      <button type="button" class="btn btn-outline btn-sm" id="cvClearFilters">Limpiar filtros</button>
+    </div>
+
+    <div class="cv-suggest reveal">
+      <div class="cv-suggest-icon">
+        <Icon name="tabler:bulb" class="w-5 h-5" aria-hidden="true" />
+      </div>
+      <div class="cv-suggest-body">
+        <div class="cv-suggest-title">¿Conoce un aliado que debería estar aquí?</div>
+        <div class="cv-suggest-sub">Escríbanos y evaluamos la posibilidad de un nuevo convenio para todos los asociados.</div>
+      </div>
+      <a href="mailto:bienestarsocial@fintegrar.com" class="btn btn-dark btn-sm cv-suggest-btn">
+        <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
+        Escribir a Bienestar Social
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div class="cv-drawer-backdrop" id="cvDrawerBackdrop"></div>
+
+{convenios.map((c) => (
+  <aside
+    class="cv-drawer"
+    id={`drawer-${slug(c.nombre)}`}
+    role="dialog"
+    aria-modal="true"
+    aria-label={`Detalle del convenio ${c.nombre}`}
+  >
+    <div class="cv-drawer-banner">
+      <button type="button" class="cv-drawer-close" data-drawer-close aria-label="Cerrar">
+        <Icon name="tabler:x" class="w-4 h-4" aria-hidden="true" />
+      </button>
+      <div class="cv-drawer-icon">
+        <Icon name={c.icon} class="w-7 h-7" aria-hidden="true" />
+      </div>
+    </div>
+    <div class="cv-drawer-body">
+      <span class="cv-drawer-categoria" style={`color:${colorPorCategoria.get(c.categoria)};`}>
+        {c.categoria}
+      </span>
+      <h3 class="cv-drawer-titulo">{c.nombre}</h3>
+      <p class="cv-drawer-desc">{c.descripcion}</p>
+      <div class="cv-drawer-como">
+        <div class="cv-drawer-como-title">
+          <Icon name="tabler:info-circle" class="w-4 h-4" aria-hidden="true" />
+          Cómo acceder al beneficio
+        </div>
+        <p>{c.comoUsar}</p>
+      </div>
+      <a href="mailto:bienestarsocial@fintegrar.com" class="btn btn-primary btn-sm cv-drawer-btn">
+        <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
+        Consultar con Bienestar Social
+      </a>
+    </div>
+  </aside>
+))}
+
+<style>
+  .cv-section {
+    background: var(--color-navbar-bg);
+    padding: 4rem 0 6rem;
+  }
+
+  .cv-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .cv-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 1.125rem 1.125rem;
+  }
+  .cv-stat-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--color-white);
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .cv-stat-num {
+    font-size: clamp(1.25rem, 2.4vw, 1.625rem);
+    font-weight: var(--fw-extrabold);
+    color: var(--color-ink);
+    line-height: var(--lh-110);
+  }
+  .cv-stat-label {
+    font-size: 0.7rem;
+    color: var(--color-ink);
+    opacity: 0.6;
+    margin-top: 0.125rem;
+  }
+
+  .cv-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.75rem 0 2.25rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--color-surface);
+    border-bottom: 1px solid var(--color-surface);
+  }
+  @media (min-width: 768px) {
+    .cv-steps {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+  .cv-step {
+    position: relative;
+    padding-left: 3rem;
+  }
+  .cv-step-num {
+    position: absolute;
+    left: 0;
+    top: -0.25rem;
+    font-size: 1.75rem;
+    font-weight: var(--fw-extrabold);
+    font-family: var(--ff-heading);
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 0.35;
+    line-height: var(--lh-100);
+  }
+  .cv-step-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--gradient-brand);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.625rem;
+  }
+  .cv-step-titulo {
+    font-size: 0.9375rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    margin-bottom: 0.25rem;
+  }
+  .cv-step-texto {
+    font-size: 0.8125rem;
+    color: var(--color-ink);
+    opacity: 0.6;
+    line-height: var(--lh-150);
+  }
+
+  .cv-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .cv-search {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+  }
+  .cv-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-ink);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .cv-search-input {
+    width: 100%;
+    padding: 0.75rem 2.5rem;
+    border-radius: var(--radius-full);
+    border: 1.5px solid var(--color-border);
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    background: var(--color-white);
+    transition: border-color 0.15s;
+  }
+  .cv-search-input:focus {
+    outline: none;
+    border-color: var(--color-brand-blue);
+  }
+  .cv-search-clear {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: none;
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .cv-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .cv-filter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-full);
+    padding: 0.5rem 0.875rem 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .cv-filter-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .cv-filter-count {
+    font-size: 0.7rem;
+    font-weight: var(--fw-bold);
+    opacity: 0.45;
+  }
+  .cv-filter-pill:hover {
+    border-color: var(--color-brand-blue);
+  }
+  .cv-filter-pill.is-active {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+  .cv-filter-pill.is-active .cv-filter-count {
+    opacity: 0.7;
+  }
+
+  .cv-results-count {
+    font-size: 0.8125rem;
+    color: var(--color-ink);
+    opacity: 0.55;
+    margin-bottom: 1.5rem;
+  }
+
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .cv-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .cv-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .cv-card {
+    position: relative;
+    text-align: left;
+    background: var(--color-white);
+    border: 1px solid var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.5rem 1.375rem;
+    cursor: pointer;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+    font-family: inherit;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .cv-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+    border-color: transparent;
+  }
+  .cv-card[hidden] {
+    display: none;
+  }
+  .cv-card-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--cv-accent, var(--color-ink));
+  }
+
+  .cv-card-featured {
+    position: absolute;
+    top: 1.125rem;
+    right: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.625rem;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    color: var(--color-warning-text-strong);
+    background: rgba(var(--color-brand-yellow-rgb), 0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+  }
+
+  .cv-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    background: color-mix(in srgb, var(--cv-accent, var(--color-ink)) 12%, white);
+    color: var(--cv-accent, var(--color-ink));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem 0 1.125rem;
+    transition: transform 0.25s;
+  }
+  .cv-card:hover .cv-card-icon {
+    transform: scale(1.08) rotate(-4deg);
+  }
+
+  .cv-card-categoria {
+    font-size: 0.68rem;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    color: var(--cv-accent, var(--color-ink));
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-card-titulo {
+    font-weight: var(--fw-bold);
+    font-size: 1.0625rem;
+    color: var(--color-ink);
+    margin-bottom: 0.375rem;
+  }
+
+  .cv-card-resumen {
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    opacity: 0.65;
+    line-height: var(--lh-155);
+    margin-bottom: 1.25rem;
+    flex: 1;
+  }
+
+  .cv-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8125rem;
+    font-weight: var(--fw-semibold);
+    color: var(--cv-accent, var(--color-ink));
+    transition: gap 0.2s;
+  }
+  .cv-card:hover .cv-card-cta {
+    gap: 10px;
+  }
+
+  .cv-empty {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--color-ink);
+    opacity: 0.6;
+  }
+  .cv-empty svg {
+    margin: 0 auto 1rem;
+    opacity: 0.4;
+  }
+  .cv-empty p {
+    margin-bottom: 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .cv-suggest {
+    margin-top: 3.5rem;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .cv-suggest-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-white);
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .cv-suggest-body {
+    flex: 1;
+    min-width: 200px;
+  }
+  .cv-suggest-title {
+    font-weight: var(--fw-bold);
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+  }
+  .cv-suggest-sub {
+    font-size: 0.8125rem;
+    color: var(--color-ink);
+    opacity: 0.6;
+    margin-top: 0.2rem;
+  }
+  .cv-suggest-btn {
+    flex-shrink: 0;
+  }
+
+  .cv-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(var(--color-ink-rgb), 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+  }
+  .cv-drawer-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .cv-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(420px, 100vw);
+    background: var(--color-white);
+    z-index: 1001;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+    overflow-y: auto;
+    box-shadow: none;
+  }
+  .cv-drawer.is-open {
+    transform: translateX(0);
+    box-shadow: -20px 0 50px rgba(var(--color-black-rgb), 0.25);
+  }
+
+  .cv-drawer-banner {
+    position: relative;
+    height: 120px;
+    background: var(--gradient-brand);
+    display: flex;
+    align-items: flex-end;
+    padding: 0 1.75rem;
+  }
+  .cv-drawer-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(var(--color-white-rgb), 0.2);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-white);
+  }
+  .cv-drawer-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(50%);
+    box-shadow: 0 8px 20px rgba(var(--color-black-rgb), 0.18);
+  }
+
+  .cv-drawer-body {
+    padding: 3rem 1.75rem 2rem;
+  }
+  .cv-drawer-categoria {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .cv-drawer-titulo {
+    font-size: 1.5rem;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-ink);
+    margin-bottom: 0.75rem;
+  }
+  .cv-drawer-desc {
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    opacity: 0.7;
+    line-height: var(--lh-165);
+    margin-bottom: 1.5rem;
+  }
+  .cv-drawer-como {
+    background: var(--color-surface);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.125rem;
+    margin-bottom: 1.5rem;
+  }
+  .cv-drawer-como-title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    margin-bottom: 0.4rem;
+  }
+  .cv-drawer-como p {
+    font-size: 0.8125rem;
+    color: var(--color-ink);
+    opacity: 0.7;
+    line-height: var(--lh-155);
+  }
+  .cv-drawer-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 639px) {
+    .cv-section { padding: 2.5rem 0 4rem; }
+    .cv-stats { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+    .cv-stat { flex-direction: column; text-align: center; padding: 1rem 0.375rem; gap: 0.375rem; }
+    .cv-suggest { flex-direction: column; text-align: center; padding: 1.5rem; }
+    .cv-drawer { width: 100vw; }
+  }
+</style>
+
+<script>
+  function initConveniosDirectorio() {
+    const search = document.getElementById('cvSearch') as HTMLInputElement | null;
+    const searchClear = document.getElementById('cvSearchClear');
+    const filters = document.getElementById('cvFilters');
+    const grid = document.getElementById('cvGrid');
+    const empty = document.getElementById('cvEmpty');
+    const resultsCount = document.getElementById('cvResultsCount');
+    const clearBtn = document.getElementById('cvClearFilters');
+
+    if (!search || !filters || !grid || !empty || !resultsCount) return;
+
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.cv-card'));
+    const total = cards.length;
+    let activeCategory = 'todos';
+
+    function applyFilters() {
+      const query = (search!.value || '').trim().toLowerCase();
+      searchClear!.hidden = query.length === 0;
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const matchesCategory = activeCategory === 'todos' || card.dataset.category === activeCategory;
+        const matchesQuery = !query || (card.dataset.search || '').includes(query);
+        const show = matchesCategory && matchesQuery;
+        card.hidden = !show;
+        if (show) visible += 1;
+      });
+
+      resultsCount!.textContent = `Mostrando ${visible} de ${total} convenios`;
+      empty!.hidden = visible !== 0;
+      grid!.style.display = visible === 0 ? 'none' : '';
+    }
+
+    search.addEventListener('input', applyFilters);
+    searchClear?.addEventListener('click', () => {
+      search.value = '';
+      applyFilters();
+      search.focus();
+    });
+
+    filters.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.cv-filter-pill');
+      if (!btn) return;
+      filters.querySelectorAll('.cv-filter-pill').forEach((p) => p.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      activeCategory = btn.dataset.category || 'todos';
+      applyFilters();
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      search.value = '';
+      activeCategory = 'todos';
+      filters.querySelectorAll('.cv-filter-pill').forEach((p) => p.classList.remove('is-active'));
+      filters.querySelector('.cv-filter-pill[data-category="todos"]')?.classList.add('is-active');
+      applyFilters();
+    });
+
+    const backdrop = document.getElementById('cvDrawerBackdrop');
+    const drawers = Array.from(document.querySelectorAll<HTMLElement>('.cv-drawer'));
+
+    function closeDrawer() {
+      drawers.forEach((d) => d.classList.remove('is-open'));
+      backdrop?.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const targetId = card.dataset.drawerTarget;
+        if (!targetId) return;
+        const drawer = document.getElementById(targetId);
+        if (!drawer) return;
+        drawer.classList.add('is-open');
+        backdrop?.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    backdrop?.addEventListener('click', closeDrawer);
+    drawers.forEach((drawer) => {
+      drawer.querySelector('[data-drawer-close]')?.addEventListener('click', closeDrawer);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+  }
+
+  initConveniosDirectorio();
+  document.addEventListener('astro:after-swap', initConveniosDirectorio);
+</script>

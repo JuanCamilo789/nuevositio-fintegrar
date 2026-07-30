@@ -1,43 +1,19 @@
 ---
 import fs from 'node:fs';
 import path from 'node:path';
-import { createHmac, timingSafeEqual } from 'node:crypto';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/600.css';
+import '@fontsource/dm-sans/700.css';
+import '@fontsource/dm-sans/800.css';
+import { ADMIN_COOKIE_NAME, verifySessionToken } from '../../../../lib/adminSession';
 
 export const prerender = false;
 
-const COOKIE_NAME = 'admin_lp';
 const ADMIN_SESSION_SECRET =
   import.meta.env.ADMIN_SESSION_SECRET ?? process.env.ADMIN_SESSION_SECRET ?? '';
 
-function base64UrlDecodeToString(text: string): string {
-  const padded = text.replace(/-/g, '+').replace(/_/g, '/').padEnd(Math.ceil(text.length / 4) * 4, '=');
-  return Buffer.from(padded, 'base64').toString('utf8');
-}
-
-function sign(payload: string): string {
-  const digest = createHmac('sha256', ADMIN_SESSION_SECRET).update(payload).digest('base64');
-  return digest.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
-}
-
-function verifySessionToken(token: string | undefined): boolean {
-  if (!token || !ADMIN_SESSION_SECRET) return false;
-  const parts = token.split('.');
-  if (parts.length !== 2) return false;
-  const [payloadB64, sig] = parts;
-  const payload = base64UrlDecodeToString(payloadB64);
-  const expected = sign(payload);
-  const a = Buffer.from(sig);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length) return false;
-  if (!timingSafeEqual(a, b)) return false;
-  const idx = payload.lastIndexOf(':');
-  if (idx === -1) return false;
-  const exp = Number(payload.slice(idx + 1));
-  return Number.isFinite(exp) && exp > Date.now();
-}
-
-
-const isAuth = verifySessionToken(Astro.cookies.get(COOKIE_NAME)?.value);
+const isAuth = verifySessionToken(Astro.cookies.get(ADMIN_COOKIE_NAME)?.value, ADMIN_SESSION_SECRET);
 if (!isAuth) {
   return Astro.redirect('/admin/landing-page');
 }
@@ -77,15 +53,15 @@ try {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Editando: {title} — Admin Cooperamigó</title>
-  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <title>Editando: {title} — Admin FINTEGRAR</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; }
+    body { font-family: var(--ff-sans); background: var(--color-admin-bg-cool); min-height: 100vh; display: flex; flex-direction: column; }
 
     .adm-header {
-      background: #172B36;
+      background: var(--color-navy);
       padding: 1rem 2rem;
       display: flex;
       align-items: center;
@@ -94,8 +70,8 @@ try {
       top: 0;
       z-index: 200;
     }
-    .adm-logo { color: #fff; font-size: 1rem; font-weight: 700; text-decoration: none; }
-    .adm-logo span { color: #FFC801; }
+    .adm-logo { color: var(--color-white); font-size: 1rem; font-weight: var(--fw-bold); text-decoration: none; }
+    .adm-logo span { color: var(--color-brand-yellow); }
 
     .editor-wrap { flex: 1; max-width: 900px; width: 100%; margin: 0 auto; padding: 2rem 1.5rem; }
 
@@ -112,23 +88,23 @@ try {
       align-items: center;
       gap: 0.375rem;
       font-size: 0.8125rem;
-      color: #172B36;
+      color: var(--color-navy);
       opacity: 0.5;
       text-decoration: none;
       transition: opacity 0.15s;
     }
     .back-link:hover { opacity: 1; }
-    .editor-title { font-size: 1.375rem; font-weight: 800; color: #172B36; margin-top: 0.25rem; }
+    .editor-title { font-size: 1.375rem; font-weight: var(--fw-extrabold); color: var(--color-navy); margin-top: 0.25rem; }
 
     .save-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.625rem 1.5rem;
-      background: #172B36;
-      color: #fff;
+      background: var(--color-navy);
+      color: var(--color-white);
       font-size: 0.9rem;
-      font-weight: 700;
+      font-weight: var(--fw-bold);
       border: none;
       border-radius: var(--radius-sm);
       cursor: pointer;
@@ -139,9 +115,9 @@ try {
     .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .editor-card {
-      background: #fff;
+      background: var(--color-white);
       border-radius: var(--radius-md);
-      box-shadow: 0 2px 24px rgba(23,43,54,0.08);
+      box-shadow: 0 2px 24px rgba(var(--color-navy-rgb), 0.08);
       overflow: hidden;
     }
 
@@ -149,13 +125,13 @@ try {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      background: #172B36;
-      color: #fff;
+      background: var(--color-navy);
+      color: var(--color-white);
       padding: 1rem 1.5rem;
       border-radius: var(--radius-md);
-      font-weight: 600;
+      font-weight: var(--fw-semibold);
       font-size: 0.9rem;
-      box-shadow: 0 8px 32px rgba(23,43,54,0.3);
+      box-shadow: 0 8px 32px rgba(var(--color-navy-rgb), 0.3);
       transform: translateY(80px);
       opacity: 0;
       transition: all 0.3s ease;
@@ -167,7 +143,7 @@ try {
 <body>
 
   <header class="adm-header">
-    <a href="/admin/landing-page" class="adm-logo">Cooperamigó <span>Admin</span></a>
+    <a href="/admin/landing-page" class="adm-logo">FINTEGRAR <span>Admin</span></a>
   </header>
 
   <div class="editor-wrap">
@@ -253,19 +229,19 @@ try {
     border-bottom: 1px solid var(--color-surface) !important;
     padding: 0.875rem 1rem !important;
     background: var(--color-surface) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important;
+    box-shadow: 0 4px 12px rgba(var(--color-black-rgb), 0.04) !important;
   }
   .ql-container.ql-snow { border: none !important; font-size: 1.05rem !important; }
-  .ql-editor { padding: 3rem !important; line-height: 1.8 !important; min-height: 600px; }
-  .ql-editor h2 { font-size: 1.625rem !important; font-weight: 700 !important; color: #172B36 !important; margin: 2.5rem 0 1.25rem !important; border-top: 1px solid var(--color-surface) !important; padding-top: 1.75rem !important; }
-  .ql-editor h3 { font-size: 1.25rem !important; font-weight: 700 !important; color: #172B36 !important; margin: 1.75rem 0 0.875rem !important; }
+  .ql-editor { padding: 3rem !important; line-height: var(--lh-180) !important; min-height: 600px; }
+  .ql-editor h2 { font-size: 1.625rem !important; font-weight: var(--fw-bold) !important; color: var(--color-navy) !important; margin: 2.5rem 0 1.25rem !important; border-top: 1px solid var(--color-surface) !important; padding-top: 1.75rem !important; }
+  .ql-editor h3 { font-size: 1.25rem !important; font-weight: var(--fw-bold) !important; color: var(--color-navy) !important; margin: 1.75rem 0 0.875rem !important; }
   .ql-editor p  { font-size: 1.05rem !important; margin-bottom: 1.25rem !important; }
   .ql-editor ul, .ql-editor ol { margin: 1.25rem 0 !important; }
   .ql-editor li { font-size: 1.05rem !important; margin-bottom: 0.6rem !important; }
   .ql-list[value="alpha"]::before {
-    content: 'abc'; font-weight: 800; font-size: 12px;
+    content: 'abc'; font-weight: var(--fw-extrabold); font-size: 12px;
     display: inline-block; width: 26px; text-align: center;
-    border: 1px solid rgba(23,43,54,0.12); border-radius: var(--radius-sm);
-    background: #fff; line-height: 19px;
+    border: 1px solid rgba(var(--color-navy-rgb), 0.12); border-radius: var(--radius-sm);
+    background: var(--color-white); line-height: var(--lh-px-19);
   }
 </style>

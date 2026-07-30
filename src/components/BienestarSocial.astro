@@ -28,15 +28,14 @@ const beneficios = [
 <section class="bienestar-section" aria-labelledby="bienestar-title">
   <div class="max-w-7xl mx-auto px-6">
     <div class="bienestar-content reveal">
-        <div class="section-eyebrow bienestar-eyebrow">Bienestar Social</div>
         <h2
           id="bienestar-title"
           class="font-display"
-          style="font-size:clamp(1.75rem,3vw,2.5rem);color:#172B36;line-height:1.2;margin-bottom:1.25rem;"
+          style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);margin-bottom:1.25rem;"
         >
           Beneficios que marcan la diferencia
         </h2>
-        <p style="font-size:0.9375rem;color:#172B36;opacity:0.8;line-height:1.75;margin-bottom:1.75rem;">
+        <p style="font-size:0.9375rem;color:var(--color-ink);opacity:0.8;line-height: var(--lh-175);margin-bottom:1.75rem;">
           Nuestro programa de bienestar social está orientado a gestionar, buscar y consolidar convenios que permitan a nuestros asociados acceder a una amplia gama de servicios y beneficios,
           contribuyendo al mejoramiento de su calidad de vida en diferentes ámbitos.
         </p>
@@ -62,25 +61,12 @@ const beneficios = [
 
 <style>
   .bienestar-section {
-    background: #fff;
+    background: var(--color-navbar-bg);
     padding: 8rem 0;
   }
 
   .bienestar-content {
     max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .bienestar-eyebrow {
-    justify-content: center;
-  }
-  .bienestar-content .beneficios-list {
-    text-align: left;
-  }
-  .bienestar-content .btn {
-    margin-left: auto;
-    margin-right: auto;
-    display: inline-flex;
   }
 
   .beneficios-list {
@@ -103,7 +89,7 @@ const beneficios = [
     padding: 1.25rem;
     background: var(--color-surface);
     border-radius: var(--radius-md);
-    box-shadow: 0 1px 4px rgba(23, 43, 54, 0.05);
+    box-shadow: 0 1px 4px rgba(var(--color-navy-rgb), 0.05);
     transition: box-shadow 0.2s, transform 0.2s;
   }
   .beneficio-row:hover {
@@ -113,25 +99,25 @@ const beneficios = [
   .beneficio-icon {
     width: 40px;
     height: 40px;
-    background: rgba(23, 43, 54, 0.08);
+    background: rgba(var(--color-navy-rgb), 0.08);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #172B36;
+    color: var(--color-ink);
   }
   .beneficio-titulo {
     font-size: 0.875rem;
-    font-weight: 700;
-    color: #172B36;
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
     margin-bottom: 2px;
   }
   .beneficio-desc {
     font-size: 0.875rem;
-    color: #172B36;
+    color: var(--color-ink);
     opacity: 0.6;
-    line-height: 1.5;
+    line-height: var(--lh-150);
   }
 
   @media (max-width: 1023px) {
@@ -139,16 +125,5 @@ const beneficios = [
   }
   @media (max-width: 767px) {
     .bienestar-section { padding: 3.5rem 0; }
-    .bienestar-content {
-      margin: 0;
-      text-align: left;
-    }
-    .bienestar-eyebrow {
-      justify-content: flex-start;
-    }
-    .bienestar-content .btn {
-      margin-left: 0;
-      margin-right: 0;
-    }
   }
 </style>
