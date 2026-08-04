@@ -1,0 +1,139 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`cs-wrap flex flex-col items-center text-center reveal ${className}`}>
+  <div class="relative text-center flex flex-col items-center -space-y-3 sm:-space-y-4 md:-space-y-5">
+    <!-- Confianza en Morado de Marca -->
+    <h2 class="cs-word cs-word--confianza text-7xl sm:text-8xl md:text-9xl font-[var(--fw-bold)] text-[var(--color-brand-purple)] tracking-tight leading-none relative inline-block">
+      Confianza
+      <svg class="absolute -top-3 -right-7 w-8 h-8 text-[var(--color-brand-purple)] opacity-90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line class="cs-spark" x1="12" y1="2" x2="12" y2="6"/>
+        <line class="cs-spark" x1="19" y1="5" x2="16" y2="8"/>
+        <line class="cs-spark" x1="22" y1="12" x2="18" y2="12"/>
+      </svg>
+    </h2>
+    <!-- Seguridad en Celeste de Marca -->
+    <h2 class="cs-word cs-word--seguridad text-7xl sm:text-8xl md:text-9xl font-[var(--fw-regular)] text-[var(--color-brand-sky-blue)] tracking-tight leading-none relative inline-block">
+      Seguridad
+      <svg class="absolute -bottom-3 left-0 w-full h-4 text-[var(--color-brand-sky-blue)] opacity-80" viewBox="0 0 200 20" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round">
+        <path class="cs-underline" d="M0,15 C50,5 150,5 200,15" pathLength="100" />
+      </svg>
+    </h2>
+  </div>
+</div>
+
+<style>
+  .cs-wrap {
+    background: var(--color-navbar-bg);
+  }
+
+  .cs-word--confianza {
+    animation: csConfianzaCycle 9s ease-in-out infinite;
+  }
+
+  .cs-word--seguridad {
+    animation: csSeguridadCycle 9s ease-in-out infinite;
+  }
+
+  @keyframes csConfianzaCycle {
+    0%, 62% {
+      opacity: 1;
+      transform: translateY(0) translateX(0) scale(1);
+    }
+    68% {
+      transform: translateY(-0.5rem) translateX(0) scale(1.04);
+    }
+    80% {
+      opacity: 0;
+      transform: translateY(0) translateX(6rem) scale(1);
+    }
+    82% {
+      opacity: 0;
+      transform: translateY(0) translateX(-6rem) scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) translateX(0) scale(1);
+    }
+  }
+
+  @keyframes csSeguridadCycle {
+    0%, 62% {
+      opacity: 1;
+      transform: translateY(0) translateX(0) scale(1);
+    }
+    68% {
+      transform: translateY(-0.5rem) translateX(0) scale(1.04);
+    }
+    80% {
+      opacity: 0;
+      transform: translateY(0) translateX(-6rem) scale(1);
+    }
+    82% {
+      opacity: 0;
+      transform: translateY(0) translateX(6rem) scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) translateX(0) scale(1);
+    }
+  }
+
+  .cs-spark {
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    animation: csSparkPop 1.8s ease-in-out infinite;
+  }
+
+  .cs-spark:nth-child(1) { animation-delay: 0s; }
+  .cs-spark:nth-child(2) { animation-delay: 0.22s; }
+  .cs-spark:nth-child(3) { animation-delay: 0.44s; }
+
+  @keyframes csSparkPop {
+    0%, 55%, 100% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    15% {
+      opacity: 1;
+      transform: scale(1.25);
+    }
+    30% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+  }
+
+  .cs-underline {
+    stroke-dasharray: 25 100;
+    animation: csUnderlineDraw 2.4s ease-in-out infinite;
+  }
+
+  @keyframes csUnderlineDraw {
+    0% {
+      stroke-dashoffset: 100;
+    }
+    60% {
+      stroke-dashoffset: -25;
+    }
+    100% {
+      stroke-dashoffset: -25;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cs-word--confianza,
+    .cs-word--seguridad,
+    .cs-spark,
+    .cs-underline {
+      animation: none;
+      opacity: revert;
+    }
+  }
+</style>

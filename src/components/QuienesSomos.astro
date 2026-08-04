@@ -1,4 +1,31 @@
 ---
+const beneficios = [
+  {
+    title: "Fomentar el Ahorro",
+    sub: "Promovemos el hábito constante del ahorro con modalidades seguras para construir su tranquilidad financiera.",
+    span: "col-span-12 md:col-span-7",
+  },
+  {
+    title: "Créditos Competitivos",
+    sub: "Fácil acceso a préstamos adaptados a sus necesidades con las mejores tasas de interés por nómina.",
+    span: "col-span-12 md:col-span-5",
+  },
+  {
+    title: "Convenios Especiales",
+    sub: "Descuentos comerciales en salud, educación, seguros, turismo y servicios con empresas aliadas.",
+    span: "col-span-12 md:col-span-4",
+  },
+  {
+    title: "Deducción Quincenal",
+    sub: "Las aportaciones y cuotas de crédito se deducen automáticamente de la nómina cada quincena.",
+    span: "col-span-12 md:col-span-4",
+  },
+  {
+    title: "Gestión por Asociados",
+    sub: "La administración del Fondo la llevan sus propios asociados a través de los órganos directivos.",
+    span: "col-span-12 md:col-span-4",
+  },
+];
 ---
 
 <section id="nosotros" class="section-white" aria-labelledby="nosotros-title">
@@ -14,7 +41,7 @@
           Somos Fintegrar
         </h2>
         <p style="font-size:1rem;color:var(--color-ink);opacity:0.8;line-height: var(--lh-175);margin-bottom:1.25rem;">
-          Con más de 36 años de trayectoria, somos un Fondo de Empleados legalmente constituido
+          Con más de 38 años de trayectoria, somos un Fondo de Empleados legalmente constituido
           y vigilado por la Superintendencia de la Economía Solidaria.
         </p>
         <p style="font-size:1rem;color:var(--color-ink);opacity:0.8;line-height: var(--lh-175);margin-bottom:2rem;">
@@ -24,9 +51,24 @@
           propósito es generar bienestar económico, social y cultural, contribuyendo al
           desarrollo integral de nuestros asociados y sus familias.
         </p>
-
       </div>
 
+    </div>
+
+    <!-- Collage de Tarjetas de Beneficios estilo Bento Grid (Fila 1: 7-5, Fila 2: 4-4-4) -->
+    <div class="grid grid-cols-12 gap-5 mt-10 reveal">
+      {
+        beneficios.map((b) => (
+          <div class={`${b.span} bg-white rounded-[1.5rem] border border-slate-200/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 p-6 sm:p-8 flex flex-col items-center justify-center text-center min-h-[190px]`}>
+            <h3 class="text-base sm:text-lg font-extrabold text-[var(--color-brand-dark-blue)] leading-snug text-center mb-2">
+              {b.title}
+            </h3>
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-normal text-center max-w-md">
+              {b.sub}
+            </p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -34,17 +76,17 @@
 <style>
   .section-white {
     background: var(--color-navbar-bg);
-    padding: 8rem 0;
+    padding: 3.5rem 0 6rem 0;
   }
 
   .nosotros-content {
-    max-width: 720px;
+    max-width: 100%;
   }
 
   @media (max-width: 1023px) {
-    .section-white { padding: 6rem 0; }
+    .section-white { padding: 3rem 0 5rem 0; }
   }
   @media (max-width: 767px) {
-    .section-white { padding: 4rem 0; }
+    .section-white { padding: 2.5rem 0 4rem 0; }
   }
 </style>

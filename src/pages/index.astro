@@ -6,16 +6,10 @@ import HeroAlternative from '../components/HeroAlternative.astro';
 import TasasVigentes from '../components/TasasVigentes.astro';
 import DigitalBanking from '../components/DigitalBanking.astro';
 import BlogBanner from '../components/BlogBanner.astro';
-import QuienesSomos from '../components/QuienesSomos.astro';
-import Creditos from '../components/Creditos.astro';
-import Ahorros from '../components/Ahorros.astro';
-import Campanas from '../components/Campanas.astro';
-import BienestarSocial from '../components/BienestarSocial.astro';
+import ConfianzaSeguridad from '../components/ConfianzaSeguridad.astro';
 import Novedades from '../components/Novedades.astro';
-import Convenios from '../components/Convenios.astro';
 import SimuladorCredito from '../components/SimuladorCredito.astro';
 import ComoFunciona from '../components/ComoFunciona.astro';
-import SummerParty from '../components/SummerParty.astro';
 import Footer from '../components/Footer.astro';
 
 // Cache de 60 segundos, permitiendo servir contenido "stale" hasta por 10 minutos mientras se actualiza
@@ -30,16 +24,10 @@ Astro.response.headers.set('Cache-Control', 'public, s-maxage=60, stale-while-re
     <TasasVigentes />
     <DigitalBanking />
     <BlogBanner />
-    <QuienesSomos />
-    <Creditos />
-    <Ahorros />
-    <Campanas />
-    <BienestarSocial />
+    <ConfianzaSeguridad class="py-16" />
     <Novedades />
-    <Convenios />
     <SimuladorCredito />
     <ComoFunciona />
-    <SummerParty />
   </main>
   <Footer />
 </Layout>
