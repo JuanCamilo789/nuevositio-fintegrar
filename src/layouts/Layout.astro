@@ -154,31 +154,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     >
       <div class="cookie-inner">
         <div class="cookie-text">
-          <svg
-            class="cookie-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="10"></circle><circle
-              cx="8.5"
-              cy="11"
-              r="1"
-              fill="currentColor"></circle><circle
-              cx="14.5"
-              cy="9.5"
-              r="1"
-              fill="currentColor"></circle><circle
-              cx="11.5"
-              cy="15"
-              r="1"
-              fill="currentColor"></circle>
-          </svg>
+          <Icon name="tabler:cookie" class="cookie-icon" aria-hidden="true" />
           <p>
             Utilizamos cookies propias y de terceros para mejorar su experiencia
-            de navegación. Al continuar, acepta nuestra
+            de navegación. Al continuar, acepta nuestra{" "}
             <a href="/politica-tratamiento-datos" class="cookie-link"
               >Política de Tratamiento de Datos</a
             >.
@@ -216,25 +195,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       const accept = document.getElementById("cookieAccept");
       const decline = document.getElementById("cookieDecline");
 
-      function setBannerPadding() {
-        if (banner && !banner.classList.contains("cookie-hidden")) {
-          document.body.style.paddingBottom = banner.offsetHeight + "px";
-        } else {
-          document.body.style.paddingBottom = "";
-        }
-      }
-
       function dismissBanner() {
         banner?.classList.add("cookie-hidden");
-        document.body.style.paddingBottom = "";
       }
 
       if (localStorage.getItem("cookieConsent")) {
         banner?.classList.add("cookie-hidden");
-      } else {
-        // Wait for layout then set padding
-        requestAnimationFrame(setBannerPadding);
-        window.addEventListener("resize", setBannerPadding);
       }
 
       accept?.addEventListener("click", () => {

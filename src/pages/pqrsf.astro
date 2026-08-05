@@ -41,81 +41,35 @@ const tipos = [
 >
   <section class="pqrsf-section">
     <div class="max-w-7xl mx-auto px-6">
+      <div class="tipos-grid reveal">
+        {
+          tipos.map((t) => (
+            <div class="tipo-card">
+              <Icon name={t.icon} class="tipo-icon" aria-hidden="true" />
+              <h3 class="tipo-label">{t.label}</h3>
+              <p class="tipo-desc">{t.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+
       <div class="pqrsf-grid">
-        <div class="pqrsf-left">
-          <div class="tipos-grid reveal">
-            {
-              tipos.map((t) => (
-                <div class="tipo-item">
-                  <div class="tipo-icon">
-                    <Icon
-                      name={t.icon}
-                      class="w-3.5 h-3.5"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div>
-                    <div class="tipo-label">{t.label}</div>
-                    <div class="tipo-desc">{t.desc}</div>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-
-          <div class="pqrsf-tiempos reveal">
-            <div class="tiempos-title">
-              <Icon
-                name="tabler:clock"
-                class="w-3.5 h-3.5"
-                style="color:var(--color-ink);"
-                aria-hidden="true"
-              />
-              Tiempos de respuesta
-            </div>
-            <div class="tiempos-row">
-              <span class="tiempos-tipo">Solicitud de información y consultas</span>
-              <span class="tiempos-plazo">10 días hábiles</span>
-            </div>
-            <div class="tiempos-row">
-              <span class="tiempos-tipo">Derechos de Petición en General</span>
-              <span class="tiempos-plazo">15 días hábiles</span>
-            </div>
-            <div class="tiempos-row">
-              <span class="tiempos-tipo">Sugerencias y felicitaciones</span>
-              <span class="tiempos-plazo">5 días hábiles</span>
-            </div>
-          </div>
-
+        <div class="pqrsf-intro reveal">
+          <h2 class="pqrsf-intro-titulo">
+            <span class="pqrsf-intro-saludo">Saludos,</span><br />
+            <span class="pqrsf-intro-sub">déjanos saber de ti</span>
+          </h2>
+          <p class="pqrsf-intro-texto">
+            Aquí también te escuchamos. Cuéntanos qué necesitas, cómo te sientes o qué podemos mejorar, y te acompañamos con la misma cercanía de siempre.
+          </p>
         </div>
 
         <div class="reveal">
           <div class="pqrsf-form-wrap">
-            <div id="pqrsf-form-header">
-              <h2 class="form-titulo">Radique su solicitud</h2>
-              <p class="form-subtitulo">
-                Complete el formulario. Una vez recibamos su solicitud, le daremos respuesta dentro de los tiempos establecidos.
-              </p>
-            </div>
-
             <form class="pqrsf-form" id="pqrsf-form" novalidate autocomplete="on">
               <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;pointer-events:none;">
                 <input type="text" name="website" id="pq-website" tabindex="-1" autocomplete="off" value="" />
               </div>
-              <FloatingInput
-                id="pq-nombre"
-                name="nombre"
-                label="Nombre completo"
-                minlength="10"
-                maxlength="100"
-                autocomplete="name"
-                style="text-transform:uppercase;"
-                required
-              >
-                <div slot="error" id="pq-nombre-error" style="display:none; color:var(--color-danger); font-size:0.75rem; font-weight: var(--fw-medium); margin-top: 0.25rem;">
-                  Por favor ingrese su nombre completo (mínimo 10 caracteres).
-                </div>
-              </FloatingInput>
               <div class="form-row">
                 <FloatingSelect id="pq-tipo-doc" name="tipo_documento" label="Tipo de documento" required>
                   <option value="">Seleccione una opción</option>
@@ -136,6 +90,21 @@ const tipos = [
                   required
                 />
               </div>
+
+              <FloatingInput
+                id="pq-nombre"
+                name="nombre"
+                label="Nombre completo"
+                minlength="10"
+                maxlength="100"
+                autocomplete="name"
+                style="text-transform:uppercase;"
+                required
+              >
+                <div slot="error" id="pq-nombre-error" style="display:none; color:var(--color-danger); font-size:0.75rem; font-weight: var(--fw-medium); margin-top: 0.25rem;">
+                  Por favor ingrese su nombre completo (mínimo 10 caracteres).
+                </div>
+              </FloatingInput>
 
               <div class="form-row">
                 <FloatingInput
@@ -160,7 +129,7 @@ const tipos = [
                 />
               </div>
 
-              <div class="form-row form-row-tipo-asunto">
+              <div class="form-row">
                 <FloatingSelect id="pq-tipo" name="tipo" label="Tipo de solicitud" required>
                   <option value="">Seleccione una opción</option>
                   <option value="peticion">Petición</option>
@@ -191,9 +160,6 @@ const tipos = [
               />
 
               <div class="form-group">
-                <label
-                  >Archivo adjunto <span class="opt">(opcional)</span></label
-                >
                 <label class="file-drop" id="pq-file-drop" for="pq-archivo">
                   <div id="pq-drop-empty" class="file-drop-state">
                     <Icon
@@ -203,8 +169,8 @@ const tipos = [
                       aria-hidden="true"
                     />
                     <span class="file-text">
-                      Arrastre su archivo o
-                      <span class="file-browse">busque aquí</span>
+                      Arrastre su archivo o{" "}
+                      <span class="file-browse">seleccione uno</span>
                     </span>
                     <span class="file-hint">PDF, JPG, PNG — máx. 5 MB · Cargue un único archivo con todos los adjuntos</span>
                   </div>
@@ -248,10 +214,13 @@ const tipos = [
                   required
                 />
                 <label for="pq-autorizo">
-                  Al radicar, autorizo al Fondo de Empleados Fintegrar el tratamiento de mis datos personales conforme a la
+                  Al radicar la presente solicitud, autorizo de manera previa, expresa e informada al Fondo de Empleados Fintegrar para recolectar, almacenar, usar, consultar, actualizar, transmitir y, en general, tratar mis datos personales para las finalidades relacionadas con la gestión de esta solicitud y las demás descritas en la{" "}
                   <a href="/politica-tratamiento-datos" target="_blank" rel="noopener noreferrer"
-                    >Política de Tratamiento de Datos</a
-                  > publicada en el sitio web www.fintegrar.com<span class="req">*</span>
+                    >Política de Tratamiento de Datos Personales</a
+                  > de Fintegrar. Declaro que conozco dicha política, disponible en{" "}
+                  <a href="https://www.fintegrar.com" target="_blank" rel="noopener noreferrer"
+                    ><strong>www.fintegrar.com</strong></a
+                  >, y que he sido informado sobre mis derechos como titular de los datos personales y los mecanismos para ejercerlos.<span class="req">*</span>
                 </label>
               </div>
 
@@ -311,134 +280,100 @@ const tipos = [
   }
   .pqrsf-grid {
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 2.5rem;
+    grid-template-columns: 1fr;
     align-items: start;
+    gap: 2.5rem;
   }
 
-  .pqrsf-left {
-    min-width: 0;
+  .pqrsf-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .pqrsf-intro-titulo {
+    font-family: var(--ff-heading);
+    line-height: var(--lh-120);
+    color: var(--color-brand-purple);
+  }
+  .pqrsf-intro-saludo {
+    font-weight: var(--fw-extrabold);
+    font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+  }
+  .pqrsf-intro-sub {
+    font-weight: var(--fw-regular);
+    font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  }
+  .pqrsf-intro-texto {
+    font-size: 1rem;
+    color: var(--color-ink);
+    opacity: 0.7;
+    line-height: var(--lh-175);
+    max-width: 30rem;
+  }
+
+  @media (min-width: 1024px) {
+    .pqrsf-grid {
+      grid-template-columns: 3fr 9fr;
+      gap: 3rem;
+    }
+    .pqrsf-intro {
+      position: sticky;
+      top: 6rem;
+    }
   }
 
   .tipos-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 4rem;
+  }
+  .tipo-card {
+    background: var(--color-white);
+    border: 1px solid rgba(var(--color-border-slate-rgb), 0.8);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    min-height: 190px;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition:
+      box-shadow 0.3s,
+      transform 0.3s;
   }
-  .tipo-item {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-    background: var(--color-white);
-    border-radius: var(--radius-sm);
-    padding: 0.625rem 0.875rem;
+  .tipo-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
   }
   .tipo-icon {
     width: 28px;
     height: 28px;
-    border-radius: var(--radius-sm);
-    background: rgba(var(--color-navy-rgb), 0.08);
-    color: var(--color-ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    color: var(--color-brand-purple);
     flex-shrink: 0;
-  }
-  .tipo-label {
-    font-size: 0.8125rem;
-    font-weight: var(--fw-bold);
-    color: var(--color-ink);
-    margin-bottom: 1px;
-    line-height: var(--lh-130);
-  }
-  .tipo-desc {
-    font-size: 0.72rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-    line-height: var(--lh-145);
-  }
-
-  .pqrsf-tiempos,
-  .pqrsf-canales {
-    background: var(--color-white);
-    border-radius: var(--radius-md);
-    padding: 1rem 1.125rem;
     margin-bottom: 0.875rem;
   }
-  .tiempos-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.78rem;
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    color: var(--color-ink);
-    margin-bottom: 0.75rem;
+  .tipo-label {
+    font-weight: var(--fw-extrabold);
+    font-size: 1.0625rem;
+    color: var(--color-brand-dark-blue);
+    line-height: var(--lh-135);
+    margin-bottom: 0.5rem;
   }
-  .tiempos-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+  .tipo-desc {
     font-size: 0.8125rem;
     color: var(--color-ink);
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-surface);
-  }
-  .tiempos-row:last-child {
-    border-bottom: none;
-  }
-  .tiempos-tipo {
-    font-size: 0.72rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-  }
-  .tiempos-plazo {
-    font-weight: var(--fw-bold);
-    color: var(--color-ink);
-    white-space: nowrap;
-  }
-  .canal-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.78rem;
-    color: var(--color-ink);
-    opacity: 0.8;
-    text-decoration: none;
-    padding: 0.3rem 0;
-    border-bottom: 1px solid var(--color-surface);
-    transition:
-      color 0.15s,
-      opacity 0.15s;
-  }
-  .canal-item:last-child {
-    border-bottom: none;
-  }
-  a.canal-item:hover {
-    color: var(--color-ink);
-    opacity: 1;
+    opacity: 0.65;
+    line-height: var(--lh-160);
+    max-width: 24rem;
   }
 
   .pqrsf-form-wrap {
     background: var(--color-white);
     border-radius: var(--radius-lg);
     padding: 2.5rem;
-  }
-  .form-titulo {
-    font-family: var(--ff-heading);
-    font-size: 1.375rem;
-    font-weight: var(--fw-bold);
-    color: var(--color-ink);
-    margin-bottom: 0.375rem;
-  }
-  .form-subtitulo {
-    font-size: 0.875rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-    margin-bottom: 2rem;
-    line-height: var(--lh-160);
   }
   .pqrsf-form {
     display: flex;
@@ -448,9 +383,6 @@ const tipos = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-  }
-  .form-row-tipo-asunto {
-    grid-template-columns: 3fr 7fr;
   }
   .form-group {
     display: flex;
@@ -517,18 +449,12 @@ const tipos = [
     align-items: center;
     gap: 0.25rem;
     background: var(--color-surface);
-    border: 1.5px dashed rgba(var(--color-navy-rgb), 0.2);
     border-radius: var(--radius-sm);
     padding: 1.25rem 1rem;
     text-align: center;
     cursor: pointer;
-    transition:
-      border-color 0.15s,
-      background 0.15s;
   }
-  .file-drop:hover,
   .file-drop.drag-over {
-    border-color: var(--color-ink);
     background: var(--color-white);
   }
   .file-text {
@@ -703,24 +629,17 @@ const tipos = [
   }
 
   @media (max-width: 1023px) {
-    .pqrsf-grid {
-      grid-template-columns: 1fr;
-    }
-    .pqrsf-left {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
     .tipos-grid {
-      grid-column: 1 / -1;
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   @media (max-width: 639px) {
-    .pqrsf-left {
-      display: block;
+    .tipos-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 4rem;
     }
-    .form-row,
-    .form-row-tipo-asunto {
+    .form-row {
       grid-template-columns: 1fr;
       gap: 0;
     }
@@ -754,7 +673,6 @@ const tipos = [
   );
 
   const form            = document.getElementById("pqrsf-form") as HTMLFormElement | null;
-  const header          = document.getElementById("pqrsf-form-header");
   const success         = document.getElementById("pqrsf-success");
   const radicadoEl      = document.getElementById("pqrsf-radicado");
   const nueva           = document.getElementById("pqrsf-nueva");
@@ -951,7 +869,6 @@ const tipos = [
 
     if ((fd.get("website") as string ?? "").length > 0) {
       if (radicadoEl) radicadoEl.textContent = "—";
-      if (header) header.style.display = "none";
       form.style.display = "none";
       if (success) success.style.display = "flex";
       return;
@@ -1034,7 +951,6 @@ const tipos = [
     }
 
     if (radicadoEl) radicadoEl.textContent = radicado;
-    if (header) header.style.display = "none";
     form.style.display = "none";
     if (success) success.style.display = "flex";
   });
@@ -1047,7 +963,6 @@ const tipos = [
     enviando = false;
     if (asuntoCounter)  asuntoCounter.textContent  = `0 / ${MAX_LENGTHS.asunto}`;
     if (mensajeCounter) mensajeCounter.textContent = `0 / ${MAX_LENGTHS.mensaje}`;
-    if (header) header.style.display = "block";
     if (form)   form.style.display   = "flex";
     if (success) success.style.display = "none";
   });

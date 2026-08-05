@@ -37,6 +37,8 @@ const slides = [
 ];
 ---
 
+<div class="hero-wrapper relative">
+
 <section id="heroSlider" class="hero-slider relative w-full bg-slate-100 overflow-hidden" aria-label="Presentación FINTEGRAR">
 
   {slides.map((s, i) => (
@@ -46,23 +48,6 @@ const slides = [
       aria-hidden={i !== 0 ? 'true' : 'false'}
       style={s.image ? undefined : 'background: var(--color-navbar-bg);'}
     >
-      <svg class="slide-brand-shape absolute" viewBox="70 -5 135 163" aria-hidden="true">
-        <defs>
-          <linearGradient id={`slideGrad-${s.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0" stop-color="#00132b" />
-            <stop offset=".2" stop-color="#5c458f" />
-            <stop offset=".4" stop-color="#81c1d6" />
-            <stop offset=".6" stop-color="#7abf72" />
-            <stop offset=".8" stop-color="#efc747" />
-            <stop offset="1" stop-color="#d58b3b" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M116.33,46.53c-15.94,10.24-28.73,29.56-29.34,48.05-.32,8.32,2.23,19.12,11.82,20.57,9.57,1.09,17.09-8.34,21-16.14,5.52-12.43,6.96-27.35,15.26-38.85,8.48-11.85,19.69-23.74,35.5-23.79,19.15-.37,28.32,17.42,26.12,34.62-1.59,15.05-7.81,28.61-15.51,41.33-8.17,13.26-18.06,24.33-30.43,34.33-5.02,4.61-12.96,4.14-17.25-1.19-5.71-6.67-1.55-17.67,7.03-19.04,9.13-1.66,17.71-7.05,24.54-13.48,11.65-11.11,19.66-27.12,20.81-42.84.41-6.21-.3-12.36-2.84-16.98-5.51-10.07-21.53-12.47-31.06-5.51-5.51,3.95-10.47,8.72-14.15,14.39-8.03,11.65-8.5,25.88-14.26,38.78-4.81,9.79-13.07,20.8-25.29,20.48-13.59-.74-19.74-14.23-20.37-26.26-1.56-15.14,3.85-30.25,10.98-43.26,3.49-6.6,7.21-12.99,10.28-20.07,2.62-6.03,9.64-8.79,15.67-6.16,8.74,3.59,9.57,16.3,1.51,21.04h0Z"
-          fill={`url(#slideGrad-${s.id})`}
-        />
-      </svg>
-
       {s.image && (
         <>
           <img src={s.image} alt="" class="slide-photo absolute inset-0 w-full h-full object-cover" />
@@ -108,6 +93,25 @@ const slides = [
   ))}
 
 </section>
+
+<div class="hero-brand-shape-layer absolute inset-x-0 top-0" aria-hidden="true">
+  <svg class="slide-brand-shape absolute" viewBox="70 -5 135 163" aria-hidden="true">
+    <defs>
+      <linearGradient id="heroBrandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0" stop-color="#00132b" />
+        <stop offset=".2" stop-color="#5c458f" />
+        <stop offset=".4" stop-color="#81c1d6" />
+        <stop offset=".6" stop-color="#7abf72" />
+        <stop offset=".8" stop-color="#efc747" />
+        <stop offset="1" stop-color="#d58b3b" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M116.33,46.53c-15.94,10.24-28.73,29.56-29.34,48.05-.32,8.32,2.23,19.12,11.82,20.57,9.57,1.09,17.09-8.34,21-16.14,5.52-12.43,6.96-27.35,15.26-38.85,8.48-11.85,19.69-23.74,35.5-23.79,19.15-.37,28.32,17.42,26.12,34.62-1.59,15.05-7.81,28.61-15.51,41.33-8.17,13.26-18.06,24.33-30.43,34.33-5.02,4.61-12.96,4.14-17.25-1.19-5.71-6.67-1.55-17.67,7.03-19.04,9.13-1.66,17.71-7.05,24.54-13.48,11.65-11.11,19.66-27.12,20.81-42.84.41-6.21-.3-12.36-2.84-16.98-5.51-10.07-21.53-12.47-31.06-5.51-5.51,3.95-10.47,8.72-14.15,14.39-8.03,11.65-8.5,25.88-14.26,38.78-4.81,9.79-13.07,20.8-25.29,20.48-13.59-.74-19.74-14.23-20.37-26.26-1.56-15.14,3.85-30.25,10.98-43.26,3.49-6.6,7.21-12.99,10.28-20.07,2.62-6.03,9.64-8.79,15.67-6.16,8.74,3.59,9.57,16.3,1.51,21.04h0Z"
+      fill="url(#heroBrandGrad)"
+    />
+  </svg>
+</div>
 
 <div class="relative z-30 -mt-14 sm:-mt-20 -mb-20 sm:-mb-28">
   <div class="absolute inset-x-0 top-14 sm:top-20 bottom-0 bg-[var(--color-navbar-bg)]" aria-hidden="true"></div>
@@ -190,6 +194,8 @@ const slides = [
   </div>
 </div>
 
+</div>
+
 <style>
   .hero-slider {
     height: calc(650px + var(--header-h));
@@ -212,19 +218,31 @@ const slides = [
     object-position: center 30%;
   }
 
+  .hero-brand-shape-layer {
+    height: calc(650px + var(--header-h));
+    z-index: 40;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
+    will-change: opacity;
+  }
+  @media (max-width: 768px) {
+    .hero-brand-shape-layer {
+      height: calc(580px + var(--header-h));
+    }
+  }
+
   .slide-brand-shape {
-    top: -15%;
+    top: -20%;
     bottom: -15%;
     right: -4%;
     height: 130%;
     width: auto;
-    z-index: 1;
     pointer-events: none;
     opacity: 1;
   }
 
   @media (max-width: 639px) {
-    .slide-brand-shape {
+    .hero-brand-shape-layer {
       display: none;
     }
   }
@@ -390,4 +408,21 @@ const slides = [
 
   initSlider();
   document.addEventListener('astro:after-swap', initSlider);
+
+  function initBrandShapeFade() {
+    const layer = document.querySelector<HTMLElement>('.hero-brand-shape-layer');
+    if (!layer) return;
+
+    const fadeDistance = 600;
+
+    function updateOpacity() {
+      const opacity = Math.max(0, 1 - window.scrollY / fadeDistance);
+      layer!.style.opacity = String(opacity);
+    }
+
+    updateOpacity();
+    window.addEventListener('scroll', updateOpacity, { passive: true });
+  }
+
+  initBrandShapeFade();
 </script>

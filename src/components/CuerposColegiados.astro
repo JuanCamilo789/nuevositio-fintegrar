@@ -1,114 +1,21 @@
 ---
-import { Icon } from 'astro-icon/components';
 ---
 
-<section class="cc-section" aria-labelledby="cc-title">
+<section class="cc-section" aria-label="Cuerpos Colegiados">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center max-w-2xl mx-auto mb-14 reveal">
-      <h2 id="cc-title" class="font-display cc-heading">Cuerpos Colegiados</h2>
-      <p class="cc-intro">
-        Estructura de gobierno corporativo de Fintegrar, desde la Asamblea
-        General hasta los Asociados.
-      </p>
-    </div>
+    <p class="cc-intro reveal">
+      La estructura de gobierno corporativo de FINTEGRAR está conformada por órganos de dirección, administración, control y apoyo que trabajan de manera articulada para garantizar una gestión transparente, eficiente y alineada con los principios de la economía solidaria. Cada instancia cumple funciones específicas que contribuyen a la adecuada toma de decisiones, la supervisión de la gestión y la protección de los intereses de los asociados.
+    </p>
+  </div>
 
-    <div class="org-chart reveal">
-      <div class="org-node org-node--pill org-node--apex">
-        <Icon name="tabler:users" class="w-5 h-5" aria-hidden="true" />
-        Asamblea General
-      </div>
-
-      <div class="org-connector"></div>
-
-      <div class="org-tier">
-        <div class="org-branch">
-          <div class="org-card">
-            <div class="org-card-icon">
-              <Icon name="tabler:shield-check" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="org-card-label">Organismos de Control</span>
-          </div>
-        </div>
-        <div class="org-branch org-branch--dashed">
-          <div class="org-card org-card--dashed">
-            <div class="org-card-icon">
-              <Icon name="tabler:clipboard-check" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="org-card-label">Revisoría Fiscal</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="org-connector"></div>
-
-      <div class="org-node org-node--pill">
-        <Icon name="tabler:users-group" class="w-5 h-5" aria-hidden="true" />
-        Junta Directiva
-      </div>
-
-      <div class="org-connector"></div>
-
-      <div class="org-tier">
-        <div class="org-branch">
-          <div class="org-card">
-            <div class="org-card-icon">
-              <Icon name="tabler:layout-grid" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="org-card-label">Comités Auxiliares</span>
-          </div>
-        </div>
-        <div class="org-branch org-branch--chain">
-          <div class="org-card">
-            <div class="org-card-icon">
-              <Icon name="tabler:bulb" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="org-card-label">Comités Asesores</span>
-          </div>
-          <div class="org-connector org-connector--short org-connector--dashed"></div>
-          <div class="org-card org-card--dashed">
-            <div class="org-card-icon">
-              <Icon name="tabler:shield-lock" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="org-card-label">Oficial de Cumplimiento</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="org-connector"></div>
-
-      <div class="org-node org-node--pill">
-        <Icon name="tabler:user-cog" class="w-5 h-5" aria-hidden="true" />
-        Gerente
-      </div>
-
-      <div class="org-connector"></div>
-
-      <div class="org-node org-node--outline">
-        <Icon name="tabler:briefcase" class="w-4 h-4" aria-hidden="true" />
-        Auxiliar Administrativo
-      </div>
-
-      <div class="org-connector"></div>
-
-      <div class="org-node org-node--outline">
-        <Icon name="tabler:heart-handshake" class="w-4 h-4" aria-hidden="true" />
-        Asociados
-      </div>
-    </div>
-
+  <div class="max-w-[96rem] mx-auto px-6">
     <div class="cc-members reveal">
-      <div class="cc-members-header">
-        <h3 class="cc-members-title">Integrantes</h3>
-        <p class="cc-members-sub">Período vigente de la Junta Directiva y los comités.</p>
-      </div>
-
       <div class="member-grid">
-        <div class="member-card">
+        <div class="member-card cc-fade">
           <div class="member-card-head">
-            <div class="member-card-icon">
-              <Icon name="tabler:users-group" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="member-card-title">Junta Directiva</span>
+            <span class="cc-org-title-main">Junta</span>
+            <br />
+            <span class="cc-org-title-sub">Directiva</span>
           </div>
           <div class="member-role-grid">
             <div class="member-role">
@@ -134,39 +41,51 @@ import { Icon } from 'astro-icon/components';
           </div>
         </div>
 
-        <div class="member-card">
+        <div class="member-card cc-fade">
           <div class="member-card-head">
-            <div class="member-card-icon">
-              <Icon name="tabler:layout-grid" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="member-card-title">Comité de Crédito</span>
+            <span class="cc-org-title-main">Comité</span>
+            <br />
+            <span class="cc-org-title-sub">de Crédito</span>
           </div>
           <ul class="member-list">
-            <li>Cindy Vanessa Olaya Hidalgo</li>
-            <li>Yulieth Yohana González Ospina</li>
+            <li>
+              <span class="member-list-label">Integrante</span>
+              <span class="member-list-name">Cindy Vanessa Olaya Hidalgo</span>
+            </li>
+            <li>
+              <span class="member-list-label">Integrante</span>
+              <span class="member-list-name">Yulieth Yohana González Ospina</span>
+            </li>
           </ul>
         </div>
 
-        <div class="member-card">
+        <div class="member-card cc-fade">
           <div class="member-card-head">
-            <div class="member-card-icon">
-              <Icon name="tabler:shield-check" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="member-card-title">Comité de Riesgos</span>
+            <span class="cc-org-title-main">Comité</span>
+            <br />
+            <span class="cc-org-title-sub">de Riesgos</span>
           </div>
           <ul class="member-list">
-            <li>Alejandra Luna Gaviria</li>
-            <li>Johnatan Gutiérrez Sossa</li>
-            <li>Dora Marcela Ríos Henao</li>
+            <li>
+              <span class="member-list-label">Integrante</span>
+              <span class="member-list-name">Alejandra Luna Gaviria</span>
+            </li>
+            <li>
+              <span class="member-list-label">Integrante</span>
+              <span class="member-list-name">Johnatan Gutiérrez Sossa</span>
+            </li>
+            <li>
+              <span class="member-list-label">Integrante</span>
+              <span class="member-list-name">Dora Marcela Ríos Henao</span>
+            </li>
           </ul>
         </div>
 
-        <div class="member-card">
+        <div class="member-card cc-fade">
           <div class="member-card-head">
-            <div class="member-card-icon">
-              <Icon name="tabler:clipboard-check" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="member-card-title">Comité de Control Social</span>
+            <span class="cc-org-title-main">Comité</span>
+            <br />
+            <span class="cc-org-title-sub">de Control Social</span>
           </div>
           <div class="member-role-grid">
             <div class="member-role">
@@ -187,12 +106,11 @@ import { Icon } from 'astro-icon/components';
           </div>
         </div>
 
-        <div class="member-card">
+        <div class="member-card cc-fade">
           <div class="member-card-head">
-            <div class="member-card-icon">
-              <Icon name="tabler:user-cog" class="w-5 h-5" aria-hidden="true" />
-            </div>
-            <span class="member-card-title">Gerencia</span>
+            <span class="cc-org-title-main">Gerencia</span>
+            <br />
+            <span class="cc-org-title-sub">Representante</span>
           </div>
           <div class="member-role">
             <span class="member-role-title">Gerente y Representante Legal</span>
@@ -210,206 +128,35 @@ import { Icon } from 'astro-icon/components';
     padding: 5rem 0 6rem;
   }
 
-  .cc-heading {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    color: var(--color-ink);
-    line-height: var(--lh-120);
-    margin-bottom: 1rem;
-  }
-
   .cc-intro {
+    margin: 0 0 2.5rem;
+    text-align: left;
     font-size: 1rem;
     color: var(--color-ink);
-    opacity: 0.6;
-    line-height: var(--lh-170);
+    opacity: 0.7;
+    line-height: var(--lh-175);
   }
 
-  .org-chart {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2.25rem 2.5rem 1.75rem;
-  }
-
-  .org-chart::before {
-    content: "";
-    position: absolute;
-    inset: 0.75rem 0 0.5rem;
-    border: 1.5px dashed rgba(var(--color-brand-purple-rgb), 0.25);
-    border-radius: var(--radius-xl);
-    pointer-events: none;
-  }
-
-  .org-connector {
-    width: 0;
-    height: 1.75rem;
-    border-left: 2px solid rgba(var(--color-brand-purple-rgb), 0.4);
-    flex-shrink: 0;
-  }
-
-  .org-connector--short {
-    height: 1.25rem;
-  }
-
-  .org-connector--dashed {
-    border-left-style: dashed;
-    border-color: rgba(var(--color-brand-purple-rgb), 0.32);
-  }
-
-  /* nodos de línea directa (tronco), estilo píldora con degradado de marca */
-  .org-node {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: var(--fw-bold);
-    border-radius: var(--radius-full);
-    white-space: nowrap;
-  }
-
-  .org-node--pill {
-    background: var(--gradient-brand);
-    color: var(--color-white);
-    padding: 0.75rem 1.75rem;
-    font-size: 0.9375rem;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .org-node--apex {
-    font-size: 1.0625rem;
-    padding: 0.9rem 2.25rem;
-  }
-
-  .org-node--outline {
-    background: transparent;
-    color: var(--color-ink);
-    border: 1.5px solid rgba(var(--color-ink-rgb), 0.28);
-    font-weight: var(--fw-semibold);
-    padding: 0.5625rem 1.5rem;
-    font-size: 0.875rem;
-    opacity: 0.85;
-  }
-
-  /* ramas: pares de órganos con línea de conexión */
-  .org-tier {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 3rem;
-    z-index: 1;
-    position: relative;
-  }
-
-  /* tronco central continuo, atraviesa toda la fila sin cortes */
-  .org-tier::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    border-left: 2px solid rgba(var(--color-brand-purple-rgb), 0.4);
-    transform: translateX(-50%);
-    z-index: 0;
-  }
-
-  .org-branch {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1.5rem;
-  }
-
-  .org-branch::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 0;
-    height: 1.5rem;
-    border-left: 2px solid rgba(var(--color-brand-purple-rgb), 0.4);
-    transform: translateX(-50%);
-  }
-
-  .org-branch::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    height: 0;
-    border-top: 2px solid rgba(var(--color-brand-purple-rgb), 0.4);
-  }
-
-  .org-branch:first-child::after {
-    left: 50%;
-    width: calc(50% + 1.5rem);
-  }
-
-  .org-branch:last-child::after {
-    right: 50%;
-    width: calc(50% + 1.5rem);
-  }
-
-  .org-branch--dashed::before,
-  .org-branch--dashed::after {
-    border-style: dashed;
-    border-color: rgba(var(--color-brand-purple-rgb), 0.32);
-  }
-
-  .org-branch--chain {
-    gap: 0;
-  }
-
-  .org-card {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--color-white);
-    border: 1px solid var(--color-surface);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    padding: 0.75rem 1.25rem;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-
-  .org-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
-
-  .org-card-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-sm);
-    background: rgba(var(--color-brand-purple-rgb), 0.1);
+  .cc-org-title-main {
+    font-family: var(--ff-heading);
+    font-weight: var(--fw-extrabold);
+    font-size: clamp(3rem, 5.5vw, 4.5rem);
+    line-height: var(--lh-100);
     color: var(--color-brand-purple);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .org-card-label {
-    font-size: 0.875rem;
-    font-weight: var(--fw-bold);
-    color: var(--color-ink);
     white-space: nowrap;
   }
 
-  .org-card--dashed {
-    background: var(--color-surface);
-    border-style: dashed;
-    border-color: rgba(var(--color-brand-purple-rgb), 0.35);
-    box-shadow: none;
-  }
-
-  .org-card--dashed .org-card-label {
-    font-weight: var(--fw-semibold);
-    opacity: 0.85;
+  .cc-org-title-sub {
+    font-family: var(--ff-heading);
+    font-weight: var(--fw-regular);
+    font-size: clamp(1.625rem, 2.6vw, 2.125rem);
+    line-height: var(--lh-100);
+    color: var(--color-brand-purple);
+    white-space: nowrap;
   }
 
   .cc-members {
-    margin-top: 3.5rem;
+    margin-top: 2.5rem;
   }
 
   .cc-members-header {
@@ -434,50 +181,35 @@ import { Icon } from 'astro-icon/components';
   .member-grid {
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
   }
 
   .member-card {
     display: flex;
     align-items: center;
     gap: 2rem;
-    padding: 1.75rem 0;
-    border-bottom: 1px solid var(--color-surface);
+    padding: 5rem 3rem;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s, transform 0.3s;
   }
 
-  .member-grid .member-card:last-child {
-    border-bottom: none;
+  .member-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
   }
 
   .member-card-head {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
     flex-shrink: 0;
-    width: 15rem;
-  }
-
-  .member-card-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-sm);
-    background: rgba(var(--color-brand-purple-rgb), 0.1);
-    color: var(--color-brand-purple);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .member-card-title {
-    font-size: 1rem;
-    font-weight: var(--fw-bold);
-    color: var(--color-ink);
+    width: 23rem;
+    text-align: right;
   }
 
   .member-role-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.5rem;
   }
 
@@ -507,13 +239,30 @@ import { Icon } from 'astro-icon/components';
   }
 
   .member-list {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .member-list li {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.25rem;
+  }
+
+  .member-list-label {
+    font-size: 0.75rem;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    color: var(--color-brand-purple);
+  }
+
+  .member-list-name {
     font-size: 0.9375rem;
-    font-weight: var(--fw-semibold);
+    font-weight: var(--fw-bold);
     color: var(--color-ink);
-    list-style: none;
   }
 
   @media (max-width: 1023px) {
@@ -526,41 +275,46 @@ import { Icon } from 'astro-icon/components';
     .cc-section {
       padding: 2.5rem 0 3rem;
     }
-    .org-chart {
-      padding: 2rem 1rem 1.5rem;
-    }
-    .org-card-label,
-    .org-node--pill,
-    .org-node--outline {
-      white-space: normal;
-      text-align: center;
-    }
-    .org-tier {
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .org-branch {
-      padding-top: 1.5rem;
-    }
-    .org-branch::after {
-      content: none;
-    }
-    .org-tier::before {
-      content: none;
-    }
     .member-card {
       flex-direction: column;
       align-items: flex-start;
       gap: 1rem;
-      padding: 1.25rem 0;
+      padding: 1.75rem;
     }
     .member-card-head {
       width: auto;
+      text-align: left;
     }
-    .member-role-grid {
+    .member-role-grid,
+    .member-list {
       width: 100%;
       grid-template-columns: 1fr;
     }
   }
+
+  .cc-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.21, 0.6, 0.35, 1),
+      transform 0.6s cubic-bezier(0.21, 0.6, 0.35, 1);
+    will-change: opacity, transform;
+  }
+
+  .cc-fade.cc-fade-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>
+
+<script>
+  const ccFadeEls = document.querySelectorAll(".cc-fade");
+  const ccFadeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("cc-fade-visible", entry.isIntersecting);
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+  );
+  ccFadeEls.forEach((el) => ccFadeObserver.observe(el));
+</script>

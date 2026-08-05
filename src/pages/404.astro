@@ -5,249 +5,114 @@ import { Icon } from 'astro-icon/components';
 export const prerender = true;
 ---
 
-<InnerLayout 
-  pageTitle="Página no encontrada" 
-  pageSubtitle="Error 404 — Lo sentimos, no pudimos encontrar lo que buscabas."
-  description="La página que buscas no existe o ha sido movida. Regresa al inicio de FINTEGRAR."
+<InnerLayout
+  pageTitle="Página no encontrada"
+  pageSubtitle="Lo sentimos, la página solicitada no está disponible."
+  description="La página que buscas no existe o ha sido movida."
 >
   <div class="error-container">
-    <div class="error-visual">
-      <div class="error-number">
-        <span>4</span>
-        <div class="error-icon-wrapper">
-          <Icon name="tabler:help-hexagon" class="error-icon" />
-        </div>
-        <span>4</span>
-      </div>
-      <div class="error-decoration"></div>
-    </div>
+    <div class="bg-404-watermark" aria-hidden="true">404</div>
 
     <div class="error-content">
-      <h2 class="error-message">¿Te has perdido en nuestro portal?</h2>
+      <h1 class="error-number">404</h1>
+      <h2 class="error-message">¡Ups! No encontramos esta página</h2>
       <p class="error-description">
-        Es posible que la dirección sea incorrecta o que hayamos movido el contenido a una nueva ubicación. 
-        No te preocupes, puedes volver a navegar desde nuestra página principal.
+        Es posible que la dirección sea incorrecta o que la página haya sido movida.
+        Vuelve a navegar desde nuestra página principal.
       </p>
-      
-      <div class="error-actions">
-        <a href="/" class="btn-primary">
-          <Icon name="tabler:home" class="w-5 h-5" />
-          Volver al Inicio
-        </a>
-      </div>
-    </div>
-
-    <div class="quick-links">
-      <h3 class="quick-links-title">Enlaces rápidos</h3>
-      <div class="links-grid">
-        <a href="/nosotros" class="quick-link">
-          <Icon name="tabler:users" class="icon" />
-          <span>Sobre Nosotros</span>
-        </a>
-        <a href="/creditos" class="quick-link">
-          <Icon name="tabler:wallet" class="icon" />
-          <span>Créditos</span>
-        </a>
-        <a href="/nosotros#auxilios" class="quick-link">
-          <Icon name="tabler:heart" class="icon" />
-          <span>Bienestar</span>
-        </a>
-        <a href="/directorio" class="quick-link">
-          <Icon name="tabler:address-book" class="icon" />
-          <span>Directorio</span>
-        </a>
-      </div>
+      <a href="/" class="error-back-link">
+        Volver al inicio
+        <Icon name="tabler:arrow-right" class="w-4 h-4" aria-hidden="true" />
+      </a>
     </div>
   </div>
 </InnerLayout>
 
 <style>
   .error-container {
+    position: relative;
     max-width: 800px;
     margin: 0 auto;
-    padding: 6rem 1.5rem 10rem;
+    padding: 5rem 1.5rem 6rem;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3.5rem;
+    overflow: hidden;
   }
 
-  .error-visual {
+  .bg-404-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22rem;
+    font-weight: var(--fw-extrabold);
+    color: var(--color-brand-dark-blue);
+    opacity: 0.05;
+    line-height: var(--lh-100);
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    white-space: nowrap;
+  }
+
+  .error-content {
     position: relative;
+    z-index: 1;
+    max-width: 500px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
   }
 
   .error-number {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    font-size: clamp(8rem, 15vw, 12rem);
+    font-size: 6.875rem;
     font-weight: var(--fw-extrabold);
-    color: var(--color-ink);
+    color: var(--color-brand-dark-blue);
     line-height: var(--lh-100);
-    letter-spacing: -0.05em;
-    position: relative;
-    z-index: 1;
-  }
-
-  .error-icon-wrapper {
-    background: var(--color-brand-yellow);
-    color: var(--color-ink);
-    width: 0.85em;
-    height: 0.85em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-lg);
-    transform: rotate(12deg);
-    box-shadow: 0 12px 30px rgba(var(--color-brand-yellow-rgb), 0.3);
-    margin: 0 -0.1em;
-  }
-
-  .error-icon {
-    width: 65%;
-    height: 65%;
-  }
-
-  .error-decoration {
-    position: absolute;
-    width: 140%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(var(--color-accent-teal-rgb), 0.05) 0%, transparent 70%);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .error-content {
-    max-width: 600px;
+    letter-spacing: -0.04em;
+    margin: 0 0 0.5rem 0;
   }
 
   .error-message {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    color: var(--color-ink);
-    margin-bottom: 1.25rem;
+    font-size: 1.75rem;
+    color: var(--color-brand-dark-blue);
+    font-weight: var(--fw-extrabold);
+    margin: 0 0 0.75rem 0;
+    line-height: var(--lh-120);
   }
 
   .error-description {
-    font-size: 1.125rem;
+    font-size: 0.9375rem;
     color: rgba(var(--color-navy-rgb), 0.7);
-    margin-bottom: 2.5rem;
+    line-height: var(--lh-160);
+    margin: 0 0 2rem 0;
   }
 
-  .error-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  .btn-primary {
+  .error-back-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    background: var(--color-accent-teal);
-    color: var(--color-white);
-    padding: 1rem 2.5rem;
-    border-radius: var(--radius-full);
+    gap: 0.5rem;
+    font-size: 0.9375rem;
     font-weight: var(--fw-semibold);
+    color: var(--color-brand-purple);
     text-decoration: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(var(--color-accent-teal-rgb), 0.15);
+    transition: gap 0.2s;
   }
 
-  .btn-primary:hover {
-    background: var(--color-accent-teal-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(var(--color-accent-teal-rgb), 0.2);
-  }
-
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
+  .error-back-link:hover {
     gap: 0.75rem;
-    background: transparent;
-    color: var(--color-ink);
-    padding: 1rem 2rem;
-    border: 2px solid rgba(var(--color-navy-rgb), 0.1);
-    border-radius: var(--radius-md);
-    font-weight: var(--fw-semibold);
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .btn-outline:hover {
-    background: rgba(var(--color-navy-rgb), 0.04);
-    border-color: rgba(var(--color-navy-rgb), 0.2);
-  }
-
-  .quick-links {
-    width: 100%;
-    padding-top: 4rem;
-    border-top: 1px solid rgba(var(--color-navy-rgb), 0.08);
-  }
-
-  .quick-links-title {
-    font-size: 0.75rem;
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    color: rgba(var(--color-navy-rgb), 0.4);
-    margin-bottom: 2rem;
-  }
-
-  .links-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-    width: 100%;
-  }
-
-  .quick-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1.5rem 1rem;
-    background: var(--color-white);
-    border: 1px solid rgba(var(--color-navy-rgb), 0.05);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    color: var(--color-ink);
-    transition: all 0.2s;
-  }
-
-  .quick-link:hover {
-    background: var(--color-admin-bg-alt);
-    border-color: var(--color-accent-teal);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(var(--color-navy-rgb), 0.06);
-  }
-
-  .quick-link .icon {
-    width: 1.75rem;
-    height: 1.75rem;
-    color: var(--color-accent-teal);
-  }
-
-  .quick-link span {
-    font-size: 0.875rem;
-    font-weight: var(--fw-semibold);
   }
 
   @media (max-width: 640px) {
-    .error-container {
-      padding: 4rem 1.25rem 6rem;
+    .bg-404-watermark {
+      font-size: 12rem;
     }
     .error-number {
-      gap: 0.75rem;
+      font-size: 4.375rem;
     }
-    .links-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .error-message {
+      font-size: 1.375rem;
     }
   }
 </style>
