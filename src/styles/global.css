@@ -430,6 +430,29 @@
     }
   }
 
+  .mega-col-image {
+    position: relative;
+  }
+
+  .mega-col-image-img {
+    position: absolute;
+    right: 0;
+    bottom: -2rem;
+    height: 260px;
+    width: auto;
+    pointer-events: none;
+  }
+
+  .mega-col-image-img--sm {
+    height: 180px;
+  }
+
+  @media (max-width: 1280px) {
+    .mega-col-image {
+      display: none;
+    }
+  }
+
   .mega-col {
     padding: 0 2rem;
     border-right: 1px solid var(--color-surface);
