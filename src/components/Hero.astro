@@ -63,7 +63,7 @@ const slides = [
 
             <div class="max-w-2xl w-full min-w-0 text-center sm:text-left flex flex-col items-center sm:items-start">
 
-              <h1 class="slide-title text-4xl md:text-5xl lg:text-[4rem] font-extrabold leading-[1.1] mb-6 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: both;" set:html={s.heading} />
+              <h1 class="slide-title max-w-xl text-4xl md:text-5xl lg:text-[4rem] font-extrabold leading-[1.1] mb-6 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: both;" set:html={s.heading} />
 
               <p class="slide-lead text-lg md:text-xl mb-8 max-w-xl animate-fade-in-up" style="animation-delay: 0.4s; animation-fill-mode: both;">
                 {s.lead}
@@ -72,13 +72,13 @@ const slides = [
               {(s.cta1 || s.cta2) && (
                 <div class="slide-ctas flex flex-wrap items-center justify-center sm:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
                   {s.cta1 && (
-                    <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta1.primary ? 'btn-gradient shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                    <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta1.primary ? 'hero-btn-purple shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                       {s.cta1.icon && <Icon name={s.cta1.icon} class="w-5 h-5" />}
                       {s.cta1.label}
                     </a>
                   )}
                   {s.cta2 && (
-                    <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta2.primary ? 'btn-gradient shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                    <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta2.primary ? 'hero-btn-purple shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                       {s.cta2.label}
                       {s.cta2.icon && <Icon name={s.cta2.icon} class="w-5 h-5" />}
                     </a>
@@ -121,7 +121,7 @@ const slides = [
     <a href="/creditos" class="hero-feature-card relative block h-[280px] group hover:-translate-y-1 transition-transform duration-300 no-underline cursor-pointer">
       <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgba(var(--color-black-rgb),0.08)] bg-white">
         <svg class="absolute bottom-0 left-0 w-full h-[55%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
-          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="#722CCE" />
+          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="var(--color-brand-sky-blue)" />
         </svg>
       </div>
       <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
@@ -148,7 +148,7 @@ const slides = [
     <a href="/ahorros" class="hero-feature-card relative block h-[280px] group hover:-translate-y-1 transition-transform duration-300 no-underline cursor-pointer">
       <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgba(var(--color-black-rgb),0.08)] bg-white">
         <svg class="absolute bottom-0 left-0 w-full h-[55%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
-          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="#722CCE" />
+          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="var(--color-brand-sky-blue)" />
         </svg>
       </div>
       <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
@@ -175,7 +175,7 @@ const slides = [
     <a href="/nosotros" class="hero-feature-card relative block h-[280px] group hover:-translate-y-1 transition-transform duration-300 no-underline cursor-pointer">
       <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgba(var(--color-black-rgb),0.08)] bg-white">
         <svg class="absolute bottom-0 left-0 w-full h-[55%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
-          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="#722CCE" />
+          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="var(--color-brand-sky-blue)" />
         </svg>
       </div>
       <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
@@ -206,6 +206,11 @@ const slides = [
 </div>
 
 <style>
+  .hero-btn-purple {
+    background: var(--color-brand-purple);
+    color: var(--color-white);
+  }
+
   .hero-slider {
     height: calc(650px + var(--header-h));
     min-height: calc(72vh + var(--header-h));

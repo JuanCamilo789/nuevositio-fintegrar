@@ -5,10 +5,7 @@ import Hero from '../components/Hero.astro';
 import HeroAlternative from '../components/HeroAlternative.astro';
 import TasasVigentes from '../components/TasasVigentes.astro';
 import DigitalBanking from '../components/DigitalBanking.astro';
-import BlogBanner from '../components/BlogBanner.astro';
-import ConfianzaSeguridad from '../components/ConfianzaSeguridad.astro';
 import Novedades from '../components/Novedades.astro';
-import SimuladorCredito from '../components/SimuladorCredito.astro';
 import ComoFunciona from '../components/ComoFunciona.astro';
 import Footer from '../components/Footer.astro';
 
@@ -20,14 +17,11 @@ Astro.response.headers.set('Cache-Control', 'public, s-maxage=60, stale-while-re
   <Navbar />
   <main>
     <Hero />
+    <DigitalBanking />
+    <ComoFunciona />
     <HeroAlternative />
     <TasasVigentes />
-    <DigitalBanking />
-    <BlogBanner />
-    <ConfianzaSeguridad class="py-16" />
     <Novedades />
-    <SimuladorCredito />
-    <ComoFunciona />
   </main>
   <Footer />
 </Layout>

@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
+import { cdtCondiciones, creditos } from '../data/tasas';
 ---
 
 <section class="tasas-section" aria-labelledby="tasas-title">
@@ -14,28 +14,21 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
         >
           CDAT y líneas de crédito
         </h2>
+        <p class="section-header-aside">
+          Tasas informativas sujetas a cambio sin previo aviso, expresadas en Mes
+          Vencido (M.V.) según el producto.
+        </p>
       </div>
-      <p class="section-header-aside">
-        Tasas informativas sujetas a cambio sin previo aviso, expresadas en Mes
-        Vencido (M.V.) según el producto.
-      </p>
     </div>
 
     <div class="cdt-panel reveal">
       <div class="cdt-panel-head">
         <div class="cdt-panel-heading">
-          <div class="cdt-icon">
-            <Icon name="tabler:wallet" class="w-5 h-5" aria-hidden="true" />
-          </div>
           <div>
             <h3 class="cdt-titulo">CDAT — Certificado de Depósito de Ahorro a Término</h3>
             <p class="cdt-subtitulo">Invierta su dinero con excelente rentabilidad y seguridad</p>
           </div>
         </div>
-        <span class="cdt-updated">
-          <Icon name="tabler:clock" class="w-3.5 h-3.5" aria-hidden="true" />
-          Actualizado {fechaActualizacion}
-        </span>
       </div>
 
       <div class="cdt-ticker">
@@ -46,22 +39,22 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
             <div class="cdt-tile-tasa">{c.valor}</div>
           </div>
         ))}
+        <div class="cdt-tile-spacer" aria-hidden="true"></div>
       </div>
+      <img
+        src="/assets/img/mega-creditos-persona.png"
+        alt=""
+        class="cdt-panel-photo"
+        loading="lazy"
+      />
       <p class="cdt-nota">
-        Usted elige el plazo, la periodicidad de pago de los intereses y la
-        forma de entrega. Consulte con un asesor para conocer la tasa
-        aplicable a su monto y plazo.
+        Elige el plazo, la periodicidad de pago y la forma de entrega.
+        Consulte con un asesor para conocer la tasa aplicable al monto y
+        plazo elegido.
       </p>
     </div>
 
-    <div class="creditos-panel card-base reveal reveal-delay-1">
-      <div class="creditos-panel-head">
-        <div class="cdt-icon">
-          <Icon name="tabler:credit-card" class="w-5 h-5" aria-hidden="true" />
-        </div>
-        <h3 class="cdt-titulo">Líneas de crédito</h3>
-      </div>
-
+    <div class="creditos-panel reveal reveal-delay-1">
       <div class="creditos-table">
         <div class="creditos-row creditos-row--head" aria-hidden="true">
           <span>Producto</span>
@@ -107,29 +100,19 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
     font-size: 0.875rem;
     color: var(--color-ink);
     opacity: 0.55;
-    line-height: var(--lh-170);
-    max-width: 340px;
-    flex-shrink: 0;
+    line-height: var(--lh-120);
+    max-width: none;
+    white-space: nowrap;
+    margin-top: 0.25rem;
   }
 
   .cdt-panel {
     position: relative;
-    background: var(--color-ink);
+    background: var(--gradient-brand);
     border-radius: var(--radius-lg);
     padding: 2.25rem 2.25rem 2.25rem;
     margin-bottom: 1.5rem;
     box-shadow: var(--shadow-xl);
-    overflow: hidden;
-  }
-
-  .cdt-panel::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--gradient-brand);
   }
 
   .cdt-panel-head {
@@ -193,31 +176,45 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
   .cdt-ticker {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(var(--color-white-rgb), 0.08);
-    border-radius: var(--radius-md);
-    overflow: hidden;
+    gap: 1rem;
   }
 
   .cdt-tile {
     position: relative;
-    background: var(--color-ink);
+    background: rgba(var(--color-white-rgb), 0.12);
+    border-radius: var(--radius-md);
     padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    transition: background 0.2s;
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
   }
 
   .cdt-tile:hover {
-    background: rgba(var(--color-white-rgb), 0.04);
+    transform: translateY(-6px) scale(1.03);
+    background: rgba(var(--color-white-rgb), 0.2);
+    box-shadow: var(--shadow-md);
   }
 
   .cdt-tile--destacado {
-    background: rgba(var(--color-brand-yellow-rgb), 0.08);
+    background: rgba(var(--color-white-rgb), 0.2);
   }
   .cdt-tile--destacado:hover {
-    background: rgba(var(--color-brand-yellow-rgb), 0.12);
+    background: rgba(var(--color-white-rgb), 0.28);
+  }
+
+  .cdt-tile-spacer {
+    background: transparent;
+  }
+
+  .cdt-panel-photo {
+    position: absolute;
+    right: 4rem;
+    bottom: 0rem;
+    height: 330px;
+    width: auto;
+    pointer-events: none;
+    z-index: 2;
   }
 
   .cdt-badge {
@@ -254,21 +251,13 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
   .cdt-nota {
     font-size: 0.8125rem;
     color: rgba(var(--color-white-rgb), 0.5);
-    line-height: var(--lh-160);
-    margin-top: 1.25rem;
-    max-width: 640px;
+    line-height: var(--lh-120);
+    margin-top: 1.75rem;
+    white-space: nowrap;
   }
 
   .creditos-panel {
-    padding: 2rem 2.25rem 1.25rem;
-    box-shadow: var(--shadow-md);
-  }
-
-  .creditos-panel-head {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    padding: 0.5rem 0.75rem 0;
   }
 
   .creditos-table {
@@ -283,7 +272,7 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
     gap: 1.5rem;
     padding: 1rem 0.75rem;
     margin: 0 -0.75rem;
-    border-bottom: 1px solid var(--color-surface);
+    border-bottom: 1px solid var(--color-border-light);
     border-radius: var(--radius-sm);
     transition: background 0.15s;
   }
@@ -291,11 +280,11 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
     border-bottom: none;
   }
   .creditos-row:not(.creditos-row--head):hover {
-    background: var(--color-surface);
+    background: var(--color-white);
   }
 
   .creditos-row--head {
-    padding-top: 0;
+    padding-top: 1rem;
     padding-bottom: 0.75rem;
     font-size: 0.7rem;
     font-weight: var(--fw-bold);
@@ -344,7 +333,7 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
     opacity: 0.45;
     line-height: var(--lh-160);
     margin-top: 1.25rem;
-    max-width: 640px;
+    white-space: nowrap;
   }
 
   @media (max-width: 1023px) {
@@ -359,9 +348,16 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
     }
     .section-header-aside {
       max-width: none;
+      white-space: normal;
+    }
+    .tasas-footnote {
+      white-space: normal;
     }
     .cdt-ticker {
       grid-template-columns: repeat(2, 1fr);
+    }
+    .cdt-nota {
+      white-space: normal;
     }
   }
 
@@ -378,6 +374,9 @@ import { fechaActualizacion, cdtCondiciones, creditos } from '../data/tasas';
     }
     .cdt-ticker {
       grid-template-columns: repeat(2, 1fr);
+    }
+    .cdt-panel-photo {
+      display: none;
     }
     .creditos-panel {
       padding: 1.5rem;
