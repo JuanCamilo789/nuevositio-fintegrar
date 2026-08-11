@@ -1,0 +1,103 @@
+---
+---
+
+<div class="hero-banner relative w-full mt-16 sm:mt-24 overflow-hidden" data-dark-bg>
+  <img
+    src="/assets/img/banner-completo.png"
+    alt=""
+    class="w-full h-full object-cover"
+    loading="lazy"
+  />
+  <div class="hero-banner-scrim absolute inset-0" aria-hidden="true"></div>
+  <div class="hero-banner-text absolute inset-0 flex items-center">
+    <div class="hero-banner-row flex items-center gap-6 sm:gap-8 pl-16 sm:pl-28 md:pl-40">
+      <img
+        src="/assets/logos/logo1.png"
+        alt="FINTEGRAR"
+        class="hero-banner-logo brightness-0 invert flex-shrink-0"
+      />
+      <span class="hero-banner-divider flex-shrink-0" aria-hidden="true"></span>
+      <div>
+        <h2 class="hero-banner-title whitespace-nowrap">Crecer juntos es nuestro propósito.</h2>
+        <p class="hero-banner-lead whitespace-nowrap">Soluciones pensadas para acompañarle hoy y construir un mejor mañana.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-banner {
+    aspect-ratio: 21 / 4;
+  }
+  @media (max-width: 639px) {
+    .hero-banner {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  .hero-banner-logo {
+    height: 3rem;
+    width: auto;
+  }
+  @media (max-width: 639px) {
+    .hero-banner-logo {
+      height: 2rem;
+    }
+  }
+
+  .hero-banner-divider {
+    width: 1px;
+    height: 3rem;
+    background: rgba(var(--color-white-rgb), 0.4);
+  }
+  @media (max-width: 639px) {
+    .hero-banner-divider {
+      height: 2.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-banner-row {
+      gap: 1rem;
+    }
+  }
+
+  .hero-banner-scrim {
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      rgba(var(--color-ink-rgb), 0.9) 0%,
+      rgba(var(--color-ink-rgb), 0.65) 40%,
+      rgba(var(--color-ink-rgb), 0.2) 70%,
+      rgba(var(--color-ink-rgb), 0) 90%
+    );
+  }
+
+  .hero-banner-text {
+    z-index: 2;
+  }
+
+  .hero-banner-title {
+    font-family: var(--ff-heading);
+    font-size: clamp(0.8125rem, 2.4vw, 2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--color-white);
+    text-shadow: 0 2px 12px rgba(var(--color-ink-rgb), 0.35);
+  }
+
+  .hero-banner-lead {
+    font-family: var(--ff-heading);
+    font-size: clamp(0.625rem, 1.1vw, 1rem);
+    line-height: var(--lh-160);
+    color: rgba(var(--color-white-rgb), 0.85);
+    margin-top: 0.5rem;
+    text-shadow: 0 1px 8px rgba(var(--color-ink-rgb), 0.3);
+  }
+
+  @media (max-width: 639px) {
+    .hero-banner-lead {
+      display: none;
+    }
+  }
+</style>

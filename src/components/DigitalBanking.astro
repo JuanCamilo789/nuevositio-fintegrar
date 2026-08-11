@@ -3,13 +3,13 @@ import { Icon } from 'astro-icon/components';
 import ConfianzaSeguridad from './ConfianzaSeguridad.astro';
 ---
 
-<section class="db-slider-wrap w-full">
+<section class="db-slider-wrap w-full mt-8 sm:mt-16 lg:mt-20">
 
   <div class="db-slider relative w-full overflow-hidden bg-[var(--color-brand-purple)]" data-dark-bg aria-roledescription="carrusel" aria-label="Oportunidades y confianza FINTEGRAR">
 
   <div class="db-slider-track flex">
 
-    <div class="db-slide w-full flex-shrink-0 py-24">
+    <div class="db-slide w-full flex-shrink-0 py-14">
       <div class="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 relative z-10">
 
         <div class="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-16 items-center">
@@ -17,7 +17,7 @@ import ConfianzaSeguridad from './ConfianzaSeguridad.astro';
           <div class="flex flex-col space-y-8 lg:order-2">
             <h2 class="font-extrabold text-white leading-[1.1] tracking-normal">
               <span class="block text-6xl sm:text-7xl lg:text-[7.5rem]">Creamos</span>
-              <span class="block font-normal text-5xl sm:text-6xl lg:text-7xl ml-[2px] sm:ml-[3px]">Oportunidades</span>
+              <span class="block text-6xl sm:text-7xl lg:text-[7.5rem]">Oportunidades</span>
             </h2>
 
             <p class="text-lg text-white/80 max-w-none leading-relaxed">
@@ -26,7 +26,7 @@ import ConfianzaSeguridad from './ConfianzaSeguridad.astro';
 
           </div>
 
-          <div class="relative w-full h-[500px] flex justify-center items-center lg:order-1">
+          <div class="relative w-full h-[380px] flex justify-center items-center lg:order-1">
 
             <div class="db-card db-card--1 absolute w-72 h-44 rounded-2xl shadow-xl p-5 text-white flex flex-col justify-between bg-gradient-to-br from-[var(--color-brand-purple)] to-[var(--color-purple-deep)] border border-white/20">
               <div class="flex justify-between items-start w-full">
@@ -70,7 +70,7 @@ import ConfianzaSeguridad from './ConfianzaSeguridad.astro';
       </div>
     </div>
 
-    <div class="db-slide w-full flex-shrink-0 py-24 flex items-center justify-center">
+    <div class="db-slide w-full flex-shrink-0 py-14 flex items-center justify-center">
       <ConfianzaSeguridad transparent confianzaWhite />
     </div>
 
@@ -86,17 +86,7 @@ import ConfianzaSeguridad from './ConfianzaSeguridad.astro';
 
 <style>
   .db-slider-wrap {
-    background: var(--color-navbar-bg);
-    /* padding-top (no margin) compensa el -mb-20/-mb-28 del wrapper de
-       cards del Hero: un margin aquí se colapsaría con esa negativa y
-       no dejaría espacio real visible entre ambas secciones. */
-    padding-top: 13rem;
-  }
-
-  @media (max-width: 639px) {
-    .db-slider-wrap {
-      padding-top: 8rem;
-    }
+    background: var(--color-brand-purple);
   }
 
   .db-slider-track {

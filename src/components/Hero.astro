@@ -5,10 +5,11 @@ const slides = [
   {
     id: 'slide-0',
     subtitle: 'FONDO DE EMPLEADOS FINTEGRAR',
-    heading: 'Su aliado estratégico para <br><span class="text-accent">hacer crecer su bienestar</span>',
+    heading: 'Su aliado estratégico <br>para hacer crecer su <br><span class="text-accent">bienestar</span>',
     lead: 'Más de 36 años construyendo futuro junto a nuestros asociados. Soluciones financieras solidarias, ahorro y beneficios para usted y su familia.',
     cta1: { label: 'Acceso al Portal', icon: 'tabler:layout-dashboard', href: 'https://tramitesvirtuales.fintegrar.com/', primary: true },
     cta2: { label: 'Conózcanos', icon: 'tabler:arrow-right', href: '/nosotros', primary: false },
+    image: '/assets/img/hero-slide-1.png',
   },
   {
     id: 'slide-1',
@@ -21,42 +22,73 @@ const slides = [
   {
     id: 'slide-2',
     subtitle: 'CULTIVE SU FUTURO',
-    heading: 'Ahorro constante y CDAT con <br><span class="text-accent">rentabilidad asegurada</span>',
+    heading: 'Ahorro constante <br>y CDAT con <span class="text-accent">rentabilidad asegurada</span>',
     lead: 'Construya su tranquilidad financiera con Aportes Sociales, Ahorro Navideño, Pequeños Ahorradores y opciones de CDAT.',
     cta1: { label: 'Planes de ahorro', icon: 'tabler:wallet', href: '/ahorros', primary: true },
     cta2: { label: 'Ver convenios', icon: 'tabler:building-store', href: '/convenios', primary: false },
+    image: '/assets/img/hero-slide-2.png',
   },
   {
     id: 'slide-alivio',
     subtitle: 'ACOMPAÑAMIENTO FINANCIERO',
-    heading: 'Le orientamos para cuidar su <br><span class="text-accent">tranquilidad financiera</span>',
+    heading: 'Le orientamos para <br><span class="text-accent">cuidar su tranquilidad financiera</span>',
     lead: '¿Necesita reorganizar sus compromisos o evaluar un plan de pagos? Le escuchamos con total confidencialidad y calidez humana.',
     cta1: { label: 'Hablemos ahora', icon: 'tabler:phone', href: 'tel:+573174879669', primary: true },
     cta2: { label: 'Escribir por correo', icon: 'tabler:mail', href: 'mailto:gerencia@fintegrar.com', primary: false },
+  },
+];
+
+const featureCards = [
+  {
+    href: '/creditos',
+    title: 'Líneas de Crédito',
+    desc: 'Ordinarios, educativos, calamidad, vivienda y compra de cartera.',
+    cta: 'Ver créditos',
+    img: '/assets/img/hero-card-creditos.png',
+    accent: 'purple',
+    blob: 'blob-1',
+  },
+  {
+    href: '/ahorros',
+    title: 'Ahorro y CDAT',
+    desc: 'Ahorro Navideño, Pequeños Ahorradores y CDAT a término.',
+    cta: 'Conocer ahorros',
+    img: '/assets/img/hero-card-ahorros.png',
+    accent: 'sky',
+    blob: 'blob-2',
+  },
+  {
+    href: '/nosotros',
+    title: 'Nosotros',
+    desc: 'Nuestra historia y los valores que nos identifican.',
+    cta: 'Conócenos',
+    img: '/assets/img/hero-card-nosotros.png',
+    accent: 'gold',
+    blob: 'blob-3',
   },
 ];
 ---
 
 <div class="hero-wrapper relative">
 
-<section id="heroSlider" class="hero-slider relative w-full bg-slate-100 overflow-hidden" aria-label="Presentación FINTEGRAR">
+<section id="heroSlider" class="hero-slider relative w-full bg-slate-100 overflow-hidden" aria-label="Presentación FINTEGRAR" data-dark-bg>
 
   {slides.map((s, i) => (
     <div
       class={`slide absolute inset-0 w-full h-full opacity-0 pointer-events-none transition-opacity duration-1000 ${i === 0 ? 'is-active' : ''} ${s.image ? 'has-photo' : ''}`}
       id={s.id}
       aria-hidden={i !== 0 ? 'true' : 'false'}
-      style={s.image ? undefined : 'background: var(--color-navbar-bg);'}
+      style={s.image ? undefined : 'background: var(--color-brand-purple);'}
     >
       {s.image && (
         <>
           <img src={s.image} alt="" class="slide-photo absolute inset-0 w-full h-full object-cover" />
           <div class="slide-scrim absolute inset-0" aria-hidden="true"></div>
-          <svg class="slide-wave absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0,120 L0,70 C 280,-10 1160,-10 1440,70 L1440,120 Z" fill="var(--color-white)" />
-          </svg>
         </>
       )}
+      <svg class="slide-wave absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,120 L0,70 C 280,-10 1160,-10 1440,70 L1440,120 Z" fill="var(--color-white)" />
+      </svg>
       {!s.imageOnly && (
         <>
           <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pb-14 sm:pb-16 h-full flex flex-col items-center sm:items-start justify-center min-w-0">
@@ -92,6 +124,19 @@ const slides = [
     </div>
   ))}
 
+  <div class="slider-dots absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5" role="tablist" aria-label="Seleccionar slide">
+    {slides.map((s, i) => (
+      <button
+        type="button"
+        class={`slider-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === 0 ? 'w-8 bg-[var(--color-brand-purple)]' : 'w-2.5 bg-[#a78bfa]'}`}
+        role="tab"
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-controls={s.id}
+        aria-label={`Ir a la slide ${i + 1}`}
+      ></button>
+    ))}
+  </div>
+
 </section>
 
 <div class="hero-brand-shape-layer absolute inset-x-0 top-0" aria-hidden="true">
@@ -113,93 +158,30 @@ const slides = [
   </svg>
 </div>
 
-<div class="relative z-30 -mt-14 sm:-mt-20 -mb-20 sm:-mb-28">
-  <div class="absolute inset-x-0 top-14 sm:top-20 bottom-0 bg-[var(--color-navbar-bg)]" aria-hidden="true"></div>
-  <div class="relative max-w-[85rem] mx-auto px-4 sm:px-6 md:px-10">
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-
-    <a href="/creditos" class="hero-feature-card relative block h-[280px] group hover:-translate-y-1 transition-transform duration-300 no-underline cursor-pointer">
-      <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgba(var(--color-black-rgb),0.08)] bg-white">
-        <svg class="absolute bottom-0 left-0 w-full h-[55%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
-          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="var(--color-brand-sky-blue)" />
-        </svg>
-      </div>
-      <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
-        <div class="min-w-0">
-          <h3 class="text-lg font-extrabold text-gray-800 tracking-tight leading-snug">Líneas de Crédito</h3>
-          <p class="text-gray-600 text-sm mt-1.5 font-medium leading-snug max-w-[85%]">Ordinarios, educativos, calamidad, vivienda y compra de cartera.</p>
-        </div>
-        <div class="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0 text-gray-800 group-hover:scale-110 transition-transform">
-          <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
-        </div>
-      </div>
-      <img
-        src="/assets/img/hero-card-creditos.png"
-        alt=""
-        class="hero-feature-card-img"
-        loading="lazy"
-      />
-      <span class="hero-feature-card-cta inline-flex items-center gap-2 bg-white text-gray-900 py-2.5 px-5 rounded-full font-bold text-xs sm:text-sm shadow-lg group-hover:shadow-xl group-hover:scale-[1.02] transition-all z-20">
-        Ver créditos
-        <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
-      </span>
-    </a>
-
-    <a href="/ahorros" class="hero-feature-card relative block h-[280px] group hover:-translate-y-1 transition-transform duration-300 no-underline cursor-pointer">
-      <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgba(var(--color-black-rgb),0.08)] bg-white">
-        <svg class="absolute bottom-0 left-0 w-full h-[55%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
-          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="var(--color-brand-sky-blue)" />
-        </svg>
-      </div>
-      <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
-        <div class="min-w-0">
-          <h3 class="text-lg font-extrabold text-gray-800 tracking-tight leading-snug">Ahorro y CDAT</h3>
-          <p class="text-gray-600 text-sm mt-1.5 font-medium leading-snug max-w-[85%]">Ahorro Navideño, Pequeños Ahorradores y CDAT a término.</p>
-        </div>
-        <div class="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0 text-gray-800 group-hover:scale-110 transition-transform">
-          <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
-        </div>
-      </div>
-      <img
-        src="/assets/img/hero-card-ahorros.png"
-        alt=""
-        class="hero-feature-card-img"
-        loading="lazy"
-      />
-      <span class="hero-feature-card-cta inline-flex items-center gap-2 bg-white text-gray-900 py-2.5 px-5 rounded-full font-bold text-xs sm:text-sm shadow-lg group-hover:shadow-xl group-hover:scale-[1.02] transition-all z-20">
-        Conocer ahorros
-        <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
-      </span>
-    </a>
-
-    <a href="/nosotros" class="hero-feature-card relative block h-[280px] group hover:-translate-y-1 transition-transform duration-300 no-underline cursor-pointer">
-      <div class="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgba(var(--color-black-rgb),0.08)] bg-white">
-        <svg class="absolute bottom-0 left-0 w-full h-[55%] z-0" preserveAspectRatio="none" viewBox="0 0 100 100">
-          <path d="M0,25 C25,5 75,45 100,20 L100,100 L0,100 Z" fill="var(--color-brand-sky-blue)" />
-        </svg>
-      </div>
-      <div class="relative z-20 p-6 h-[100px] flex items-start justify-between gap-3">
-        <div class="min-w-0">
-          <h3 class="text-lg font-extrabold text-gray-800 tracking-tight leading-snug">Nosotros</h3>
-          <p class="text-gray-600 text-sm mt-1.5 font-medium leading-snug max-w-[85%]">Nuestra historia y los valores que nos identifican.</p>
-        </div>
-        <div class="w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0 text-gray-800 group-hover:scale-110 transition-transform">
-          <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
-        </div>
-      </div>
-      <img
-        src="/assets/img/hero-card-nosotros.png"
-        alt=""
-        class="hero-feature-card-img"
-        loading="lazy"
-      />
-      <span class="hero-feature-card-cta inline-flex items-center gap-2 bg-white text-gray-900 py-2.5 px-5 rounded-full font-bold text-xs sm:text-sm shadow-lg group-hover:shadow-xl group-hover:scale-[1.02] transition-all z-20">
-        Conócenos
-        <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" />
-      </span>
-    </a>
-
-  </div>
+<div class="relative z-30 mt-2 sm:mt-3 pb-24 sm:pb-32 lg:pb-40">
+  <div class="absolute inset-x-0 top-0 bottom-0 bg-[var(--color-white)]" aria-hidden="true"></div>
+  <div class="relative max-w-[70rem] mx-auto px-4 sm:px-6 md:px-10 pt-8 sm:pt-10 pb-16 sm:pb-24">
+    <div class="services-list flex flex-col">
+      {featureCards.map((c, i) => (
+        <a href={c.href} class={`service-row service-row--${c.accent} reveal reveal-delay-${i + 1} group no-underline ${i % 2 === 1 ? 'service-row--reverse' : ''}`}>
+          <div class="service-figure">
+            <span class={`service-figure-blob service-figure--${c.accent} ${c.blob}`} aria-hidden="true"></span>
+            <div class={`service-figure-mask ${c.blob}`}>
+              <img src={c.img} alt="" class="service-figure-img" loading="lazy" />
+            </div>
+            <img src={c.img} alt="" class="service-figure-img service-figure-img--top" loading="lazy" aria-hidden="true" />
+          </div>
+          <div class="service-copy">
+            <h3 class="service-title">{c.title}</h3>
+            <p class="service-desc">{c.desc}</p>
+            <span class={`service-cta service-cta--${c.accent}`}>
+              {c.cta}
+              <Icon name="tabler:arrow-up-right" class="w-4 h-4" />
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
   </div>
 </div>
 
@@ -212,13 +194,13 @@ const slides = [
   }
 
   .hero-slider {
-    height: calc(650px + var(--header-h));
-    min-height: calc(72vh + var(--header-h));
+    height: calc(680px + var(--header-h));
+    min-height: calc(74vh + var(--header-h));
     padding-top: var(--header-h);
   }
   @media (max-width: 768px) {
     .hero-slider {
-      height: calc(580px + var(--header-h));
+      height: calc(600px + var(--header-h));
       min-height: auto;
     }
   }
@@ -233,7 +215,7 @@ const slides = [
   }
 
   .hero-brand-shape-layer {
-    height: calc(650px + var(--header-h));
+    height: calc(680px + var(--header-h));
     z-index: 40;
     pointer-events: none;
     transition: opacity 0.3s ease-out;
@@ -241,18 +223,19 @@ const slides = [
   }
   @media (max-width: 768px) {
     .hero-brand-shape-layer {
-      height: calc(580px + var(--header-h));
+      height: calc(600px + var(--header-h));
     }
   }
 
   .slide-brand-shape {
-    top: -20%;
-    bottom: -15%;
-    right: -4%;
-    height: 130%;
+    top: -35%;
+    bottom: -30%;
+    right: -12%;
+    height: 165%;
     width: auto;
     pointer-events: none;
-    opacity: 1;
+    opacity: 0.25;
+    filter: brightness(0) invert(1);
   }
 
   @media (max-width: 639px) {
@@ -261,50 +244,182 @@ const slides = [
     }
   }
 
-  .hero-feature-card-img {
+  .services-list {
+    position: relative;
+    z-index: 1;
+    gap: 2.5rem;
+  }
+  @media (min-width: 640px) {
+    .services-list {
+      gap: 3rem;
+    }
+  }
+
+  .service-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 58rem;
+    margin: 0 auto;
+    text-decoration: none;
+  }
+  @media (min-width: 768px) {
+    .service-row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3.5rem;
+    }
+    .service-row--reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .service-figure {
+    position: relative;
+    flex-shrink: 0;
+    width: 10rem;
+    height: 10.5rem;
+  }
+  @media (min-width: 640px) {
+    .service-figure {
+      width: 11.5rem;
+      height: 12rem;
+    }
+  }
+
+  .service-figure-blob {
+    position: absolute;
+    inset: 15% 0 0 0;
+    z-index: 0;
+  }
+
+  .service-figure--purple {
+    background: var(--color-brand-purple);
+  }
+  .service-figure--sky {
+    background: var(--color-brand-sky-blue);
+  }
+  .service-figure--gold {
+    background: var(--color-brand-gold);
+  }
+
+  .blob-1 {
+    border-radius: 63% 37% 54% 46% / 43% 39% 61% 57%;
+  }
+  .blob-2 {
+    border-radius: 38% 62% 63% 37% / 55% 40% 60% 45%;
+  }
+  .blob-3 {
+    border-radius: 55% 45% 40% 60% / 60% 35% 65% 40%;
+  }
+
+  /* Máscara inferior: recorta la parte de abajo de la imagen con la forma del blob */
+  .service-figure-mask {
+    position: absolute;
+    inset: 15% 0 0 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .service-figure-img {
     position: absolute;
     bottom: 0;
-    right: 1rem;
-    height: 70%;
-    width: auto;
-    z-index: 15;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 9.5rem;
+    height: 12rem;
+    object-fit: contain;
+    object-position: bottom center;
     pointer-events: none;
   }
-
-  .hero-feature-card-cta {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    z-index: 25;
-  }
-
-  @media (max-width: 1023px) {
-    .hero-feature-card {
-      height: 280px;
-    }
-    .hero-feature-card-img {
-      height: 70%;
+  @media (min-width: 640px) {
+    .service-figure-img {
+      width: 11rem;
+      height: 13.8rem;
     }
   }
 
+  /* Capa superior: la cabeza y parte superior de la imagen sobresalen del blob sin cortes */
+  .service-figure-img--top {
+    z-index: 2;
+    clip-path: inset(0 0 45% 0);
+  }
+
+  .service-copy {
+    flex: 1;
+    min-width: 0;
+    max-width: 40rem;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .service-copy {
+      text-align: left;
+    }
+    .service-row--reverse .service-copy {
+      text-align: right;
+    }
+  }
+
+  .service-title {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.375rem, 2.4vw, 1.75rem);
+    font-weight: 800;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+
+  .service-desc {
+    margin-top: 0.625rem;
+    font-size: 1rem;
+    line-height: var(--lh-160);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
   @media (max-width: 639px) {
-    .hero-feature-card {
-      height: 260px;
-      margin-top: 2rem;
+    .service-desc {
+      white-space: normal;
     }
-    .hero-feature-card-img {
-      height: 65%;
-      right: 0.5rem;
+  }
+
+  .service-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    transition: gap 0.25s ease;
+  }
+  @media (min-width: 768px) {
+    .service-row--reverse .service-cta {
+      margin-left: auto;
     }
+  }
+
+  .service-row:hover .service-cta {
+    gap: 0.65rem;
+  }
+
+  .service-cta--purple {
+    color: var(--color-brand-purple);
+  }
+  .service-cta--sky {
+    color: var(--color-steel-blue);
+  }
+  .service-cta--gold {
+    color: var(--color-gold-dark);
   }
 
   .slide-scrim {
     z-index: 2;
     background: linear-gradient(
       90deg,
-      rgba(var(--color-ink-rgb), 0.82) 0%,
-      rgba(var(--color-ink-rgb), 0.55) 40%,
-      rgba(var(--color-ink-rgb), 0.15) 70%,
+      rgba(var(--color-ink-rgb), 0.9) 0%,
+      rgba(var(--color-ink-rgb), 0.65) 40%,
+      rgba(var(--color-ink-rgb), 0.2) 70%,
       rgba(var(--color-ink-rgb), 0) 90%
     );
   }
@@ -336,13 +451,13 @@ const slides = [
 
   .slide-title {
     font-size: clamp(2rem, 4.5vw, 3.25rem);
-    color: var(--color-ink);
+    color: var(--color-white);
   }
 
   .slide-lead {
     font-size: clamp(1rem, 1.5vw, 1.125rem);
     line-height: var(--lh-160);
-    color: var(--color-text-muted);
+    color: rgba(var(--color-white-rgb), 0.85);
   }
 
   .slide.has-photo .slide-title {
@@ -407,8 +522,9 @@ const slides = [
       slides[current].classList.remove('is-active');
       slides[current].setAttribute('aria-hidden', 'true');
       if (dots.length) {
-        dots[current].classList.remove('bg-[var(--color-brand-yellow)]', 'w-8');
-        dots[current].classList.add('bg-white/50');
+        dots[current].classList.remove('bg-[var(--color-brand-purple)]', 'w-8');
+        dots[current].classList.add('bg-[#a78bfa]', 'w-2.5');
+        dots[current].setAttribute('aria-selected', 'false');
       }
 
       current = (n + slides.length) % slides.length;
@@ -416,8 +532,9 @@ const slides = [
       slides[current].classList.add('is-active');
       slides[current].setAttribute('aria-hidden', 'false');
       if (dots.length) {
-        dots[current].classList.remove('bg-white/50');
-        dots[current].classList.add('bg-[var(--color-brand-yellow)]', 'w-8');
+        dots[current].classList.remove('bg-[#a78bfa]', 'w-2.5');
+        dots[current].classList.add('bg-[var(--color-brand-purple)]', 'w-8');
+        dots[current].setAttribute('aria-selected', 'true');
       }
 
       resetTimer();
