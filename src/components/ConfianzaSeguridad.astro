@@ -42,11 +42,11 @@ const seguridadColorClass = seguridadWhite ? 'text-white' : 'text-[var(--color-b
   }
 
   .cs-word--confianza {
-    animation: csConfianzaCycle 9s ease-in-out 1;
+    animation: csConfianzaCycle 9s ease-in-out infinite;
   }
 
   .cs-word--seguridad {
-    animation: csSeguridadCycle 9s ease-in-out 1;
+    animation: csSeguridadCycle 9s ease-in-out infinite;
   }
 
   @keyframes csConfianzaCycle {
@@ -97,42 +97,42 @@ const seguridadColorClass = seguridadWhite ? 'text-white' : 'text-[var(--color-b
     transform-box: fill-box;
     transform-origin: center;
     opacity: 0;
-    animation: csSparkPop 1.8s ease-in-out 1;
+    animation: csSparkPop 4s ease-in-out infinite;
   }
 
   .cs-spark:nth-child(1) { animation-delay: 0s; }
-  .cs-spark:nth-child(2) { animation-delay: 0.22s; }
-  .cs-spark:nth-child(3) { animation-delay: 0.44s; }
+  .cs-spark:nth-child(2) { animation-delay: 0.15s; }
+  .cs-spark:nth-child(3) { animation-delay: 0.3s; }
 
   @keyframes csSparkPop {
-    0%, 55%, 100% {
+    0%, 50%, 100% {
       opacity: 0;
       transform: scale(0.3);
     }
-    15% {
+    10% {
       opacity: 1;
       transform: scale(1.25);
     }
-    30% {
-      opacity: 0.7;
-      transform: scale(1);
+    25% {
+      opacity: 0;
+      transform: scale(0.8);
     }
   }
 
   .cs-underline {
-    stroke-dasharray: 25 100;
-    animation: csUnderlineDraw 2.4s ease-in-out 1 forwards;
+    stroke-dasharray: 100 100;
+    animation: csUnderlineDraw 5s ease-in-out infinite;
   }
 
   @keyframes csUnderlineDraw {
-    0% {
+    0%, 10% {
       stroke-dashoffset: 100;
     }
-    60% {
-      stroke-dashoffset: -25;
+    40%, 60% {
+      stroke-dashoffset: 0;
     }
-    100% {
-      stroke-dashoffset: -25;
+    90%, 100% {
+      stroke-dashoffset: -100;
     }
   }
 

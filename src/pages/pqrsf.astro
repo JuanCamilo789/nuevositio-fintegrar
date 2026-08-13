@@ -45,7 +45,6 @@ const tipos = [
         {
           tipos.map((t) => (
             <div class="tipo-card">
-              <Icon name={t.icon} class="tipo-icon" aria-hidden="true" />
               <h3 class="tipo-label">{t.label}</h3>
               <p class="tipo-desc">{t.desc}</p>
             </div>
@@ -216,7 +215,7 @@ const tipos = [
                 <label for="pq-autorizo">
                   Al radicar la presente solicitud, autorizo de manera previa, expresa e informada al Fondo de Empleados Fintegrar para recolectar, almacenar, usar, consultar, actualizar, transmitir y, en general, tratar mis datos personales para las finalidades relacionadas con la gestión de esta solicitud y las demás descritas en la{" "}
                   <a href="/politica-tratamiento-datos" target="_blank" rel="noopener noreferrer"
-                    >Política de Tratamiento de Datos Personales</a
+                    ><strong>Política de Tratamiento de Datos Personales</strong></a
                   > de Fintegrar. Declaro que conozco dicha política, disponible en{" "}
                   <a href="https://www.fintegrar.com" target="_blank" rel="noopener noreferrer"
                     ><strong>www.fintegrar.com</strong></a

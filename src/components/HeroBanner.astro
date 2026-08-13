@@ -9,19 +9,20 @@
     loading="lazy"
   />
   <div class="hero-banner-scrim absolute inset-0" aria-hidden="true"></div>
-  <div class="hero-banner-text absolute inset-0 flex items-center">
-    <div class="max-w-7xl mx-auto px-6 w-full">
-      <div class="hero-banner-row flex items-center gap-6 sm:gap-8">
-        <img
-          src="/assets/logos/logo1.png"
-          alt="FINTEGRAR"
-          class="hero-banner-logo brightness-0 invert flex-shrink-0"
-        />
-        <span class="hero-banner-divider flex-shrink-0" aria-hidden="true"></span>
-        <div>
-          <h2 class="hero-banner-title whitespace-nowrap">Crecer juntos es nuestro propósito.</h2>
-          <p class="hero-banner-lead whitespace-nowrap">Soluciones pensadas para acompañarle hoy y construir un mejor mañana.</p>
+  <div class="hero-banner-text absolute inset-0 flex items-center z-[3]">
+    <div class="max-w-7xl mx-auto px-6 w-full relative">
+      <div class="relative inline-block w-full">
+        <!-- Watermark -->
+        <div class="hero-banner-watermark absolute top-1/2 left-0 -translate-y-1/2 pointer-events-none select-none z-[-1]" aria-hidden="true">
+          <span class="block font-bold whitespace-nowrap">Crecer juntos es</span>
+          <span class="block font-normal whitespace-nowrap">nuestro propósito.</span>
         </div>
+
+        <!-- Foreground Title -->
+        <h2 class="hero-banner-title whitespace-nowrap text-left relative z-10">
+          <span class="block font-bold">Crecer juntos es</span>
+          <span class="block font-normal">nuestro propósito.</span>
+        </h2>
       </div>
     </div>
   </div>
@@ -81,12 +82,22 @@
 
   .hero-banner-title {
     font-family: var(--ff-heading);
-    font-size: clamp(0.9375rem, 2.9vw, 2.25rem);
+    font-size: clamp(1.5rem, 4vw, 3.25rem);
     font-weight: 800;
     letter-spacing: -0.01em;
     line-height: 1.15;
     color: var(--color-white);
     text-shadow: 0 2px 12px rgba(var(--color-ink-rgb), 0.35);
+  }
+
+  .hero-banner-watermark {
+    font-family: var(--ff-heading);
+    font-size: clamp(2.5rem, 7vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: rgba(255, 255, 255, 0.08); /* Solid color, low opacity */
+    -webkit-text-stroke: 0;
   }
 
   .hero-banner-lead {
