@@ -63,7 +63,7 @@ const featureCards = [
     desc: 'Nuestra historia y los valores que nos identifican.',
     cta: 'Conócenos',
     img: '/assets/img/hero-card-nosotros.png',
-    accent: 'gold',
+    accent: 'purple',
     blob: 'blob-3',
   },
 ];
@@ -158,9 +158,9 @@ const featureCards = [
   </svg>
 </div>
 
-<div class="relative z-30 mt-2 sm:mt-3 pb-24 sm:pb-32 lg:pb-40">
+<div class="relative z-30 mt-2 sm:mt-3 pb-8 sm:pb-12 lg:pb-14">
   <div class="absolute inset-x-0 top-0 bottom-0 bg-[var(--color-white)]" aria-hidden="true"></div>
-  <div class="relative max-w-[70rem] mx-auto px-4 sm:px-6 md:px-10 pt-8 sm:pt-10 pb-16 sm:pb-24">
+  <div class="relative max-w-[70rem] mx-auto px-4 sm:px-6 md:px-10 pt-8 sm:pt-10 pb-4 sm:pb-6">
     <div class="services-list flex flex-col">
       {featureCards.map((c, i) => (
         <a href={c.href} class={`service-row service-row--${c.accent} reveal reveal-delay-${i + 1} group no-underline ${i % 2 === 1 ? 'service-row--reverse' : ''}`}>

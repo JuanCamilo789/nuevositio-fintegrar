@@ -1,114 +1,15 @@
 ---
 import { Icon } from 'astro-icon/components';
-
-// Geometría real del círculo: los pines se calculan con trigonometría
-// (no con porcentajes a ojo) para que caigan exactamente sobre el borde
-// de la foto sin importar la altura a la que estén.
-const STAGE = 340;
-const CENTER = STAGE / 2;
-const PIN_RADIUS = 197; // radio de la foto (170) + ~27px hacia afuera
-
-function pinPos(angleDeg: number) {
-  const rad = (angleDeg * Math.PI) / 180;
-  const x = CENTER + PIN_RADIUS * Math.cos(rad);
-  const y = CENTER + PIN_RADIUS * Math.sin(rad);
-  return {
-    left: `${((x / STAGE) * 100).toFixed(2)}%`,
-    top: `${((y / STAGE) * 100).toFixed(2)}%`,
-  };
-}
-
-const pasosBase = [
-  {
-    num: '1',
-    side: 'left',
-    angle: -145,
-    texto: 'Solicite asesoría en línea o visite cualquiera de nuestras oficinas.',
-    lineWidth: '220px',
-  },
-  {
-    num: '2',
-    side: 'left',
-    angle: 180,
-    texto: 'Aporte la documentación solicitada y complete su vinculación.',
-    lineWidth: '270px',
-  },
-  {
-    num: '3',
-    side: 'left',
-    angle: 145,
-    texto: 'Realice su aporte inicial y active su cuenta de asociado.',
-    lineWidth: '240px',
-  },
-  {
-    num: '4',
-    side: 'right',
-    angle: -35,
-    texto: 'Reciba acompañamiento y empiece a disfrutar los beneficios FINTEGRAR.',
-    lineWidth: '255px',
-  },
-  {
-    num: '5',
-    side: 'right',
-    angle: 35,
-    texto: 'Acceda al Portal de Servicios Digitales para gestionar sus productos.',
-    lineWidth: '200px',
-  },
-];
-
-const pasos = pasosBase.map((p) => ({ ...p, pin: pinPos(p.angle) }));
-
-const textLeft = (side: string) => (side === 'left' ? '-300px' : '410px');
 ---
 
-<section class="cf-section" aria-labelledby="cf-title">
+<section class="cf-section" aria-labelledby="cf-req-title">
   <div class="max-w-6xl mx-auto px-6">
-    <h2 id="cf-title" class="cf-title">Cómo vincularse a FINTEGRAR</h2>
 
-    <div class="cf-stage">
-      <div class="cf-orbit-wrap">
-        <div class="cf-photo-blob" aria-hidden="true"></div>
-        <svg class="cf-arc" viewBox="0 0 200 200" aria-hidden="true">
-          <circle cx="100" cy="100" r="92" />
-        </svg>
-        <img
-          src="/assets/img/orbit-familia.webp"
-          alt="Familia asociada a FINTEGRAR"
-          class="cf-photo"
-          loading="lazy"
-        />
-
-        <div class="cf-pins" aria-hidden="true">
-          {pasos.map((p) => (
-            <span class="cf-pin-num" style={`top:${p.pin.top}; left:${p.pin.left};`}>{p.num}</span>
-          ))}
-        </div>
-      </div>
-
-      <div class="cf-steps">
-        {pasos.map((p, i) => (
-          <div
-            class={`cf-step cf-step-${p.side}`}
-            style={`--step-top:${p.pin.top}; --step-left:${textLeft(p.side)}; --step-line-width:${p.lineWidth};`}
-          >
-            <span class="cf-step-num">{p.num}</span>
-            <p class="cf-step-text">{p.texto}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="cf-cta">
-      <a href="https://tramitesvirtuales.fintegrar.com/" class="btn btn-primary cf-btn-ink" target="_blank" rel="noopener noreferrer">
-        <Icon name="tabler:user-plus" class="w-4 h-4" aria-hidden="true" />
-        Solicitar asesoría
-      </a>
-    </div>
-
-    <div class="cf-requisitos">
-      <h3 class="cf-req-title">Requisitos para ser asociado</h3>
+    <div class="cf-requisitos" id="requisitos">
+      <h3 id="cf-req-title" class="cf-req-title">Requisitos para ser asociado</h3>
 
       <div class="cf-req-cards">
+        <!-- Tarjeta 1: Persona Natural -->
         <div class="cf-req-member-card cf-req-fade">
           <div class="cf-req-card-head">
             <span class="cf-req-org-main">Persona</span>
@@ -135,6 +36,7 @@ const textLeft = (side: string) => (side === 'left' ? '-300px' : '410px');
           </div>
         </div>
 
+        <!-- Tarjeta 2: Persona Jurídica -->
         <div class="cf-req-member-card cf-req-fade">
           <div class="cf-req-card-head">
             <span class="cf-req-org-main">Persona</span>
@@ -168,8 +70,57 @@ const textLeft = (side: string) => (side === 'left' ? '-300px' : '410px');
             </div>
           </div>
         </div>
+
+        <!-- Tarjeta 3: Proceso de Vinculación -->
+        <div class="cf-req-member-card cf-req-member-card--proceso cf-req-fade">
+          <div class="cf-req-card-head">
+            <span class="cf-req-org-main">Proceso</span>
+            <br />
+            <span class="cf-req-org-sub">de Vinculación</span>
+            <p class="cf-req-card-note">5 sencillos pasos para asociarse</p>
+            <div class="cf-card-cta-wrap mt-6 hidden md:block">
+              <a href="https://api.whatsapp.com/send/?phone=573174879669&text=Hola%2C+quisiera+informaci%C3%B3n+sobre+cr%C3%A9dito%2Fcartera.&type=phone_number&app_absent=0" class="btn btn-primary cf-btn-ink inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-full font-semibold" target="_blank" rel="noopener noreferrer">
+                <Icon name="tabler:user-plus" class="w-4 h-4" aria-hidden="true" />
+                Solicitar asesoría
+              </a>
+            </div>
+          </div>
+          <div class="cf-req-item-col">
+            <span class="cf-req-items-label">Pasos para asociarse</span>
+            <div class="cf-req-item-grid">
+              <div class="cf-req-item">
+                <span class="cf-req-item-num">1</span>
+                <span class="cf-req-item-text"><strong>Solicite Asesoría:</strong> Solicite asesoría en línea o visite cualquiera de nuestras oficinas.</span>
+              </div>
+              <div class="cf-req-item">
+                <span class="cf-req-item-num">2</span>
+                <span class="cf-req-item-text"><strong>Documentación:</strong> Aporte la documentación solicitada y complete su vinculación.</span>
+              </div>
+              <div class="cf-req-item">
+                <span class="cf-req-item-num">3</span>
+                <span class="cf-req-item-text"><strong>Aporte Inicial:</strong> Realice su aporte inicial y active su cuenta de asociado.</span>
+              </div>
+              <div class="cf-req-item">
+                <span class="cf-req-item-num">4</span>
+                <span class="cf-req-item-text"><strong>Acompañamiento:</strong> Reciba acompañamiento y empiece a disfrutar los beneficios FINTEGRAR.</span>
+              </div>
+              <div class="cf-req-item">
+                <span class="cf-req-item-num">5</span>
+                <span class="cf-req-item-text"><strong>Portal Digital:</strong> Acceda al Portal de Servicios Digitales para gestionar sus productos.</span>
+              </div>
+            </div>
+            <div class="mt-4 block md:hidden">
+              <a href="https://api.whatsapp.com/send/?phone=573174879669&text=Hola%2C+quisiera+informaci%C3%B3n+sobre+cr%C3%A9dito%2Fcartera.&type=phone_number&app_absent=0" class="btn btn-primary cf-btn-ink inline-flex items-center justify-center gap-2 text-sm px-5 py-2.5 rounded-full font-semibold w-full" target="_blank" rel="noopener noreferrer">
+                <Icon name="tabler:user-plus" class="w-4 h-4" aria-hidden="true" />
+                Solicitar asesoría
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
+
   </div>
 </section>
 
@@ -180,194 +131,8 @@ const textLeft = (side: string) => (side === 'left' ? '-300px' : '410px');
     overflow: hidden;
   }
 
-  .cf-title {
-    font-family: var(--ff-heading);
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: var(--fw-extrabold);
-    color: var(--color-ink);
-    line-height: var(--lh-120);
-    text-align: center;
-    margin-bottom: 3.5rem;
-  }
-
-  .cf-orbit-wrap {
-    position: relative;
-    width: 340px;
-    height: 340px;
-    margin: 0 auto;
-    display: none;
-  }
-
-  .cf-photo-blob {
-    position: absolute;
-    inset: -10%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--color-brand-purple-rgb), 0.28) 0%, rgba(var(--color-brand-purple-rgb), 0.14) 60%, transparent 75%);
-  }
-
-  .cf-arc {
-    position: absolute;
-    inset: -34px;
-    width: calc(100% + 68px);
-    height: calc(100% + 68px);
-    fill: none;
-    stroke: var(--color-brand-purple);
-    stroke-width: 4;
-    stroke-linecap: round;
-    stroke-dasharray: 180 400;
-    transform: rotate(100deg);
-  }
-
-  .cf-photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 20px 45px rgba(var(--color-ink-rgb), 0.18);
-  }
-
-  /* Números-insignia: anclados exactamente sobre el borde del círculo,
-     con top/left fijos por paso (ver frontmatter) y centrados sobre ese
-     punto con translate(-50%,-50%). */
-  .cf-pins {
-    position: absolute;
-    inset: 0;
-  }
-
-  .cf-pin-num {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--color-brand-purple);
-    color: var(--color-white);
-    font-weight: var(--fw-extrabold);
-    font-size: 1.0625rem;
-    font-family: var(--ff-heading);
-    box-shadow: 0 4px 14px rgba(var(--color-ink-rgb), 0.3);
-    border: 3px solid var(--color-white);
-    z-index: 2;
-  }
-
-  .cf-steps {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  .cf-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    text-align: left;
-  }
-
-  .cf-step-num {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--color-brand-purple);
-    color: var(--color-white);
-    font-weight: var(--fw-extrabold);
-    font-size: 0.9375rem;
-    font-family: var(--ff-heading);
-  }
-
-  .cf-step-text {
-    font-size: clamp(1rem, 1.5vw, 1.125rem);
-    color: var(--color-text-muted);
-    line-height: var(--lh-160);
-    padding-top: 0.3rem;
-  }
-
-  .cf-cta {
-    display: flex;
-    justify-content: center;
-    margin-top: 3rem;
-  }
-
-  .cf-btn-ink {
-    background: var(--color-ink);
-    color: var(--color-white);
-  }
-
-  /* A partir de desktop: la foto se muestra centrada con los números sobre
-     su borde, y el texto de cada paso flota alrededor en columnas fijas
-     (izquierda / derecha). El número visible pasa a vivir en .cf-pins
-     (sobre la foto); en .cf-steps se oculta para no duplicarlo, dejando
-     solo el texto con una línea divisoria del ancho del bloque. */
-  @media (min-width: 1024px) {
-    .cf-stage {
-      position: relative;
-      width: 340px;
-      height: 340px;
-      margin: 0 auto;
-    }
-
-    .cf-orbit-wrap {
-      display: block;
-      position: absolute;
-      inset: 0;
-      margin: 0;
-    }
-
-    .cf-steps {
-      max-width: none;
-      display: block;
-      position: absolute;
-      inset: 0;
-      margin: 0;
-    }
-
-    .cf-step {
-      position: absolute;
-      top: var(--step-top);
-      left: var(--step-left);
-      width: 210px;
-      padding-top: 0.75rem;
-      display: block;
-    }
-    .cf-step-num { display: none; }
-
-    .cf-step::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: var(--step-line-width, 40px);
-      height: 2px;
-      background: var(--color-ink);
-    }
-
-    /* El borde que da hacia el círculo queda fijo/alineado; el que varía
-       en ancho es el extremo exterior (lejos del círculo). */
-    .cf-step-left::before {
-      right: 0;
-    }
-
-    .cf-step-right::before {
-      left: 0;
-    }
-  }
-
-  @media (max-width: 639px) {
-    .cf-section { padding: 3.5rem 0; }
-    .cf-title { margin-bottom: 2.25rem; }
-  }
-
   .cf-requisitos {
-    margin-top: 7rem;
+    margin-top: 0;
   }
 
   .cf-req-title {
@@ -398,12 +163,39 @@ const textLeft = (side: string) => (side === 'left' ? '-300px' : '410px');
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     text-align: left;
-    transition: box-shadow 0.3s, transform 0.3s;
   }
-
   .cf-req-member-card:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
+  }
+
+  .cf-req-member-card--proceso {
+    background: var(--color-brand-purple);
+    color: var(--color-white);
+  }
+  .cf-req-member-card--proceso .cf-req-org-main,
+  .cf-req-member-card--proceso .cf-req-org-sub {
+    color: var(--color-white);
+  }
+  .cf-req-member-card--proceso .cf-req-card-note {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .cf-req-member-card--proceso .cf-req-items-label {
+    color: var(--color-brand-yellow, #EFC747);
+  }
+  .cf-req-member-card--proceso .cf-req-item-num {
+    background: var(--color-white);
+    color: var(--color-brand-purple);
+  }
+  .cf-req-member-card--proceso .cf-req-item-text {
+    color: var(--color-white);
+  }
+  .cf-req-member-card--proceso .btn-primary {
+    background: var(--color-white);
+    color: var(--color-brand-purple);
+  }
+  .cf-req-member-card--proceso .btn-primary:hover {
+    background: rgba(255, 255, 255, 0.92);
   }
 
   .cf-req-card-head {
@@ -434,6 +226,11 @@ const textLeft = (side: string) => (side === 'left' ? '-300px' : '410px');
     color: var(--color-text-muted);
     line-height: var(--lh-140);
     margin-top: 0.75rem;
+  }
+
+  .cf-btn-ink {
+    background: var(--color-ink);
+    color: var(--color-white);
   }
 
   .cf-req-item-col {
@@ -496,12 +293,6 @@ const textLeft = (side: string) => (side === 'left' ? '-300px' : '410px');
     .cf-req-card-head {
       width: auto;
       text-align: left;
-    }
-  }
-
-  @media (max-width: 639px) {
-    .cf-requisitos {
-      margin-top: 4rem;
     }
   }
 

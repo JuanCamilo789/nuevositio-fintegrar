@@ -3,158 +3,185 @@ import { Icon } from 'astro-icon/components';
 
 const noticias = [
   {
-    imagen: 'https://placehold.co/800x460/0D1425/F1F6F4?font=lato&text=Asamblea%0AGeneral+2026',
-    categoria: 'Institucional',
-    fecha: '24 de marzo, 2026',
-    titulo: 'Asamblea General Ordinaria 2026: resultados y compromisos',
-    resumen: 'FINTEGRAR avanza en su proceso de recuperación, modernización y compromiso con cada uno de sus asociados.',
+    fecha: '12/08/2026',
+    imagen: '/assets/img/hero-card-creditos.png',
+    titulo: 'Solidaridad ante emergencia nacional tras el sismo del 10 de agosto de 2026',
+    href: '/noticias/solidaridad-emergencia',
   },
   {
-    imagen: 'https://placehold.co/800x460/0D1425/F1F6F4?font=lato&text=Credito%0AEducativo+2026',
-    categoria: 'Créditos',
-    fecha: 'Enero, 2026',
-    titulo: 'Crédito para Educación: tasa especial 2026',
-    resumen: 'FINTEGRAR ofrece su línea de Crédito para Educación con tasa preferencial del 1% M.V. para instituciones certificadas por el Ministerio de Educación.',
+    fecha: '04/08/2026',
+    imagen: '/assets/img/hero-card-ahorros.png',
+    titulo: 'Ruta de alegría: entregas a las familias ganadoras del primer sorteo de 2026',
+    href: '/noticias/ruta-alegria',
   },
   {
-    imagen: 'https://placehold.co/800x460/0D1425/F1F6F4?font=lato&text=Convenios%0ABienestar+2026',
-    categoria: 'Bienestar',
-    fecha: '01 de marzo, 2026',
-    titulo: 'Convenios y oportunidades',
-    resumen: 'Nuestra área de Bienestar Social se encuentra en proceso de ampliar la gama de convenios y servicios a nuestros asociados, así como del adecuado control de los mismos.',
+    fecha: '03/08/2026',
+    imagen: '/assets/img/hero-card-nosotros.png',
+    titulo: 'Convocatoria expositores Bazar de la Confianza Duitama',
+    href: '/noticias/bazar-confianza',
+  },
+];
+
+const eventos = [
+  {
+    fecha: '15 ago',
+    items: [
+      {
+        titulo: 'Taller de Educación Financiera y Ahorro',
+        desc: 'Cuidamos tu futuro: aprende estrategias prácticas para optimizar tus finanzas personales...',
+        href: '/eventos/taller-educacion-financiera',
+      },
+    ],
+  },
+  {
+    fecha: '20 ago',
+    items: [
+      {
+        titulo: 'Feria Virtual de Vivienda y Crédito Educativo',
+        desc: 'Conoce las tasas preferenciales y asesoría personalizada para tus metas familiares...',
+        href: '/eventos/feria-vivienda-educacion',
+      },
+    ],
+  },
+  {
+    fecha: '25 ago',
+    items: [
+      {
+        titulo: 'Sorteo Semanal de Asociados y Beneficios',
+        desc: 'Participa automáticamente por ser asociado activo al día con tus aportes sociales...',
+        href: '/eventos/sorteo-semanal',
+      },
+      {
+        titulo: 'Jornada de Salud y Bienestar Familiar',
+        desc: 'Chequeos preventivos y beneficios exclusivos gracias a nuestras alianzas IPS...',
+        href: '/eventos/jornada-salud',
+      },
+    ],
+  },
+  {
+    fecha: '30 ago',
+    items: [
+      {
+        titulo: 'Webinar: Inversión Segura y Rentabilidad con CDAT',
+        desc: 'Descubre cómo hacer crecer tus ahorros con el respaldo y solidez de FINTEGRAR...',
+        href: '/eventos/webinar-cdat',
+      },
+    ],
   },
 ];
 ---
 
-<section id="novedades" class="section-white" aria-labelledby="novedades-title">
+<section id="novedades" class="news-events-section text-white" aria-labelledby="novedades-title">
   <div class="max-w-7xl mx-auto px-6">
 
-    <div class="flex flex-col items-start sm:items-end sm:flex-row justify-between gap-4 mb-10 reveal">
-      <div>
-        <h2
-          id="novedades-title"
-          class="font-display"
-          style="font-size:clamp(1.75rem,3vw,2.5rem);color:var(--color-ink);line-height: var(--lh-120);"
-        >
-          Últimas noticias
-        </h2>
-      </div>
-      <a href="#heroSlider" class="btn btn-outline btn-sm flex-shrink-0" style="border: none;">
-        Ver todas las novedades
-        <Icon name="tabler:arrow-right" class="w-4 h-4" aria-hidden="true" />
-      </a>
-    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {noticias.map((n, i) => (
-        <article class={`news-card card-base reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}>
-          <div class="news-body">
-            <div class="news-top">
-              <div class="news-doc-icon">
-                <Icon name="tabler:file-text" class="w-5 h-5" aria-hidden="true" />
+      <!-- COLUMNA IZQUIERDA: Últimas Noticias -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- Header Noticias -->
+        <div class="pb-2">
+          <h2 id="novedades-title" class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-heading">
+            Novedades
+          </h2>
+        </div>
+
+        <!-- Grid de 3 Tarjetas de Noticias -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {noticias.map((n) => (
+            <article class="bg-white text-slate-800 rounded-sm p-2.5 shadow-md hover:shadow-lg transition-shadow flex flex-col justify-between group">
+              <div>
+                <!-- Top Meta -->
+                <div class="text-[11px] font-medium text-slate-400 mb-2">
+                  <span>{n.fecha}</span>
+                </div>
+
+                <!-- Imagen -->
+                <div class="aspect-[4/3] w-full rounded-sm overflow-hidden mb-3 bg-slate-100">
+                  <img
+                    src={n.imagen}
+                    alt={n.titulo}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+
+                <!-- Título -->
+                <h3 class="text-sm font-bold text-slate-800 leading-snug group-hover:text-[var(--color-brand-purple)] transition-colors line-clamp-3">
+                  <a href={n.href}>
+                    {n.titulo}
+                  </a>
+                </h3>
               </div>
-              <span class="news-category">{n.categoria}</span>
+            </article>
+          ))}
+        </div>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: Próximos Eventos -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- Header Eventos -->
+        <div class="pb-2">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-heading">
+            Programación
+          </h2>
+        </div>
+
+        <!-- Lista de Eventos -->
+        <div class="divide-y divide-white/20">
+          {eventos.map((evGroup) => (
+            <div class="py-3.5 first:pt-0 last:pb-0 flex items-start gap-4">
+              <!-- Columna de Fecha -->
+              <div class="w-16 sm:w-20 flex-shrink-0 pt-0.5">
+                <span class="text-base sm:text-lg font-extrabold text-white font-heading">
+                  {evGroup.fecha}
+                </span>
+              </div>
+
+              <!-- Lista de ítems del día -->
+              <div class="flex-1 space-y-3">
+                {evGroup.items.map((item) => (
+                  <div class="space-y-0.5">
+                    <h3 class="text-sm font-bold text-white leading-tight hover:text-[var(--color-brand-yellow)] transition-colors">
+                      <a href={item.href} class="flex items-start gap-1.5">
+                        <span class="text-white/60 font-bold">•</span>
+                        <span>{item.titulo}</span>
+                      </a>
+                    </h3>
+                    <p class="text-xs text-white/70 leading-snug pl-3 line-clamp-1">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div class="news-meta">
-              <Icon name="tabler:calendar-event" class="w-3.5 h-3.5" aria-hidden="true" />
-              {n.fecha}
-            </div>
-            <h3 class="news-titulo">{n.titulo}</h3>
-            <p class="news-resumen">{n.resumen}</p>
-            <a href="#heroSlider" class="news-link">
-              Leer más
-              <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" aria-hidden="true" />
-            </a>
-          </div>
-        </article>
-      ))}
+          ))}
+        </div>
+
+      </div>
+
     </div>
 
   </div>
 </section>
 
 <style>
-  .section-white {
-    background: var(--color-navbar-bg);
-    padding: 8rem 0;
-  }
-
-  .news-card {
-    overflow: hidden;
-  }
-  .news-top {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .news-doc-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-sm);
-    background: var(--color-surface);
-    color: var(--color-ink);
-    flex-shrink: 0;
-  }
-  .news-body {
-    padding: 1.75rem;
-  }
-  .news-category {
-    font-size: 0.7rem;
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    color: var(--color-ink);
-    background: var(--color-surface);
-    padding: 0.3rem 0.75rem;
-    border-radius: var(--radius-full);
-  }
-  .news-meta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-    font-weight: var(--fw-medium);
-    margin-bottom: 0.75rem;
-  }
-  .news-titulo {
-    font-weight: var(--fw-bold);
-    font-size: 1.125rem;
-    color: var(--color-ink);
-    line-height: var(--lh-140);
-    margin-bottom: 0.5rem;
-  }
-  .news-resumen {
-    font-size: 0.9375rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-    line-height: var(--lh-160);
-    margin-bottom: 1.5rem;
-  }
-  .news-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.875rem;
-    font-weight: var(--fw-semibold);
-    color: var(--color-ink);
-    text-decoration: none;
-    transition: gap 0.2s;
-  }
-  .news-link:hover {
-    gap: 10px;
+  .news-events-section {
+    background: #00132B;
+    padding: 5rem 0;
   }
 
   @media (max-width: 1023px) {
-    .section-white { padding: 6rem 0; }
+    .news-events-section {
+      padding: 4rem 0;
+    }
   }
-  @media (max-width: 767px) {
-    .section-white { padding: 3.5rem 0; }
-    .news-body { padding: 1.25rem; }
-    .news-titulo { font-size: 1rem; }
+
+  @media (max-width: 639px) {
+    .news-events-section {
+      padding: 3rem 0;
+    }
   }
 </style>

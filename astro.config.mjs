@@ -29,11 +29,11 @@ export default defineConfig({
           'briefcase', 'building-bank', 'building-store', 'bulb', 'calculator', 'calendar-check',
           'calendar-event', 'candle', 'check', 'chevron-down', 'chevron-left', 'chevron-right',
           'circle-check', 'clipboard-check', 'clock', 'clock-hour-4', 'cookie', 'credit-card', 'device-mobile-dollar',
-          'equal', 'eye', 'file-text', 'file-type-pdf', 'file-upload', 'folder', 'headset',
+          'equal', 'eye', 'file-check', 'file-text', 'file-type-pdf', 'file-upload', 'folder', 'headset',
           'heart', 'heart-handshake', 'help', 'help-hexagon', 'home', 'home-heart',
           'id-badge', 'info-circle', 'layout-dashboard', 'layout-grid', 'mail',
           'map-pin', 'menu-2', 'message-x', 'mood-empty', 'mood-happy', 'phone',
-          'plane', 'receipt', 'scale', 'search',
+          'plane', 'receipt', 'scale', 'search', 'sparkles', 'device-laptop',
           'school', 'send', 'share', 'shield-check', 'shield-lock', 'star-filled', 'stethoscope', 'target', 'trending-up',
           'upload', 'user', 'user-cog', 'user-plus', 'users', 'users-group', 'wallet', 'x', 'refresh'
         ],
