@@ -71,7 +71,7 @@ const eventos = [
 ];
 ---
 
-<section id="novedades" class="news-events-section text-white" aria-labelledby="novedades-title">
+<section id="novedades" class="news-events-section text-white" aria-labelledby="novedades-title" data-dark-bg>
   <div class="max-w-7xl mx-auto px-6">
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
@@ -89,7 +89,7 @@ const eventos = [
         <!-- Grid de 3 Tarjetas de Noticias -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {noticias.map((n) => (
-            <article class="bg-white text-slate-800 rounded-sm p-2.5 shadow-md hover:shadow-lg transition-shadow flex flex-col justify-between group">
+            <article class="bg-white text-slate-800 rounded-sm p-2.5 pb-4 shadow-md hover:shadow-lg transition-shadow flex flex-col justify-between group">
               <div>
                 <!-- Top Meta -->
                 <div class="text-[11px] font-medium text-slate-400 mb-2">

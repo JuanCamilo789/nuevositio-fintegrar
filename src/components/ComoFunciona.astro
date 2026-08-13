@@ -73,48 +73,43 @@ import { Icon } from 'astro-icon/components';
 
         <!-- Tarjeta 3: Proceso de Vinculación -->
         <div class="cf-req-member-card cf-req-member-card--proceso cf-req-fade">
-          <div class="cf-req-card-head">
-            <span class="cf-req-org-main">Proceso</span>
-            <br />
-            <span class="cf-req-org-sub">de Vinculación</span>
-            <p class="cf-req-card-note">5 sencillos pasos para asociarse</p>
-            <div class="cf-card-cta-wrap mt-6 hidden md:block">
-              <a href="https://api.whatsapp.com/send/?phone=573174879669&text=Hola%2C+quisiera+informaci%C3%B3n+sobre+cr%C3%A9dito%2Fcartera.&type=phone_number&app_absent=0" class="btn btn-primary cf-btn-ink inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-full font-semibold" target="_blank" rel="noopener noreferrer">
-                <Icon name="tabler:user-plus" class="w-4 h-4" aria-hidden="true" />
-                Solicitar asesoría
-              </a>
+          <div class="cf-req-card-body">
+            <div class="cf-req-card-head">
+              <span class="cf-req-org-main">Proceso</span>
+              <br />
+              <span class="cf-req-org-sub">de Vinculación</span>
+              <p class="cf-req-card-note">5 sencillos pasos para asociarse</p>
+            </div>
+            <div class="cf-req-item-col">
+              <div class="cf-req-item-grid">
+                <div class="cf-req-item">
+                  <span class="cf-req-item-num">1</span>
+                  <span class="cf-req-item-text"><strong>Solicite Asesoría:</strong> Solicite asesoría en línea o visite cualquiera de nuestras oficinas.</span>
+                </div>
+                <div class="cf-req-item">
+                  <span class="cf-req-item-num">2</span>
+                  <span class="cf-req-item-text"><strong>Documentación:</strong> Aporte la documentación solicitada y complete su vinculación.</span>
+                </div>
+                <div class="cf-req-item">
+                  <span class="cf-req-item-num">3</span>
+                  <span class="cf-req-item-text"><strong>Aporte Inicial:</strong> Realice su aporte inicial y active su cuenta de asociado.</span>
+                </div>
+                <div class="cf-req-item">
+                  <span class="cf-req-item-num">4</span>
+                  <span class="cf-req-item-text"><strong>Acompañamiento:</strong> Reciba acompañamiento y empiece a disfrutar los beneficios FINTEGRAR.</span>
+                </div>
+                <div class="cf-req-item">
+                  <span class="cf-req-item-num">5</span>
+                  <span class="cf-req-item-text"><strong>Portal Digital:</strong> Acceda al Portal de Servicios Digitales para gestionar sus productos.</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="cf-req-item-col">
-            <span class="cf-req-items-label">Pasos para asociarse</span>
-            <div class="cf-req-item-grid">
-              <div class="cf-req-item">
-                <span class="cf-req-item-num">1</span>
-                <span class="cf-req-item-text"><strong>Solicite Asesoría:</strong> Solicite asesoría en línea o visite cualquiera de nuestras oficinas.</span>
-              </div>
-              <div class="cf-req-item">
-                <span class="cf-req-item-num">2</span>
-                <span class="cf-req-item-text"><strong>Documentación:</strong> Aporte la documentación solicitada y complete su vinculación.</span>
-              </div>
-              <div class="cf-req-item">
-                <span class="cf-req-item-num">3</span>
-                <span class="cf-req-item-text"><strong>Aporte Inicial:</strong> Realice su aporte inicial y active su cuenta de asociado.</span>
-              </div>
-              <div class="cf-req-item">
-                <span class="cf-req-item-num">4</span>
-                <span class="cf-req-item-text"><strong>Acompañamiento:</strong> Reciba acompañamiento y empiece a disfrutar los beneficios FINTEGRAR.</span>
-              </div>
-              <div class="cf-req-item">
-                <span class="cf-req-item-num">5</span>
-                <span class="cf-req-item-text"><strong>Portal Digital:</strong> Acceda al Portal de Servicios Digitales para gestionar sus productos.</span>
-              </div>
-            </div>
-            <div class="mt-4 block md:hidden">
-              <a href="https://api.whatsapp.com/send/?phone=573174879669&text=Hola%2C+quisiera+informaci%C3%B3n+sobre+cr%C3%A9dito%2Fcartera.&type=phone_number&app_absent=0" class="btn btn-primary cf-btn-ink inline-flex items-center justify-center gap-2 text-sm px-5 py-2.5 rounded-full font-semibold w-full" target="_blank" rel="noopener noreferrer">
-                <Icon name="tabler:user-plus" class="w-4 h-4" aria-hidden="true" />
-                Solicitar asesoría
-              </a>
-            </div>
+          <div class="cf-req-card-footer">
+            <a href="https://api.whatsapp.com/send/?phone=573174879669&text=Hola%2C+quisiera+informaci%C3%B3n+sobre+cr%C3%A9dito%2Fcartera.&type=phone_number&app_absent=0" class="btn btn-primary cf-btn-ink inline-flex items-center gap-2 text-sm px-5 py-2.5 rounded-full font-semibold" target="_blank" rel="noopener noreferrer">
+              <Icon name="tabler:user-plus" class="w-4 h-4" aria-hidden="true" />
+              Solicitar asesoría
+            </a>
           </div>
         </div>
 
@@ -170,8 +165,24 @@ import { Icon } from 'astro-icon/components';
   }
 
   .cf-req-member-card--proceso {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.75rem;
     background: var(--color-brand-purple);
     color: var(--color-white);
+  }
+
+  .cf-req-card-body {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .cf-req-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
   .cf-req-member-card--proceso .cf-req-org-main,
   .cf-req-member-card--proceso .cf-req-org-sub {
@@ -293,6 +304,18 @@ import { Icon } from 'astro-icon/components';
     .cf-req-card-head {
       width: auto;
       text-align: left;
+    }
+    .cf-req-card-body {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .cf-req-card-footer {
+      justify-content: stretch;
+    }
+    .cf-req-card-footer .btn {
+      width: 100%;
+      justify-content: center;
     }
   }
 
