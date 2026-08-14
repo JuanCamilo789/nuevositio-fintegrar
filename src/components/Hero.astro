@@ -128,12 +128,12 @@ const featureCards = [
     {slides.map((s, i) => (
       <button
         type="button"
-        class={`slider-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${i === 0 ? 'w-8 bg-[var(--color-brand-purple)]' : 'w-2.5 bg-[#a78bfa]'}`}
+        class={`slider-dot relative h-2.5 rounded-full overflow-hidden transition-all duration-300 cursor-pointer bg-[#a78bfa] ${i === 0 ? 'w-8 is-filling' : 'w-2.5'}`}
         role="tab"
         aria-selected={i === 0 ? 'true' : 'false'}
         aria-controls={s.id}
         aria-label={`Ir a la slide ${i + 1}`}
-      ></button>
+      ><span class="slider-dot-fill"></span></button>
     ))}
   </div>
 
@@ -504,6 +504,25 @@ const featureCards = [
     animation: none;
     opacity: 0;
   }
+
+  .slider-dot-fill {
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: var(--color-brand-purple);
+    border-radius: inherit;
+  }
+  .slider-dot.is-filling .slider-dot-fill {
+    animation: dotFill 3500ms linear forwards;
+  }
+  #heroSlider[data-paused='true'] .slider-dot-fill {
+    animation-play-state: paused;
+  }
+
+  @keyframes dotFill {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
 </style>
 
 <script>
@@ -518,13 +537,25 @@ const featureCards = [
     let timer: ReturnType<typeof setInterval>;
     let paused = false;
 
+    function setDotFilling(dot: HTMLElement, filling: boolean) {
+      const fill = dot.querySelector<HTMLElement>('.slider-dot-fill');
+      dot.classList.remove('is-filling');
+      if (fill) fill.style.animation = 'none';
+      if (filling && fill) {
+        void fill.offsetWidth;
+        fill.style.animation = '';
+        dot.classList.add('is-filling');
+      }
+    }
+
     function activateSlide(n: number) {
       slides[current].classList.remove('is-active');
       slides[current].setAttribute('aria-hidden', 'true');
       if (dots.length) {
-        dots[current].classList.remove('bg-[var(--color-brand-purple)]', 'w-8');
-        dots[current].classList.add('bg-[#a78bfa]', 'w-2.5');
+        dots[current].classList.remove('w-8');
+        dots[current].classList.add('w-2.5');
         dots[current].setAttribute('aria-selected', 'false');
+        setDotFilling(dots[current], false);
       }
 
       current = (n + slides.length) % slides.length;
@@ -532,9 +563,10 @@ const featureCards = [
       slides[current].classList.add('is-active');
       slides[current].setAttribute('aria-hidden', 'false');
       if (dots.length) {
-        dots[current].classList.remove('bg-[#a78bfa]', 'w-2.5');
-        dots[current].classList.add('bg-[var(--color-brand-purple)]', 'w-8');
+        dots[current].classList.remove('w-2.5');
+        dots[current].classList.add('w-8');
         dots[current].setAttribute('aria-selected', 'true');
+        setDotFilling(dots[current], true);
       }
 
       resetTimer();
@@ -545,7 +577,7 @@ const featureCards = [
 
     function resetTimer() {
       clearInterval(timer);
-      timer = setInterval(() => { if (!paused) next(); }, 6000);
+      timer = setInterval(() => { if (!paused) next(); }, 3500);
     }
 
     resetTimer();
@@ -555,8 +587,14 @@ const featureCards = [
     });
 
     if (window.innerWidth > 1023 && slider) {
-      slider.addEventListener('mouseenter', () => paused = true);
-      slider.addEventListener('mouseleave', () => paused = false);
+      slider.addEventListener('mouseenter', () => {
+        paused = true;
+        slider.setAttribute('data-paused', 'true');
+      });
+      slider.addEventListener('mouseleave', () => {
+        paused = false;
+        slider.setAttribute('data-paused', 'false');
+      });
     }
 
     let touchStartX = 0;

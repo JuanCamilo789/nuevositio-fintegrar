@@ -126,16 +126,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <div class="promo-popup-media">
           <img
             src="/assets/img/popup-produtos.webp"
-            alt="Tablet, olla multifuncional y bonos en efectivo"
+            alt="Familia sonriente usando un computador portátil"
             class="promo-popup-img"
           />
         </div>
         <div class="promo-popup-content">
-          <h3 class="promo-popup-title">
-            Actualiza tus datos y participa por grandes premios
-          </h3>
           <p class="promo-popup-text">
-            Solo te toma 3 minutos. Participa por 1 tablet, 1 olla multifuncional y 10 bonos de $100.000 c/u. Tienes hasta el miércoles, 15 de septiembre de 2026.
+            <strong>¡Bienvenido a tu nueva página web!</strong>
+          </p>
+          <p class="promo-popup-text">
+            Aquí encuentras toda la información de tus <strong>créditos</strong>, <strong>ahorros</strong> y <strong>convenios</strong>, además de contenido para acompañarte en tu educación financiera.
+          </p>
+          <p class="promo-popup-text">
+            Diseñamos este espacio pensando en ti: rápido, claro y fácil de usar, para que resuelvas lo que necesites sin complicaciones y en el momento que lo necesites.
+          </p>
+          <p class="promo-popup-text">
+            Explora, conoce nuestros productos y descubre todo lo que hemos preparado para acompañarte a crecer, a ti y a tu familia.
           </p>
         </div>
       </div>
@@ -250,12 +256,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
       function closePopup() {
         popupOverlay?.classList.remove("is-visible");
+        document.documentElement.classList.remove("promo-popup-open");
         sessionStorage.setItem("promoPopupSeen", "1");
       }
 
       if (!sessionStorage.getItem("promoPopupSeen")) {
         window.addEventListener("load", () => {
-          setTimeout(() => popupOverlay?.classList.add("is-visible"), 600);
+          setTimeout(() => {
+            popupOverlay?.classList.add("is-visible");
+            document.documentElement.classList.add("promo-popup-open");
+          }, 600);
         });
       }
 

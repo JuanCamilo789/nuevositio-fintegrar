@@ -1172,6 +1172,11 @@
   }
 }
 
+html.promo-popup-open,
+html.promo-popup-open body {
+  overflow: hidden;
+}
+
 .promo-popup-overlay {
   position: fixed;
   inset: 0;
@@ -1199,7 +1204,7 @@
   width: 100%;
   height: min(420px, calc(100vh - 3rem));
   background: var(--color-white);
-  border-radius: 16px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
   transform: scale(0.95);
   transition: transform 0.3s ease;
@@ -1211,7 +1216,7 @@
 }
 
 .promo-popup-media {
-  flex: 0 0 42%;
+  flex: 0 0 50%;
   background: var(--color-brand-yellow);
   min-width: 0;
 }
@@ -1224,29 +1229,28 @@
 }
 
 .promo-popup-content {
+  position: relative;
   flex: 1 1 auto;
   min-width: 0;
   padding: 2rem 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 1rem;
   overflow-y: auto;
-}
-
-.promo-popup-title {
-  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
-  font-weight: var(--fw-extrabold);
-  color: var(--color-ink);
-  line-height: var(--lh-125);
-  margin-bottom: 1rem;
 }
 
 .promo-popup-text {
   font-size: 1rem;
   color: var(--color-ink);
-  opacity: 0.75;
-  line-height: var(--lh-160);
-  margin-bottom: 1.25rem;
+  opacity: 0.85;
+  line-height: var(--lh-130);
+  margin-bottom: 0;
+}
+
+.promo-popup-text strong {
+  font-weight: var(--fw-bold);
+  opacity: 1;
 }
 
 .promo-popup-close {
@@ -1277,7 +1281,6 @@
     height: auto;
     max-height: calc(100vh - 1.5rem);
     overflow-y: auto;
-    border-radius: 14px;
   }
 
   .promo-popup-media {
@@ -1290,10 +1293,6 @@
   .promo-popup-content {
     padding: 1.5rem;
     overflow-y: visible;
-  }
-
-  .promo-popup-title {
-    font-size: 1.25rem;
   }
 }
 

@@ -1,0 +1,157 @@
+---
+import InnerLayout from '../layouts/InnerLayout.astro';
+
+interface SiteLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface SiteGroup {
+  title: string;
+  links: SiteLink[];
+}
+
+const groups: SiteGroup[] = [
+  {
+    title: 'Inicio',
+    links: [
+      { label: 'Página principal', href: '/' },
+      { label: 'Simulador de crédito', href: '/#simulador' },
+      { label: 'Novedades', href: '/#novedades' },
+    ],
+  },
+  {
+    title: 'Institución',
+    links: [
+      { label: 'Quiénes somos', href: '/nosotros' },
+      { label: 'Misión y Visión', href: '/nosotros#mision' },
+      { label: 'Nuestra historia', href: '/nosotros#historia' },
+      { label: 'Cuerpos Colegiados', href: '/cuerpos-colegiados' },
+      { label: 'Normatividad', href: '/normatividad' },
+      { label: 'SARLAFT', href: '/sarlaft' },
+    ],
+  },
+  {
+    title: 'Ahorros',
+    links: [
+      { label: 'Modalidades de ahorro', href: '/ahorros' },
+      { label: 'Aportes Sociales', href: '/ahorros#aportes-sociales' },
+      { label: 'Ahorro Navideño', href: '/ahorros#ahorro-navideno' },
+      { label: 'Pequeños Ahorradores', href: '/ahorros#pequenos-ahorradores' },
+      { label: 'CDAT', href: '/ahorros#cdat' },
+      { label: 'Rifa Semanal', href: '/ahorros#rifa-semanal' },
+    ],
+  },
+  {
+    title: 'Créditos',
+    links: [
+      { label: 'Líneas de crédito', href: '/creditos' },
+      { label: 'Proceso de solicitud', href: '/creditos#proceso' },
+      { label: 'Simulador de crédito', href: '/#simulador' },
+    ],
+  },
+  {
+    title: 'Convenios',
+    links: [
+      { label: 'Convenios y alianzas', href: '/convenios' },
+    ],
+  },
+  {
+    title: 'Servicios y trámites',
+    links: [
+      { label: 'Directorio', href: '/directorio' },
+      { label: 'Actualización de datos', href: '/actualizacion-datos' },
+      { label: 'Radicar PQRSF', href: '/pqrsf' },
+      { label: 'Trámites Virtuales', href: 'https://tramitesvirtuales.fintegrar.com/', external: true },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Política de Datos', href: '/politica-tratamiento-datos' },
+      { label: 'Términos y Condiciones', href: '/terminos-condiciones' },
+    ],
+  },
+];
+---
+
+<InnerLayout
+  pageTitle="Mapa del sitio"
+  pageSubtitle="Todas las secciones de nuestra página, organizadas para que encuentre lo que necesita en un solo lugar."
+  breadcrumbs={[{ label: 'Mapa del sitio' }]}
+>
+  <section class="ms-section">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="ms-columns">
+        {groups.map((group) => (
+          <div class="ms-group">
+            <h2 class="ms-group-title">{group.title}</h2>
+            <ul class="ms-group-links">
+              {group.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="ms-link"
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</InnerLayout>
+
+<style>
+  .ms-section {
+    background: var(--color-white);
+    padding: 2.5rem 0 3.5rem;
+  }
+
+  .ms-columns {
+    columns: 3;
+    column-gap: 3rem;
+  }
+
+  .ms-group {
+    break-inside: avoid;
+    margin-bottom: 2rem;
+  }
+
+  .ms-group-title {
+    font-size: 1.125rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-brand-purple);
+    margin-bottom: 0.75rem;
+  }
+
+  .ms-group-links {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .ms-link {
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .ms-link:hover {
+    color: var(--color-brand-purple);
+  }
+
+  @media (max-width: 1023px) {
+    .ms-columns { columns: 2; }
+  }
+  @media (max-width: 639px) {
+    .ms-columns { columns: 1; }
+  }
+</style>

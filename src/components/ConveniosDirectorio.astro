@@ -2,9 +2,10 @@
 import { Icon } from 'astro-icon/components';
 
 interface Convenio {
+  id: string;
   nombre: string;
   categoria: string;
-  icon: string;
+  logo: string;
   resumen: string;
   descripcion: string;
   comoUsar: string;
@@ -13,221 +14,182 @@ interface Convenio {
 
 const convenios: Convenio[] = [
   {
-    nombre: 'Aviatur',
-    categoria: 'Turismo y viajes',
-    icon: 'tabler:plane',
-    resumen: 'Tarifas preferenciales en planes turísticos nacionales e internacionales.',
+    id: 'alkomprar',
+    nombre: 'Alkomprar',
+    categoria: 'Tecnología',
+    logo: '/assets/logos/convenios/alkomprar.webp',
+    resumen: 'Tecnología a tu alcance: celulares, computadores y electrodomésticos con precios especiales.',
     descripcion:
-      'Convenio con Aviatur para que los asociados y su familia accedan a condiciones especiales en la planeación de viajes, tiquetes aéreos y planes turísticos.',
+      'Convenio con Alkomprar para que accedas a tecnología y electrodomésticos con condiciones de pago preferenciales, pensado para que renueves lo que necesitas en casa sin afanes.',
     comoUsar:
-      'Comuníquese con Bienestar Social de FINTEGRAR para conocer el código o carta de presentación vigente antes de realizar su reserva con Aviatur.',
+      'Consulte con Bienestar Social de FINTEGRAR el código o carta de presentación vigente antes de tu compra.',
   },
   {
-    nombre: 'Emermédica',
-    categoria: 'Salud y emergencias',
-    icon: 'tabler:stethoscope',
-    resumen: 'Atención médica prepagada y ambulancia de emergencia con tarifas especiales.',
+    id: 'carino',
+    nombre: 'Cariño',
+    categoria: 'Cuidado familiar',
+    logo: '/assets/logos/convenios/carino.webp',
+    resumen: 'Beneficios en productos de cuidado e higiene para toda la familia.',
     descripcion:
-      'Servicio de medicina prepagada y atención de emergencias médicas a domicilio, con planes preferenciales para los asociados de FINTEGRAR y su núcleo familiar.',
+      'Alianza que te da acceso a productos de cuidado e higiene familiar con descuentos especiales, para que el bienestar de los tuyos siempre esté cubierto.',
+    comoUsar:
+      'Consulte con Bienestar Social de FINTEGRAR el procedimiento vigente para acceder al beneficio.',
+  },
+  {
+    id: 'emi-falck',
+    nombre: 'EMI Falck',
+    categoria: 'Salud y emergencias',
+    logo: '/assets/logos/convenios/emi-falck.webp',
+    resumen: 'Atención médica de urgencias y ambulancia con tarifas preferenciales.',
+    descripcion:
+      'Servicio de atención médica de emergencias y ambulancia a domicilio, con planes preferenciales para ti y tu núcleo familiar, porque tu tranquilidad es lo primero.',
     comoUsar:
       'Solicite información sobre el plan y el proceso de afiliación directamente en Bienestar Social.',
-    destacado: true,
   },
   {
-    nombre: 'Campos de Paz',
-    categoria: 'Servicios funerarios',
-    icon: 'tabler:shield-check',
-    resumen: 'Plan exequial con cobertura funeraria completa para el asociado y su familia.',
+    id: 'seresa',
+    nombre: 'Seresa',
+    categoria: 'Servicios',
+    logo: '/assets/logos/convenios/seresa.webp',
+    resumen: 'Servicios y representaciones con condiciones especiales para asociados.',
     descripcion:
-      'Plan de previsión exequial que cubre servicios funerarios completos para el asociado y su núcleo familiar, en condiciones preferenciales por el convenio con FINTEGRAR.',
+      'Convenio con Seresa (Servicios y Representaciones) que te da acceso a sus soluciones y servicios en condiciones preferenciales por ser asociado FINTEGRAR.',
     comoUsar:
-      'Consulte los requisitos de vinculación al plan con Bienestar Social de FINTEGRAR.',
+      'Consulte con Bienestar Social de FINTEGRAR el procedimiento vigente para acceder al beneficio.',
   },
   {
+    id: 'estra',
+    nombre: 'Estra',
+    categoria: 'Telecomunicaciones',
+    logo: '/assets/logos/convenios/estra.webp',
+    resumen: 'Planes de telefonía e internet con tarifas preferenciales.',
+    descripcion:
+      'Alianza con Estra para que accedas a planes de telefonía e internet con condiciones especiales, y te mantengas siempre conectado con lo que más quieres.',
+    comoUsar:
+      'Consulte con Bienestar Social de FINTEGRAR el código o carta de presentación vigente antes de tu vinculación.',
+  },
+  {
+    id: 'la-roseria',
+    nombre: 'La Rosería Floristería',
+    categoria: 'Regalos y floristería',
+    logo: '/assets/logos/convenios/la-roseria.webp',
+    resumen: 'Arreglos florales y detalles especiales con descuentos para toda ocasión.',
+    descripcion:
+      'Convenio con La Rosería Floristería para que sorprendas a quien más quieres con arreglos florales y detalles especiales en condiciones preferenciales.',
+    comoUsar:
+      'Consulte con Bienestar Social de FINTEGRAR el procedimiento vigente para acceder al beneficio.',
+  },
+  {
+    id: 'los-olivos',
     nombre: 'Los Olivos',
     categoria: 'Servicios funerarios',
-    icon: 'tabler:shield-check',
-    resumen: 'Servicios funerarios y de previsión exequial con condiciones preferenciales.',
+    logo: '/assets/logos/convenios/los-olivos.webp',
+    resumen: 'Plan de previsión exequial con cobertura completa para el asociado y su familia.',
     descripcion:
-      'Alianza para el acceso a servicios de previsión exequial y funerarios con beneficios exclusivos para los asociados de FINTEGRAR.',
+      'Plan de previsión exequial que cubre servicios funerarios completos para ti y tu núcleo familiar, un homenaje al amor en condiciones preferenciales por el convenio con FINTEGRAR.',
     comoUsar:
       'Consulte los requisitos de vinculación al plan con Bienestar Social de FINTEGRAR.',
   },
   {
-    nombre: 'Cotrafa Social',
-    categoria: 'Protección exequial',
-    icon: 'tabler:users',
-    resumen: 'Protección exequial complementaria para asociados.',
+    id: 'majestic-optical',
+    nombre: 'Majestic Optical',
+    categoria: 'Salud visual',
+    logo: '/assets/logos/convenios/majestic-optical.webp',
+    resumen: 'Exámenes visuales, monturas y lentes con precios preferenciales.',
     descripcion:
-      'Convenio de protección exequial complementaria, pensado como respaldo adicional para los asociados de FINTEGRAR y su grupo familiar.',
+      'Convenio con Majestic Optical para que cuides tu salud visual y la de tu familia con exámenes, monturas y lentes en condiciones especiales.',
     comoUsar:
-      'Solicite el procedimiento de afiliación en Bienestar Social de FINTEGRAR.',
+      'Consulte con Bienestar Social de FINTEGRAR el código o carta de presentación vigente antes de tu cita.',
   },
   {
-    nombre: 'Confiar',
-    categoria: 'Servicios financieros',
-    icon: 'tabler:building-bank',
-    resumen: 'Productos y servicios financieros cooperativos con beneficios cruzados.',
+    id: 'recordar',
+    nombre: 'Recordar',
+    categoria: 'Servicios funerarios',
+    logo: '/assets/logos/convenios/recordar.webp',
+    resumen: 'Plan exequial con acompañamiento integral para el asociado y su núcleo familiar.',
     descripcion:
-      'Alianza entre cooperativas que permite a los asociados de FINTEGRAR acceder a productos y servicios financieros de Confiar en condiciones preferenciales.',
+      'Plan de previsión exequial con acompañamiento integral en momentos difíciles, pensado como respaldo adicional para ti y tu grupo familiar.',
     comoUsar:
-      'Consulte con Bienestar Social de FINTEGRAR qué productos aplican y el procedimiento para acceder al beneficio.',
-    destacado: true,
+      'Consulte los requisitos de vinculación al plan con Bienestar Social de FINTEGRAR.',
+  },
+  {
+    id: 'salud-optima',
+    nombre: 'Salud Óptima Colombia',
+    categoria: 'Salud y bienestar',
+    logo: '/assets/logos/convenios/salud-optima.webp',
+    resumen: 'Programas de bienestar y calidad de vida con beneficios exclusivos.',
+    descripcion:
+      'Alianza con Salud Óptima Colombia para acompañarte con programas de bienestar y calidad de vida, porque tu felicidad y la de tu familia también nos importa.',
+    comoUsar:
+      'Solicite información sobre el plan y el proceso de afiliación directamente en Bienestar Social.',
+  },
+  {
+    id: 'turibus',
+    nombre: 'Turibus',
+    categoria: 'Turismo y viajes',
+    logo: '/assets/logos/convenios/turibus.webp',
+    resumen: 'Recorridos turísticos con tarifas especiales para ti y tu familia.',
+    descripcion:
+      'Convenio con Turibus para que descubras nuevos destinos con tarifas preferenciales en recorridos turísticos para ti y los tuyos.',
+    comoUsar:
+      'Consulte con Bienestar Social de FINTEGRAR el código o carta de presentación vigente antes de tu reserva.',
+  },
+  {
+    id: 'universal',
+    nombre: 'Universal',
+    categoria: 'Hogar',
+    logo: '/assets/logos/convenios/universal.webp',
+    resumen: 'Muebles y artículos para el hogar con condiciones de pago preferenciales.',
+    descripcion:
+      'Alianza con Universal, hacemos hogar contigo: muebles y artículos para tu casa en condiciones de pago preferenciales para asociados.',
+    comoUsar:
+      'Consulte con Bienestar Social de FINTEGRAR el código o carta de presentación vigente antes de tu compra.',
+  },
+  {
+    id: 'velez',
+    nombre: 'Vélez',
+    categoria: 'Moda y accesorios',
+    logo: '/assets/logos/convenios/velez.webp',
+    resumen: 'Descuentos en marroquinería y accesorios de la marca.',
+    descripcion:
+      'Convenio con Vélez para que accedas a descuentos especiales en marroquinería y accesorios, un detalle para ti o para regalar.',
+    comoUsar:
+      'Consulte con Bienestar Social de FINTEGRAR el procedimiento vigente para acceder al beneficio.',
   },
 ];
 
-// Paleta cíclica alineada al degradado de marca: violeta, verde azulado, celeste, dorado.
-const paleta = ['var(--color-brand-purple)', 'var(--color-brand-teal-bright)', 'var(--color-brand-blue)', 'var(--color-gold-deep)'];
-const categorias = [...new Set(convenios.map((c) => c.categoria))];
-const colorPorCategoria = new Map(categorias.map((cat, i) => [cat, paleta[i % paleta.length]]));
-const iconoPorCategoria = new Map(
-  categorias.map((cat) => [cat, convenios.find((c) => c.categoria === cat)!.icon]),
-);
-const slug = (s: string) => s.replace(/\s+/g, '-').toLowerCase();
-
-const pasos = [
-  {
-    icon: 'tabler:search',
-    titulo: 'Explore la red de aliados',
-    texto: 'Filtre por categoría o busque el convenio que necesita.',
-  },
-  {
-    icon: 'tabler:file-text',
-    titulo: 'Revise las condiciones',
-    texto: 'Abra el detalle del convenio para conocer el beneficio y los requisitos.',
-  },
-  {
-    icon: 'tabler:heart-handshake',
-    titulo: 'Actívelo con Bienestar Social',
-    texto: 'Confirme el procedimiento vigente antes de usar el beneficio.',
-  },
+const entidadesAliadas = [
+  { nombre: 'Prosalco', logo: '/assets/logos/aliadoprosalco.png' },
+  { nombre: 'Policlínico Sur', logo: '/assets/logos/aliadopoliclinico.png' },
+  { nombre: 'Sumemos Coop', logo: '/assets/logos/alieadosumemoscoop.png' },
 ];
 ---
 
 <section class="cv-section" aria-labelledby="cv-title">
   <div class="max-w-7xl mx-auto px-6">
 
-    <div class="cv-stats reveal">
-      <div class="cv-stat">
-        <div class="cv-stat-icon"><Icon name="tabler:building-store" class="w-5 h-5" aria-hidden="true" /></div>
-        <div>
-          <div class="cv-stat-num">{convenios.length}</div>
-          <div class="cv-stat-label">Convenios activos</div>
-        </div>
-      </div>
-      <div class="cv-stat">
-        <div class="cv-stat-icon"><Icon name="tabler:layout-dashboard" class="w-5 h-5" aria-hidden="true" /></div>
-        <div>
-          <div class="cv-stat-num">{categorias.length}</div>
-          <div class="cv-stat-label">Categorías de beneficios</div>
-        </div>
-      </div>
-      <div class="cv-stat">
-        <div class="cv-stat-icon"><Icon name="tabler:users" class="w-5 h-5" aria-hidden="true" /></div>
-        <div>
-          <div class="cv-stat-num">100%</div>
-          <div class="cv-stat-label">Exclusivo asociados</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cv-steps reveal">
-      {pasos.map((p, i) => (
-        <div class="cv-step">
-          <div class="cv-step-num">{`0${i + 1}`}</div>
-          <div class="cv-step-icon"><Icon name={p.icon} class="w-4 h-4" aria-hidden="true" /></div>
-          <div class="cv-step-titulo">{p.titulo}</div>
-          <div class="cv-step-texto">{p.texto}</div>
-        </div>
-      ))}
-    </div>
-
-    <div class="cv-toolbar reveal">
-      <div class="cv-search">
-        <Icon name="tabler:search" class="w-4 h-4 cv-search-icon" aria-hidden="true" />
-        <input
-          type="text"
-          id="cvSearch"
-          class="cv-search-input"
-          placeholder="Buscar convenio por nombre o beneficio..."
-          aria-label="Buscar convenio"
-          autocomplete="off"
-        />
-        <button type="button" class="cv-search-clear" id="cvSearchClear" aria-label="Limpiar búsqueda" hidden>
-          <Icon name="tabler:x" class="w-3.5 h-3.5" aria-hidden="true" />
-        </button>
-      </div>
-
-      <div class="cv-filters" id="cvFilters" role="group" aria-label="Filtrar por categoría">
-        <button type="button" class="cv-filter-pill is-active" data-category="todos">
-          <span class="cv-filter-dot" style="background:var(--gradient-brand);"></span>
-          Todos
-          <span class="cv-filter-count">{convenios.length}</span>
-        </button>
-        {categorias.map((cat) => (
-          <button type="button" class="cv-filter-pill" data-category={cat}>
-            <span class="cv-filter-dot" style={`background:${colorPorCategoria.get(cat)};`}></span>
-            {cat}
-            <span class="cv-filter-count">{convenios.filter((c) => c.categoria === cat).length}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-
-    <p class="cv-results-count" id="cvResultsCount" aria-live="polite">
-      Mostrando {convenios.length} de {convenios.length} convenios
-    </p>
-
     <div class="cv-grid" id="cvGrid">
       {convenios.map((c) => (
         <button
           type="button"
-          class="cv-card"
-          style={`--cv-accent:${colorPorCategoria.get(c.categoria)};`}
-          data-name={c.nombre.toLowerCase()}
-          data-category={c.categoria}
-          data-search={`${c.nombre} ${c.categoria} ${c.resumen}`.toLowerCase()}
-          data-drawer-target={`drawer-${slug(c.nombre)}`}
+          class="cv-tile"
+          data-drawer-target={`drawer-${c.id}`}
+          aria-label={`Ver detalle de ${c.nombre}`}
         >
-          <span class="cv-card-bar" aria-hidden="true"></span>
-          {c.destacado && (
-            <span class="cv-card-featured">
-              <Icon name="tabler:star-filled" class="w-3 h-3" aria-hidden="true" />
-              Destacado
-            </span>
-          )}
-          <div class="cv-card-icon">
-            <Icon name={c.icon} class="w-6 h-6" aria-hidden="true" />
-          </div>
-          <span class="cv-card-categoria">{c.categoria}</span>
-          <div class="cv-card-titulo">{c.nombre}</div>
-          <p class="cv-card-resumen">{c.resumen}</p>
-          <span class="cv-card-cta">
-            Ver detalles
-            <Icon name="tabler:arrow-right" class="w-3.5 h-3.5" aria-hidden="true" />
-          </span>
+          <img src={c.logo} alt={`Logo ${c.nombre}`} loading="lazy" />
         </button>
       ))}
     </div>
 
-    <div class="cv-empty" id="cvEmpty" hidden>
-      <Icon name="tabler:mood-empty" class="w-10 h-10" aria-hidden="true" />
-      <p>No encontramos convenios que coincidan con su búsqueda.</p>
-      <button type="button" class="btn btn-outline btn-sm" id="cvClearFilters">Limpiar filtros</button>
-    </div>
-
-    <div class="cv-suggest reveal">
-      <div class="cv-suggest-icon">
-        <Icon name="tabler:bulb" class="w-5 h-5" aria-hidden="true" />
+    <div class="cv-allies reveal">
+      <h3 class="cv-allies-title">Entidades aliadas</h3>
+      <div class="cv-grid cv-allies-row">
+        {entidadesAliadas.map((e) => (
+          <div class="cv-tile cv-tile--mono">
+            <img src={e.logo} alt={`Logo ${e.nombre}`} loading="lazy" />
+          </div>
+        ))}
       </div>
-      <div class="cv-suggest-body">
-        <div class="cv-suggest-title">¿Conoce un aliado que debería estar aquí?</div>
-        <div class="cv-suggest-sub">Escríbanos y evaluamos la posibilidad de un nuevo convenio para todos los asociados.</div>
-      </div>
-      <a href="mailto:bienestarsocial@fintegrar.com" class="btn btn-dark btn-sm cv-suggest-btn">
-        <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
-        Escribir a Bienestar Social
-      </a>
     </div>
 
   </div>
@@ -238,7 +200,7 @@ const pasos = [
 {convenios.map((c) => (
   <aside
     class="cv-drawer"
-    id={`drawer-${slug(c.nombre)}`}
+    id={`drawer-${c.id}`}
     role="dialog"
     aria-modal="true"
     aria-label={`Detalle del convenio ${c.nombre}`}
@@ -247,15 +209,14 @@ const pasos = [
       <button type="button" class="cv-drawer-close" data-drawer-close aria-label="Cerrar">
         <Icon name="tabler:x" class="w-4 h-4" aria-hidden="true" />
       </button>
-      <div class="cv-drawer-icon">
-        <Icon name={c.icon} class="w-7 h-7" aria-hidden="true" />
+    </div>
+    <div class="cv-drawer-header">
+      <div class="cv-drawer-logo">
+        <img src={c.logo} alt={`Logo ${c.nombre}`} />
       </div>
+      <h3 class="cv-drawer-titulo">{c.nombre}</h3>
     </div>
     <div class="cv-drawer-body">
-      <span class="cv-drawer-categoria" style={`color:${colorPorCategoria.get(c.categoria)};`}>
-        {c.categoria}
-      </span>
-      <h3 class="cv-drawer-titulo">{c.nombre}</h3>
       <p class="cv-drawer-desc">{c.descripcion}</p>
       <div class="cv-drawer-como">
         <div class="cv-drawer-como-title">
@@ -278,367 +239,88 @@ const pasos = [
     padding: 4rem 0 6rem;
   }
 
-  .cv-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  .cv-stat {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--color-surface);
-    border-radius: var(--radius-md);
-    padding: 1.125rem 1.125rem;
-  }
-  .cv-stat-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: var(--color-white);
-    color: var(--color-ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .cv-stat-num {
-    font-size: clamp(1.25rem, 2.4vw, 1.625rem);
-    font-weight: var(--fw-extrabold);
-    color: var(--color-ink);
-    line-height: var(--lh-110);
-  }
-  .cv-stat-label {
-    font-size: 0.7rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-    margin-top: 0.125rem;
-  }
-
-  .cv-steps {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding: 1.75rem 0 2.25rem;
-    margin-bottom: 2rem;
-    border-top: 1px solid var(--color-surface);
-    border-bottom: 1px solid var(--color-surface);
-  }
-  @media (min-width: 768px) {
-    .cv-steps {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-  }
-  .cv-step {
-    position: relative;
-    padding-left: 3rem;
-  }
-  .cv-step-num {
-    position: absolute;
-    left: 0;
-    top: -0.25rem;
-    font-size: 1.75rem;
-    font-weight: var(--fw-extrabold);
-    font-family: var(--ff-heading);
-    background: var(--gradient-brand);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    opacity: 0.35;
-    line-height: var(--lh-100);
-  }
-  .cv-step-icon {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: var(--gradient-brand);
-    color: var(--color-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 0.625rem;
-  }
-  .cv-step-titulo {
-    font-size: 0.9375rem;
-    font-weight: var(--fw-bold);
-    color: var(--color-ink);
-    margin-bottom: 0.25rem;
-  }
-  .cv-step-texto {
-    font-size: 0.8125rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-    line-height: var(--lh-150);
-  }
-
-  .cv-toolbar {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .cv-search {
-    position: relative;
-    max-width: 420px;
-    width: 100%;
-  }
-  .cv-search-icon {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--color-ink);
-    opacity: 0.4;
-    pointer-events: none;
-  }
-  .cv-search-input {
-    width: 100%;
-    padding: 0.75rem 2.5rem;
-    border-radius: var(--radius-full);
-    border: 1.5px solid var(--color-border);
-    font-size: 0.9375rem;
-    color: var(--color-ink);
-    background: var(--color-white);
-    transition: border-color 0.15s;
-  }
-  .cv-search-input:focus {
-    outline: none;
-    border-color: var(--color-brand-blue);
-  }
-  .cv-search-clear {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--color-surface);
-    border: none;
-    color: var(--color-ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .cv-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .cv-filter-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8125rem;
-    font-weight: var(--fw-semibold);
-    color: var(--color-ink);
-    background: var(--color-surface);
-    border: 1.5px solid transparent;
-    border-radius: var(--radius-full);
-    padding: 0.5rem 0.875rem 0.5rem 0.75rem;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-  .cv-filter-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .cv-filter-count {
-    font-size: 0.7rem;
-    font-weight: var(--fw-bold);
-    opacity: 0.45;
-  }
-  .cv-filter-pill:hover {
-    border-color: var(--color-brand-blue);
-  }
-  .cv-filter-pill.is-active {
-    background: var(--color-ink);
-    color: var(--color-white);
-  }
-  .cv-filter-pill.is-active .cv-filter-count {
-    opacity: 0.7;
-  }
-
-  .cv-results-count {
-    font-size: 0.8125rem;
-    color: var(--color-ink);
-    opacity: 0.55;
-    margin-bottom: 1.5rem;
-  }
-
   .cv-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
   @media (min-width: 640px) {
-    .cv-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
     .cv-grid { grid-template-columns: repeat(3, 1fr); }
   }
+  @media (min-width: 1024px) {
+    .cv-grid { grid-template-columns: repeat(4, 1fr); }
+  }
 
-  .cv-card {
+  .cv-tile {
     position: relative;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
     background: var(--color-white);
     border: 1px solid var(--color-surface);
     border-radius: var(--radius-md);
-    padding: 1.5rem 1.5rem 1.375rem;
+    padding: 1.5rem;
     cursor: pointer;
     transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
     font-family: inherit;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
   }
-  .cv-card:hover {
+  .cv-tile:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-3px);
     border-color: transparent;
   }
-  .cv-card[hidden] {
-    display: none;
-  }
-  .cv-card-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--cv-accent, var(--color-ink));
-  }
 
-  .cv-card-featured {
-    position: absolute;
-    top: 1.125rem;
-    right: 1.25rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.625rem;
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    color: var(--color-warning-text-strong);
-    background: rgba(var(--color-brand-yellow-rgb), 0.2);
-    padding: 0.2rem 0.6rem;
-    border-radius: var(--radius-full);
-  }
 
-  .cv-card-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-sm);
-    background: color-mix(in srgb, var(--cv-accent, var(--color-ink)) 12%, white);
-    color: var(--cv-accent, var(--color-ink));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0.5rem 0 1.125rem;
-    transition: transform 0.25s;
-  }
-  .cv-card:hover .cv-card-icon {
-    transform: scale(1.08) rotate(-4deg);
-  }
-
-  .cv-card-categoria {
-    font-size: 0.68rem;
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    color: var(--cv-accent, var(--color-ink));
-    margin-bottom: 0.5rem;
-  }
-
-  .cv-card-titulo {
-    font-weight: var(--fw-bold);
-    font-size: 1.0625rem;
-    color: var(--color-ink);
-    margin-bottom: 0.375rem;
-  }
-
-  .cv-card-resumen {
-    font-size: 0.875rem;
-    color: var(--color-ink);
+  .cv-tile img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(1);
     opacity: 0.65;
-    line-height: var(--lh-155);
-    margin-bottom: 1.25rem;
-    flex: 1;
+    transition: filter 0.25s, opacity 0.25s;
+  }
+  .cv-tile:hover img {
+    filter: grayscale(0);
+    opacity: 1;
   }
 
-  .cv-card-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.8125rem;
-    font-weight: var(--fw-semibold);
-    color: var(--cv-accent, var(--color-ink));
-    transition: gap 0.2s;
+  .cv-tile--mono img {
+    filter: invert(1) grayscale(1);
+    opacity: 0.55;
   }
-  .cv-card:hover .cv-card-cta {
-    gap: 10px;
+  .cv-tile--mono:hover img {
+    filter: invert(1) grayscale(1);
+    opacity: 1;
   }
 
-  .cv-empty {
-    text-align: center;
-    padding: 4rem 1rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-  }
-  .cv-empty svg {
-    margin: 0 auto 1rem;
-    opacity: 0.4;
-  }
-  .cv-empty p {
-    margin-bottom: 1.25rem;
-    font-size: 0.9375rem;
-  }
-
-  .cv-suggest {
+  .cv-allies {
     margin-top: 3.5rem;
-    background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    padding: 1.75rem 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--color-surface);
+    text-align: center;
   }
-  .cv-suggest-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--color-white);
-    color: var(--color-ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .cv-suggest-body {
-    flex: 1;
-    min-width: 200px;
-  }
-  .cv-suggest-title {
+  .cv-allies-title {
+    font-size: clamp(1.375rem, 2.2vw, 1.75rem);
     font-weight: var(--fw-bold);
-    font-size: 0.9375rem;
     color: var(--color-ink);
+    margin-bottom: 1.5rem;
   }
-  .cv-suggest-sub {
-    font-size: 0.8125rem;
-    color: var(--color-ink);
-    opacity: 0.6;
-    margin-top: 0.2rem;
+  .cv-allies-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
   }
-  .cv-suggest-btn {
-    flex-shrink: 0;
+  .cv-allies-row .cv-tile {
+    flex: 0 0 calc((100% - 1 * 1rem) / 2);
+  }
+  @media (min-width: 640px) {
+    .cv-allies-row .cv-tile { flex-basis: calc((100% - 2 * 1rem) / 3); }
+  }
+  @media (min-width: 1024px) {
+    .cv-allies-row .cv-tile { flex-basis: calc((100% - 3 * 1rem) / 4); }
   }
 
   .cv-drawer-backdrop {
@@ -657,29 +339,50 @@ const pasos = [
 
   .cv-drawer {
     position: fixed;
-    top: 0;
+    left: 0;
     right: 0;
     bottom: 0;
-    width: min(420px, 100vw);
+    width: 100%;
+    max-height: 40vh;
     background: var(--color-white);
     z-index: 1001;
-    transform: translateX(100%);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transform: translateY(100%);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
     overflow-y: auto;
     box-shadow: none;
   }
   .cv-drawer.is-open {
-    transform: translateX(0);
-    box-shadow: -20px 0 50px rgba(var(--color-black-rgb), 0.25);
+    transform: translateY(0);
+    box-shadow: 0 -20px 50px rgba(var(--color-black-rgb), 0.25);
+  }
+
+  @media (min-width: 640px) {
+    .cv-drawer {
+      left: auto;
+      top: 2rem;
+      bottom: 2rem;
+      right: 2rem;
+      width: min(400px, calc(100vw - 4rem));
+      max-height: none;
+      border-radius: var(--radius-lg);
+      transform: translateY(16px);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.35s;
+    }
+    .cv-drawer.is-open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      box-shadow: 0 20px 50px rgba(var(--color-black-rgb), 0.25);
+    }
   }
 
   .cv-drawer-banner {
     position: relative;
-    height: 120px;
+    height: 64px;
     background: var(--gradient-brand);
-    display: flex;
-    align-items: flex-end;
-    padding: 0 1.75rem;
   }
   .cv-drawer-close {
     position: absolute;
@@ -696,34 +399,42 @@ const pasos = [
     cursor: pointer;
     color: var(--color-white);
   }
-  .cv-drawer-icon {
+
+  .cv-drawer-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1.75rem;
+    margin-top: -32px;
+  }
+  .cv-drawer-logo {
     width: 64px;
     height: 64px;
     border-radius: var(--radius-md);
     background: var(--color-white);
-    color: var(--color-ink);
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateY(50%);
+    flex-shrink: 0;
     box-shadow: 0 8px 20px rgba(var(--color-black-rgb), 0.18);
+    padding: 0.5rem;
+  }
+  .cv-drawer-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   .cv-drawer-body {
-    padding: 3rem 1.75rem 2rem;
-  }
-  .cv-drawer-categoria {
-    display: block;
-    font-size: 0.7rem;
-    font-weight: var(--fw-bold);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    padding: 1.5rem 1.75rem 2rem;
   }
   .cv-drawer-titulo {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: var(--fw-extrabold);
     color: var(--color-ink);
-    margin-bottom: 0.75rem;
+    margin-top: 0.5rem;
   }
   .cv-drawer-desc {
     font-size: 0.9375rem;
@@ -760,71 +471,16 @@ const pasos = [
 
   @media (max-width: 639px) {
     .cv-section { padding: 2.5rem 0 4rem; }
-    .cv-stats { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
-    .cv-stat { flex-direction: column; text-align: center; padding: 1rem 0.375rem; gap: 0.375rem; }
-    .cv-suggest { flex-direction: column; text-align: center; padding: 1.5rem; }
-    .cv-drawer { width: 100vw; }
+    .cv-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 
 <script>
   function initConveniosDirectorio() {
-    const search = document.getElementById('cvSearch') as HTMLInputElement | null;
-    const searchClear = document.getElementById('cvSearchClear');
-    const filters = document.getElementById('cvFilters');
     const grid = document.getElementById('cvGrid');
-    const empty = document.getElementById('cvEmpty');
-    const resultsCount = document.getElementById('cvResultsCount');
-    const clearBtn = document.getElementById('cvClearFilters');
+    if (!grid) return;
 
-    if (!search || !filters || !grid || !empty || !resultsCount) return;
-
-    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.cv-card'));
-    const total = cards.length;
-    let activeCategory = 'todos';
-
-    function applyFilters() {
-      const query = (search!.value || '').trim().toLowerCase();
-      searchClear!.hidden = query.length === 0;
-      let visible = 0;
-
-      cards.forEach((card) => {
-        const matchesCategory = activeCategory === 'todos' || card.dataset.category === activeCategory;
-        const matchesQuery = !query || (card.dataset.search || '').includes(query);
-        const show = matchesCategory && matchesQuery;
-        card.hidden = !show;
-        if (show) visible += 1;
-      });
-
-      resultsCount!.textContent = `Mostrando ${visible} de ${total} convenios`;
-      empty!.hidden = visible !== 0;
-      grid!.style.display = visible === 0 ? 'none' : '';
-    }
-
-    search.addEventListener('input', applyFilters);
-    searchClear?.addEventListener('click', () => {
-      search.value = '';
-      applyFilters();
-      search.focus();
-    });
-
-    filters.addEventListener('click', (e) => {
-      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.cv-filter-pill');
-      if (!btn) return;
-      filters.querySelectorAll('.cv-filter-pill').forEach((p) => p.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      activeCategory = btn.dataset.category || 'todos';
-      applyFilters();
-    });
-
-    clearBtn?.addEventListener('click', () => {
-      search.value = '';
-      activeCategory = 'todos';
-      filters.querySelectorAll('.cv-filter-pill').forEach((p) => p.classList.remove('is-active'));
-      filters.querySelector('.cv-filter-pill[data-category="todos"]')?.classList.add('is-active');
-      applyFilters();
-    });
-
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.cv-tile'));
     const backdrop = document.getElementById('cvDrawerBackdrop');
     const drawers = Array.from(document.querySelectorAll<HTMLElement>('.cv-drawer'));
 
