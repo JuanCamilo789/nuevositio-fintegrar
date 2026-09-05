@@ -1,5 +1,5 @@
 ---
-const equipoBase = [
+const equipo = [
   {
     nombre: "Luis Hernando Loaiza Gallego",
     cargo: "Gerente · Representante Legal",
@@ -36,35 +36,29 @@ const equipoBase = [
     email: ["comercial@fintegrar.com"],
   },
 ];
-
-const equipo = equipoBase.map((p) => ({
-  ...p,
-  iniciales: p.nombre
-    .split(" ")
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join(""),
-}));
 ---
 
 <section id="directorio" class="dir-section" aria-labelledby="dir-title">
   <h2 id="dir-title" class="sr-only">Nuestro Equipo de Trabajo</h2>
-  <div class="max-w-5xl mx-auto px-6">
-    <div class="dir-list-card reveal">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="dir-grid reveal">
       {
         equipo.map((p) => (
-          <div class="dir-row">
-            <span class="dir-row-avatar">{p.iniciales}</span>
-            <span class="dir-row-name">{p.nombre}</span>
-            <span class="dir-row-meta">
-              <span class="dir-row-role">{p.cargo}</span>
-              <span class="dir-row-emails">
-                {p.email.map((e) => (
-                  <a href={`mailto:${e}`} class="dir-row-email">
-                    {e}
-                  </a>
-                ))}
-              </span>
+          <div class="dir-card">
+            <div class="dir-photo" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.5" />
+                <path d="M4.5 19.5c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </div>
+            <span class="dir-card-name">{p.nombre}</span>
+            <span class="dir-card-role">{p.cargo}</span>
+            <span class="dir-card-emails">
+              {p.email.map((e) => (
+                <a href={`mailto:${e}`} class="dir-card-email">
+                  {e}
+                </a>
+              ))}
             </span>
           </div>
         ))
@@ -79,87 +73,67 @@ const equipo = equipoBase.map((p) => ({
     padding: 4rem 0;
   }
 
-  .dir-list-card {
+  .dir-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 15rem));
+    justify-content: center;
+    gap: 2.5rem 2rem;
+  }
+
+  .dir-card {
     display: flex;
     flex-direction: column;
-    background: var(--color-white);
-    border: 1px solid rgba(var(--color-brand-purple-rgb), 0.12);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    padding: 0.5rem 1.75rem;
-  }
-
-  .dir-row {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    column-gap: 1.25rem;
-    row-gap: 0.25rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(var(--color-brand-purple-rgb), 0.1);
-    margin: 0 -1.75rem;
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
-    transition: background 0.15s;
+    gap: 0.35rem;
+    text-align: center;
   }
 
-  .dir-row:hover {
-    background: rgba(var(--color-brand-purple-rgb), 0.04);
-  }
-
-  .dir-row:last-child {
-    border-bottom: none;
-  }
-
-  .dir-row-avatar {
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
+  .dir-photo {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    background: rgba(var(--color-brand-purple-rgb), 0.12);
-    color: var(--color-brand-purple);
-    font-size: 0.75rem;
-    font-weight: var(--fw-bold);
-    margin-right: 0.25rem;
+    flex-shrink: 0;
+    width: 8rem;
+    height: 8rem;
+    border-radius: var(--radius-md);
+    background: var(--color-navbar-bg);
+    border: 1px dashed rgba(var(--color-brand-purple-rgb), 0.35);
+    color: rgba(var(--color-brand-purple-rgb), 0.4);
+    margin-bottom: 0.5rem;
   }
 
-  .dir-row-name {
-    flex: 1 1 auto;
-    font-size: 1rem;
+  .dir-photo svg {
+    width: 42%;
+    height: 42%;
+  }
+
+  .dir-card-name {
+    font-size: 0.9375rem;
     font-weight: var(--fw-bold);
     color: var(--color-ink);
+    white-space: nowrap;
   }
 
-  .dir-row-meta {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-  }
-
-  .dir-row-role {
-    font-size: 0.875rem;
+  .dir-card-role {
+    font-size: 0.8125rem;
     color: var(--color-ink);
-    opacity: 0.65;
+    opacity: 0.6;
   }
 
-  .dir-row-emails {
+  .dir-card-emails {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 0.75rem;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-top: 0.35rem;
   }
 
-  .dir-row-email {
-    font-size: 0.875rem;
+  .dir-card-email {
+    font-size: 0.8125rem;
     font-weight: var(--fw-bold);
     color: var(--color-brand-purple);
     text-decoration: none;
   }
-  .dir-row-email:hover {
+  .dir-card-email:hover {
     text-decoration: underline;
   }
 
@@ -167,24 +141,15 @@ const equipo = equipoBase.map((p) => ({
     .dir-section {
       padding: 3rem 0;
     }
-    .dir-list-card {
-      padding: 0.5rem 1.25rem;
+    .dir-grid {
+      grid-template-columns: repeat(2, minmax(0, 8rem));
     }
-    .dir-row {
-      flex-wrap: wrap;
-      align-items: center;
-      row-gap: 0.5rem;
-      padding: 1rem 0;
-      margin: 0 -1.25rem;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
+    .dir-photo {
+      width: 6rem;
+      height: 6rem;
     }
-    .dir-row-meta {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.25rem;
-      width: 100%;
-      padding-left: calc(36px + 0.25rem);
+    .dir-card-name {
+      white-space: normal;
     }
   }
 </style>

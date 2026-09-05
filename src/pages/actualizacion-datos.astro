@@ -12,19 +12,23 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
 >
   <section class="ad-section">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="ad-card">
-
-        <div class="ad-promo-banner">
-          <img src="/assets/img/banner5.webp" alt="Actualiza tus datos y participa por 1 tablet, 1 olla multifuncional y 10 bonos de $100.000. Tienes hasta el 15 de septiembre." loading="eager" />
+      <div class="ad-grid">
+        <div class="ad-intro reveal">
+          <h2 class="ad-intro-titulo">
+            <span class="ad-intro-saludo">Cuéntanos,</span><br />
+            <span class="ad-intro-sub">actualiza tus datos</span>
+          </h2>
+          <p class="ad-intro-texto">
+            Tenerte al día nos ayuda a acompañarte mejor: comunicarnos contigo en el momento justo y con la información correcta. Solo te tomará un momento y tus datos están protegidos con nosotros.
+          </p>
         </div>
 
-                <div id="ad-step-form" class="ad-step">
+        <div class="reveal">
+      <div class="ad-card">
+
+        <div id="ad-step-form" class="ad-step">
 
           <form id="ad-form-datos" novalidate>
-
-            <div class="ad-section-title">
-              <span><i class="ad-section-num">1</i> Información personal</span>
-            </div>
 
             <div class="ad-accordion-item open">
               <div id="acc-identificacion" class="ad-accordion-body" style="padding-top:0;">
@@ -57,11 +61,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                   <FloatingInput id="f-direccion_completa" label="Dirección de residencia" required data-campo="direccion_completa" readonly class="cursor-pointer" placeholder="Haz clic para ingresar dirección" />
                 </div>
 
-                <div class="ad-section-title" style="margin-top:2.5rem;">
-                  <span><i class="ad-section-num">2</i> Preferencias u otra información</span>
-                </div>
-
-                <div class="form-group mb-6 mt-2">
+                <div class="form-group mb-6" style="margin-top:2.5rem;">
                   <label id="lbl-preferencias" class="block mb-2 text-[0.875rem] font-semibold text-[var(--color-border-strong)]">Preferencias de contacto<span class="req">*</span></label>
                   <div class="ad-checkbox-grupo" role="group" aria-labelledby="lbl-preferencias">
                     <label class="ad-checkbox"><input type="checkbox" class="f-preferencias" value="whatsapp" /><span class="ad-toggle" aria-hidden="true"></span> WhatsApp</label>
@@ -99,7 +99,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
                     <option value="Estudiante">Estudiante</option>
                     <option value="Cuidado del hogar">Cuidado del hogar</option>
                   </FloatingSelect>
-                  <FloatingSelect id="f-tipo_vivienda" label="¿La vivienda donde vive actualmente es?" required data-campo="tipo_vivienda">
+                  <FloatingSelect id="f-tipo_vivienda" label="¿La vivienda donde vive es?" required data-campo="tipo_vivienda">
                     <option value="">Seleccione</option>
                     <option value="Familiar">Familiar</option>
                     <option value="Propia">Propia</option>
@@ -208,7 +208,6 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
             <div class="ad-btn-row" style="justify-content: flex-end;">
               <button type="submit" id="ad-btn-revisar" class="btn btn-primary" style="width:100%;justify-content:center;padding:0.875rem;" disabled>
                 Actualizar datos
-                <Icon name="tabler:send" class="w-4 h-4" aria-hidden="true" />
               </button>
             </div>
           </form>
@@ -228,6 +227,8 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
           </button>
         </div>
 
+      </div>
+        </div>
       </div>
     </div>
   </section>
@@ -413,69 +414,55 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     background: var(--color-navbar-bg);
     padding: 3.5rem 0 5rem;
   }
-  /* Tarjeta principal sin bordes ni sombras — alineada con el hero, sin padding horizontal extra */
-  .ad-card {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem 0;
+
+  .ad-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 2.5rem;
+  }
+  .ad-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .ad-intro-titulo {
+    font-family: var(--ff-heading);
+    line-height: var(--lh-120);
+    color: var(--color-brand-purple);
+  }
+  .ad-intro-saludo {
+    font-weight: var(--fw-extrabold);
+    font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+  }
+  .ad-intro-sub {
+    font-weight: var(--fw-regular);
+    font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  }
+  .ad-intro-texto {
+    font-size: 1rem;
+    color: var(--color-ink);
+    opacity: 0.7;
+    line-height: var(--lh-175);
+    max-width: 30rem;
   }
 
-  .ad-promo-banner {
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    margin-bottom: 2.5rem;
-    line-height: var(--lh-0);
-    aspect-ratio: 3 / 1;
-  }
-  .ad-promo-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 55%;
-    display: block;
-  }
-  @media (max-width: 639px) {
-    .ad-promo-banner {
-      aspect-ratio: 16 / 9;
+  @media (min-width: 1024px) {
+    .ad-grid {
+      grid-template-columns: 3fr 9fr;
+      gap: 3rem;
+    }
+    .ad-intro {
+      position: sticky;
+      top: 6rem;
     }
   }
 
-  .ad-section-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.25rem;
-    margin: 0 0 2.25rem;
-  }
-  .ad-section-title::before,
-  .ad-section-title::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--color-border);
-  }
-  .ad-section-title span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    font-size: 0.9375rem;
-    font-weight: var(--fw-bold);
-    color: var(--color-ink);
-    white-space: nowrap;
-  }
-  .ad-section-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--color-ink);
-    color: var(--color-white);
-    font-size: 0.75rem;
-    font-weight: var(--fw-extrabold);
-    font-style: normal;
-    flex-shrink: 0;
+  /* Tarjeta principal: contenedor blanco del formulario, igual a pqrsf-form-wrap */
+  .ad-card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
   }
 
     .ad-stepper {
@@ -746,12 +733,11 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
     cursor: pointer;
     transition: background 0.15s, color 0.15s, opacity 0.15s;
   }
-  /* Botón Primario: mismo estilo que .btn-primary global (pqrsf, etc.) */
   .btn-primary {
-    background: var(--color-ink);
+    background: var(--color-brand-purple);
     color: var(--color-white);
   }
-  .btn-primary:hover { background: var(--color-ink); }
+  .btn-primary:hover { background: var(--color-brand-purple); }
   .btn-primary:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -768,7 +754,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
   }
 
   @media (max-width: 639px) {
-    .ad-card { padding: 1.5rem 0; border-radius: var(--radius-md); }
+    .ad-card { padding: 1.5rem; border-radius: var(--radius-md); }
     .form-row { grid-template-columns: 1fr; gap: 0; }
     .ad-stepper-item span:last-child { display: none; }
     .ad-stepper-line { margin-top: 17px; }

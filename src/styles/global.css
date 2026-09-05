@@ -633,6 +633,20 @@
     box-shadow: 0 4px 16px rgba(255, 200, 1, 0.35);
   }
 
+  .btn-purple {
+    background: var(--color-brand-purple);
+    color: var(--color-white);
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+  }
+
+  .btn-purple:hover {
+    background: var(--color-brand-purple);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(var(--color-brand-purple-rgb), 0.35);
+  }
+
   .btn-dark {
     background: var(--color-ink);
     color: var(--color-white);

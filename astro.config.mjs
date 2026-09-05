@@ -28,7 +28,7 @@ export default defineConfig({
           'baby-carriage', 'brand-facebook', 'brand-instagram', 'brand-linkedin', 'brand-whatsapp',
           'briefcase', 'building-bank', 'building-store', 'bulb', 'calculator', 'calendar-check',
           'calendar-event', 'candle', 'check', 'chevron-down', 'chevron-left', 'chevron-right',
-          'circle-check', 'clipboard-check', 'clock', 'clock-hour-4', 'cookie', 'credit-card', 'device-mobile-dollar',
+          'circle-check', 'clipboard-check', 'clock', 'clock-hour-4', 'cookie', 'credit-card', 'device-mobile-dollar', 'download',
           'equal', 'eye', 'file-check', 'file-text', 'file-type-pdf', 'file-upload', 'folder', 'headset',
           'heart', 'heart-handshake', 'help', 'help-hexagon', 'home', 'home-heart',
           'id-badge', 'info-circle', 'layout-dashboard', 'layout-grid', 'mail',

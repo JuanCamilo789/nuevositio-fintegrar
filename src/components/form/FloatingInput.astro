@@ -16,7 +16,7 @@ const requerido = "required" in rest && rest.required !== false;
 ---
 
 <div class="ff-field">
-  <label for={id}>{label}{requerido && <span class="ff-req" aria-hidden="true">*</span>}</label>
+  <label for={id}>{label}{requerido && <span class="ff-req" aria-hidden="true">&nbsp;*</span>}</label>
   <input id={id} type={type} class={className} {...rest} />
   <slot name="error" />
 </div>

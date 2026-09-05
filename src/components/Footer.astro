@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import developerLogo from "../assets/img/developers/logo-completo-negro.png";
 ---
 
-<footer class="footer-light relative overflow-hidden bg-white border-t border-slate-200" role="contentinfo">
+<footer class="footer-light relative overflow-hidden bg-white" role="contentinfo">
 
   <svg class="footer-brand-shape absolute" viewBox="70 -5 135 163" aria-hidden="true">
     <defs>
@@ -103,6 +103,9 @@ import developerLogo from "../assets/img/developers/logo-completo-negro.png";
         <h3 class="footer-heading footer-heading--plain whitespace-nowrap text-center lg:text-right">Entidades aliadas</h3>
         <div class="flex flex-wrap items-center justify-center lg:justify-end gap-x-8 gap-y-4">
           <img src="/assets/logos/aliadoprosalco.png" alt="Prosalco" class="footer-ally-logo" />
+          <div class="footer-ally-logo footer-ally-logo--placeholder" role="img" aria-label="Asociados Independientes">
+            Asociados<br />Independientes
+          </div>
           <img src="/assets/logos/aliadopoliclinico.png" alt="Policlínico Sur" class="footer-ally-logo" />
           <img src="/assets/logos/alieadosumemoscoop.png" alt="Sumemos Coop" class="footer-ally-logo" />
         </div>
@@ -258,6 +261,28 @@ import developerLogo from "../assets/img/developers/logo-completo-negro.png";
   }
 
   .footer-ally-logo:hover {
+    opacity: 1;
+  }
+
+  .footer-ally-logo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    height: 32px;
+    padding: 0;
+    font-family: var(--ff-sans);
+    font-size: 0.6875rem;
+    font-weight: var(--fw-extrabold);
+    line-height: var(--lh-115);
+    color: var(--color-ink);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    filter: none;
+    opacity: 1;
+  }
+
+  .footer-ally-logo--placeholder:hover {
     opacity: 1;
   }
 

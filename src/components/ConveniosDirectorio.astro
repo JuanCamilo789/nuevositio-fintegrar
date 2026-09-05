@@ -160,6 +160,7 @@ const convenios: Convenio[] = [
 
 const entidadesAliadas = [
   { nombre: 'Prosalco', logo: '/assets/logos/aliadoprosalco.png' },
+  { nombre: 'Asociados Independientes', logo: null },
   { nombre: 'Policlínico Sur', logo: '/assets/logos/aliadopoliclinico.png' },
   { nombre: 'Sumemos Coop', logo: '/assets/logos/alieadosumemoscoop.png' },
 ];
@@ -186,7 +187,18 @@ const entidadesAliadas = [
       <div class="cv-grid cv-allies-row">
         {entidadesAliadas.map((e) => (
           <div class="cv-tile cv-tile--mono">
-            <img src={e.logo} alt={`Logo ${e.nombre}`} loading="lazy" />
+            {e.logo ? (
+              <img src={e.logo} alt={`Logo ${e.nombre}`} loading="lazy" />
+            ) : (
+              <span class="cv-tile-placeholder" role="img" aria-label={`Logo ${e.nombre}`}>
+                {e.nombre.split(' ').map((palabra, i) => (
+                  <>
+                    {i > 0 && <br />}
+                    {palabra}
+                  </>
+                ))}
+              </span>
+            )}
           </div>
         ))}
       </div>
@@ -227,7 +239,7 @@ const entidadesAliadas = [
       </div>
       <a href="mailto:bienestarsocial@fintegrar.com" class="btn btn-primary btn-sm cv-drawer-btn">
         <Icon name="tabler:mail" class="w-4 h-4" aria-hidden="true" />
-        Consultar con Bienestar Social
+        Más información
       </a>
     </div>
   </aside>
@@ -292,6 +304,17 @@ const entidadesAliadas = [
   .cv-tile--mono:hover img {
     filter: invert(1) grayscale(1);
     opacity: 1;
+  }
+
+  .cv-tile-placeholder {
+    font-family: var(--ff-sans);
+    font-size: 1.0625rem;
+    font-weight: var(--fw-extrabold);
+    line-height: var(--lh-115);
+    color: var(--color-ink);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-align: center;
   }
 
   .cv-allies {
@@ -360,11 +383,11 @@ const entidadesAliadas = [
   @media (min-width: 640px) {
     .cv-drawer {
       left: auto;
-      top: 2rem;
+      top: auto;
       bottom: 2rem;
       right: 2rem;
       width: min(400px, calc(100vw - 4rem));
-      max-height: none;
+      max-height: calc(100vh - 4rem);
       border-radius: var(--radius-lg);
       transform: translateY(16px);
       opacity: 0;
@@ -382,7 +405,7 @@ const entidadesAliadas = [
   .cv-drawer-banner {
     position: relative;
     height: 64px;
-    background: var(--gradient-brand);
+    background: var(--color-brand-purple);
   }
   .cv-drawer-close {
     position: absolute;
@@ -407,7 +430,7 @@ const entidadesAliadas = [
     align-items: center;
     gap: 1rem;
     padding: 0 1.75rem;
-    margin-top: -32px;
+    margin-top: -20px;
   }
   .cv-drawer-logo {
     width: 64px;
@@ -434,7 +457,7 @@ const entidadesAliadas = [
     font-size: 1.25rem;
     font-weight: var(--fw-extrabold);
     color: var(--color-ink);
-    margin-top: 0.5rem;
+    margin-top: 1.75rem;
   }
   .cv-drawer-desc {
     font-size: 0.9375rem;
