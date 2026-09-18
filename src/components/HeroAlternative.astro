@@ -1,4 +1,15 @@
 ---
+import { tasasDestacadas } from '../data/tasas';
+
+const tasasRotativas = tasasDestacadas.map((c) => {
+  const [valor, ...unidadPartes] = c.tasa.split(' ');
+  return {
+    nombre: c.nombre,
+    modalidad: c.modalidad,
+    valor,
+    unidad: unidadPartes.join(' '),
+  };
+});
 ---
 
 <section class="w-full overflow-hidden hero-alternative">
@@ -36,16 +47,28 @@
             </div>
          </div>
 
-         <div class="hero-float-card hero-float-card-3 absolute top-10 right-0 lg:-right-10 bg-[var(--color-brand-purple)] rounded-3xl p-6 shadow-[0_20px_40px_rgba(var(--color-black-rgb),0.15)] w-[210px] z-20">
+         <div
+            class="hero-float-card hero-float-card-3 absolute top-10 right-0 lg:-right-10 bg-[var(--color-brand-purple)] rounded-3xl p-6 shadow-[0_20px_40px_rgba(var(--color-black-rgb),0.15)] w-[210px] z-20"
+            id="heroRateCardA"
+            aria-live="polite"
+            data-tasas={JSON.stringify(tasasRotativas)}
+            data-offset="0"
+         >
             <p class="text-sm font-bold text-white mb-2">Tasa desde</p>
-            <h3 class="text-3xl font-extrabold text-white mb-1 whitespace-nowrap">1.53% <span class="text-sm font-normal">M.V.</span></h3>
-            <p class="text-sm font-medium text-white/90 leading-tight">Crédito Ordinario</p>
+            <h3 class="hero-rate-value text-3xl font-extrabold text-white mb-1 whitespace-nowrap"><span class="hero-rate-num">{tasasRotativas[0].valor}</span> <span class="text-sm font-normal hero-rate-unit">{tasasRotativas[0].unidad}</span></h3>
+            <p class="hero-rate-label text-sm font-medium text-white/90 leading-tight">{tasasRotativas[0].nombre}</p>
          </div>
 
-         <div class="hero-float-card hero-float-card-4 absolute bottom-10 -right-4 md:right-0 lg:right-[-2rem] bg-[var(--color-brand-purple)] rounded-3xl p-6 shadow-[0_20px_40px_rgba(var(--color-black-rgb),0.15)] w-[210px] z-20">
-            <p class="text-sm font-bold text-white mb-2">Crédito Educativo</p>
-            <h3 class="text-3xl font-extrabold text-white mb-1 whitespace-nowrap">1% <span class="text-sm font-normal">M.V.</span></h3>
-            <p class="text-sm font-medium text-white/90 leading-tight">Tasas preferenciales con aliados certificados</p>
+         <div
+            class="hero-float-card hero-float-card-4 absolute bottom-10 -right-4 md:right-0 lg:right-[-2rem] bg-[var(--color-brand-purple)] rounded-3xl p-6 shadow-[0_20px_40px_rgba(var(--color-black-rgb),0.15)] w-[210px] z-20"
+            id="heroRateCardB"
+            aria-live="polite"
+            data-tasas={JSON.stringify(tasasRotativas)}
+            data-offset="1"
+         >
+            <p class="hero-rate-label text-sm font-bold text-white mb-2">{tasasRotativas[1].nombre}</p>
+            <h3 class="hero-rate-value text-3xl font-extrabold text-white mb-1 whitespace-nowrap"><span class="hero-rate-num">{tasasRotativas[1].valor}</span> <span class="text-sm font-normal hero-rate-unit">{tasasRotativas[1].unidad}</span></h3>
+            <p class="hero-rate-sub text-sm font-medium text-white/90 leading-tight">{tasasRotativas[1].modalidad}</p>
          </div>
 
       </div>
@@ -93,4 +116,65 @@
     line-height: var(--lh-160);
     color: var(--color-text-muted);
   }
+
+  .hero-rate-num {
+    display: inline-block;
+  }
+
+  .hero-rate-num,
+  .hero-rate-label,
+  .hero-rate-sub {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .hero-rate-num.is-swapping,
+  .hero-rate-label.is-swapping,
+  .hero-rate-sub.is-swapping {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 </style>
+
+<script>
+  function initHeroRateCards() {
+    const cardA = document.getElementById('heroRateCardA');
+    const cardB = document.getElementById('heroRateCardB');
+    if (!cardA || !cardB) return;
+
+    const tasas = JSON.parse(cardA.dataset.tasas || '[]') as {
+      nombre: string;
+      modalidad: string;
+      valor: string;
+      unidad: string;
+    }[];
+    if (tasas.length < 2) return;
+
+    let index = 0;
+
+    function swap(card: HTMLElement, item: { nombre: string; modalidad: string; valor: string; unidad: string }, offset: number) {
+      const num = card.querySelector<HTMLElement>('.hero-rate-num');
+      const unit = card.querySelector<HTMLElement>('.hero-rate-unit');
+      const label = card.querySelector<HTMLElement>('.hero-rate-label');
+      const sub = card.querySelector<HTMLElement>('.hero-rate-sub');
+      const swapEls = [num, label, sub].filter(Boolean) as HTMLElement[];
+
+      swapEls.forEach((el) => el.classList.add('is-swapping'));
+      setTimeout(() => {
+        if (num) num.textContent = item.valor;
+        if (unit) unit.textContent = item.unidad;
+        if (label) label.textContent = item.nombre;
+        if (offset === 1 && sub) sub.textContent = item.modalidad;
+        swapEls.forEach((el) => el.classList.remove('is-swapping'));
+      }, 250);
+    }
+
+    setInterval(() => {
+      index = (index + 1) % tasas.length;
+      swap(cardA, tasas[index], 0);
+      swap(cardB, tasas[(index + 1) % tasas.length], 1);
+    }, 4000);
+  }
+
+  initHeroRateCards();
+  document.addEventListener('astro:after-swap', initHeroRateCards);
+</script>

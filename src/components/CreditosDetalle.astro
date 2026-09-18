@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { tasaPorId } from "../data/tasas";
 
 const modalidades = [
   {
@@ -9,7 +10,7 @@ const modalidades = [
     tagline: "Un crédito pensado para acompañarlo, sin complicaciones.",
     desc: "Se encuentran en esta clasificación todos aquellos préstamos que serán cancelados con deducciones quincenales antes del 30 de noviembre del año en que se apruebe el crédito.",
     stats: [
-      { value: "1.53% M.V.", label: "Tasa de interés" },
+      { value: tasaPorId["ordinario"], label: "Tasa de interés" },
       { value: "30 de noviembre", label: "Fecha límite de pago" },
     ],
   },
@@ -20,7 +21,7 @@ const modalidades = [
     tagline: "Adelante su Ahorro Navideño cuando más lo necesite.",
     desc: "El asociado puede hacer un anticipo de su Ahorro Navideño, solo se le cobra quincenalmente el valor del interés y en el mes de diciembre, cuando se efectúe la liquidación, se descuenta el valor del crédito.",
     stats: [
-      { value: "1.53% M.V.", label: "Tasa de interés" },
+      { value: tasaPorId["ahorro-navideno-anticipo"], label: "Tasa de interés" },
       { value: "Diciembre", label: "Liquidación del crédito" },
     ],
   },
@@ -31,7 +32,7 @@ const modalidades = [
     tagline: "Para celebrar en grande las fechas que más importan.",
     desc: "El asociado puede hacer uso de este crédito por eventos que se realizan en fechas especiales programados por FINTEGRAR: Día de la Madre, Día del Padre, Navidad, paseos, Fiesta del Fondo, entre otros.",
     stats: [
-      { value: "0%", label: "Tasa de interés" },
+      { value: tasaPorId["eventos-especiales"], label: "Tasa de interés" },
       { value: "Fechas Fintegrar", label: "Aplica en" },
     ],
   },
@@ -43,7 +44,7 @@ const modalidades = [
     tagline: "Un respiro para su bolsillo antes de la prima.",
     desc: "El asociado puede hacer un adelanto de la prima de servicios y solo se le cobra quincenalmente el valor del interés; en el momento que se liquide se descontará por nómina el valor del crédito.",
     stats: [
-      { value: "Según estudio", label: "Tasa de interés" },
+      { value: tasaPorId["cuota-especial"], label: "Tasa de interés" },
       { value: "Abril y octubre", label: "Aplica después de" },
     ],
   },
@@ -54,7 +55,7 @@ const modalidades = [
     tagline: "Estamos con usted en los momentos difíciles.",
     desc: "Cuando un asociado de FINTEGRAR se encuentre en una dificultad económica producto de desastres naturales, atenciones en salud no cubiertas por el POS, o pérdidas de bienes muebles e inmuebles de primera necesidad debidamente comprobados, podrá solicitar un crédito al Fondo aportando las pruebas correspondientes.",
     stats: [
-      { value: "0.5% M.V.", label: "Tasa de interés" },
+      { value: tasaPorId["calamidad"], label: "Tasa de interés" },
       { value: "12 meses", label: "Plazo máximo" },
     ],
   },
@@ -65,7 +66,7 @@ const modalidades = [
     tagline: "Sus vacaciones soñadas, más cerca de lo que cree.",
     desc: "El asociado puede solicitar crédito para sus vacaciones eligiendo el plan y la forma de pago, ya sea con su Ahorro Navideño, prima de servicios o deducciones de nómina. El Fondo tiene convenios para descuentos especiales con diferentes entidades.",
     stats: [
-      { value: "1.53% M.V.", label: "Si lo programa el asociado" },
+      { value: tasaPorId["vacacional"], label: "Si lo programa el asociado" },
       { value: "Tasa especial", label: "Si lo programa Fintegrar" },
     ],
   },
@@ -76,7 +77,7 @@ const modalidades = [
     tagline: "Más tiempo para hacer realidad sus proyectos.",
     desc: "El plazo máximo de este préstamo es de 3 años. Las garantías para este tipo de crédito serán exigidas de acuerdo con el monto solicitado.",
     stats: [
-      { value: "1.53% M.V.", label: "Tasa de interés" },
+      { value: tasaPorId["largo-plazo"], label: "Tasa de interés" },
       { value: "36 meses", label: "Plazo máximo" },
     ],
   },
@@ -87,7 +88,7 @@ const modalidades = [
     tagline: "Invierta en su formación y en su futuro.",
     desc: "Aplica solo para educación del asociado; la institución educativa debe estar certificada por el Ministerio de Educación. Posterior al desembolso se debe presentar el comprobante de pago de la institución educativa.",
     stats: [
-      { value: "1% M.V.", label: "Tasa de interés" },
+      { value: tasaPorId["educacion"], label: "Tasa de interés" },
       { value: "5 días hábiles", label: "Plazo para comprobante" },
     ],
   },
@@ -98,7 +99,7 @@ const modalidades = [
     tagline: "Para que su hogar crezca con usted.",
     desc: "Para vivienda propia del asociado. El plazo y las garantías para este tipo de crédito serán exigidas de acuerdo con el monto solicitado.",
     stats: [
-      { value: "1% M.V.", label: "Tasa de interés" },
+      { value: tasaPorId["mejoras-vivienda"], label: "Tasa de interés" },
       { value: "Tradición y libertad", label: "Documento requerido" },
     ],
   },
@@ -109,7 +110,7 @@ const modalidades = [
     tagline: "Simplifique sus deudas en una sola cuota.",
     desc: "El asociado podrá solicitar un crédito para recoger sus obligaciones en FINTEGRAR, para tal efecto el asociado deberá presentar el estado de cuenta vigente de cada una de las obligaciones en los demás establecimientos de crédito. FINTEGRAR ofrecerá una tasa inferior (Según estudio) a sus obligaciones actuales.",
     stats: [
-      { value: "Según estudio", label: "Tasa de interés" },
+      { value: tasaPorId["compra-cartera"], label: "Tasa de interés" },
       { value: "Estado de cuenta", label: "Documento requerido" },
     ],
   },

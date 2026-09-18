@@ -1,0 +1,40 @@
+---
+import InnerLayout from '../../layouts/InnerLayout.astro';
+import { noticias } from '../../data/noticias';
+
+const { slug } = Astro.params;
+const noticia = noticias.find((n) => n.slug === slug);
+
+if (!noticia) {
+  return Astro.redirect('/404');
+}
+---
+
+<InnerLayout
+  pageTitle={noticia.titulo}
+  pageSubtitle={noticia.fecha}
+  description={noticia.resumen}
+  breadcrumbs={[{ label: 'Novedades', href: '/#novedades' }, { label: noticia.titulo }]}
+>
+  <article class="noticia-body max-w-7xl mx-auto px-6">
+    {noticia.cuerpo.map((parrafo) => <p>{parrafo}</p>)}
+  </article>
+</InnerLayout>
+
+<style>
+  .noticia-body {
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+  }
+
+  .noticia-body p {
+    font-size: 0.90625rem;
+    color: var(--color-ink);
+    opacity: 0.8;
+    line-height: var(--lh-180);
+  }
+
+  .noticia-body p + p {
+    margin-top: 1.25rem;
+  }
+</style>

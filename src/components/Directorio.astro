@@ -1,39 +1,25 @@
 ---
 const equipo = [
   {
-    nombre: "Luis Hernando Loaiza Gallego",
-    cargo: "Gerente · Representante Legal",
-    email: ["lhloaiza@fintegrar.com"],
+    nombre: "Cindy Vanesa Olaya Hidalgo",
+    cargo: "Gerente y Representante Legal",
+    email: ["gerencia@fintegrar.com"],
+    foto: "/assets/img/MiembrosCuerposColegiados/11.png",
   },
   {
-    nombre: "Juan Camilo Álvarez",
-    cargo: "Sección Jurídica",
-    email: ["juridica@fintegrar.com"],
+    nombre: "Astrid Arroyave Mazo",
+    cargo: "Auxiliar Administrativa",
+    email: ["auxiliar@fintegrar.com"],
   },
   {
-    nombre: "Juan Camilo Álvarez",
-    cargo: "Coordinación Crédito y Cartera",
-    email: ["creditos@fintegrar.com", "cartera@fintegrar.com"],
+    nombre: "Francy Elena Gómez Vélez",
+    cargo: "Auxiliar Comercial",
+    email: ["auxiliar@fintegrar.com"],
   },
   {
-    nombre: "Edilson Alzate Herrera",
-    cargo: "Tesorería y Contabilidad",
-    email: ["tesoreria@fintegrar.com"],
-  },
-  {
-    nombre: "Diana María Sánchez",
-    cargo: "Bienestar Social · Auxiliar Administrativa",
-    email: ["bienestarsocial@fintegrar.com"],
-  },
-  {
-    nombre: "Juan Pablo Bustamante",
-    cargo: "Líder Marketing",
-    email: ["marketing@fintegrar.com"],
-  },
-  {
-    nombre: "Lina María Restrepo",
-    cargo: "Ejecutiva Comercial",
-    email: ["comercial@fintegrar.com"],
+    nombre: "Alba Luz Marín Mejía",
+    cargo: "Oficial de Cumplimiento",
+    email: ["sarlaft@fintegrar.com"],
   },
 ];
 ---
@@ -45,12 +31,18 @@ const equipo = [
       {
         equipo.map((p) => (
           <div class="dir-card">
-            <div class="dir-photo" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.5" />
-                <path d="M4.5 19.5c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-              </svg>
-            </div>
+            {p.foto ? (
+              <div class="dir-photo">
+                <img src={p.foto} alt={p.nombre} loading="lazy" />
+              </div>
+            ) : (
+              <div class="dir-photo" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.5" />
+                  <path d="M4.5 19.5c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </div>
+            )}
             <span class="dir-card-name">{p.nombre}</span>
             <span class="dir-card-role">{p.cargo}</span>
             <span class="dir-card-emails">
@@ -84,7 +76,7 @@ const equipo = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.15rem;
     text-align: center;
   }
 
@@ -99,12 +91,19 @@ const equipo = [
     background: var(--color-navbar-bg);
     border: 1px dashed rgba(var(--color-brand-purple-rgb), 0.35);
     color: rgba(var(--color-brand-purple-rgb), 0.4);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
   .dir-photo svg {
     width: 42%;
     height: 42%;
+  }
+
+  .dir-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
   }
 
   .dir-card-name {
@@ -124,7 +123,6 @@ const equipo = [
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
-    margin-top: 0.35rem;
   }
 
   .dir-card-email {

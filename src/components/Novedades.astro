@@ -1,26 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-
-const noticias = [
-  {
-    fecha: '12/08/2026',
-    imagen: '/assets/img/hero-card-creditos.png',
-    titulo: 'Solidaridad ante emergencia nacional tras el sismo del 10 de agosto de 2026',
-    href: '/noticias/solidaridad-emergencia',
-  },
-  {
-    fecha: '04/08/2026',
-    imagen: '/assets/img/hero-card-ahorros.png',
-    titulo: 'Ruta de alegría: entregas a las familias ganadoras del primer sorteo de 2026',
-    href: '/noticias/ruta-alegria',
-  },
-  {
-    fecha: '03/08/2026',
-    imagen: '/assets/img/hero-card-nosotros.png',
-    titulo: 'Convocatoria expositores Bazar de la Confianza Duitama',
-    href: '/noticias/bazar-confianza',
-  },
-];
+import { noticias } from '../data/noticias';
 
 const eventos = [
   {
@@ -88,7 +68,7 @@ const eventos = [
 
         <!-- Grid de 3 Tarjetas de Noticias -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {noticias.map((n) => (
+          {noticias.slice(0, 3).map((n) => (
             <article class="bg-white text-slate-800 rounded-sm p-2.5 pb-4 shadow-md hover:shadow-lg transition-shadow flex flex-col justify-between group">
               <div>
                 <!-- Top Meta -->
@@ -96,19 +76,15 @@ const eventos = [
                   <span>{n.fecha}</span>
                 </div>
 
-                <!-- Imagen -->
-                <div class="aspect-[4/3] w-full rounded-sm overflow-hidden mb-3 bg-slate-100">
-                  <img
-                    src={n.imagen}
-                    alt={n.titulo}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
+                <!-- Sin imagen -->
+                <div class="aspect-[4/3] w-full rounded-sm overflow-hidden mb-3 bg-slate-100 border border-dashed border-slate-200 flex flex-col items-center justify-center gap-1.5 text-slate-300">
+                  <Icon name="tabler:photo-off" class="w-8 h-8" aria-hidden="true" />
+                  <span class="text-[10px] font-medium text-slate-400">Sin imagen</span>
                 </div>
 
                 <!-- Título -->
                 <h3 class="text-sm font-bold text-slate-800 leading-snug group-hover:text-[var(--color-brand-purple)] transition-colors line-clamp-3">
-                  <a href={n.href}>
+                  <a href={`/noticias/${n.slug}`}>
                     {n.titulo}
                   </a>
                 </h3>

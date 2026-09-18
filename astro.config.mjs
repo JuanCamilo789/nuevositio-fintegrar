@@ -32,7 +32,7 @@ export default defineConfig({
           'equal', 'eye', 'file-check', 'file-text', 'file-type-pdf', 'file-upload', 'folder', 'headset',
           'heart', 'heart-handshake', 'help', 'help-hexagon', 'home', 'home-heart',
           'id-badge', 'info-circle', 'layout-dashboard', 'layout-grid', 'mail',
-          'map-pin', 'menu-2', 'message-x', 'mood-empty', 'mood-happy', 'phone',
+          'map-pin', 'menu-2', 'message-x', 'mood-empty', 'mood-happy', 'phone', 'photo-off',
           'plane', 'receipt', 'scale', 'search', 'sparkles', 'device-laptop',
           'school', 'send', 'share', 'shield-check', 'shield-lock', 'star-filled', 'stethoscope', 'target', 'trending-up',
           'upload', 'user', 'user-cog', 'user-plus', 'users', 'users-group', 'wallet', 'x', 'refresh'

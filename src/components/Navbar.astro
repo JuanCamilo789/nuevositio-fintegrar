@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { tasasDestacadas } from '../data/tasas';
+import { tasasDestacadas, tasaPorId } from '../data/tasas';
 ---
 
 <!--
@@ -232,19 +232,19 @@ import { tasasDestacadas } from '../data/tasas';
         <a href="/creditos#ordinario" class="mega-item">
           <div>
             <div class="mega-item-title">Crédito Ordinario</div>
-            <div class="mega-item-sub">1.53% M.V. · para cualquier necesidad</div>
+            <div class="mega-item-sub">{tasaPorId['ordinario']} · para cualquier necesidad</div>
           </div>
         </a>
         <a href="/creditos#educacion" class="mega-item">
           <div>
             <div class="mega-item-title">Crédito para Educación</div>
-            <div class="mega-item-sub">1% M.V. · instituciones certificadas</div>
+            <div class="mega-item-sub">{tasaPorId['educacion']} · instituciones certificadas</div>
           </div>
         </a>
         <a href="/creditos#calamidad" class="mega-item">
           <div>
             <div class="mega-item-title">Calamidad Doméstica</div>
-            <div class="mega-item-sub">0.5% M.V. · plazo hasta 12 meses</div>
+            <div class="mega-item-sub">{tasaPorId['calamidad']} · plazo hasta 12 meses</div>
           </div>
         </a>
         <a href="/creditos" class="mega-item">

@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { tasaPorId } from "../data/tasas";
 
 interface Props {
   full?: boolean;
@@ -11,73 +12,63 @@ const todasLineas = [
     id: "ordinario",
     icon: "tabler:credit-card",
     nombre: "Crédito Ordinario",
-    tasa: "1.53% M.V.",
     desc: "Créditos cancelados con deducciones quincenales antes del 30 de noviembre del año en que se apruebe.",
   },
   {
     id: "ahorro-navideno-anticipo",
     icon: "tabler:wallet",
     nombre: "Anticipo Ahorro Navideño",
-    tasa: "1.53% M.V.",
     desc: "Adelante su Ahorro Navideño y solo pague el interés quincenal; el valor se liquida en diciembre.",
   },
   {
     id: "eventos-especiales",
     icon: "tabler:calendar-event",
     nombre: "Crédito Eventos Especiales",
-    tasa: "0%",
     desc: "Para fechas especiales programadas por Fintegrar: Día de la Madre, Día del Padre, Navidad, paseos, Fiesta del Fondo y más.",
   },
   {
     id: "cuota-especial",
     icon: "tabler:receipt",
     nombre: "Cuota Especial (Prima)",
-    tasa: "Según estudio",
     desc: "Anticipo de la prima de servicios de junio y diciembre; aplica después de los meses de abril y octubre.",
   },
   {
     id: "calamidad",
     icon: "tabler:home-heart",
     nombre: "Crédito Calamidad Doméstica",
-    tasa: "0.5% M.V.",
     desc: "Para desastres naturales, salud no cubierta por el POS o pérdida de bienes de primera necesidad. Plazo máximo 12 meses.",
   },
   {
     id: "vacacional",
     icon: "tabler:plane",
     nombre: "Plan Vacacional",
-    tasa: "1.53% M.V.",
     desc: "Financie sus vacaciones con descuentos en convenios aliados; pago con Ahorro Navideño, prima o nómina.",
   },
   {
     id: "largo-plazo",
     icon: "tabler:calendar-check",
     nombre: "Crédito Largo Plazo",
-    tasa: "1.53% M.V.",
     desc: "Plazo máximo de 36 meses. Las garantías se exigen de acuerdo con el monto solicitado.",
   },
   {
     id: "educacion",
     icon: "tabler:school",
     nombre: "Crédito para Educación",
-    tasa: "1% M.V.",
     desc: "Para estudios del asociado en instituciones certificadas por el Ministerio de Educación.",
   },
   {
     id: "mejoras-vivienda",
     icon: "tabler:home",
     nombre: "Mejoras de Vivienda",
-    tasa: "1% M.V.",
     desc: "Para vivienda propia del asociado, presentando el certificado de tradición y libertad.",
   },
   {
     id: "compra-cartera",
     icon: "tabler:building-bank",
     nombre: "Compra de Cartera",
-    tasa: "Tasa inferior, según estudio",
     desc: "Consolide sus obligaciones con otras entidades de crédito en una sola cuota con Fintegrar.",
   },
-];
+].map((l) => ({ ...l, tasa: tasaPorId[l.id] }));
 
 const destacadas = new Set(["ordinario", "educacion", "calamidad", "vacacional"]);
 const lineas = full ? todasLineas : todasLineas.filter((l) => destacadas.has(l.id));

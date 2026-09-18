@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { tasaPorId, tasaNumero } from '../data/tasas';
 
 const lineas = [
   {
@@ -7,8 +8,6 @@ const lineas = [
     icon: 'tabler:credit-card',
     nombre: 'Crédito Ordinario',
     subtitulo: 'Para cualquier necesidad',
-    tasa: 1.53,
-    displayTasa: '1.53% M.V.',
     maxMeses: 12,
     badge: null,
     nota: 'Se cancela con deducciones quincenales antes del 30 de noviembre del año en que se apruebe.',
@@ -18,8 +17,6 @@ const lineas = [
     icon: 'tabler:school',
     nombre: 'Crédito para Educación',
     subtitulo: 'Instituciones certificadas',
-    tasa: 1,
-    displayTasa: '1% M.V.',
     maxMeses: 12,
     badge: null,
     nota: '',
@@ -29,8 +26,6 @@ const lineas = [
     icon: 'tabler:home-heart',
     nombre: 'Calamidad Doméstica',
     subtitulo: 'Emergencias y salud',
-    tasa: 0.5,
-    displayTasa: '0.5% M.V.',
     maxMeses: 12,
     badge: null,
     nota: 'Plazo máximo de 12 meses.',
@@ -40,8 +35,6 @@ const lineas = [
     icon: 'tabler:plane',
     nombre: 'Plan Vacacional',
     subtitulo: 'Con convenios aliados',
-    tasa: 1.53,
-    displayTasa: '1.53% M.V.',
     maxMeses: 12,
     badge: null,
     nota: '',
@@ -51,13 +44,15 @@ const lineas = [
     icon: 'tabler:calendar-check',
     nombre: 'Crédito Largo Plazo',
     subtitulo: 'Hasta 36 meses',
-    tasa: 1.53,
-    displayTasa: '1.53% M.V.',
     maxMeses: 36,
     badge: null,
     nota: 'Las garantías se exigen de acuerdo con el monto solicitado.',
   },
-];
+].map((l) => ({
+  ...l,
+  displayTasa: tasaPorId[l.id],
+  tasa: tasaNumero(tasaPorId[l.id]),
+}));
 ---
 
 <section id="simulador" class="sim-section">
