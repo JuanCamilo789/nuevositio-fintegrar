@@ -3,6 +3,7 @@
 export const noticias = [
   {
     slug: 'nuevo-sitio-web',
+    imagen: '/assets/img/noticia1.png',
     fecha: '30/09/2026',
     titulo: 'Estrenamos nuevo sitio web Fintegrar: más fácil, claro y cercano',
     resumen: 'Renovamos nuestra página web para que encuentres todo lo que necesitas de forma más rápida y sencilla.',

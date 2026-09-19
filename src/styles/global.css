@@ -39,6 +39,10 @@
   --lh-180: 1.8;
   --lh-185: 1.85;
   --lh-px-19: 19px;
+  /* ── Transiciones ── */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.4s ease;
   --header-h: 80px;
   /* mobile: navbar pegado arriba (sin topbar) */
   --navbar-h: 80px;
@@ -717,6 +721,19 @@
     border-color: var(--color-white);
   }
 
+  .btn-outline-dark {
+    background: transparent;
+    color: var(--color-ink);
+    border: 1.5px solid var(--color-ink);
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 1rem;
+  }
+
+  .btn-outline-dark:hover {
+    background: var(--color-surface);
+  }
+
   .btn-lg {
     padding: 0.875rem 2rem;
     font-size: 1rem;
@@ -820,11 +837,11 @@
     right: 0;
     bottom: 0;
     z-index: 300;
-    background: var(--color-ink);
+    background: var(--color-white);
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
-    padding: 5rem 1.5rem 2rem;
+    padding: 1.5rem 1.5rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -907,7 +924,7 @@
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--color-surface);
     border: none;
     border-radius: 8px;
     width: 40px;
@@ -916,11 +933,11 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--color-white);
+    color: var(--color-ink);
   }
 
   .close-btn:hover {
-    background: rgba(255, 255, 255, 0.18);
+    background: var(--color-surface-faint);
   }
 
     a:focus-visible,

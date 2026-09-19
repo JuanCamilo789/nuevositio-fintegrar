@@ -76,11 +76,16 @@ const eventos = [
                   <span>{n.fecha}</span>
                 </div>
 
-                <!-- Sin imagen -->
-                <div class="aspect-[4/3] w-full rounded-sm overflow-hidden mb-3 bg-slate-100 border border-dashed border-slate-200 flex flex-col items-center justify-center gap-1.5 text-slate-300">
-                  <Icon name="tabler:photo-off" class="w-8 h-8" aria-hidden="true" />
-                  <span class="text-[10px] font-medium text-slate-400">Sin imagen</span>
-                </div>
+                {n.imagen ? (
+                  <div class="aspect-[4/3] w-full rounded-sm overflow-hidden mb-3 bg-slate-100">
+                    <img src={n.imagen} alt={n.titulo} class="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                ) : (
+                  <div class="aspect-[4/3] w-full rounded-sm overflow-hidden mb-3 bg-slate-100 border border-dashed border-slate-200 flex flex-col items-center justify-center gap-1.5 text-slate-300">
+                    <Icon name="tabler:photo-off" class="w-8 h-8" aria-hidden="true" />
+                    <span class="text-[10px] font-medium text-slate-400">Sin imagen</span>
+                  </div>
+                )}
 
                 <!-- Título -->
                 <h3 class="text-sm font-bold text-slate-800 leading-snug group-hover:text-[var(--color-brand-purple)] transition-colors line-clamp-3">

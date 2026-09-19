@@ -17,7 +17,7 @@ const slides = [
     heading: 'Líneas de crédito diseñadas para <br><span class="text-accent">acompañar sus metas</span>',
     lead: 'Crédito ordinario, educativo, vacacional y de calamidad con condiciones favorables y fácil descuento por nómina.',
     cta1: { label: 'Ver líneas de crédito', icon: 'tabler:credit-card', href: '/creditos', primary: true },
-    cta2: { label: 'Simular crédito', icon: 'tabler:calculator', href: '/creditos#simulador', primary: false },
+    cta2: { label: 'Simular crédito', icon: 'tabler:calculator', href: '/#simulador', primary: false },
   },
   {
     id: 'slide-2',
@@ -102,15 +102,15 @@ const featureCards = [
               </p>
 
               {(s.cta1 || s.cta2) && (
-                <div class="slide-ctas flex flex-wrap items-center justify-center sm:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
+                <div class="slide-ctas flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-4 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: both;">
                   {s.cta1 && (
-                    <a href={s.cta1.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta1.primary ? 'hero-btn-purple shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                    <a href={s.cta1.href} class={`inline-flex w-full sm:w-auto items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta1.primary ? 'hero-btn-purple shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                       {s.cta1.icon && <Icon name={s.cta1.icon} class="w-5 h-5" />}
                       {s.cta1.label}
                     </a>
                   )}
                   {s.cta2 && (
-                    <a href={s.cta2.href} class={`inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta2.primary ? 'hero-btn-purple shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
+                    <a href={s.cta2.href} class={`inline-flex w-full sm:w-auto items-center justify-center gap-2 px-5 py-2.5 text-sm sm:px-7 sm:py-3.5 sm:text-base rounded-full font-semibold transition-all ${s.cta2.primary ? 'hero-btn-purple shadow-lg hover:shadow-xl' : 'bg-white text-[var(--color-ink)] hover:bg-slate-50 shadow-md border border-slate-100'}`}>
                       {s.cta2.label}
                       {s.cta2.icon && <Icon name={s.cta2.icon} class="w-5 h-5" />}
                     </a>
