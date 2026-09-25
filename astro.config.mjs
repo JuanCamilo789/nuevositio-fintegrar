@@ -10,17 +10,17 @@ export default defineConfig({
   server: {
     host: true,
   },
+  // Solo se confía en el header X-Forwarded-Host de estos dominios (evita envenenar URLs con un Host falso).
+  // Al desplegar en Railway, agregar aquí el dominio que asigne.
+  security: {
+    allowedDomains: [{ hostname: 'fintegrar.com' }, { hostname: 'www.fintegrar.com' }],
+  },
   adapter: node({
     mode: 'standalone',
     host: true,
   }),
   integrations: [
-    sitemap({
-      // Excluir rutas de administración y endpoints de API
-      filter: (page) =>
-        !page.includes('/admin/') &&
-        !page.includes('/api/'),
-    }),
+    sitemap(),
     icon({
       include: {
         tabler: [
@@ -47,10 +47,10 @@ export default defineConfig({
       target: ['safari14', 'chrome100', 'firefox100', 'edge100'],
     },
     preview: {
-      allowedHosts: ['fintegrar.com', 'www.fintegrar.com', 'coop-landing-page-production.up.railway.app'],
+      allowedHosts: ['fintegrar.com', 'www.fintegrar.com'],
     },
     server: {
-      allowedHosts: ['fintegrar.com', 'www.fintegrar.com', 'coop-landing-page-production.up.railway.app'],
+      allowedHosts: ['fintegrar.com', 'www.fintegrar.com'],
     },
   },
 });

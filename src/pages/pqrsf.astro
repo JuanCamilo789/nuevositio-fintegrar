@@ -1,9 +1,9 @@
 ---
-import InnerLayout from "../layouts/InnerLayout.astro";
+import InnerLayout from "@layouts/InnerLayout.astro";
 import { Icon } from "astro-icon/components";
-import FloatingInput from "../components/form/FloatingInput.astro";
-import FloatingSelect from "../components/form/FloatingSelect.astro";
-import FloatingTextarea from "../components/form/FloatingTextarea.astro";
+import FloatingInput from "@components/form/FloatingInput.astro";
+import FloatingSelect from "@components/form/FloatingSelect.astro";
+import FloatingTextarea from "@components/form/FloatingTextarea.astro";
 
 const tipos = [
   {
@@ -423,7 +423,7 @@ const tipos = [
   .form-group select {
     appearance: none;
     -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230d1425' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2300132B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     padding-right: 2.25rem;
@@ -649,8 +649,6 @@ const tipos = [
 </style>
 
 <script>
-  import { createClient } from "@supabase/supabase-js";
-
   const TIPOS_VALIDOS = new Set([
     "peticion", "queja", "reclamo", "sugerencia", "felicitacion",
   ]);
@@ -665,11 +663,6 @@ const tipos = [
     nombre: 100, documento: 10, email: 100,
     telefono: 10, asunto: 50, mensaje: 400,
   };
-
-  const supabase = createClient(
-    import.meta.env.PUBLIC_SUPABASE_URL,
-    import.meta.env.PUBLIC_SUPABASE_ANON_KEY,
-  );
 
   const form            = document.getElementById("pqrsf-form") as HTMLFormElement | null;
   const success         = document.getElementById("pqrsf-success");
@@ -908,50 +901,16 @@ const tipos = [
     enviando = true;
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Enviando..."; }
 
-    let archivoUrl: string | null = null;
     const archivo = fileInput?.files?.[0];
     if (archivo) {
       const err = validarArchivo(archivo);
       if (err) { mostrarError(err); resetearBoton(); return; }
-
-      const ext  = archivo.name.split(".").pop()!.toLowerCase();
-      const path = `${crypto.randomUUID()}.${ext}`;
-      const { data: storageData, error: storageError } = await supabase.storage
-        .from("pqrsf-adjuntos")
-        .upload(path, archivo, { upsert: false, contentType: archivo.type });
-      if (storageError) {
-        mostrarError("Error al subir el archivo. Intente nuevamente.");
-        resetearBoton();
-        return;
-      }
-      const { data: urlData } = supabase.storage
-        .from("pqrsf-adjuntos")
-        .getPublicUrl(storageData!.path);
-      archivoUrl = urlData.publicUrl;
     }
 
-    const { data: radicado, error } = await supabase.rpc("radicar_pqrsf", {
-      p_tipo:        sanitizar(tipo,             MAX_LENGTHS.nombre),
-      p_nombre:      sanitizar(campos.nombre,    MAX_LENGTHS.nombre).toUpperCase(),
-      p_documento:   sanitizar(campos.documento, MAX_LENGTHS.documento),
-      p_email:       sanitizar(campos.email,     MAX_LENGTHS.email),
-      p_telefono:    campos.telefono ? sanitizar(campos.telefono, MAX_LENGTHS.telefono) : null,
-      p_asunto:      sanitizar(campos.asunto,    MAX_LENGTHS.asunto),
-      p_mensaje:     sanitizar(campos.mensaje,   MAX_LENGTHS.mensaje),
-      p_archivo_url: archivoUrl,
-      p_autorizo:    autorizoCheck?.checked ?? false,
-      p_tipo_documento: tipoDocumento,
-    });
-
-    if (error || !radicado) {
-      mostrarError("Error al enviar la solicitud. Por favor intente nuevamente.");
-      resetearBoton();
-      return;
-    }
-
-    if (radicadoEl) radicadoEl.textContent = radicado;
-    form.style.display = "none";
-    if (success) success.style.display = "flex";
+    // TODO: sin backend conectado todavía — el formulario solo valida en el
+    // cliente. Cuando se conecte el servicio, enviar `campos` + `archivo` ahí.
+    mostrarError("El envío de solicitudes aún no está disponible. Vuelva pronto.");
+    resetearBoton();
   });
 
   nueva?.addEventListener("click", () => {

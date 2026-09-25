@@ -1,17 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import HeroAlternative from '../components/HeroAlternative.astro';
-import TasasVigentes from '../components/TasasVigentes.astro';
-import DigitalBanking from '../components/DigitalBanking.astro';
-import Novedades from '../components/Novedades.astro';
-import SimuladorCredito from '../components/SimuladorCredito.astro';
-import ComoFunciona from '../components/ComoFunciona.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '@layouts/Layout.astro';
+import Navbar from '@components/layout/Navbar.astro';
+import Hero from '@components/home/Hero.astro';
+import HeroAlternative from '@components/home/HeroAlternative.astro';
+import TasasVigentes from '@components/home/TasasVigentes.astro';
+import DigitalBanking from '@components/home/DigitalBanking.astro';
+import Novedades from '@components/home/Novedades.astro';
+import SimuladorCredito from '@components/home/SimuladorCredito.astro';
+import ComoFunciona from '@components/home/ComoFunciona.astro';
+import ConveniosCarousel from '@components/home/ConveniosCarousel.astro';
+import Footer from '@components/layout/Footer.astro';
 
-// Cache de 60 segundos, permitiendo servir contenido "stale" hasta por 10 minutos mientras se actualiza
-Astro.response.headers.set('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=600');
 ---
 
 <Layout>
@@ -22,6 +21,7 @@ Astro.response.headers.set('Cache-Control', 'public, s-maxage=60, stale-while-re
     <ComoFunciona />
     <HeroAlternative />
     <TasasVigentes />
+    <ConveniosCarousel />
     <SimuladorCredito />
     <Novedades />
   </main>

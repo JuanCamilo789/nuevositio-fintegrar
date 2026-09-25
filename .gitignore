@@ -14,3 +14,6 @@ supabase/.temp
 # Imágenes fuente originales (PNG sin comprimir) — resguardadas localmente,
 # no se sirven ni se versionan. Las servidas son los .webp en public/.
 image-originals/
+
+# Configuración local de Claude Code
+.claude/

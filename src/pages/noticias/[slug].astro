@@ -1,23 +1,26 @@
 ---
-import InnerLayout from '../../layouts/InnerLayout.astro';
-import { noticias } from '../../data/noticias';
+import { getEntry, render } from 'astro:content';
+import InnerLayout from '@layouts/InnerLayout.astro';
+import { fechaCorta } from '@lib/fecha';
 
 const { slug } = Astro.params;
-const noticia = noticias.find((n) => n.slug === slug);
+const noticia = slug ? await getEntry('noticias', slug) : undefined;
 
 if (!noticia) {
   return Astro.redirect('/404');
 }
+
+const { Content } = await render(noticia);
 ---
 
 <InnerLayout
-  pageTitle={noticia.titulo}
-  pageSubtitle={noticia.fecha}
-  description={noticia.resumen}
-  breadcrumbs={[{ label: 'Novedades', href: '/#novedades' }, { label: noticia.titulo }]}
+  pageTitle={noticia.data.titulo}
+  pageSubtitle={fechaCorta(noticia.data.fecha)}
+  description={noticia.data.resumen}
+  breadcrumbs={[{ label: 'Novedades', href: '/#novedades' }, { label: noticia.data.titulo }]}
 >
   <article class="noticia-body max-w-7xl mx-auto px-6">
-    {noticia.cuerpo.map((parrafo) => <p>{parrafo}</p>)}
+    <Content />
   </article>
 </InnerLayout>
 
@@ -27,14 +30,14 @@ if (!noticia) {
     padding-bottom: 6rem;
   }
 
-  .noticia-body p {
+  .noticia-body :global(p) {
     font-size: 0.90625rem;
     color: var(--color-ink);
     opacity: 0.8;
     line-height: var(--lh-180);
   }
 
-  .noticia-body p + p {
+  .noticia-body :global(p + p) {
     margin-top: 1.25rem;
   }
 </style>

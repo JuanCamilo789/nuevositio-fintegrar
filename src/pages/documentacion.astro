@@ -1,0 +1,26 @@
+---
+import InnerLayout from '@layouts/InnerLayout.astro';
+import { getCollection } from 'astro:content';
+import NormatividadSection from '@components/legal/Normatividad.astro';
+
+// Cada documento es un archivo .md en src/content/documentos/ (ver src/content.config.ts).
+const docs = (await getCollection('documentos'))
+  .sort((a, b) => b.data.fecha.getTime() - a.data.fecha.getTime())
+  .map((d) => ({
+    id: d.id,
+    titulo: d.data.titulo,
+    descripcion: d.data.descripcion,
+    categoria: d.data.categoria,
+    tipo: d.data.tipo,
+    url: d.data.url ?? null,
+    fecha: d.data.fecha.toISOString().slice(0, 10),
+  }));
+---
+
+<InnerLayout
+  pageTitle="Documentación"
+  pageSubtitle="Estatutos, reglamentos y documentos institucionales de FINTEGRAR"
+  breadcrumbs={[{ label: 'Nosotros', href: '/nosotros' }, { label: 'Documentación' }]}
+>
+  <NormatividadSection docs={docs} />
+</InnerLayout>

@@ -1,8 +1,8 @@
 ---
-import InnerLayout from "../layouts/InnerLayout.astro";
+import InnerLayout from "@layouts/InnerLayout.astro";
 import { Icon } from "astro-icon/components";
-import FloatingInput from "../components/form/FloatingInput.astro";
-import FloatingSelect from "../components/form/FloatingSelect.astro";
+import FloatingInput from "@components/form/FloatingInput.astro";
+import FloatingSelect from "@components/form/FloatingSelect.astro";
 ---
 
 <InnerLayout
@@ -765,14 +765,7 @@ import FloatingSelect from "../components/form/FloatingSelect.astro";
 </style>
 
 <script>
-import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombiaData.js';
-
-  import { createClient } from "@supabase/supabase-js";
-
-  const supabase = createClient(
-    import.meta.env.PUBLIC_SUPABASE_URL,
-    import.meta.env.PUBLIC_SUPABASE_ANON_KEY,
-  );
+import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '@data/colombiaData.js';
 
   // Columnas editables — deben coincidir con la lista blanca del RPC
   // actualizar_datos_asociado en la base de datos.
@@ -1076,22 +1069,6 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     formDatos.addEventListener("change", actualizarEstadoBoton);
   }
 
-  // Hash de la IP del solicitante para trazabilidad/auditoría (ver
-  // actualizaciones_datos.ip_hash). Se calcula en el servidor (Edge
-  // Function) y no en el navegador, porque el cliente podría reportar
-  // cualquier cosa si el hash se calculara en el front. Si la función falla
-  // por cualquier motivo, se envía null: no debe bloquear el envío del
-  // formulario.
-  async function obtenerIpHash(): Promise<string | null> {
-    try {
-      const { data, error } = await supabase.functions.invoke("ip-hash");
-      if (error) return null;
-      return (data as { ip_hash?: string })?.ip_hash ?? null;
-    } catch {
-      return null;
-    }
-  }
-
   // Ejecuta una acción async mostrando un texto de carga en el botón y
   // restaurando su contenido original al terminar.
   async function conEstadoCarga(btn: HTMLButtonElement, textoCargando: string, fn: () => Promise<void>) {
@@ -1298,21 +1275,9 @@ import { VIAS_PRINCIPALES, DEPARTAMENTOS, getMunicipios } from '../data/colombia
     const btn = $("ad-btn-revisar") as HTMLButtonElement;
 
     await conEstadoCarga(btn, "Enviando…", async () => {
-      const ipHash = await obtenerIpHash();
-
-      const { data, error } = await supabase.rpc("actualizar_datos_asociado", {
-        p_cedula: cedulaActual,
-        p_tipo_identificacion: tipoIdentificacionActual,
-        p_cambios: paraPayloadRpc(cambiosPendientes),
-        p_ip_hash: ipHash,
-      });
-
-      if (error || !data?.ok) {
-        mostrarError("ad-form-error", error?.message ?? "No se pudieron guardar los cambios. Intenta nuevamente.");
-        return;
-      }
-
-      mostrarPaso("success");
+      // TODO: sin backend conectado todavía — `cambiosPendientes` queda listo
+      // en `paraPayloadRpc(cambiosPendientes)` para cuando se conecte el servicio.
+      mostrarError("ad-form-error", "El envío de actualizaciones aún no está disponible. Vuelva pronto.");
     });
   });
 

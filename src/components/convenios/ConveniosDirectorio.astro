@@ -1,0 +1,153 @@
+---
+import { convenios } from '@data/convenios';
+
+const entidadesAliadas = [
+  { nombre: 'Prosalco', logo: '/assets/logos/aliados/prosalco.webp' },
+  { nombre: 'Asociados Independientes', logo: null },
+  { nombre: 'Policlínico Sur', logo: '/assets/logos/aliados/policlinico-sur.webp' },
+  { nombre: 'Sumemos Coop', logo: '/assets/logos/aliados/sumemos-coop.webp' },
+];
+---
+
+<section class="cv-section" aria-labelledby="cv-title">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="cv-grid" id="cvGrid">
+      {convenios.map((c) => (
+        <div class="cv-tile">
+          <img src={c.logo} alt="Logo de convenio aliado FINTEGRAR" loading="lazy" />
+        </div>
+      ))}
+    </div>
+
+    <div class="cv-allies reveal">
+      <h3 class="cv-allies-title">Entidades aliadas</h3>
+      <div class="cv-grid cv-allies-row">
+        {entidadesAliadas.map((e) => (
+          <div class="cv-tile cv-tile--mono">
+            {e.logo ? (
+              <img src={e.logo} alt={`Logo ${e.nombre}`} loading="lazy" />
+            ) : (
+              <span class="cv-tile-placeholder" role="img" aria-label={`Logo ${e.nombre}`}>
+                {e.nombre.split(' ').map((palabra, i) => (
+                  <>
+                    {i > 0 && <br />}
+                    {palabra}
+                  </>
+                ))}
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .cv-section {
+    background: var(--color-navbar-bg);
+    padding: 4rem 0 6rem;
+  }
+
+  .cv-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .cv-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .cv-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .cv-tile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
+    background: var(--color-white);
+    border: 1px solid var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+    font-family: inherit;
+  }
+  .cv-tile:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+    border-color: transparent;
+  }
+
+
+  .cv-tile img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.65;
+    transition: filter 0.25s, opacity 0.25s;
+  }
+  .cv-tile:hover img {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  .cv-tile--mono img {
+    filter: invert(1) grayscale(1);
+    opacity: 0.55;
+  }
+  .cv-tile--mono:hover img {
+    filter: invert(1) grayscale(1);
+    opacity: 1;
+  }
+
+  .cv-tile-placeholder {
+    font-family: var(--ff-sans);
+    font-size: 1.0625rem;
+    font-weight: var(--fw-extrabold);
+    line-height: var(--lh-115);
+    color: var(--color-ink);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  .cv-allies {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--color-surface);
+    text-align: center;
+  }
+  .cv-allies-title {
+    font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+    font-weight: var(--fw-bold);
+    color: var(--color-ink);
+    margin-bottom: 1.5rem;
+  }
+  .cv-allies-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
+  }
+  .cv-allies-row .cv-tile {
+    flex: 0 0 calc((100% - 1 * 1rem) / 2);
+  }
+  @media (min-width: 640px) {
+    .cv-allies-row .cv-tile { flex-basis: calc((100% - 2 * 1rem) / 3); }
+  }
+  @media (min-width: 1024px) {
+    .cv-allies-row .cv-tile { flex-basis: calc((100% - 3 * 1rem) / 4); }
+  }
+
+  @media (max-width: 639px) {
+    .cv-section { padding: 2.5rem 0 4rem; }
+    .cv-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

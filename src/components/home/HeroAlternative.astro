@@ -1,0 +1,180 @@
+---
+import { tasasDestacadas } from '@data/tasas';
+
+const tasasRotativas = tasasDestacadas.map((c) => {
+  const [valor, ...unidadPartes] = c.tasa.split(' ');
+  return {
+    nombre: c.nombre,
+    modalidad: c.modalidad,
+    valor,
+    unidad: unidadPartes.join(' '),
+  };
+});
+---
+
+<section class="w-full overflow-hidden hero-alternative">
+
+  <div class="w-full bg-[var(--color-navbar-bg)] py-16 md:py-24 lg:py-32 px-6 sm:px-12 lg:px-16 relative">
+    
+    <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center relative z-10">
+
+      <div class="flex flex-col space-y-8">
+
+        <h1 class="text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] lg:text-[9rem] leading-[0.85] tracking-normal text-gray-900" style="font-family: var(--ff-heading);">
+          <span class="font-extrabold text-[1.2em]">Somos</span><br />
+          <span class="font-light text-[var(--color-brand-purple)]">Fintegrar</span>
+        </h1>
+
+        <p class="hero-alt-lead max-w-xl mt-4">
+          Somos el aliado que le acompaña a crecer: créditos ágiles, convenios exclusivos y beneficios pensados para usted y su familia.
+        </p>
+      </div>
+
+      <div class="relative w-full h-[500px] lg:h-[700px] flex justify-center items-center">
+         
+         <div class="absolute left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-0 lg:right-10 w-[72%] sm:w-[320px] lg:w-[380px] h-[90%] lg:h-[600px] bg-[var(--color-brand-purple)] rounded-[3rem] overflow-hidden shadow-2xl">
+            <img src="/assets/img/hero/orbit-familia.webp" alt="Familia asociada disfrutando de los servicios digitales de Fintegrar" class="w-full h-full object-cover" />
+         </div>
+
+         <div class="absolute left-0 md:left-[10%] lg:left-[5%] top-[38%] md:top-[25%] flex flex-col gap-3 z-20">
+            <div class="hero-float-card hero-float-card-1 bg-[var(--color-brand-purple)] rounded-full px-3 py-2 md:px-5 md:py-3 flex items-center gap-2 md:gap-3 shadow-[0_10px_30px_rgba(var(--color-black-rgb),0.15)]">
+               <div class="bg-white text-[var(--color-brand-purple)] rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">✓</div>
+               <span class="text-xs md:text-sm font-bold text-white">¿Necesita un crédito rápido?</span>
+            </div>
+            <div class="hero-float-card hero-float-card-2 bg-[var(--color-brand-purple)] rounded-full px-3 py-2 md:px-5 md:py-3 flex items-center gap-2 md:gap-3 shadow-[0_10px_30px_rgba(var(--color-black-rgb),0.15)] ml-4 sm:-ml-6">
+               <div class="bg-white text-[var(--color-brand-purple)] rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">✓</div>
+               <span class="text-xs md:text-sm font-bold text-white">¿Ya conoce nuestros convenios?</span>
+            </div>
+         </div>
+
+         <div
+            class="hero-float-card hero-float-card-3 text-center md:text-left absolute top-6 right-0 md:top-10 lg:-right-10 bg-[var(--color-brand-purple)] rounded-2xl md:rounded-3xl p-2.5 md:p-6 shadow-[0_20px_40px_rgba(var(--color-black-rgb),0.15)] w-[118px] md:w-[210px] z-20"
+            id="heroRateCardA"
+            aria-live="polite"
+            data-tasas={JSON.stringify(tasasRotativas)}
+            data-offset="0"
+         >
+            <p class="text-[11px] md:text-sm font-bold text-white mb-1 md:mb-2">Tasa desde</p>
+            <h3 class="hero-rate-value text-xl md:text-3xl font-extrabold text-white mb-1 whitespace-nowrap"><span class="hero-rate-num">{tasasRotativas[0].valor}</span> <span class="text-[11px] md:text-sm font-normal hero-rate-unit">{tasasRotativas[0].unidad}</span></h3>
+            <p class="hero-rate-label text-[11px] md:text-sm font-medium text-white/90 leading-tight">{tasasRotativas[0].nombre}</p>
+         </div>
+
+         <div
+            class="hero-float-card hero-float-card-4 text-center md:text-left absolute bottom-6 right-0 md:bottom-10 lg:right-[-2rem] bg-[var(--color-brand-purple)] rounded-2xl md:rounded-3xl p-2.5 md:p-6 shadow-[0_20px_40px_rgba(var(--color-black-rgb),0.15)] w-[118px] md:w-[210px] z-20"
+            id="heroRateCardB"
+            aria-live="polite"
+            data-tasas={JSON.stringify(tasasRotativas)}
+            data-offset="1"
+         >
+            <p class="hero-rate-label text-[11px] md:text-sm font-bold text-white mb-1 md:mb-2">{tasasRotativas[1].nombre}</p>
+            <h3 class="hero-rate-value text-xl md:text-3xl font-extrabold text-white mb-1 whitespace-nowrap"><span class="hero-rate-num">{tasasRotativas[1].valor}</span> <span class="text-[11px] md:text-sm font-normal hero-rate-unit">{tasasRotativas[1].unidad}</span></h3>
+            <p class="hero-rate-sub text-[11px] md:text-sm font-medium text-white/90 leading-tight">{tasasRotativas[1].modalidad}</p>
+         </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  .hero-alternative {
+    padding: 0;
+  }
+
+  @keyframes heroFloatIn {
+    from {
+      opacity: 0;
+      transform: translateY(18px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes heroFloatLoop {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero-float-card {
+    opacity: 0;
+    animation: heroFloatIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+      heroFloatLoop 5s ease-in-out infinite;
+    animation-delay: var(--float-delay, 0s), calc(var(--float-delay, 0s) + 0.7s);
+  }
+
+  .hero-float-card-1 { --float-delay: 0.1s; }
+  .hero-float-card-2 { --float-delay: 0.3s; }
+  .hero-float-card-3 { --float-delay: 0.5s; }
+  .hero-float-card-4 { --float-delay: 0.7s; }
+
+  .hero-alt-lead {
+    font-family: var(--ff-heading);
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: var(--lh-160);
+    color: var(--color-text-muted);
+  }
+
+  .hero-rate-num {
+    display: inline-block;
+  }
+
+  .hero-rate-num,
+  .hero-rate-label,
+  .hero-rate-sub {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .hero-rate-num.is-swapping,
+  .hero-rate-label.is-swapping,
+  .hero-rate-sub.is-swapping {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+</style>
+
+<script>
+  function initHeroRateCards() {
+    const cardA = document.getElementById('heroRateCardA');
+    const cardB = document.getElementById('heroRateCardB');
+    if (!cardA || !cardB) return;
+
+    const tasas = JSON.parse(cardA.dataset.tasas || '[]') as {
+      nombre: string;
+      modalidad: string;
+      valor: string;
+      unidad: string;
+    }[];
+    if (tasas.length < 2) return;
+
+    let index = 0;
+
+    function swap(card: HTMLElement, item: { nombre: string; modalidad: string; valor: string; unidad: string }, offset: number) {
+      const num = card.querySelector<HTMLElement>('.hero-rate-num');
+      const unit = card.querySelector<HTMLElement>('.hero-rate-unit');
+      const label = card.querySelector<HTMLElement>('.hero-rate-label');
+      const sub = card.querySelector<HTMLElement>('.hero-rate-sub');
+      const swapEls = [num, label, sub].filter(Boolean) as HTMLElement[];
+
+      swapEls.forEach((el) => el.classList.add('is-swapping'));
+      setTimeout(() => {
+        if (num) num.textContent = item.valor;
+        if (unit) unit.textContent = item.unidad;
+        if (label) label.textContent = item.nombre;
+        if (offset === 1 && sub) sub.textContent = item.modalidad;
+        swapEls.forEach((el) => el.classList.remove('is-swapping'));
+      }, 250);
+    }
+
+    setInterval(() => {
+      index = (index + 1) % tasas.length;
+      swap(cardA, tasas[index], 0);
+      swap(cardB, tasas[(index + 1) % tasas.length], 1);
+    }, 4000);
+  }
+
+  initHeroRateCards();
+  document.addEventListener('astro:after-swap', initHeroRateCards);
+</script>

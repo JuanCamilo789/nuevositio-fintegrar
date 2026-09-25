@@ -1,0 +1,43 @@
+---
+import { getEntry, render } from 'astro:content';
+import InnerLayout from '@layouts/InnerLayout.astro';
+import { fechaCorta } from '@lib/fecha';
+
+const { slug } = Astro.params;
+const evento = slug ? await getEntry('eventos', slug) : undefined;
+
+if (!evento) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await render(evento);
+---
+
+<InnerLayout
+  pageTitle={evento.data.titulo}
+  pageSubtitle={evento.data.fecha ? fechaCorta(evento.data.fecha) : 'Próximamente'}
+  description={evento.data.resumen}
+  breadcrumbs={[{ label: 'Programación', href: '/#novedades' }, { label: evento.data.titulo }]}
+>
+  <article class="evento-body max-w-7xl mx-auto px-6">
+    <Content />
+  </article>
+</InnerLayout>
+
+<style>
+  .evento-body {
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+  }
+
+  .evento-body :global(p) {
+    font-size: 0.90625rem;
+    color: var(--color-ink);
+    opacity: 0.8;
+    line-height: var(--lh-180);
+  }
+
+  .evento-body :global(p + p) {
+    margin-top: 1.25rem;
+  }
+</style>

@@ -1,10 +1,4 @@
 User-agent: *
 Allow: /
 
-# Rutas de administración — nunca indexar
-Disallow: /admin/
-
-# Endpoints de API — nunca indexar
-Disallow: /api/
-
 Sitemap: https://fintegrar.com/sitemap-index.xml

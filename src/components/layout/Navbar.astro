@@ -1,0 +1,770 @@
+---
+import { Icon } from 'astro-icon/components';
+import { tasasDestacadas, tasaPorId } from '@data/tasas';
+---
+
+<!--
+     SITE HEADER (navbar flotante + topbar debajo — mega panels son hermanos, más abajo)
+ -->
+<div id="siteHeader" class="site-header">
+
+  <header class="navbar" id="navbar">
+    <div class="max-w-7xl mx-auto px-6 w-full">
+      <div class="flex items-center justify-between xl:grid xl:grid-cols-[auto_1fr_auto] xl:gap-4 h-16">
+
+        <div class="flex justify-start">
+          <a href="/" class="flex items-center flex-shrink-0" aria-label="FINTEGRAR inicio">
+            <img
+              src="/assets/logos/logo1.png"
+              alt="FINTEGRAR Logo"
+              class="site-logo h-8 lg:h-9 w-auto"
+              fetchpriority="high"
+            >
+          </a>
+        </div>
+
+        <nav class="hidden xl:flex items-center justify-center gap-1 min-w-0" aria-label="Navegación principal">
+          <a href="/" class="nav-link active">Inicio</a>
+
+          <button
+            class="mega-trigger nav-link"
+            data-target="nosotros"
+            aria-expanded="false"
+            aria-controls="mega-nosotros"
+            aria-haspopup="true"
+          >
+            Nosotros
+            <Icon name="tabler:arrow-up-right" class="mega-arrow w-3.5 h-3.5" aria-hidden="true" />
+          </button>
+
+          <button
+            class="mega-trigger nav-link"
+            data-target="ahorros"
+            aria-expanded="false"
+            aria-controls="mega-ahorros"
+            aria-haspopup="true"
+          >
+            Ahorros
+            <Icon name="tabler:arrow-up-right" class="mega-arrow w-3.5 h-3.5" aria-hidden="true" />
+          </button>
+
+          <button
+            class="mega-trigger nav-link"
+            data-target="creditos"
+            aria-expanded="false"
+            aria-controls="mega-creditos"
+            aria-haspopup="true"
+          >
+            Créditos
+            <Icon name="tabler:arrow-up-right" class="mega-arrow w-3.5 h-3.5" aria-hidden="true" />
+          </button>
+
+          <a href="/convenios" class="nav-link">Convenios</a>
+          <a href="/directorio" class="nav-link">Directorio</a>
+        </nav>
+
+        <div class="hidden xl:flex items-center justify-end gap-2">
+          <div class="services-dropdown">
+            <button
+              class="btn btn-dark btn-sm flex items-center gap-1.5"
+              id="servicesToggle"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-controls="servicesMenu"
+            >
+              <Icon name="tabler:apps" class="w-4 h-4" aria-hidden="true" />
+              Servicios
+              <Icon name="tabler:chevron-down" class="services-chevron w-3.5 h-3.5" aria-hidden="true" />
+            </button>
+            <div class="services-menu" id="servicesMenu" role="menu">
+              <a href="https://tramitesvirtuales.fintegrar.com/" class="services-menu-item" target="_blank" rel="noopener noreferrer" role="menuitem">
+                <Icon name="tabler:layout-dashboard" class="w-4 h-4" aria-hidden="true" />
+                Trámites Virtuales
+              </a>
+              <a href="https://www.zonapagos.net/formulariosNV/?cod=BTK3a53qAPJK5dFzuUb9xoOMEi6GjxTVEz6jgj8WOG4kf7Z7mmbU2N6iG2sClbz5isF7xpuvz4ec%2FstAKWghYq2ihH6ea5Ab%2BfJXSgfBIPShwQxb9hHbzgY1XqGlsllif2sqgYeyszPfE%2Fq5SNonDhF9ZhqXm7OyDm%2Ba4lfdMItrvmOCQ5Py2gAq%2BvwFtoRMoNDPxeZKzglBDlEyqykoMK2kz6zyhc7dmjJO23oOZfDrWY5p5hfLu%2BH0xUIIx2%2F2zJLthSgc28WEY9rneC44s4DORf3zdoMntL1Bmxpscus%3D" class="services-menu-item" target="_blank" rel="noopener noreferrer" role="menuitem">
+                <Icon name="tabler:device-mobile-dollar" class="w-4 h-4" aria-hidden="true" />
+                Pagos PSE
+              </a>
+            </div>
+          </div>
+          <a href="/docs/brochure-fintegrar.pdf" class="btn btn-purple btn-sm flex items-center gap-1.5" download="portafolio-fintegrar-2026.pdf">
+            <Icon name="tabler:download" class="w-4 h-4" aria-hidden="true" />
+            Descargar brochure
+          </a>
+        </div>
+
+        <div class="xl:hidden flex justify-end">
+          <button
+            id="mobileMenuToggle"
+            class="p-2 -mr-2 text-[var(--color-ink)] flex flex-col items-center"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+          >
+            <Icon name="tabler:menu-2" class="w-7 h-7" id="iconMenu" />
+            <Icon name="tabler:x" class="w-7 h-7 hidden" id="iconClose" />
+            <span class="text-xs font-semibold mt-0">Menú</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <div class="topbar">
+    <div class="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
+      <div class="flex items-center gap-5">
+        <a href="mailto:auxiliar@fintegrar.com" class="topbar-item" style="--topbar-item-delay: 0.05s;">
+          <Icon name="tabler:mail" class="w-3.5 h-3.5" aria-hidden="true" />
+          auxiliar@fintegrar.com
+        </a>
+        <span class="topbar-sep hidden lg:block" style="--topbar-item-delay: 0.09s;"></span>
+        <span class="topbar-item hidden lg:flex" style="--topbar-item-delay: 0.12s;">
+          <Icon name="tabler:map-pin" class="w-3.5 h-3.5" aria-hidden="true" />
+          Oficinas de Prosalco IPS Poblado, Cra 43 A # 25-69
+        </span>
+        <span class="topbar-sep hidden xl:block" style="--topbar-item-delay: 0.16s;"></span>
+        <span class="topbar-item hidden xl:flex" style="--topbar-item-delay: 0.19s;">
+          <Icon name="tabler:clock" class="w-3.5 h-3.5" aria-hidden="true" />
+          Lun-Mar 7:30am-5:00pm &amp; Mié-Vie 7:30am-4:00pm
+        </span>
+      </div>
+
+      <div class="hidden lg:flex items-center gap-4">
+        <a
+          href="/creditos#tasas"
+          class="topbar-ticker hidden 2xl:flex"
+          id="topbarTicker"
+          aria-live="polite"
+          style="--topbar-item-delay: 0.28s;"
+          data-tasas={JSON.stringify(tasasDestacadas.map((t) => `${t.nombre} · ${t.tasa}`))}
+        >
+          <span class="topbar-ticker-text" id="topbarTickerText">{tasasDestacadas[0].nombre} · {tasasDestacadas[0].tasa}</span>
+        </a>
+
+        <div class="topbar-sep hidden 2xl:block" style="--topbar-item-delay: 0.31s;"></div>
+
+        <div class="flex items-center gap-3">
+          <a href="https://www.facebook.com/p/Fintegrar-Fondo-de-Empleados-61579258882412/" target="_blank" rel="noopener noreferrer" class="topbar-item hover:text-white transition-colors" aria-label="Facebook" style="--topbar-item-delay: 0.34s;">
+            <Icon name="tabler:brand-facebook" class="w-4 h-4" />
+          </a>
+          <a href="https://www.instagram.com/fintegrar_/" target="_blank" rel="noopener noreferrer" class="topbar-item hover:text-white transition-colors" aria-label="Instagram" style="--topbar-item-delay: 0.37s;">
+            <Icon name="tabler:brand-instagram" class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="mega-panel" id="mega-nosotros" role="region" aria-label="Menú Nosotros">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mega-inner">
+
+      <div class="mega-col">
+        <div class="mega-col-title">El Fondo</div>
+        <a href="/nosotros#historia" class="mega-item">
+          <div>
+            <div class="mega-item-title">Nuestra historia</div>
+            <div class="mega-item-sub">36 años de trayectoria</div>
+          </div>
+        </a>
+        <a href="/nosotros" class="mega-item">
+          <div>
+            <div class="mega-item-title">Quiénes somos</div>
+            <div class="mega-item-sub">Historia y valores institucionales</div>
+          </div>
+        </a>
+        <a href="/nosotros#mision" class="mega-item">
+          <div>
+            <div class="mega-item-title">Misión y Visión</div>
+            <div class="mega-item-sub">Nuestro propósito y metas</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col">
+        <div class="mega-col-title">Informes</div>
+        <a href="/cuerpos-colegiados" class="mega-item">
+          <div>
+            <div class="mega-item-title">Cuerpos Colegiados</div>
+            <div class="mega-item-sub">Junta Directiva y otros</div>
+          </div>
+        </a>
+        <a href="/documentacion" class="mega-item">
+          <div>
+            <div class="mega-item-title">Documentación</div>
+            <div class="mega-item-sub">Estatutos y documentos vigentes</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col">
+        <div class="mega-col-title">Transparencia</div>
+        <a href="/documentacion#informes" class="mega-item">
+          <div>
+            <div class="mega-item-title">Informes anuales</div>
+            <div class="mega-item-sub">Balances financieros y sociales</div>
+          </div>
+        </a>
+        <a href="/documentacion" class="mega-item">
+          <div>
+            <div class="mega-item-title">SARLAFT</div>
+            <div class="mega-item-sub">Prevención lavado de activos</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="mega-panel" id="mega-creditos" role="region" aria-label="Menú Créditos">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mega-inner">
+
+      <div class="mega-col">
+        <div class="mega-col-title">Líneas de Crédito</div>
+        <a href="/creditos#ordinario" class="mega-item">
+          <div>
+            <div class="mega-item-title">Crédito Ordinario</div>
+            <div class="mega-item-sub">{tasaPorId['ordinario']} · para cualquier necesidad</div>
+          </div>
+        </a>
+        <a href="/creditos#educacion" class="mega-item">
+          <div>
+            <div class="mega-item-title">Crédito para Educación</div>
+            <div class="mega-item-sub">{tasaPorId['educacion']} · instituciones certificadas</div>
+          </div>
+        </a>
+        <a href="/creditos#calamidad" class="mega-item">
+          <div>
+            <div class="mega-item-title">Calamidad Doméstica</div>
+            <div class="mega-item-sub">{tasaPorId['calamidad']} · plazo hasta 12 meses</div>
+          </div>
+        </a>
+        <a href="/creditos" class="mega-item">
+          <div>
+            <div class="mega-item-title">Ver todas las líneas</div>
+            <div class="mega-item-sub">10 modalidades disponibles</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col">
+        <div class="mega-col-title">Herramientas</div>
+        <a href="/#simulador" class="mega-item">
+          <div>
+            <div class="mega-item-title">Simulador de crédito</div>
+            <div class="mega-item-sub">Calcule su cuota mensual</div>
+          </div>
+        </a>
+        <a href="/creditos#tasas" class="mega-item">
+          <div>
+            <div class="mega-item-title">Tasas de interés</div>
+            <div class="mega-item-sub">Vigentes por línea</div>
+          </div>
+        </a>
+        <a href="/creditos#documentos" class="mega-item">
+          <div>
+            <div class="mega-item-title">Documentos requeridos</div>
+            <div class="mega-item-sub">Lista completa por línea</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col">
+        <div class="mega-col-title">Cómo Solicitar</div>
+        <a href="/creditos#requisitos" class="mega-item">
+          <div>
+            <div class="mega-item-title">Requisitos</div>
+            <div class="mega-item-sub">Condiciones de elegibilidad</div>
+          </div>
+        </a>
+        <a href="/creditos#proceso" class="mega-item">
+          <div>
+            <div class="mega-item-title">Proceso de solicitud</div>
+            <div class="mega-item-sub">Paso a paso hasta el desembolso</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col-image" aria-hidden="true">
+        <img
+          src="/assets/img/shared/mega-creditos-persona.webp"
+          alt=""
+          class="mega-col-image-img"
+          loading="lazy"
+        />
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="mega-panel" id="mega-ahorros" role="region" aria-label="Menú Ahorros">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mega-inner">
+
+      <div class="mega-col">
+        <div class="mega-col-title">Modalidades de Ahorro</div>
+        <a href="/ahorros#aportes-sociales" class="mega-item">
+          <div>
+            <div class="mega-item-title">Aportes Sociales y Ahorro Permanente</div>
+            <div class="mega-item-sub">Deducción quincenal por nómina</div>
+          </div>
+        </a>
+        <a href="/ahorros#ahorro-navideno" class="mega-item">
+          <div>
+            <div class="mega-item-title">Ahorro Navideño</div>
+            <div class="mega-item-sub">Se entrega en diciembre</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col">
+        <div class="mega-col-title" aria-hidden="true" style="visibility:hidden;">Modalidades de Ahorro</div>
+        <a href="/ahorros#pequenos-ahorradores" class="mega-item">
+          <div>
+            <div class="mega-item-title">Pequeños Ahorradores</div>
+            <div class="mega-item-sub">Para los hijos de asociados</div>
+          </div>
+        </a>
+        <a href="/ahorros#cdat" class="mega-item">
+          <div>
+            <div class="mega-item-title">CDAT</div>
+            <div class="mega-item-sub">Depósito a término, 90 a 720 días</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col">
+        <div class="mega-col-title">Beneficios</div>
+        <a href="/ahorros#rifa-semanal" class="mega-item">
+          <div>
+            <div class="mega-item-title">Rifa Semanal</div>
+            <div class="mega-item-sub">3 oportunidades de ganar cada semana</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col-image" aria-hidden="true">
+        <img
+          src="/assets/img/hero/hero-card-ahorros.webp"
+          alt=""
+          class="mega-col-image-img mega-col-image-img--sm"
+          loading="lazy"
+        />
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="mega-panel" id="mega-bienestar" role="region" aria-label="Menú Bienestar Social">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mega-inner">
+
+      <div class="mega-col">
+        <div class="mega-col-title">Auxilios y Beneficios</div>
+        <a href="/nosotros#auxilios" class="mega-item">
+          <div>
+            <div class="mega-item-title">Subsidio de salud</div>
+            <div class="mega-item-sub">Auxilios médicos y hospitalarios</div>
+          </div>
+        </a>
+        <a href="/nosotros#auxilios" class="mega-item">
+          <div>
+            <div class="mega-item-title">Auxilio educativo</div>
+            <div class="mega-item-sub">Para hijos y asociados</div>
+          </div>
+        </a>
+        <a href="/nosotros#auxilios" class="mega-item">
+          <div>
+            <div class="mega-item-title">Calamidad doméstica</div>
+            <div class="mega-item-sub">Apoyo en emergencias</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col">
+        <div class="mega-col-title">Convenios</div>
+        <a href="/convenios" class="mega-item">
+          <div>
+            <div class="mega-item-title">Salud y medicina</div>
+            <div class="mega-item-sub">Clínicas, laboratorios, ópticas</div>
+          </div>
+        </a>
+        <a href="/convenios" class="mega-item">
+          <div>
+            <div class="mega-item-title">Turismo y recreación</div>
+            <div class="mega-item-sub">Agencias y hoteles aliados</div>
+          </div>
+        </a>
+        <a href="/convenios" class="mega-item">
+          <div>
+            <div class="mega-item-title">Tecnología</div>
+            <div class="mega-item-sub">Equipos y telecomunicaciones</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-col">
+        <div class="mega-col-title">Información</div>
+        <a href="/nosotros#novedades" class="mega-item">
+          <div>
+            <div class="mega-item-title">Novedades</div>
+            <div class="mega-item-sub">Noticias y comunicados</div>
+          </div>
+        </a>
+        <a href="/nosotros#calendario" class="mega-item">
+          <div>
+            <div class="mega-item-title">Calendario de actividades</div>
+            <div class="mega-item-sub">Jornadas y eventos del semestre</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="mega-featured" style="background:var(--color-white);color:var(--color-ink);margin-left:1.5rem;border:1px solid var(--color-surface);">
+        <div class="mega-featured-icon" style="background:var(--color-surface);border:1px solid var(--color-surface);">
+          <Icon name="tabler:heart" class="w-5 h-5" style="color:var(--color-ink);" aria-hidden="true" />
+        </div>
+        <div class="mega-featured-title" style="color:var(--color-ink);">Bienestar para todos</div>
+        <div class="mega-featured-sub" style="color:var(--color-ink); opacity: 0.6;">
+          Programas y beneficios diseñados para mejorar la calidad de vida de nuestra comunidad.
+        </div>
+        <a href="/nosotros#auxilios" class="mega-featured-cta" style="background:var(--color-ink);color:var(--color-white);">
+          Ver beneficios
+          <Icon name="tabler:arrow-up-right" class="w-3.5 h-3.5" aria-hidden="true" />
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="mega-backdrop" id="megaBackdrop" aria-hidden="true"></div>
+
+<div
+  class="mobile-menu"
+  id="mobileMenu"
+  role="dialog"
+  aria-label="Menú de navegación"
+  aria-modal="true"
+>
+  <button class="close-btn" id="closeMenu" aria-label="Cerrar menú">
+    <Icon name="tabler:x" class="w-5 h-5" aria-hidden="true" />
+  </button>
+
+  <a href="/" class="flex items-center mb-6 px-2 min-h-10" aria-label="FINTEGRAR inicio">
+     <img
+       src="/assets/logos/logo1.png"
+       alt="FINTEGRAR Logo"
+       class="h-8 w-auto"
+     />
+   </a>
+
+  <div class="mm-tiles">
+    <a href="https://tramitesvirtuales.fintegrar.com/" class="mm-tile" target="_blank" rel="noopener noreferrer">
+      <Icon name="tabler:layout-dashboard" class="w-6 h-6" aria-hidden="true" />
+      <span>Trámites</span>
+    </a>
+    <a href="https://www.zonapagos.net/formulariosNV/?cod=BTK3a53qAPJK5dFzuUb9xoOMEi6GjxTVEz6jgj8WOG4kf7Z7mmbU2N6iG2sClbz5isF7xpuvz4ec%2FstAKWghYq2ihH6ea5Ab%2BfJXSgfBIPShwQxb9hHbzgY1XqGlsllif2sqgYeyszPfE%2Fq5SNonDhF9ZhqXm7OyDm%2Ba4lfdMItrvmOCQ5Py2gAq%2BvwFtoRMoNDPxeZKzglBDlEyqykoMK2kz6zyhc7dmjJO23oOZfDrWY5p5hfLu%2BH0xUIIx2%2F2zJLthSgc28WEY9rneC44s4DORf3zdoMntL1Bmxpscus%3D" class="mm-tile" target="_blank" rel="noopener noreferrer">
+      <Icon name="tabler:device-mobile-dollar" class="w-6 h-6" aria-hidden="true" />
+      <span>Pagos PSE</span>
+    </a>
+    <a href="/docs/brochure-fintegrar.pdf" class="mm-tile" download="portafolio-fintegrar-2026.pdf">
+      <Icon name="tabler:download" class="w-6 h-6" aria-hidden="true" />
+      <span>Brochure</span>
+    </a>
+  </div>
+
+  <a href="/"                class="mobile-menu-link">Inicio</a>
+  <details class="mm-group"><summary class="mm-summary">Nosotros<Icon name="tabler:chevron-down" class="mm-chevron w-5 h-5" aria-hidden="true" /></summary><div class="mm-sub">
+  <a href="/nosotros"          class="mobile-menu-link">Quiénes somos</a>
+  <a href="/nosotros#mision"   class="mobile-menu-link">Misión y Visión</a>
+  <a href="/nosotros#historia" class="mobile-menu-link">Historia</a>
+  <a href="/cuerpos-colegiados" class="mobile-menu-link">Cuerpos Colegiados</a>
+  <a href="/documentacion"           class="mobile-menu-link">Documentación</a>
+  <a href="/documentacion#informes" class="mobile-menu-link">Informes anuales</a>
+  <a href="/documentacion#sarlaft"  class="mobile-menu-link">SARLAFT</a>
+  <a href="/nosotros#auxilios" class="mobile-menu-link">Auxilios y Beneficios</a>
+  <a href="/nosotros#novedades" class="mobile-menu-link">Novedades</a>
+  <a href="/nosotros#calendario" class="mobile-menu-link">Calendario de actividades</a>
+  </div></details>
+  <details class="mm-group"><summary class="mm-summary">Ahorros<Icon name="tabler:chevron-down" class="mm-chevron w-5 h-5" aria-hidden="true" /></summary><div class="mm-sub">
+  <a href="/ahorros#aportes-sociales" class="mobile-menu-link">Aportes Sociales</a>
+  <a href="/ahorros#cdat" class="mobile-menu-link">CDAT</a>
+  <a href="/ahorros#rifa-semanal" class="mobile-menu-link">Rifa Semanal</a>
+  </div></details>
+  <details class="mm-group"><summary class="mm-summary">Créditos<Icon name="tabler:chevron-down" class="mm-chevron w-5 h-5" aria-hidden="true" /></summary><div class="mm-sub">
+  <a href="/creditos#ordinario" class="mobile-menu-link">Crédito Ordinario</a>
+  <a href="/creditos#educacion" class="mobile-menu-link">Crédito para Educación</a>
+  <a href="/#simulador"        class="mobile-menu-link">Simulador de crédito</a>
+  <a href="/creditos"          class="mobile-menu-link">Ver todas las líneas</a>
+  <a href="/creditos#requisitos" class="mobile-menu-link">Requisitos</a>
+  </div></details>
+  <a href="/convenios" class="mobile-menu-link">Convenios</a>
+  <a href="/directorio"        class="mobile-menu-link">Directorio</a>
+
+  <div style="margin-top:auto;padding-top:2rem;display:flex;flex-direction:column;gap:0.75rem;">
+    <div style="display:flex;justify-content:center;gap:1.5rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--color-surface);">
+      <a href="https://www.facebook.com/p/Fintegrar-Fondo-de-Empleados-61579258882412/" target="_blank" rel="noopener noreferrer" style="color:var(--color-ink);transition:color 0.2s;" onmouseover="this.style.color='var(--color-brand-purple)'" onmouseout="this.style.color='var(--color-ink)'">
+        <Icon name="tabler:brand-facebook" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/fintegrar_/" target="_blank" rel="noopener noreferrer" style="color:var(--color-ink);transition:color 0.2s;" onmouseover="this.style.color='var(--color-brand-purple)'" onmouseout="this.style.color='var(--color-ink)'">
+        <Icon name="tabler:brand-instagram" class="w-6 h-6" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const siteHeader = document.getElementById('siteHeader');
+  const menuBtn    = document.getElementById('mobileMenuToggle');
+  const closeBtn   = document.getElementById('closeMenu');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const backdrop   = document.getElementById('megaBackdrop');
+
+
+  const ticker = document.getElementById('topbarTicker');
+  const tickerText = document.getElementById('topbarTickerText');
+  if (ticker && tickerText) {
+    const tasas = JSON.parse(ticker.dataset.tasas || '[]');
+    if (tasas.length > 1) {
+      let tickerIndex = 0;
+      setInterval(() => {
+        tickerText.classList.add('is-swapping');
+        setTimeout(() => {
+          tickerIndex = (tickerIndex + 1) % tasas.length;
+          tickerText.textContent = tasas[tickerIndex];
+          tickerText.classList.remove('is-swapping');
+        }, 250);
+      }, 4000);
+    }
+  }
+
+
+  window.addEventListener('scroll', () => {
+    siteHeader?.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  
+  function openMobile() {
+    mobileMenu?.classList.add('open');
+    menuBtn?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobile() {
+    mobileMenu?.classList.remove('open');
+    menuBtn?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  menuBtn?.addEventListener('click', openMobile);
+  closeBtn?.addEventListener('click', closeMobile);
+  mobileMenu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMobile));
+
+  
+  let activeTrigger: HTMLElement | null = null;
+  let activePanel:   HTMLElement | null = null;
+  let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function openMega(trigger: HTMLElement) {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    if (activeTrigger && activeTrigger !== trigger) closeMega();
+    const target = trigger.dataset.target;
+    const panel  = document.getElementById(`mega-${target}`);
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', 'true');
+    panel.classList.add('is-active');
+    backdrop?.classList.add('is-active');
+    activeTrigger = trigger;
+    activePanel   = panel;
+  }
+
+  function closeMega() {
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    activeTrigger?.setAttribute('aria-expanded', 'false');
+    activePanel?.classList.remove('is-active');
+    backdrop?.classList.remove('is-active');
+    activeTrigger = null;
+    activePanel   = null;
+  }
+
+  function scheduleClose() {
+    closeTimer = setTimeout(closeMega, 120);
+  }
+
+  document.querySelectorAll<HTMLElement>('.mega-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      activeTrigger === trigger ? closeMega() : openMega(trigger);
+    });
+    trigger.addEventListener('mouseenter', () => openMega(trigger));
+    trigger.addEventListener('mouseleave', scheduleClose);
+  });
+
+  document.querySelectorAll<HTMLElement>('.mega-panel').forEach((panel) => {
+    panel.addEventListener('mouseenter', () => {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    });
+    panel.addEventListener('mouseleave', scheduleClose);
+  });
+
+  backdrop?.addEventListener('click', closeMega);
+
+  document.addEventListener('click', (e) => {
+    const t = e.target as Node;
+    if (activePanel && !activePanel.contains(t) && siteHeader && !siteHeader.contains(t)) {
+      closeMega();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { closeMega(); closeMobile(); }
+  });
+
+  document.querySelectorAll('.mega-panel a').forEach((a) => {
+    a.addEventListener('click', closeMega);
+  });
+
+  const servicesDropdown = document.querySelector<HTMLElement>('.services-dropdown');
+  const servicesToggle   = document.getElementById('servicesToggle');
+  const servicesMenu     = document.getElementById('servicesMenu');
+
+  function closeServices() {
+    servicesDropdown?.classList.remove('is-open');
+    servicesMenu?.classList.remove('is-open');
+    servicesToggle?.setAttribute('aria-expanded', 'false');
+  }
+
+  servicesToggle?.addEventListener('click', () => {
+    const isOpen = servicesDropdown?.classList.toggle('is-open');
+    servicesMenu?.classList.toggle('is-open', isOpen);
+    servicesToggle.setAttribute('aria-expanded', String(!!isOpen));
+  });
+
+  document.addEventListener('click', (e) => {
+    const t = e.target as Node;
+    if (servicesDropdown && !servicesDropdown.contains(t)) {
+      closeServices();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeServices();
+  });
+
+</script>
+
+<style>
+  .mm-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+  .mm-tile {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.375rem;
+    aspect-ratio: 1; padding: 0.25rem; text-align: center; text-decoration: none;
+    font-size: 0.6875rem; font-weight: var(--fw-semibold); line-height: 1.15;
+    color: var(--color-ink); background: var(--color-surface); border-radius: var(--radius-md);
+    transition: background 0.2s, color 0.2s;
+  }
+  .mm-tile:active { background: var(--color-brand-purple); color: var(--color-white); }
+  .mm-group { border-bottom: 1px solid var(--color-surface); }
+  .mm-summary {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.875rem 0.5rem; font-size: 1.0625rem; font-weight: var(--fw-semibold);
+    color: var(--color-ink); cursor: pointer; list-style: none;
+  }
+  .mm-summary::-webkit-details-marker { display: none; }
+  .mm-chevron { transition: transform 0.2s ease; color: var(--color-brand-purple); }
+  .mm-group[open] > .mm-summary { color: var(--color-brand-purple); }
+  .mm-group[open] .mm-chevron { transform: rotate(180deg); }
+  .mm-sub { display: flex; flex-direction: column; padding: 0 0 0.5rem 0.75rem; }
+  .mm-sub .mobile-menu-link { font-size: 0.9375rem; font-weight: var(--fw-regular); padding: 0.5rem; border-bottom: none; }
+  .mobile-menu-link {
+    display: block;
+    padding: 0.625rem 0.5rem;
+    font-size: 1rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-surface);
+    transition: background 0.2s, color 0.2s;
+  }
+  .mobile-menu-link:active {
+    background: var(--color-surface);
+    color: var(--color-brand-purple);
+  }
+  .mobile-menu-link.mobile-menu-sub {
+    padding-left: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: var(--fw-regular);
+    opacity: 0.8;
+  }
+  .mobile-menu-section {
+    padding: 0.875rem 0.5rem 0.375rem;
+    font-size: 0.75rem;
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    color: var(--color-brand-purple);
+    opacity: 0.8;
+  }
+
+  .services-dropdown {
+    position: relative;
+  }
+
+  .services-chevron {
+    transition: transform 0.2s ease;
+  }
+  .services-dropdown.is-open .services-chevron {
+    transform: rotate(180deg);
+  }
+
+  .services-menu {
+    position: absolute;
+    top: calc(100% + 0.625rem);
+    right: 0;
+    min-width: 210px;
+    background: var(--color-navbar-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 0.5rem;
+    z-index: 250;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0.2s;
+  }
+  .services-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0s;
+  }
+
+  .services-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.625rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: var(--fw-semibold);
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .services-menu-item:hover {
+    color: var(--color-brand-blue);
+  }
+  .services-menu-item svg {
+    color: var(--color-ink);
+    opacity: 0.6;
+    flex-shrink: 0;
+    transition: color 0.15s;
+  }
+  .services-menu-item:hover svg {
+    color: var(--color-brand-blue);
+  }
+</style>
